@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CrackIT - GeneralAptitude</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        /* For iOS Safari */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* For Android Chrome (and most browsers) */
+        * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Global styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            background-color: #0f0f0f;
+            color: #f0f0f0;
+            min-height: 100vh;
+            display: flex;
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme {
+            background-color: #f5f7fb;
+            color: #333;
+        }
+
+        /* Sidebar container */
+        .sidebar {
+            width: 50px;
+            background-color: #0a0a0a;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: fixed;
+            height: 100vh;
+            transition: width 0.3s ease;
+            padding: 20px 0;
+            border-right: 1px solid #222;
+            left: 0;
+            top: 0;
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+        body.light-theme .sidebar {
+            background-color: #e6ecf0;
+            border-right: 1px solid #d3dce6;
+        }
+
+        /* Hover effect for sidebar on all screens */
+        .sidebar:hover {
+            width: 200px;
+        }
+
+        .sidebar:hover .sidebar-item span,
+        .sidebar:hover .sidebar-header .sidebar-title,
+        .sidebar:hover .sidebar-header i {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Sidebar Header */
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 20px 0;
+            font-size: 20px;
+            font-weight: bold;
+            color: #22c55e;
+            border-bottom: 1px solid #222;
+            margin-bottom: 20px;
+            transition: opacity 0.3s ease;
+        }
+
+        body.light-theme .sidebar-header {
+            color: #0ea5e9;
+            border-bottom: 1px solid #d3dce6;
+        }
+
+        .sidebar-header i {
+            font-size: 40px;
+            color: #22c55e;
+            margin-bottom: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        body.light-theme .sidebar-header i {
+            color: #0ea5e9;
+        }
+
+        .sidebar-header .sidebar-title {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar.active .sidebar-header .sidebar-title,
+        .sidebar.active .sidebar-header i {
+            opacity: 1;
+        }
+
+        /* Sidebar items */
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0 12px 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #888;
+        }
+
+        body.light-theme .sidebar-item {
+            color: #666;
+        }
+
+        .sidebar-item i {
+            font-size: 20px;
+            min-width: 24px;
+            margin-right: 12px;
+        }
+
+        .sidebar-item span {
+            display: inline;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            white-space: nowrap;
+        }
+
+        /* Active state for sidebar */
+        .sidebar.active .sidebar-item span {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .sidebar.active {
+            width: 200px;
+        }
+
+        .sidebar-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .sidebar-item:hover i,
+        .sidebar-item:hover span {
+            color: #22c55e;
+        }
+
+        body.light-theme .sidebar-item:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+            color: #333;
+        }
+
+        body.light-theme .sidebar-item:hover i,
+        body.light-theme .sidebar-item:hover span {
+            color: #4a90e2;
+        }
+
+        .sidebar-item.active {
+            background-color: transparent;
+            border-left: none;
+            color: #ffffff;
+        }
+
+        body.light-theme .sidebar-item.active {
+            color: #333;
+        }
+
+        /* Sidebar sections */
+        .sidebar-top, .sidebar-bottom {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-spacer {
+            flex-grow: 1;
+        }
+
+        /* Sidebar toggle button (Arrow) */
+        .sidebar-toggle {
+            display: flex;
+            position: fixed;
+            top: 45px;
+            left: 9px;
+            background-color: rgb(10, 10, 10);
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 50%;
+            padding: 6px;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            font-size: 16px;
+            font-weight: bold;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s ease, background-color 0.3s ease;
+            opacity: 0.9;
+            z-index: 1100;
+        }
+
+        body.light-theme .sidebar-toggle {
+            background-color: rgb(200, 200, 200);
+            color: #4a90e2;
+            border: 1px solid rgba(74, 144, 226, 0.3);
+        }
+
+        .sidebar-toggle:hover {
+            opacity: 1;
+            background-color: #1a1a1a;
+        }
+
+        body.light-theme .sidebar-toggle:hover {
+            background-color: #d3dce6;
+        }
+
+        .toggle-arrow {
+            display: inline-block;
+        }
+
+        /* Main content area */
+        .main-content {
+            margin-left: 50px;
+            flex: 1;
+            padding: 40px;
+            width: calc(100% - 50px);
+            transition: margin-left 0.3s ease, width 0.3s ease;
+        }
+
+        @media (min-width: 769px) {
+            .sidebar:hover ~ .main-content {
+                margin-left: 200px;
+                width: calc(100% - 200px);
+            }
+        }
+
+        .page-title {
+            font-size: 28px;
+            margin-bottom: 40px;
+            color: #f0f0f0;
+            font-weight: 600;
+        }
+
+        body.light-theme .page-title {
+            color: #1f2937;
+        }
+
+        .topic-section {
+            margin-bottom: 40px;
+            background-color: #1a1a1a;
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme .topic-section {
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .topic-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-color: #22c55e;
+        }
+
+        body.light-theme .topic-section:hover {
+            border-color: #4a90e2;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .topic-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .topic-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+        }
+
+        .topic-icon i {
+            font-size: 24px;
+        }
+
+        .topic-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: white;
+        }
+
+        body.light-theme .topic-title {
+            color: #1f2937;
+        }
+
+        .topic-description {
+            font-size: 14px;
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        body.light-theme .topic-description {
+            color: #6b7280;
+        }
+
+        .notes-btn, .test-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: #22c55e;
+            color: #0a0a0a;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+            margin-top: 20px;
+            text-decoration: none;
+            position: relative;
+        }
+
+        body.light-theme .notes-btn,
+        body.light-theme .test-btn {
+            background-color: #4a90e2;
+            color: #ffffff;
+        }
+
+        .notes-btn:hover, .test-btn:hover {
+            background-color: #16a34a;
+            transform: translateY(-2px);
+        }
+
+        body.light-theme .notes-btn:hover,
+        body.light-theme .test-btn:hover {
+            background-color: #357abd;
+        }
+
+        .notes-btn i, .test-btn i {
+            margin-left: 8px;
+        }
+
+        .footer {
+            background-color: #0f0f0f;
+            padding: 60px 0 20px;
+            margin-top: 60px;
+            border-top: 1px solid #222;
+        }
+
+        body.light-theme .footer {
+            background-color: #f5f7fb;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .footer-section h3 {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+
+        body.light-theme .footer-section h3 {
+            color: #1f2937;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 16px;
+        }
+
+        .footer-section ul li a {
+            color: #888;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        body.light-theme .footer-section ul li a {
+            color: #6b7280;
+        }
+
+        .footer-section ul li a:hover {
+            color: #22c55e;
+        }
+
+        body.light-theme .footer-section ul li a:hover {
+            color: #4a90e2;
+        }
+
+        .copyright {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            border-top: 1px solid #222;
+            color: #888;
+            font-size: 14px;
+        }
+
+        body.light-theme .copyright {
+            border-top: 1px solid #e5e7eb;
+            color: #6b7280;
+        }
+
+        /* Responsive styles for mobile */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 50px;
+                transform: translateX(0);
+            }
+
+            .sidebar.active {
+                width: 200px;
+            }
+
+            .main-content {
+                padding: 20px;
+                margin-left: 50px;
+                width: calc(100% - 50px);
+            }
+
+            .sidebar-item span,
+            .sidebar-header .sidebar-title,
+            .sidebar-header i {
+                opacity: 0;
+            }
+
+            .sidebar.active .sidebar-item span,
+            .sidebar.active .sidebar-header .sidebar-title,
+            .sidebar.active .sidebar-header i {
+                opacity: 1;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .footer-section {
+                text-align: center;
+            }
+
+            .notes-btn, .test-btn {
+                margin-right: 10px;
+                padding: 10px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 15px;
+            }
+
+            .page-title {
+                font-size: 24px;
+            }
+
+            .topic-section {
+                padding: 12px;
+            }
+
+            .topic-title {
+                font-size: 18px;
+            }
+
+            .topic-description {
+                font-size: 12px;
+            }
+
+            .notes-btn, .test-btn {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+
+            .footer-grid {
+                padding: 0 10px;
+            }
+
+            .footer-section h3 {
+                font-size: 16px;
+            }
+
+            .footer-section ul li a {
+                font-size: 13px;
+            }
+
+            .copyright {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Toggle Button (Arrow) -->
+    <button class="sidebar-toggle" id="sidebarToggle">
+        <span class="toggle-arrow">❯</span>
+    </button>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <i class='bx bxs-graduation'></i>
+            <span class="sidebar-title">CrackIT</span>
+        </div>
+        <div class="sidebar-top">
+            <div class="sidebar-item">
+                <a href="index.html" style="text-decoration: none; color: inherit;">
+                    <i class='bx bx-home-alt'></i>
+                    <span>Home</span>
+                </a>
+            </div>
+            <div class="sidebar-item active">
+                <a href="Topics.html" style="text-decoration: none; color: inherit;">
+                    <i class='bx bx-book-open'></i>
+                    <span>Practice Area</span>
+                </a>
+            </div>
+        </div>
+        <div class="sidebar-spacer"></div>
+        <div class="sidebar-bottom">
+            <div class="sidebar-item theme-toggle">
+                <i class='bx bx-palette'></i>
+                <span>Theme</span>
+            </div>
+            <div class="sidebar-item">
+                <a href="login and register.html" style="text-decoration: none; color: inherit;">
+                    <i class='bx bx-log-out'></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <h1 class="page-title">General Aptitude</h1>
+
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon" style="background-color: rgba(239, 68, 68, 0.2); color: #ef4444;">
+                    <i class='bx bx-brain'></i>
+                </div>
+                <h2 class="topic-title">Logical Reasoning</h2>
+            </div>
+            <p class="topic-description">
+                Develop critical thinking and problem-solving abilities through questions on logical deduction, syllogisms, 
+                logical sequences, and analytic reasoning. Practice with diverse questions to enhance your logical thinking skills.
+            </p>
+            <a href="pracQuestions LogicalReasoning.html" class="notes-btn">
+                Practice Questions <i class='bx bx-note'></i>
+            </a>
+            <a href="LogicalReasoning Test.html" class="test-btn">
+                Practice Tests <i class='bx bx-right-arrow-alt'></i>
+            </a>
+        </div>
+
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon" style="background-color: rgba(124, 58, 237, 0.2); color: #7c3aed;">
+                    <i class='bx bx-line-chart'></i>
+                </div>
+                <h2 class="topic-title">Ratio & Proportion</h2>
+            </div>
+            <p class="topic-description">
+                Develop a strong grasp of comparing quantities and scaling values. Enhance your ability to solve real-world problems using ratios, proportions, and their practical applications.
+            </p>
+            <a href="pracQuestions Ratio and Proportion.html" class="notes-btn">
+                Practice Questions <i class='bx bx-note'></i>
+            </a>
+            <a href="RatioProportion Test.html" class="test-btn">
+                Practice Tests <i class='bx bx-right-arrow-alt'></i>
+            </a>
+        </div>
+
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon" style="background-color: rgba(249, 115, 22, 0.2); color: #f97316;">
+                    <i class='bx bx-money'></i>
+                </div>
+                <h2 class="topic-title">Averages, Profit & Loss</h2>
+            </div>
+            <p class="topic-description">
+                Master the concepts of mean values and financial calculations. Sharpen your skills in solving problems related to average performance, cost analysis, and profit-making strategies.
+            </p>
+            <a href="pracQuestions Averages Profit and Loss.html" class="notes-btn">
+                Practice Questions <i class='bx bx-note'></i>
+            </a>
+            <a href="Averages_Profit_Loss Test.html" class="test-btn">
+                Practice Tests <i class='bx bx-right-arrow-alt'></i>
+            </a>
+        </div>
+
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon" style="background-color: rgba(14, 165, 233, 0.2); color: #0ea5e9;">
+                    <i class='bx bx-math'></i>
+                </div>
+                <h2 class="topic-title">HCF & LCM, Simplification</h2>
+            </div>
+            <p class="topic-description">
+                Enhance your arithmetic foundation by mastering HCF, LCM, and simplification techniques—boosting your speed, accuracy, and confidence in solving a wide range of quantitative problems.
+            </p>
+            <a href="pracQuestions HCF LCM and Simplification.html" class="notes-btn">
+                Practice Questions <i class='bx bx-note'></i>
+            </a>
+            <a href="HcfLcm_Simplification Test.html" class="test-btn">
+                Practice Tests <i class='bx bx-right-arrow-alt'></i>
+            </a>
+        </div>
+
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon" style="background-color: rgba(34, 197, 94, 0.2); color: #22c55e;">
+                    <i class='bx bx-chart'></i>
+                </div>
+                <h2 class="topic-title">Probability, Permutations & Combinations</h2>
+            </div>
+            <p class="topic-description">
+                Strengthen your logical reasoning and analytical skills by mastering the techniques to count possible outcomes in various scenarios.
+            </p>
+            <a href="pracQuestions Probability Permutations and Combinations.html" class="notes-btn">
+                Practice Questions <i class='bx bx-note'></i>
+            </a>
+            <a href="Probability_Permutation_Combination Test.html" class="test-btn">
+                Practice Tests <i class='bx bx-right-arrow-alt'></i>
+            </a>
+        </div>
+
+        <!-- Footer Section -->
+        <footer class="footer">
+            <div class="footer-grid">
+                <div class="footer-section"></div>
+                <div class="footer-section"></div>
+                <div class="footer-section"></div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 CrackIT Prep. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Elements
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const toggleArrow = sidebarToggle.querySelector('.toggle-arrow');
+            const sidebar = document.querySelector('.sidebar');
+            const sidebarHeader = document.querySelector('.sidebar-header');
+            const mainContent = document.querySelector('.main-content');
+            const themeToggle = document.querySelector('.sidebar-item.theme-toggle');
+            const sidebarItems = document.querySelectorAll('.sidebar-item');
+            const buttons = document.querySelectorAll('.notes-btn, .test-btn');
+
+            // Toggle sidebar
+            if (sidebarToggle && sidebar && sidebarHeader) {
+                sidebarToggle.addEventListener('click', function () {
+                    sidebar.classList.toggle('active');
+                    toggleArrow.textContent = sidebar.classList.contains('active') ? '❮' : '❯';
+                });
+
+                // Close sidebar when clicking outside
+                document.addEventListener('click', function (event) {
+                    if (
+                        !sidebar.contains(event.target) &&
+                        !sidebarToggle.contains(event.target)
+                    ) {
+                        sidebar.classList.remove('active');
+                        toggleArrow.textContent = '❯';
+                    }
+                });
+            }
+
+            // Theme toggle functionality
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function () {
+                    document.body.classList.toggle('light-theme');
+                    localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+                });
+            }
+
+            // Load saved theme
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-theme');
+            }
+
+            // Sidebar item click handling
+            sidebarItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    sidebarItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Test and Notes buttons hover effect
+            buttons.forEach(btn => {
+                btn.addEventListener('mouseenter', function () {
+                    this.style.transform = 'translateY(-2px)';
+                });
+
+                btn.addEventListener('mouseleave', function () {
+                    this.style.transform = '';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verbal Reasoning Practice</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        /* Prevent content overflow and ensure full-width responsiveness */
+        .main-content {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        .topic-section {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        .question-list ol {
+            padding-left: 0;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .question {
+            max-width: 100%;
+        }
+
+        .options {
+            max-width: 100%;
+        }
+
+        /* For iOS Safari tap highlight */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Disable text selection for better mobile interaction */
+        * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0f0f0f;
+            color: #f0f0f0;
+            min-height: 100vh;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body.light-theme {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .header-icons {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .header-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            background-color: #22c55e;
+            color: white;
+            border: none;
+        }
+
+        body.light-theme .header-icon {
+            background-color: #2563eb;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-icon:hover {
+            transform: scale(1.1);
+            background-color: #16a34a;
+        }
+
+        body.light-theme .header-icon:hover {
+            background-color: #1d4ed8;
+        }
+
+        .main-content {
+            padding: 80px 50px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .page-title {
+            font-size: 36px;
+            margin-bottom: 60px;
+            font-weight: 700;
+            color: #f0f0f0;
+            text-align: center;
+            position: relative;
+        }
+
+        .page-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #22c55e;
+            margin: 20px auto 0;
+            border-radius: 2px;
+        }
+
+        body.light-theme .page-title {
+            color: #333;
+        }
+
+        body.light-theme .page-title::after {
+            background-color: #2563eb;
+        }
+
+        .topic-section {
+            margin-bottom: 80px;
+            background-color: #1a1a1a;
+            border-radius: 16px;
+            padding: 40px;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme .topic-section {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .topic-section:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+            border-color: #22c55e;
+        }
+
+        body.light-theme .topic-section:hover {
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+            border-color: #3b82f6;
+        }
+
+        .topic-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .topic-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 25px;
+        }
+
+        body.light-theme .topic-icon {
+            background-color: rgba(239, 68, 68, 0.1);
+        }
+
+        .topic-icon i {
+            font-size: 28px;
+        }
+
+        .topic-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: white;
+        }
+
+        body.light-theme .topic-title {
+            color: #333;
+        }
+
+        .topic-description {
+            font-size: 17px;
+            color: #aaa;
+            line-height: 1.9;
+            margin-bottom: 30px;
+        }
+
+        body.light-theme .topic-description {
+            color: #666;
+        }
+
+        .question-list {
+            margin-top: 30px;
+            padding: 0 20px;
+        }
+
+        .question-list ol {
+            list-style-position: outside;
+            padding-left: 25px;
+            margin: 0;
+            counter-reset: item;
+        }
+
+        .question {
+            position: relative;
+            font-size: 17px;
+            color: #f0f0f0;
+            margin-bottom: 30px;
+            line-height: 1.8;
+            padding: 20px;
+            background-color: #222;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme .question {
+            color: #333;
+            background-color: #f9fafb;
+        }
+
+        .question-text {
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .option {
+            background-color: #333;
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        body.light-theme .option {
+            background-color: #e5e7eb;
+        }
+
+        .option:hover {
+            background-color: #444;
+        }
+
+        body.light-theme .option:hover {
+            background-color: #d1d5db;
+        }
+
+        .option.selected {
+            background-color: #22c55e;
+            color: white;
+            border: 2px solid #16a34a;
+        }
+
+        body.light-theme .option.selected {
+            background-color: #2563eb;
+            color: white;
+            border: 2px solid #1d4ed8;
+        }
+
+        .answer-table {
+            margin-top: 40px;
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .answer-table::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 20px;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.2));
+            pointer-events: none;
+        }
+
+        body.light-theme .answer-table {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+        }
+
+        body.light-theme .answer-table::after {
+            background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.1));
+        }
+
+        .answer-table table {
+            width: 100%;
+            min-width: 600px;
+            border-collapse: collapse;
+        }
+
+        .answer-table th, .answer-table td {
+            border: 1px solid #333;
+            padding: 15px;
+            text-align: center;
+            color: #f0f0f0;
+            font-size: 15px;
+            min-width: 60px;
+        }
+
+        body.light-theme .answer-table th,
+        body.light-theme .answer-table td {
+            border: 1px solid #ddd;
+            color: #333;
+        }
+
+        .answer-table td.correct {
+            background-color: #16a34a;
+            color: white;
+        }
+
+        body.light-theme .answer-table td.correct {
+            background-color: #16a34a;
+            color: white;
+        }
+
+        .answer-table td.incorrect {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        body.light-theme .answer-table td.incorrect {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        .footer {
+            background-color: #0f0f0f;
+            padding: 100px 0 40px;
+            margin-top: 100px;
+            border-top: 1px solid #222;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background-color: #22c55e;
+            border-radius: 2px;
+        }
+
+        body.light-theme .footer {
+            background-color: #f5f5f5;
+            border-top: 1px solid #ddd;
+        }
+
+        body.light-theme .footer::before {
+            background-color: #2563eb;
+        }
+
+        .copyright {
+            text-align: center;
+            padding: 40px 0 0;
+            margin-top: 60px;
+            border-top: 1px solid #222;
+            color: #888;
+            font-size: 15px;
+        }
+
+        body.light-theme .copyright {
+            border-top: 1px solid #ddd;
+            color: #666;
+        }
+
+        /* Media query for screens up to 1024px */
+        @media screen and (max-width: 1024px) {
+            .options {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Media query for screens up to 768px */
+        @media screen and (max-width: 768px) {
+            .header-icons {
+                top: 10px;
+                right: 10px;
+                gap: 10px;
+            }
+
+            .header-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+
+            .main-content {
+                padding: 60px 10px;
+                margin: 0 auto;
+                max-width: 100%;
+            }
+
+            .page-title {
+                font-size: 28px;
+                margin-bottom: 40px;
+            }
+
+            .topic-section {
+                padding: 20px 12px;
+                margin: 0 auto 40px;
+                max-width: 100%;
+            }
+
+            .topic-header {
+                margin-bottom: 20px;
+            }
+
+            .topic-icon {
+                width: 50px;
+                height: 50px;
+                margin-right: 15px;
+            }
+
+            .topic-icon i {
+                font-size: 24px;
+            }
+
+            .topic-title {
+                font-size: 24px;
+            }
+
+            .topic-description {
+                font-size: 15px;
+                line-height: 1.7;
+            }
+
+            .question-list {
+                padding: 0;
+                margin: 0 auto;
+            }
+
+            .question-list ol {
+                list-style-position: inside;
+                padding-left: 0;
+                max-width: 100%;
+            }
+
+            .question {
+                font-size: 15px;
+                padding: 15px 20px;
+                margin-bottom: 20px;
+                display: flex;
+                flex-direction: column;
+                max-width: 100%;
+            }
+
+            .question::before {
+                content: counter(item) ".";
+                counter-increment: item;
+                position: absolute;
+                left: 10px;
+                top: 15px;
+                font-weight: 500;
+            }
+
+            body.light-theme .question::before {
+                color: #2563eb;
+            }
+
+            body:not(.light-theme) .question::before {
+                color: #22c55e;
+            }
+
+            .question-text {
+                position: relative;
+                padding-left: 30px;
+                margin-bottom: 12px;
+                margin-left: 10px;
+            }
+
+            .options {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 12px;
+                padding-left: 30px;
+                max-width: 100%;
+            }
+
+            .option {
+                padding: 10px;
+                font-size: 14px;
+                border-radius: 4px;
+            }
+
+            .answer-table {
+                background-color: transparent;
+            }
+
+            .answer-table table {
+                min-width: 600px;
+                border-radius: 8px;
+            }
+
+            body.light-theme .answer-table table {
+                background-color: #ffffff;
+            }
+
+            .answer-table th, 
+            .answer-table td {
+                padding: 10px 8px;
+                font-size: 13px;
+                min-width: 40px;
+            }
+        }
+
+        /* Media query for screens up to 480px */
+        @media screen and (max-width: 480px) {
+            .header-icons {
+                top: 8px;
+                right: 8px;
+                gap: 8px;
+            }
+
+            .header-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+
+            .main-content {
+                padding: 50px 8px;
+            }
+
+            .page-title {
+                font-size: 24px;
+                margin-bottom: 30px;
+            }
+
+            .topic-section {
+                padding: 15px 10px;
+                margin-bottom: 30px;
+            }
+
+            .topic-icon {
+                width: 40px;
+                height: 40px;
+                margin-right: 12px;
+            }
+
+            .topic-icon i {
+                font-size: 20px;
+            }
+
+            .topic-title {
+                font-size: 20px;
+            }
+
+            .topic-description {
+                font-size: 14px;
+            }
+
+            .question {
+                font-size: 14px;
+                padding: 12px 15px;
+                margin-bottom: 15px;
+            }
+
+            .question::before {
+                left: 8px;
+                top: 12px;
+            }
+
+            .question-text {
+                padding-left: 25px;
+                margin-left: 8px;
+            }
+
+            .options {
+                gap: 8px;
+                padding-left: 25px;
+            }
+
+            .option {
+                padding: 8px 10px;
+                font-size: 13px;
+            }
+
+            .answer-table th, 
+            .answer-table td {
+                padding: 8px 6px;
+                font-size: 12px;
+                min-width: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-icons">
+        <button class="header-icon theme-toggle" id="theme-toggle" title="Toggle Theme">
+            <i class='bx bx-moon'></i>
+        </button>
+        <button class="header-icon back-button" title="Back">
+            <i class='bx bx-arrow-back'></i>
+        </button>
+    </div>
+
+    <div class="main-content">
+        <h1 class="page-title">Practice Questions</h1>
+
+        <!-- Verbal Reasoning Questions -->
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon">
+                    <i class='bx bx-conversation'></i>
+                </div>
+                <h2 class="topic-title">Verbal Reasoning</h2>
+            </div>
+            <p class="topic-description">
+                Test your Verbal Reasoning skills with these 30 practice questions covering analogies, logical sequences, syllogisms, critical reasoning, and word relationships.
+            </p>
+            <div class="question-list">
+                <ol>
+                    <li class="question" data-question-id="1">
+                        <div class="question-text">Big is to small as tall is to:</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) high</div>
+                            <div class="option" data-option="(b)">(b) short</div>
+                            <div class="option" data-option="(c)">(c) long</div>
+                            <div class="option" data-option="(d)">(d) wide</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="2">
+                        <div class="question-text">If all cats are mammals, and some mammals are black, which is true?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) All cats are black.</div>
+                            <div class="option" data-option="(b)">(b) Some cats are black.</div>
+                            <div class="option" data-option="(c)">(c) No cats are black.</div>
+                            <div class="option" data-option="(d)">(d) Cats are not mammals.</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="3">
+                        <div class="question-text">Complete the sequence: FLOWER is to GOMPXS as GARDEN is to:</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) IBFWJT</div>
+                            <div class="option" data-option="(b)">(b) HCEWKT</div>
+                            <div class="option" data-option="(c)">(c) IBEXJU</div>
+                            <div class="option" data-option="(d)">(d) JCFXLU</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="4">
+                        <div class="question-text">Doctor is to patient as teacher is to:</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) classroom</div>
+                            <div class="option" data-option="(b)">(b) student</div>
+                            <div class="option" data-option="(c)">(c) book</div>
+                            <div class="option" data-option="(d)">(d) school</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="5">
+                        <div class="question-text">If the day after tomorrow is Wednesday, what day is today?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Monday</div>
+                            <div class="option" data-option="(b)">(b) Tuesday</div>
+                            <div class="option" data-option="(c)">(c) Sunday</div>
+                            <div class="option" data-option="(d)">(d) Friday</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="6">
+                        <div class="question-text">Which word is most closely related to "happy"?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Sad</div>
+                            <div class="option" data-option="(b)">(b) Joyful</div>
+                            <div class="option" data-option="(c)">(c) Angry</div>
+                            <div class="option" data-option="(d)">(d) Tired</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="7">
+                        <div class="question-text">If A is B’s brother, and C is A’s sister, who is C to B?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Sister</div>
+                            <div class="option" data-option="(b)">(b) Brother</div>
+                            <div class="option" data-option="(c)">(c) Mother</div>
+                            <div class="option" data-option="(d)">(d) Father</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="8">
+                        <div class="question-text">Pen is to write as knife is to:</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) cook</div>
+                            <div class="option" data-option="(b)">(b) cut</div>
+                            <div class="option" data-option="(c)">(c) eat</div>
+                            <div class="option" data-option="(d)">(d) sharpen</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="9">
+                        <div class="question-text">All roses are flowers. Some flowers are red. Which is true?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) All roses are red.</div>
+                            <div class="option" data-option="(b)">(b) Some roses are red.</div>
+                            <div class="option" data-option="(c)">(c) No roses are red.</div>
+                            <div class="option" data-option="(d)">(d) Roses are not flowers.</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="10">
+                        <div class="question-text">Complete the analogy: Big is to bigger as small is to:</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) small</div>
+                            <div class="option" data-option="(b)">(b) smaller</div>
+                            <div class="option" data-option="(c)">(c) smallest</div>
+                            <div class="option" data-option="(d)">(d) large</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="11">
+                        <div class="question-text">If Monday is the first day, what is the fifth day?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Thursday</div>
+                            <div class="option" data-option="(b)">(b) Friday</div>
+                            <div class="option" data-option="(c)">(c) Saturday</div>
+                            <div class="option" data-option="(d)">(d) Sunday</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="12">
+                        <div class="question-text">Which word does not belong: Apple, Banana, Carrot, Orange?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Apple</div>
+                            <div class="option" data-option="(b)">(b) Banana</div>
+                            <div class="option" data-option="(c)">(c) Carrot</div>
+                            <div class="option" data-option="(d)">(d) Orange</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="13">
+                        <div class="question-text">Bird is to nest as dog is to:</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) kennel</div>
+                            <div class="option" data-option="(b)">(b) bone</div>
+                            <div class="option" data-option="(c)">(c) leash</div>
+                            <div class="option" data-option="(d)">(d) collar</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="14">
+                        <div class="question-text">If all A are B, and some B are C, which is true?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) All A are C.</div>
+                            <div class="option" data-option="(b)">(b) Some A are C.</div>
+                            <div class="option" data-option="(c)">(c) No A are C.</div>
+                            <div class="option" data-option="(d)">(d) All C are A.</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="15">
+                        <div class="question-text">Complete the sequence: ZYX is to WVU as TSR is to:</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) QPO</div>
+                            <div class="option" data-option="(b)">(b) RST</div>
+                            <div class="option" data-option="(c)">(c) UTS</div>
+                            <div class="option" data-option="(d)">(d) PQR</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="16">
+                        <div class="question-text">Book is to read as piano is to:</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) play</div>
+                            <div class="option" data-option="(b)">(b) listen</div>
+                            <div class="option" data-option="(c)">(c) tune</div>
+                            <div class="option" data-option="(d)">(d) sing</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="17">
+                        <div class="question-text">If P is Q’s father, and R is P’s wife, who is R to Q?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Sister</div>
+                            <div class="option" data-option="(b)">(b) Mother</div>
+                            <div class="option" data-option="(c)">(c) Daughter</div>
+                            <div class="option" data-option="(d)">(d) Aunt</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="18">
+                        <div class="question-text">Which word is most closely related to "fast"?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Slow</div>
+                            <div class="option" data-option="(b)">(b) Quick</div>
+                            <div class="option" data-option="(c)">(c) Heavy</div>
+                            <div class="option" data-option="(d)">(d) Big</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="19">
+                        <div class="question-text">Sun is to day as moon is to:</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) night</div>
+                            <div class="option" data-option="(b)">(b) star</div>
+                            <div class="option" data-option="(c)">(c) sky</div>
+                            <div class="option" data-option="(d)">(d) cloud</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="20">
+                        <div class="question-text">If some X are Y, and all Y are Z, which is true?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) All X are Z.</div>
+                            <div class="option" data-option="(b)">(b) Some X are Z.</div>
+                            <div class="option" data-option="(c)">(c) No X are Z.</div>
+                            <div class="option" data-option="(d)">(d) All Z are X.</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="21">
+                        <div class="question-text">Complete the analogy: Foot is to shoe as hand is to:</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) glove</div>
+                            <div class="option" data-option="(b)">(b) ring</div>
+                            <div class="option" data-option="(c)">(c) bracelet</div>
+                            <div class="option" data-option="(d)">(d) watch</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="22">
+                        <div class="question-text">Which word does not belong: Chair, Table, Bed, Window?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Chair</div>
+                            <div class="option" data-option="(b)">(b) Table</div>
+                            <div class="option" data-option="(c)">(c) Bed</div>
+                            <div class="option" data-option="(d)">(d) Window</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="23">
+                        <div class="question-text">If today is Friday, what day was it two days ago?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Tuesday</div>
+                            <div class="option" data-option="(b)">(b) Wednesday</div>
+                            <div class="option" data-option="(c)">(c) Thursday</div>
+                            <div class="option" data-option="(d)">(d) Monday</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="24">
+                        <div class="question-text">Tree is to forest as drop is to:</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) river</div>
+                            <div class="option" data-option="(b)">(b) ocean</div>
+                            <div class="option" data-option="(c)">(c) bottle</div>
+                            <div class="option" data-option="(d)">(d) glass</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="25">
+                        <div class="question-text">If all dogs bark, and Max is a dog, what is true?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Max barks.</div>
+                            <div class="option" data-option="(b)">(b) Max is quiet.</div>
+                            <div class="option" data-option="(c)">(c) Max is not a dog.</div>
+                            <div class="option" data-option="(d)">(d) Max may or may not bark.</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="26">
+                        <div class="question-text">Complete the sequence: ACE is to GIK as JLO is to:</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) PRU</div>
+                            <div class="option" data-option="(b)">(b) QSU</div>
+                            <div class="option" data-option="(c)">(c) RTV</div>
+                            <div class="option" data-option="(d)">(d) PSU</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="27">
+                        <div class="question-text">Car is to road as boat is to:</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) water</div>
+                            <div class="option" data-option="(b)">(b) dock</div>
+                            <div class="option" data-option="(c)">(c) sky</div>
+                            <div class="option" data-option="(d)">(d) shore</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="28">
+                        <div class="question-text">Which word is most closely related to "bright"?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Dark</div>
+                            <div class="option" data-option="(b)">(b) Dull</div>
+                            <div class="option" data-option="(c)">(c) Radiant</div>
+                            <div class="option" data-option="(d)">(d) Dim</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="29">
+                        <div class="question-text">If M is N’s mother, and O is N’s brother, who is M to O?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Sister</div>
+                            <div class="option" data-option="(b)">(b) Mother</div>
+                            <div class="option" data-option="(c)">(c) Daughter</div>
+                            <div class="option" data-option="(d)">(d) Aunt</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="30">
+                        <div class="question-text">Complete the analogy: Old is to young as hot is to:</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) warm</div>
+                            <div class="option" data-option="(b)">(b) cold</div>
+                            <div class="option" data-option="(c)">(c) fire</div>
+                            <div class="option" data-option="(d)">(d) cool</div>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Answers -->
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon">
+                    <i class='bx bx-key'></i>
+                </div>
+                <h2 class="topic-title">Answer Key</h2>
+            </div>
+            <p class="topic-description">
+                Correct answers for the Verbal Reasoning practice questions.
+            </p>
+            <div class="answer-table">
+                <table>
+                    <tr>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                    </tr>
+                    <tr>
+                        <td>1</td><td data-question-id="1">(b)</td>
+                        <td>2</td><td data-question-id="2">(b)</td>
+                        <td>3</td><td data-question-id="3">(a)</td>
+                        <td>4</td><td data-question-id="4">(b)</td>
+                        <td>5</td><td data-question-id="5">(a)</td>
+                    </tr>
+                    <tr>
+                        <td>6</td><td data-question-id="6">(b)</td>
+                        <td>7</td><td data-question-id="7">(a)</td>
+                        <td>8</td><td data-question-id="8">(b)</td>
+                        <td>9</td><td data-question-id="9">(b)</td>
+                        <td>10</td><td data-question-id="10">(b)</td>
+                    </tr>
+                    <tr>
+                        <td>11</td><td data-question-id="11">(b)</td>
+                        <td>12</td><td data-question-id="12">(c)</td>
+                        <td>13</td><td data-question-id="13">(a)</td>
+                        <td>14</td><td data-question-id="14">(b)</td>
+                        <td>15</td><td data-question-id="15">(a)</td>
+                    </tr>
+                    <tr>
+                        <td>16</td><td data-question-id="16">(a)</td>
+                        <td>17</td><td data-question-id="17">(b)</td>
+                        <td>18</td><td data-question-id="18">(b)</td>
+                        <td>19</td><td data-question-id="19">(a)</td>
+                        <td>20</td><td data-question-id="20">(b)</td>
+                    </tr>
+                    <tr>
+                        <td>21</td><td data-question-id="21">(a)</td>
+                        <td>22</td><td data-question-id="22">(d)</td>
+                        <td>23</td><td data-question-id="23">(b)</td>
+                        <td>24</td><td data-question-id="24">(b)</td>
+                        <td>25</td><td data-question-id="25">(a)</td>
+                    </tr>
+                    <tr>
+                        <td>26</td><td data-question-id="26">(c)</td>
+                        <td>27</td><td data-question-id="27">(a)</td>
+                        <td>28</td><td data-question-id="28">(c)</td>
+                        <td>29</td><td data-question-id="29">(b)</td>
+                        <td>30</td><td data-question-id="30">(b)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="copyright">
+                <p>© 2025 Verbal Reasoning Prep. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.querySelector('.theme-toggle');
+            const backButton = document.querySelector('.back-button');
+            const options = document.querySelectorAll('.option');
+            const answerKey = {
+                1: '(b)', 2: '(b)', 3: '(a)', 4: '(b)', 5: '(a)',
+                6: '(b)', 7: '(a)', 8: '(b)', 9: '(b)', 10: '(b)',
+                11: '(b)', 12: '(c)', 13: '(a)', 14: '(b)', 15: '(a)',
+                16: '(a)', 17: '(b)', 18: '(b)', 19: '(a)', 20: '(b)',
+                21: '(a)', 22: '(d)', 23: '(b)', 24: '(b)', 25: '(a)',
+                26: '(c)', 27: '(a)', 28: '(c)', 29: '(b)', 30: '(b)'
+            };
+
+            if (themeToggle) {
+                const themeIcon = themeToggle.querySelector('i');
+                themeToggle.addEventListener('click', function() {
+                    document.body.classList.toggle('light-theme');
+                    if (document.body.classList.contains('light-theme')) {
+                        themeIcon.classList.remove('bx-moon');
+                        themeIcon.classList.add('bx-sun');
+                        localStorage.setItem('theme', 'light');
+                    } else {
+                        themeIcon.classList.remove('bx-sun');
+                        themeIcon.classList.add('bx-moon');
+                        localStorage.setItem('theme', 'dark');
+                    }
+                });
+
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'light') {
+                    document.body.classList.add('light-theme');
+                    themeIcon.classList.remove('bx-moon');
+                    themeIcon.classList.add('bx-sun');
+                }
+            }
+
+            if (backButton) {
+                backButton.addEventListener('click', function() {
+                    window.history.back();
+                });
+            }
+
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    const question = this.closest('.question');
+                    const questionId = question.getAttribute('data-question-id');
+                    const selectedOption = this.getAttribute('data-option');
+                    const correctAnswer = answerKey[questionId];
+
+                    question.querySelectorAll('.option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+
+                    this.classList.add('selected');
+
+                    const answerCell = document.querySelector(`td[data-question-id="${questionId}"]`);
+                    if (answerCell) {
+                        answerCell.classList.remove('correct', 'incorrect');
+                        if (selectedOption === correctAnswer) {
+                            answerCell.classList.add('correct');
+                        } else {
+                            answerCell.classList.add('incorrect');
+                        }
+                    }
+                });
+            });
+
+            // Enhance table scroll behavior on mobile
+            const answerTable = document.querySelector('.answer-table');
+            if (answerTable && window.innerWidth <= 768) {
+                answerTable.style.scrollSnapType = 'x mandatory';
+                answerTable.style.webkitOverflowScrolling = 'touch';
+            }
+        });
+    </script>
+</body>
+</html>

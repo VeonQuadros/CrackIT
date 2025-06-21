@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antonyms & Synonyms, Fill in the Blanks Practice</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        /* Prevent content overflow and ensure full-width responsiveness */
+        .main-content {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        .topic-section {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        .question-list ol {
+            padding-left: 0;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .question {
+            max-width: 100%;
+        }
+
+        .options {
+            max-width: 100%;
+        }
+
+        /* For iOS Safari tap highlight */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Disable text selection for better mobile interaction */
+        * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0f0f0f;
+            color: #f0f0f0;
+            min-height: 100vh;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body.light-theme {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .header-icons {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .header-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            background-color: #22c55e;
+            color: white;
+            border: none;
+        }
+
+        body.light-theme .header-icon {
+            background-color: #2563eb;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-icon:hover {
+            transform: scale(1.1);
+            background-color: #16a34a;
+        }
+
+        body.light-theme .header-icon:hover {
+            background-color: #1d4ed8;
+        }
+
+        .main-content {
+            padding: 80px 50px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .page-title {
+            font-size: 36px;
+            margin-bottom: 60px;
+            font-weight: 700;
+            color: #f0f0f0;
+            text-align: center;
+            position: relative;
+        }
+
+        .page-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #22c55e;
+            margin: 20px auto 0;
+            border-radius: 2px;
+        }
+
+        body.light-theme .page-title {
+            color: #333;
+        }
+
+        body.light-theme .page-title::after {
+            background-color: #2563eb;
+        }
+
+        .topic-section {
+            margin-bottom: 80px;
+            background-color: #1a1a1a;
+            border-radius: 16px;
+            padding: 40px;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme .topic-section {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .topic-section:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+            border-color: #22c55e;
+        }
+
+        body.light-theme .topic-section:hover {
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+            border-color: #3b82f6;
+        }
+
+        .topic-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .topic-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 25px;
+        }
+
+        body.light-theme .topic-icon {
+            background-color: rgba(239, 68, 68, 0.1);
+        }
+
+        .topic-icon i {
+            font-size: 28px;
+        }
+
+        .topic-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: white;
+        }
+
+        body.light-theme .topic-title {
+            color: #333;
+        }
+
+        .topic-description {
+            font-size: 17px;
+            color: #aaa;
+            line-height: 1.9;
+            margin-bottom: 30px;
+        }
+
+        body.light-theme .topic-description {
+            color: #666;
+        }
+
+        .question-list {
+            margin-top: 30px;
+            padding: 0 20px;
+        }
+
+        .question-list ol {
+            list-style-position: outside;
+            padding-left: 25px;
+            margin: 0;
+            counter-reset: item;
+        }
+
+        .question {
+            position: relative;
+            font-size: 17px;
+            color: #f0f0f0;
+            margin-bottom: 30px;
+            line-height: 1.8;
+            padding: 20px;
+            background-color: #222;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme .question {
+            color: #333;
+            background-color: #f9fafb;
+        }
+
+        .question-text {
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .option {
+            background-color: #333;
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        body.light-theme .option {
+            background-color: #e5e7eb;
+        }
+
+        .option:hover {
+            background-color: #444;
+        }
+
+        body.light-theme .option:hover {
+            background-color: #d1d5db;
+        }
+
+        .option.selected {
+            background-color: #22c55e;
+            color: white;
+            border: 2px solid #16a34a;
+        }
+
+        body.light-theme .option.selected {
+            background-color: #2563eb;
+            color: white;
+            border: 2px solid #1d4ed8;
+        }
+
+        .answer-table {
+            margin-top: 40px;
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .answer-table::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 20px;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.2));
+            pointer-events: none;
+        }
+
+        body.light-theme .answer-table {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+        }
+
+        body.light-theme .answer-table::after {
+            background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.1));
+        }
+
+        .answer-table table {
+            width: 100%;
+            min-width: 600px;
+            border-collapse: collapse;
+        }
+
+        .answer-table th, .answer-table td {
+            border: 1px solid #333;
+            padding: 15px;
+            text-align: center;
+            color: #f0f0f0;
+            font-size: 15px;
+            min-width: 60px;
+        }
+
+        body.light-theme .answer-table th,
+        body.light-theme .answer-table td {
+            border: 1px solid #ddd;
+            color: #333;
+        }
+
+        .answer-table td.correct {
+            background-color: #16a34a;
+            color: white;
+        }
+
+        body.light-theme .answer-table td.correct {
+            background-color: #16a34a;
+            color: white;
+        }
+
+        .answer-table td.incorrect {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        body.light-theme .answer-table td.incorrect {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        .footer {
+            background-color: #0f0f0f;
+            padding: 100px 0 40px;
+            margin-top: 100px;
+            border-top: 1px solid #222;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background-color: #22c55e;
+            border-radius: 2px;
+        }
+
+        body.light-theme .footer {
+            background-color: #f5f5f5;
+            border-top: 1px solid #ddd;
+        }
+
+        body.light-theme .footer::before {
+            background-color: #2563eb;
+        }
+
+        .copyright {
+            text-align: center;
+            padding: 40px 0 0;
+            margin-top: 60px;
+            border-top: 1px solid #222;
+            color: #888;
+            font-size: 15px;
+        }
+
+        body.light-theme .copyright {
+            border-top: 1acb3 1px solid #ddd;
+            color: #666;
+        }
+
+        /* Media query for screens up to 1024px */
+        @media screen and (max-width: 1024px) {
+            .options {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Media query for screens up to 768px */
+        @media screen and (max-width: 768px) {
+            .header-icons {
+                top: 10px;
+                right: 10px;
+                gap: 10px;
+            }
+
+            .header-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+
+            .main-content {
+                padding: 60px 10px;
+                margin: 0 auto;
+                max-width: 100%;
+            }
+
+            .page-title {
+                font-size: 28px;
+                margin-bottom: 40px;
+            }
+
+            .topic-section {
+                padding: 20px 12px;
+                margin: 0 auto 40px;
+                max-width: 100%;
+            }
+
+            .topic-header {
+                margin-bottom: 20px;
+            }
+
+            .topic-icon {
+                width: 50px;
+                height: 50px;
+                margin-right: 15px;
+            }
+
+            .topic-icon i {
+                font-size: 24px;
+            }
+
+            .topic-title {
+                font-size: 24px;
+            }
+
+            .topic-description {
+                font-size: 15px;
+                line-height: 1.7;
+            }
+
+            .question-list {
+                padding: 0;
+                margin: 0 auto;
+            }
+
+            .question-list ol {
+                list-style-position: inside;
+                padding-left: 0;
+                max-width: 100%;
+            }
+
+            .question {
+                font-size: 15px;
+                padding: 15px 20px;
+                margin-bottom: 20px;
+                display: flex;
+                flex-direction: column;
+                max-width: 100%;
+            }
+
+            .question::before {
+                content: counter(item) ".";
+                counter-increment: item;
+                position: absolute;
+                left: 10px;
+                top: 15px;
+                font-weight: 500;
+            }
+
+            body.light-theme .question::before {
+                color: #2563eb;
+            }
+
+            body:not(.light-theme) .question::before {
+                color: #22c55e;
+            }
+
+            .question-text {
+                position: relative;
+                padding-left: 30px;
+                margin-bottom: 12px;
+                margin-left: 10px;
+            }
+
+            .options {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 12px;
+                padding-left: 30px;
+                max-width: 100%;
+            }
+
+            .option {
+                padding: 10px;
+                font-size: 14px;
+                border-radius: 4px;
+            }
+
+            .answer-table {
+                background-color: transparent;
+            }
+
+            .answer-table table {
+                min-width: 600px;
+                border-radius: 8px;
+            }
+
+            body.light-theme .answer-table table {
+                background-color: #ffffff;
+            }
+
+            .answer-table th, 
+            .answer-table td {
+                padding: 10px 8px;
+                font-size: 13px;
+                min-width: 40px;
+            }
+        }
+
+        /* Media query for screens up to 480px */
+        @media screen and (max-width: 480px) {
+            .header-icons {
+                top: 8px;
+                right: 8px;
+                gap: 8px;
+            }
+
+            .header-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+
+            .main-content {
+                padding: 50px 8px;
+            }
+
+            .page-title {
+                font-size: 24px;
+                margin-bottom: 30px;
+            }
+
+            .topic-section {
+                padding: 15px 10px;
+                margin-bottom: 30px;
+            }
+
+            .topic-icon {
+                width: 40px;
+                height: 40px;
+                margin-right: 12px;
+            }
+
+            .topic-icon i {
+                font-size: 20px;
+            }
+
+            .topic-title {
+                font-size: 20px;
+            }
+
+            .topic-description {
+                font-size: 14px;
+            }
+
+            .question {
+                font-size: 14px;
+                padding: 12px 15px;
+                margin-bottom: 15px;
+            }
+
+            .question::before {
+                left: 8px;
+                top: 12px;
+            }
+
+            .question-text {
+                padding-left: 25px;
+                margin-left: 8px;
+            }
+
+            .options {
+                gap: 8px;
+                padding-left: 25px;
+            }
+
+            .option {
+                padding: 8px 10px;
+                font-size: 13px;
+            }
+
+            .answer-table th, 
+            .answer-table td {
+                padding: 8px 6px;
+                font-size: 12px;
+                min-width: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-icons">
+        <button class="header-icon theme-toggle" id="theme-toggle" title="Toggle Theme">
+            <i class='bx bx-moon'></i>
+        </button>
+        <button class="header-icon back-button" title="Back">
+            <i class='bx bx-arrow-back'></i>
+        </button>
+    </div>
+
+    <div class="main-content">
+        <h1 class="page-title">Practice Questions</h1>
+
+        <!-- Antonyms & Synonyms, Fill in the Blanks Questions -->
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon">
+                    <i class='bx bx-book'></i>
+                </div>
+                <h2 class="topic-title">Antonyms & Synonyms, Fill in the Blanks</h2>
+            </div>
+            <p class="topic-description">
+                Test your vocabulary and sentence completion skills with these 30 practice questions covering antonyms, synonyms, and fill-in-the-blank exercises.
+            </p>
+            <div class="question-list">
+                <ol>
+                    <li class="question" data-question-id="1">
+                        <div class="question-text">What is a synonym for "big"?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Small</div>
+                            <div class="option" data-option="(b)">(b) Large</div>
+                            <div class="option" data-option="(c)">(c) Tiny</div>
+                            <div class="option" data-option="(d)">(d) Short</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="2">
+                        <div class="question-text">What is an antonym for "happy"?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Joyful</div>
+                            <div class="option" data-option="(b)">(b) Sad</div>
+                            <div class="option" data-option="(c)">(c) Excited</div>
+                            <div class="option" data-option="(d)">(d) Content</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="3">
+                        <div class="question-text">The room was so _____ that it felt oppressive.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Bright</div>
+                            <div class="option" data-option="(b)">(b) Spacious</div>
+                            <div class="option" data-option="(c)">(c) Cramped</div>
+                            <div class="option" data-option="(d)">(d) Airy</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="4">
+                        <div class="question-text">What is a synonym for "difficult"?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Easy</div>
+                            <div class="option" data-option="(b)">(b) Hard</div>
+                            <div class="option" data-option="(c)">(c) Simple</div>
+                            <div class="option" data-option="(d)">(d) Clear</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="5">
+                        <div class="question-text">What is an antonym for "fast"?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Quick</div>
+                            <div class="option" data-option="(b)">(b) Rapid</div>
+                            <div class="option" data-option="(c)">(c) Slow</div>
+                            <div class="option" data-option="(d)">(d) Swift</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="6">
+                        <div class="question-text">She was _____ to help after the accident.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Reluctant</div>
+                            <div class="option" data-option="(b)">(b) Eager</div>
+                            <div class="option" data-option="(c)">(c) Hesitant</div>
+                            <div class="option" data-option="(d)">(d) Unwilling</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="7">
+                        <div class="question-text">What is a synonym for "calm"?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Agitated</div>
+                            <div class="option" data-option="(b)">(b) Peaceful</div>
+                            <div class="option" data-option="(c)">(c) Nervous</div>
+                            <div class="option" data-option="(d)">(d) Restless</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="8">
+                        <div class="question-text">What is an antonym for "bright"?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Dim</div>
+                            <div class="option" data-option="(b)">(b) Radiant</div>
+                            <div class="option" data-option="(c)">(c) Glowing</div>
+                            <div class="option" data-option="(d)">(d) Vivid</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="9">
+                        <div class="question-text">His speech was so _____ that everyone was inspired.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Dull</div>
+                            <div class="option" data-option="(b)">(b) Eloquent</div>
+                            <div class="option" data-option="(c)">(c) Monotonous</div>
+                            <div class="option" data-option="(d)">(d) Tedious</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="10">
+                        <div class="question-text">What is a synonym for "generous"?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Stingy</div>
+                            <div class="option" data-option="(b)">(b) Kind</div>
+                            <div class="option" data-option="(c)">(c) Selfish</div>
+                            <div class="option" data-option="(d)">(d) Charitable</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="11">
+                        <div class="question-text">What is an antonym for "ancient"?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Old</div>
+                            <div class="option" data-option="(b)">(b) Modern</div>
+                            <div class="option" data-option="(c)">(c) Antique</div>
+                            <div class="option" data-option="(d)">(d) Historic</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="12">
+                        <div class="question-text">The task was so _____ that it required extra effort.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Simple</div>
+                            <div class="option" data-option="(b)">(b) Complex</div>
+                            <div class="option" data-option="(c)">(c) Easy</div>
+                            <div class="option" data-option="(d)">(d) Clear</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="13">
+                        <div class="question-text">What is a synonym for "brave"?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Cowardly</div>
+                            <div class="option" data-option="(b)">(b) Fearful</div>
+                            <div class="option" data-option="(c)">(c) Courageous</div>
+                            <div class="option" data-option="(d)">(d) Timid</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="14">
+                        <div class="options">
+                        <div class="question-text">What is an antonym for "strong"?</div>
+                        <div class="option" data-option="(a)">(a) Powerful</div>
+                        <div class="option" data-option="(b)">(b) Weak</div>
+                        <div class="option" data-option="(c)">(c) Robust</div>
+                        <div class="option" data-option="(d)">(d) Mighty</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="15">
+                        <div class="question-text">Her explanation was so _____ that everyone understood.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Confusing</div>
+                            <div class="option" data-option="(b)">(b) Clear</div>
+                            <div class="option" data-option="(c)">(c) Vague</div>
+                            <div class="option" data-option="(d)">(d) Obscure</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="16">
+                        <div class="question-text">What is a synonym for "beautiful"?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Ugly</div>
+                            <div class="option" data-option="(b)">(b) Lovely</div>
+                            <div class="option" data-option="(c)">(c) Plain</div>
+                            <div class="option" data-option="(d)">(d) Dull</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="17">
+                        <div class="question-text">What is an antonym for "tall"?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) High</div>
+                        <div class="option" data-option="(b)">(b) Short</div>
+                            <div class="option" data-option="(c)">(c) Elevated</div>
+                            <div class="option" data-option="(d)">(d) Lofty</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="18">
+                        <div class="question-text">The meeting was _____ due to unforeseen circumstances.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Continued</div>
+                            <div class="option" data-option="(b)">(b) Cancelled</div>
+                            <div class="option" data-option="(c)">(c) Scheduled</div>
+                            <div class="option" data-option="(d)">(d) Held</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="19">
+                        <div class="question-text">What is a synonym for "quiet"?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Noisy</div>
+                            <div class="option" data-option="(b)">(b) Silent</div>
+                            <div class="option" data-option="(c)">(c) Loud</div>
+                            <div class="option" data-option="(d)">(d) Boisterous</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="20">
+                        <div class="question-text">What is an antonym for "hot"?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Warm</div>
+                            <div class="option" data-option="(b)">(b) Cold</div>
+                            <div class="option" data-option="(c)">(c) Boiling</div>
+                            <div class="option" data-option="(d)">(d) Scalding</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="21">
+                        <div class="question-text">His decision was _____ and well-thought-out.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Hasty</div>
+                            <div class="option" data-option="(b)">(b) Prudent</div>
+                            <div class="option" data-option="(c)">(c) Rash</div>
+                            <div class="option" data-option="(d)">(d) Impulsive</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="22">
+                        <div class="question-text">What is a synonym for "smart"?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Dull</div>
+                            <div class="option" data-option="(b)">(b) Intelligent</div>
+                            <div class="option" data-option="(c)">(c) Slow</div>
+                            <div class="option" data-option="(d)">(d) Dim</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="23">
+                        <div class="question-text">What is an antonym for "full"?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Packed</div>
+                            <div class="option" data-option="(b)">(b) Empty</div>
+                            <div class="option" data-option="(c)">(c) Loaded</div>
+                            <div class="option" data-option="(d)">(d) Stuffed</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="24">
+                        <div class="question-text">The project was _____ due to its innovative approach.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Criticized</div>
+                            <div class="option" data-option="(b)">(b) Praised</div>
+                            <div class="option" data-option="(c)">(c) Ignored</div>
+                            <div class="option" data-option="(d)">(d) Rejected</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="25">
+                        <div class="question-text">What is a synonym for "sad"?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Happy</div>
+                            <div class="option" data-option="(b)">(b) Joyful</div>
+                            <div class="option" data-option="(c)">(c) Gloomy</div>
+                            <div class="option" data-option="(d)">(d) Cheerful</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="26">
+                        <div class="question-text">What is an antonym for "open"?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Accessible</div>
+                            <div class="option" data-option="(b)">(b) Closed</div>
+                            <div class="option" data-option="(c)">(c) Available</div>
+                            <div class="option" data-option="(d)">(d) Unlocked</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="27">
+                        <div class="question-text">The book was so _____ that I couldn’t put it down.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Boring</div>
+                            <div class="option" data-option="(b)">(b) Engaging</div>
+                            <div class="option" data-option="(c)">(c) Dull</div>
+                            <div class="option" data-option="(d)">(d) Tedious</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="28">
+                        <div class="question-text">What is a synonym for "fearful"?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Brave</div>
+                            <div class="option" data-option="(b)">(b) Afraid</div>
+                            <div class="option" data-option="(c)">(c) Confident</div>
+                            <div class="option" data-option="(d)">(d) Bold</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="29">
+                        <div class="options">
+                        <div class="question-text">What is an antonym for "kind"?</div>
+                        <div class="option" data-option="(a)">(a) Gentle</div>
+                        <div class="option" data-option="(b)">(b) Cruel</div>
+                        <div class="option" data-option="(c)">(c) Compassionate</div>
+                        <div class="option" data-option="(d)">(d) Caring</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="30">
+                        <div class="question-text">His _____ behavior made everyone feel welcome.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Rude</div>
+                            <div class="option" data-option="(b)">(b) Friendly</div>
+                            <div class="option" data-option="(c)">(c) Hostile</div>
+                            <div class="option" data-option="(d)">(d) Cold</div>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Answers -->
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon">
+                    <i class='bx bx-key'></i>
+                </div>
+                <h2 class="topic-title">Answer Key</h2>
+            </div>
+            <p class="topic-description">
+                Correct answers for the Antonyms & Synonyms, Fill in the Blanks practice questions.
+            </p>
+            <div class="answer-table">
+                <table>
+                    <tr>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                    </tr>
+                    <tr>
+                        <td>1</td><td data-question-id="1">(b)</td>
+                        <td>2</td><td data-question-id="2">(b)</td>
+                        <td>3</td><td data-question-id="3">(c)</td>
+                        <td>4</td><td data-question-id="4">(b)</td>
+                        <td>5</td><td data-question-id="5">(c)</td>
+                    </tr>
+                    <tr>
+                        <td>6</td><td data-question-id="6">(b)</td>
+                        <td>7</td><td data-question-id="7">(b)</td>
+                        <td>8</td><td data-question-id="8">(a)</td>
+                        <td>9</td><td data-question-id="9">(b)</td>
+                        <td>10</td><td data-question-id="10">(d)</td>
+                    </tr>
+                    <tr>
+                        <td>11</td><td data-question-id="11">(b)</td>
+                        <td>12</td><td data-question-id="12">(b)</td>
+                        <td>13</td><td data-question-id="13">(c)</td>
+                        <td>14</td><td data-question-id="14">(b)</td>
+                        <td>15</td><td data-question-id="15">(b)</td>
+                    </tr>
+                    <tr>
+                        <td>16</td><td data-question-id="16">(b)</td>
+                        <td>17</td><td data-question-id="17">(b)</td>
+                        <td>18</td><td data-question-id="18">(b)</td>
+                        <td>19</td><td data-question-id="19">(b)</td>
+                        <td>20</td><td data-question-id="20">(b)</td>
+                    </tr>
+                    <tr>
+                        <td>21</td><td data-question-id="21">(b)</td>
+                        <td>22</td><td data-question-id="22">(b)</td>
+                        <td>23</td><td data-question-id="23">(b)</td>
+                        <td>24</td><td data-question-id="24">(b)</td>
+                        <td>25</td><td data-question-id="25">(c)</td>
+                    </tr>
+                    <tr>
+                        <td>26</td><td data-question-id="26">(b)</td>
+                        <td>27</td><td data-question-id="27">(b)</td>
+                        <td>28</td><td data-question-id="28">(b)</td>
+                        <td>29</td><td data-question-id="29">(b)</td>
+                        <td>30</td><td data-question-id="30">(b)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="copyright">
+                <p>© 2025 Vocabulary Prep. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.querySelector('.theme-toggle');
+            const backButton = document.querySelector('.back-button');
+            const options = document.querySelectorAll('.option');
+            const answerKey = {
+                1: '(b)', 2: '(b)', 3: '(c)', 4: '(b)', 5: '(c)',
+                6: '(b)', 7: '(b)', 8: '(a)', 9: '(b)', 10: '(d)',
+                11: '(b)', 12: '(b)', 13: '(c)', 14: '(b)', 15: '(b)',
+                16: '(b)', 17: '(b)', 18: '(b)', 19: '(b)', 20: '(b)',
+                21: '(b)', 22: '(b)', 23: '(b)', 24: '(b)', 25: '(c)',
+                26: '(b)', 27: '(b)', 28: '(b)', 29: '(b)', 30: '(b)'
+            };
+
+            if (themeToggle) {
+                const themeIcon = themeToggle.querySelector('i');
+                themeToggle.addEventListener('click', function() {
+                    document.body.classList.toggle('light-theme');
+                    if (document.body.classList.contains('light-theme')) {
+                        themeIcon.classList.remove('bx-moon');
+                        themeIcon.classList.add('bx-sun');
+                        localStorage.setItem('theme', 'light');
+                    } else {
+                        themeIcon.classList.remove('bx-sun');
+                        themeIcon.classList.add('bx-moon');
+                        localStorage.setItem('theme', 'dark');
+                    }
+                });
+
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'light') {
+                    document.body.classList.add('light-theme');
+                    themeIcon.classList.remove('bx-moon');
+                    themeIcon.classList.add('bx-sun');
+                }
+            }
+
+            if (backButton) {
+                backButton.addEventListener('click', function() {
+                    window.history.back();
+                });
+            }
+
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    const question = this.closest('.question');
+                    const questionId = question.getAttribute('data-question-id');
+                    const selectedOption = this.getAttribute('data-option');
+                    const correctAnswer = answerKey[questionId];
+
+                    question.querySelectorAll('.option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+
+                    this.classList.add('selected');
+
+                    const answerCell = document.querySelector(`td[data-question-id="${questionId}"]`);
+                    if (answerCell) {
+                        answerCell.classList.remove('correct', 'incorrect');
+                        if (selectedOption === correctAnswer) {
+                            answerCell.classList.add('correct');
+                        } else {
+                            answerCell.classList.add('incorrect');
+                        }
+                    }
+                });
+            });
+
+            // Enhance table scroll behavior on mobile
+            const answerTable = document.querySelector('.answer-table');
+            if (answerTable && window.innerWidth <= 768) {
+                answerTable.style.scrollSnapType = 'x mandatory';
+                answerTable.style.webkitOverflowScrolling = 'touch';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Technical / HR Questions</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        /* Global styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            background-color: #0f0f0f;
+            color: #f0f0f0;
+            min-height: 100vh;
+            display: flex;
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme {
+            background-color: #f5f7fb;
+            color: #333;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 50px;
+            background-color: #0a0a0a;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: fixed;
+            height: 100vh;
+            transition: width 0.3s ease;
+            padding: 20px 0;
+            border-right: 1px solid #222;
+            left: 0;
+            top: 0;
+            overflow: hidden;
+            z-index: 1000;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        body.light-theme .sidebar {
+            background-color: #e6ecf0;
+            border-right: 1px solid #d3dce6;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar:hover {
+            width: 200px;
+        }
+
+        .sidebar:hover .sidebar-item span,
+        .sidebar:hover .sidebar-header .sidebar-title,
+        .sidebar:hover .sidebar-header i {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 20px 0;
+            font-size: 20px;
+            font-weight: bold;
+            color: #22c55e;
+            border-bottom: 1px solid #222;
+            margin-bottom: 20px;
+            transition: opacity 0.3s ease;
+        }
+
+        body.light-theme .sidebar-header {
+            color: #0ea5e9;
+            border-bottom: 1px solid #d3dce6;
+        }
+
+        .sidebar-header i {
+            font-size: 40px;
+            color: #22c55e;
+            margin-bottom: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        body.light-theme .sidebar-header i {
+            color: #0ea5e9;
+        }
+
+        .sidebar-header .sidebar-title {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar.active .sidebar-header .sidebar-title,
+        .sidebar.active .sidebar-header i {
+            opacity: 1;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0 12px 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #888;
+        }
+
+        body.light-theme .sidebar-item {
+            color: #666;
+        }
+
+        .sidebar-item i {
+            font-size: 20px;
+            min-width: 24px;
+            margin-right: 12px;
+        }
+
+        .sidebar-item span {
+            display: inline;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .sidebar.active .sidebar-item span {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .sidebar.active {
+            width: 200px;
+        }
+
+        .sidebar-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .sidebar-item:hover i,
+        .sidebar-item:hover span {
+            color: #22c55e;
+        }
+
+        body.light-theme .sidebar-item:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+            color: #333;
+        }
+
+        body.light-theme .sidebar-item:hover i,
+        body.light-theme .sidebar-item:hover span {
+            color: #4a90e2;
+        }
+
+        .sidebar-item.active {
+            background-color: transparent;
+            border-left: none;
+            color: #ffffff;
+        }
+
+        body.light-theme .sidebar-item.active {
+            color: #333;
+        }
+
+        .sidebar-top, .sidebar-bottom {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-spacer {
+            flex-grow: 1;
+        }
+
+        .sidebar-toggle {
+            display: flex;
+            position: fixed;
+            top: 45px;
+            left: 9px;
+            background-color: #0a0a0a;
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 50%;
+            padding: 6px;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            font-size: 16px;
+            font-weight: bold;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s ease, background-color 0.3s ease;
+            opacity: 0.9;
+            z-index: 1100;
+        }
+
+        body.light-theme .sidebar-toggle {
+            background-color: #c8c8c8;
+            color: #4a90e2;
+            border: 1px solid rgba(74, 144, 226, 0.3);
+        }
+
+        .sidebar-toggle:hover {
+            opacity: 1;
+            background-color: #1a1a1a;
+        }
+
+        body.light-theme .sidebar-toggle:hover {
+            background-color: #d3dce6;
+        }
+
+        /* Main content */
+        .main-content {
+            margin-left: 50px;
+            flex: 1;
+            padding: 40px;
+            width: calc(100% - 50px);
+            transition: margin-left 0.3s ease, width 0.3s ease;
+        }
+
+        @media (min-width: 769px) {
+            .sidebar:hover ~ .main-content {
+                margin-left: 200px;
+                width: calc(100% - 200px);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #4CAF50, #45D149);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        body.light-theme .header h1 {
+            background: linear-gradient(45deg, #4a90e2, #357abd);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-icon {
+            font-size: 4rem;
+            color: #22c55e;
+            margin: 1rem 0;
+            display: block;
+            animation: scaleIn 0.5s ease;
+        }
+
+        body.light-theme .header-icon {
+            color: #4a90e2;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #aaa;
+            margin-top: 1rem;
+        }
+
+        body.light-theme .header p {
+            color: #6b7280;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid transparent;
+            background: linear-gradient(90deg, #22c55e, #45D149);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #22c55e, #45D149);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .section-title:hover::after {
+            transform: scaleX(1);
+        }
+
+        body.light-theme .section-title {
+            background: linear-gradient(90deg, #4a90e2, #357abd);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        body.light-theme .section-title::after {
+            background: linear-gradient(90deg, #4a90e2, #357abd);
+            height: 3px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.6s ease forwards;
+            animation-delay: calc(var(--card-index) * 0.1s);
+            min-height: 200px; /* Ensure consistent card height */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        body.light-theme .card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-color: #22c55e;
+            background: radial-gradient(circle, rgba(34, 197, 94, 0.1) 0%, transparent 70%);
+        }
+
+        body.light-theme .card:hover {
+            border-color: #4a90e2;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            animation: pulseLight 1.5s infinite;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(45deg, #4CAF50, #45D149);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        body.light-theme .card::before {
+            background: linear-gradient(45deg, #4a90e2, #357abd);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        body.light-theme .card-title {
+            color: #1f2937;
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem auto;
+            font-size: 1.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .card-icon {
+            transform: scale(1.1);
+        }
+
+        .card-description {
+            font-size: 0.9rem;
+            color: #aaa;
+            line-height: 1.5;
+            flex-grow: 1; /* Ensure description takes available space */
+        }
+
+        body.light-theme .card-description {
+            color: #6b7280;
+        }
+
+        /* Icon backgrounds */
+        .card:nth-child(1) .card-icon { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+        .card:nth-child(2) .card-icon { background: rgba(14, 165, 233, 0.2); color: #0ea5e9; }
+        .card:nth-child(3) .card-icon { background: rgba(249, 115, 22, 0.2); color: #f97316; }
+        .card:nth-child(4) .card-icon { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+        .card:nth-child(5) .card-icon { background: rgba(124, 58, 237, 0.2); color: #7c3aed; }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #333, transparent);
+            margin: 3rem 0;
+        }
+
+        body.light-theme .divider {
+            background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #0f0f0f;
+            padding: 60px 0 20px;
+            margin-top: 60px;
+            border-top: 1px solid #222;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        body.light-theme .footer {
+            background-color: #f5f7fb;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .footer-section h3 {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+
+        body.light-theme .footer-section h3 {
+            color: #1f2937;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 16px;
+        }
+
+        .footer-section ul li a {
+            color: #888;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        body.light-theme .footer-section ul li a {
+            color: #6b7280;
+        }
+
+        .footer-section ul li a:hover {
+            color: #22c55e;
+        }
+
+        body.light-theme .footer-section ul li a:hover {
+            color: #4a90e2;
+        }
+
+        .copyright {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            border-top: 1px solid #222;
+            color: #888;
+            font-size: 14px;
+        }
+
+        body.light-theme .copyright {
+            border-top: 1px solid #e5e7eb;
+            color: #6b7280;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.8); }
+            to { transform: scale(1); }
+        }
+
+        @keyframes pulseLight {
+            0% {
+                box-shadow: 0 0 0 0 rgba(74, 144, 226, 0.7);
+            }
+            50% {
+                box-shadow: 0 0 15px 5px rgba(74, 144, 226, 0.3);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(74, 144, 226, 0.7);
+            }
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 20px;
+                margin-left: 50px;
+                width: calc(100% - 50px);
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 1.2rem;
+                min-height: 180px; /* Adjusted for smaller screens */
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .footer-section {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .card-title {
+                font-size: 1.3rem;
+            }
+
+            .card-description {
+                font-size: 0.85rem;
+            }
+
+            .card {
+                min-height: 160px; /* Adjusted for smaller screens */
+            }
+
+            .footer-section h3 {
+                font-size: 16px;
+            }
+
+            .footer-section ul li a {
+                font-size: 13px;
+            }
+
+            .copyright {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Toggle Button -->
+    <button class="sidebar-toggle" id="sidebarToggle">
+        <span class="toggle-arrow">❯</span>
+    </button>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <i class='bx bxs-graduation'></i>
+            <span class="sidebar-title">CrackIT</span>
+        </div>
+        <div class="sidebar-top">
+            <div class="sidebar-item">
+                <a href="index.html" style="text-decoration: none; color: inherit;">
+                    <i class='bx bx-home-alt'></i>
+                    <span>Home</span>
+                </a>
+            </div>
+            <div class="sidebar-item" onclick="scrollToSection('tech-hr')">
+                <a href="#tech-hr" style="text-decoration: none; color: inherit;">
+                    <i class='bx bx-code'></i>
+                    <span>Tech/HR</span>
+                </a>
+            </div>
+            <div class="sidebar-item" onclick="scrollToSection('it-topics')">
+                <a href="#it-topics" style="text-decoration: none; color: inherit;">
+                    <i class='bx bx-server'></i>
+                    <span>IT Topics</span>
+                </a>
+            </div>
+        </div>
+        <div class="sidebar-spacer"></div>
+        <div class="sidebar-bottom">
+            <div class="sidebar-item theme-toggle">
+                <i class='bx bx-palette'></i>
+                <span>Theme</span>
+            </div>
+            <div class="sidebar-item">
+                <a href="login and register.html" style="text-decoration: none; color: inherit;">
+                    <i class='bx bx-log-out'></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <section class="section" id="tech-hr">
+                <h2 class="section-title">Tech / HR Questions</h2>
+                <div class="cards-grid">
+                    <a href="Tech HR Self Introduction.html" class="card-link">
+                        <div class="card" style="--card-index: 1;">
+                            <h3 class="card-title">Self-Introduction</h3>
+                            <div class="card-icon"><i class='bx bx-user-circle'></i></div>
+                            <p class="card-description">Craft a compelling personal narrative to make a strong first impression.</p>
+                        </div>
+                    </a>
+
+                    <a href="Tech HR Acedemic Projects.html" class="card-link">
+                        <div class="card" style="--card-index: 2;">
+                            <h3 class="card-title">Academic Projects</h3>
+                            <div class="card-icon"><i class='bx bx-book-open'></i></div>
+                            <p class="card-description">Highlight technical skills and project outcomes effectively.</p>
+                        </div>
+                    </a>
+
+                    <a href="Tech HR Programming Knowledge.html" class="card-link">
+                        <div class="card" style="--card-index: 3;">
+                            <h3 class="card-title">Programming Knowledge</h3>
+                            <div class="card-icon"><i class='bx bx-code-alt'></i></div>
+                            <p class="card-description">Demonstrate coding proficiency and best practices.</p>
+                        </div>
+                    </a>
+
+                    <a href="Tech HR Behavioural Questions.html" class="card-link">
+                        <div class="card" style="--card-index: 4;">
+                            <h3 class="card-title">Behavioral Questions</h3>
+                            <div class="card-icon"><i class='bx bx-group'></i></div>
+                            <p class="card-description">Master STAR method and situational responses for Behavioral Questions.</p>
+                        </div>
+                    </a>
+
+                    <a href="Tech Hr Problem Solving Questions.html" class="card-link">
+                        <div class="card" style="--card-index: 5;">
+                            <h3 class="card-title">Problem Solving Questions</h3>
+                            <div class="card-icon"><i class='bx bx-bulb'></i></div>
+                            <p class="card-description">Tackle algorithmic and logical challenges with confidence.</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="section" id="it-topics">
+                <h2 class="section-title">Important IT Topics</h2>
+                <div class="cards-grid">
+                    <div class="card" style="--card-index: 1;">
+                        <h3 class="card-title">OOPS</h3>
+                        <div class="card-icon"><i class='bx bx-cog'></i></div>
+                        <p class="card-description">Master OOP concepts and design patterns.</p>
+                    </div>
+
+                    <div class="card" style="--card-index: 2;">
+                        <h3 class="card-title">Data Structures & Algorithms</h3>
+                        <div class="card-icon"><i class='bx bx-sitemap'></i></div>
+                        <p class="card-description">Understand arrays, trees, sorting, and complexity.</p>
+                    </div>
+
+                    <div class="card" style="--card-index: 3;">
+                        <h3 class="card-title">DBMS</h3>
+                        <div class="card-icon"><i class='bx bx-data'></i></div>
+                        <p class="card-description">Learn SQL, normalization, and database optimization.</p>
+                    </div>
+
+                    <div class="card" style="--card-index: 4;">
+                        <h3 class="card-title">Operating Systems & Networking</h3>
+                        <div class="card-icon"><i class='bx bx-network-chart'></i></div>
+                        <p class="card-description">Grasp process management, TCP/IP, and security.</p>
+                    </div>
+
+                    <div class="card" style="--card-index: 5;">
+                        <h3 class="card-title">Web Development</h3>
+                        <div class="card-icon"><i class='bx bx-world'></i></div>
+                        <p class="card-description">Master full-stack technologies and DevOps.</p>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="footer">
+                <div class="copyright">
+                    <p>© 2025 CrackIT Prep. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const toggleArrow = sidebarToggle.querySelector('.toggle-arrow');
+            const sidebar = document.querySelector('.sidebar');
+            const themeToggle = document.querySelector('.sidebar-item.theme-toggle');
+            const sidebarItems = document.querySelectorAll('.sidebar-item');
+
+            // Sidebar toggle
+            if (sidebarToggle && sidebar) {
+                sidebarToggle.addEventListener('click', function () {
+                    sidebar.classList.toggle('active');
+                    toggleArrow.textContent = sidebar.classList.contains('active') ? '❮' : '❯';
+                });
+
+                document.addEventListener('click', function (event) {
+                    if (!sidebar.contains(event.target) && !sidebarToggle.contains(event.target)) {
+                        sidebar.classList.remove('active');
+                        toggleArrow.textContent = '❯';
+                    }
+                });
+            }
+
+            // Theme toggle
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function () {
+                    document.body.classList.toggle('light-theme');
+                    localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+                });
+            }
+
+            // Load saved theme
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-theme');
+            }
+
+            // Sidebar item active state
+            sidebarItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    sidebarItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Smooth scroll to section
+            window.scrollToSection = function (sectionId) {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            };
+        });
+    </script>
+</body>
+</html>

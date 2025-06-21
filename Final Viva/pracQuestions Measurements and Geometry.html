@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Measurements & Geometry Practice</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+    /* For iOS Safari */
+    * {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    /* For Android Chrome (and most browsers) */
+    * {
+        -webkit-user-select: none; /* Prevents text selection */
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+        background-color: #0f0f0f;
+        color: #f0f0f0;
+        min-height: 100vh;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    body.light-theme {
+        background-color: #f5f5f5;
+        color: #333;
+    }
+
+    .header-icons {
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        display: flex;
+        gap: 15px;
+        z-index: 1000;
+    }
+
+    .header-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        background-color: #22c55e;
+        color: white;
+        border: none;
+    }
+
+    body.light-theme .header-icon {
+        background-color: #2563eb;
+        color: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-icon:hover {
+        transform: scale(1.1);
+        background-color: #16a34a;
+    }
+
+    body.light-theme .header-icon:hover {
+        background-color: #1d4ed8;
+    }
+
+    .main-content {
+        padding: 80px 50px;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .page-title {
+        font-size: 36px;
+        margin-bottom: 60px;
+        font-weight: 700;
+        color: #f0f0f0;
+        text-align: center;
+        position: relative;
+    }
+
+    .page-title::after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 4px;
+        background-color: #22c55e;
+        margin: 20px auto 0;
+        border-radius: 2px;
+    }
+
+    body.light-theme .page-title {
+        color: #333;
+    }
+
+    body.light-theme .page-title::after {
+        background-color: #2563eb;
+    }
+
+    .topic-section {
+        margin-bottom: 80px;
+        background-color: #1a1a1a;
+        border-radius: 16px;
+        padding: 40px;
+        border: 1px solid #333;
+        transition: all 0.3s ease;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    body.light-theme .topic-section {
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .topic-section:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        border-color: #22c55e;
+    }
+
+    body.light-theme .topic-section:hover {
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        border-color: #3b82f6;
+    }
+
+    .topic-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+    .topic-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: rgba(239, 68, 68, 0.2);
+        color: #ef4444;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 25px;
+    }
+
+    body.light-theme .topic-icon {
+        background-color: rgba(239, 68, 68, 0.1);
+    }
+
+    .topic-icon i {
+        font-size: 28px;
+    }
+
+    .topic-title {
+        font-size: 28px;
+        font-weight: 600;
+        color: white;
+    }
+
+    body.light-theme .topic-title {
+        color: #333;
+    }
+
+    .topic-description {
+        font-size: 17px;
+        color: #aaa;
+        line-height: 1.9;
+        margin-bottom: 30px;
+    }
+
+    body.light-theme .topic-description {
+        color: #666;
+    }
+
+    .question-list {
+        margin-top: 30px;
+        padding: 0;
+        max-width: 100%;
+    }
+
+    .question-list ol {
+        list-style-position: outside;
+        padding-left: 0;
+        margin: 0 auto;
+        max-width: 100%;
+        counter-reset: item;
+    }
+
+    .question {
+        position: relative;
+        font-size: 17px;
+        color: #f0f0f0;
+        margin-bottom: 30px;
+        line-height: 1.8;
+        padding: 20px;
+        background-color: #222;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    body.light-theme .question {
+        color: #333;
+        background-color: #f9fafb;
+    }
+
+    .question-text {
+        margin-bottom: 15px;
+        font-weight: 500;
+        padding-left: 35px;
+    }
+
+    .options {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-top: 15px;
+        padding-left: 35px;
+    }
+
+    .option {
+        background-color: #333;
+        padding: 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 16px;
+        width: 100%;
+    }
+
+    body.light-theme .option {
+        background-color: #e5e7eb;
+    }
+
+    .option:hover {
+        background-color: #444;
+    }
+
+    body.light-theme .option:hover {
+        background-color: #d1d5db;
+    }
+
+    .option.selected {
+        background-color: #22c55e;
+        color: white;
+        border: 2px solid #16a34a;
+    }
+
+    body.light-theme .option.selected {
+        background-color: #2563eb;
+        color: white;
+        border: 2px solid #1d4ed8;
+    }
+
+    .answer-table {
+        margin-top: 40px;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+        background-color: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 8px;
+        position: relative;
+    }
+
+    .answer-table::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 20px;
+        height: 100%;
+        background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.2));
+        pointer-events: none;
+    }
+
+    body.light-theme .answer-table {
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+    }
+
+    body.light-theme .answer-table::after {
+        background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.1));
+    }
+
+    .answer-table table {
+        width: 100%;
+        min-width: 600px;
+        border-collapse: collapse;
+    }
+
+    .answer-table th, .answer-table td {
+        border: 1px solid #333;
+        padding: 15px;
+        text-align: center;
+        color: #f0f0f0;
+        font-size: 15px;
+        min-width: 50px;
+    }
+
+    body.light-theme .answer-table th,
+    body.light-theme .answer-table td {
+        border: 1px solid #ddd;
+        color: #333;
+    }
+
+    .answer-table td.correct {
+        background-color: #16a34a;
+        color: white;
+    }
+
+    body.light-theme .answer-table td.correct {
+        background-color: #16a34a;
+        color: white;
+    }
+
+    .answer-table td.incorrect {
+        background-color: #ef4444;
+        color: white;
+    }
+
+    body.light-theme .answer-table td.incorrect {
+        background-color: #ef4444;
+        color: white;
+    }
+
+    .footer {
+        background-color: #0f0f0f;
+        padding: 100px 0 40px;
+        margin-top: 100px;
+        border-top: 1px solid #222;
+        position: relative;
+    }
+
+    .footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 4px;
+        background-color: #22c55e;
+        border-radius: 2px;
+    }
+
+    body.light-theme .footer {
+        background-color: #f5f5f5;
+        border-top: 1px solid #ddd;
+    }
+
+    body.light-theme .footer::before {
+        background-color: #2563eb;
+    }
+
+    .copyright {
+        text-align: center;
+        padding: 40px 0 0;
+        margin-top: 60px;
+        border-top: 1px solid #222;
+        color: #888;
+        font-size: 15px;
+    }
+
+    body.light-theme .copyright {
+        border-top: 1px solid #ddd;
+        color: #666;
+    }
+
+    @media screen and (max-width: 1024px) {
+        .options {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        .header-icons {
+            top: 10px;
+            right: 10px;
+            gap: 10px;
+        }
+
+        .header-icon {
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+        }
+
+        .main-content {
+            padding: 60px 10px;
+            margin: 0 auto;
+            max-width: 100%;
+        }
+
+        .page-title {
+            font-size: 28px;
+            margin-bottom: 40px;
+        }
+
+        .topic-section {
+            padding: 20px 12px;
+            margin: 0 auto 40px;
+            max-width: 100%;
+        }
+
+        .topic-header {
+            margin-bottom: 20px;
+        }
+
+        .topic-icon {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+        }
+
+        .topic-icon i {
+            font-size: 24px;
+        }
+
+        .topic-title {
+            font-size: 24px;
+        }
+
+        .topic-description {
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .question-list {
+            padding: 0;
+            margin: 0 auto;
+        }
+
+        .question-list ol {
+            list-style-position: inside;
+            padding-left: 0;
+            max-width: 100%;
+        }
+
+        .question {
+            font-size: 15px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            max-width: 100%;
+        }
+
+        .question::before {
+            content: counter(item) ".";
+            counter-increment: item;
+            position: absolute;
+            left: 10px;
+            top: 15px;
+            color: #22c55e;
+            font-weight: 500;
+        }
+
+        body.light-theme .question::before {
+            color: #2563eb;
+        }
+
+        .question-text {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 12px;
+            margin-left: 10px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 12px;
+            padding-left: 30px;
+            max-width: 100%;
+        }
+
+        .option {
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 4px;
+        }
+
+        .answer-table {
+            background-color: transparent;
+        }
+
+        .answer-table table {
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            min-width: 600px;
+        }
+
+        body.light-theme .answer-table table {
+            background-color: #ffffff;
+        }
+
+        .answer-table th, 
+        .answer-table td {
+            padding: 10px 8px;
+            font-size: 13px;
+            min-width: 40px;
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        .header-icons {
+            top: 8px;
+            right: 8px;
+            gap: 8px;
+        }
+
+        .header-icon {
+            width: 36px;
+            height: 36px;
+            font-size: 16px;
+        }
+
+        .main-content {
+            padding: 50px 8px;
+        }
+
+        .page-title {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        .topic-section {
+            padding: 15px 10px;
+            margin-bottom: 30px;
+        }
+
+        .topic-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 12px;
+        }
+
+        .topic-icon i {
+            font-size: 20px;
+        }
+
+        .topic-title {
+            font-size: 20px;
+        }
+
+        .topic-description {
+            font-size: 14px;
+        }
+
+        .question {
+            font-size: 14px;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+        }
+
+        .question::before {
+            left: 8px;
+            top: 12px;
+        }
+
+        .question-text {
+            padding-left: 25px;
+            margin-left: 8px;
+        }
+
+        .options {
+            gap: 8px;
+            padding-left: 25px;
+        }
+
+        .option {
+            padding: 8px 10px;
+            font-size: 13px;
+        }
+
+        .answer-table th, 
+        .answer-table td {
+            padding: 8px 6px;
+            font-size: 12px;
+            min-width: 35px;
+        }
+    }
+</style>
+</head>
+<body>
+    <div class="header-icons">
+        <button class="header-icon theme-toggle" id="theme-toggle" title="Toggle Theme">
+            <i class='bx bx-moon'></i>
+        </button>
+        <button class="header-icon back-button" title="Back">
+            <i class='bx bx-arrow-back'></i>
+        </button>
+    </div>
+
+    <div class="main-content">
+        <h1 class="page-title">Practice Questions</h1>
+
+        <!-- Questions -->
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon">
+                    <i class='bx bx-ruler'></i>
+                </div>
+                <h2 class="topic-title">Measurements & Geometry</h2>
+            </div>
+            <p class="topic-description">
+                Test your skills with these 50 practice questions on Measurements & Geometry, covering areas, perimeters, volumes, angles, triangles, circles, polygons, and coordinate geometry.
+            </p>
+            <div class="question-list">
+                <ol>
+                    <li class="question" data-question-id="1">
+                        <div class="question-text">A rectangle has a length of <strong>12 m</strong> and width of <em>5 m</em>. What is its area?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 60 m²</div>
+                            <div class="option" data-option="(b)">(b) 68 m²</div>
+                            <div class="option" data-option="(c)">(c) 72 m²</div>
+                            <div class="option" data-option="(d)">(d) 84 m²</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="2">
+                        <div class="question-text">The perimeter of a square is <strong>48 cm</strong>. What is its side length?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 8 cm</div>
+                            <div class="option" data-option="(b)">(b) 10 cm</div>
+                            <div class="option" data-option="(c)">(c) 12 cm</div>
+                            <div class="option" data-option="(d)">(d) 14 cm</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="3">
+                        <div class="question-text">A circle has a radius of <em>7 cm</em>. What is its circumference? (Use π ≈ 3.14)</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 40.82 cm</div>
+                            <div class="option" data-option="(b)">(b) 43.96 cm</div>
+                            <div class="option" data-option="(c)">(c) 46.50 cm</div>
+                            <div class="option" data-option="(d)">(d) 49.28 cm</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="4">
+                        <div class="question-text">A triangle has a base of <strong>10 cm</strong> and height of <em>6 cm</em>. What is its area?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 25 cm²</div>
+                            <div class="option" data-option="(b)">(b) 30 cm²</div>
+                            <div class="option" data-option="(c)">(c) 35 cm²</div>
+                            <div class="option" data-option="(d)">(d) 40 cm²</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="5">
+                        <div class="question-text">A cube has an edge length of <em>4 cm</em>. What is its volume?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 64 cm³</div>
+                            <div class="option" data-option="(b)">(b) 72 cm³</div>
+                            <div class="option" data-option="(c)">(c) 80 cm³</div>
+                            <div class="option" data-option="(d)">(d) 88 cm³</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="6">
+                        <div class="question-text">The angles of a triangle are <strong>50°</strong>, <em>60°</em>, and <em>x°</em>. What is <em>x</em>?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 60°</div>
+                            <div class="option" data-option="(b)">(b) 70°</div>
+                            <div class="option" data-option="(c)">(c) 80°</div>
+                            <div class="option" data-option="(d)">(d) 90°</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="7">
+                        <div class="question-text">A cylinder has a radius of <em>5 cm</em> and height of <strong>10 cm</strong>. What is its volume? (Use π ≈ 3.14)</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 785 cm³</div>
+                            <div class="option" data-option="(b)">(b) 800 cm³</div>
+                            <div class="option" data-option="(c)">(c) 820 cm³</div>
+                            <div class="option" data-option="(d)">(d) 850 cm³</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="8">
+                        <div class="question-text">The distance between points <strong>(2, 3)</strong> and <em>(5, 7)</em> is:</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 4 units</div>
+                            <div class="option" data-option="(b)">(b) 5 units</div>
+                            <div class="option" data-option="(c)">(c) 6 units</div>
+                            <div class="option" data-option="(d)">(d) 7 units</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="9">
+                        <div class="question-text">A regular hexagon has a side length of <em>8 cm</em>. What is its perimeter?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 40 cm</div>
+                            <div class="option" data-option="(b)">(b) 48 cm</div>
+                            <div class="option" data-option="(c)">(c) 56 cm</div>
+                            <div class="option" data-option="(d)">(d) 64 cm</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="10">
+                        <div class="question-text">A trapezoid has parallel sides of <strong>6 m</strong> and <em>10 m</em>, and height of <em>5 m</em>. What is its area?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 35 m²</div>
+                            <div class="option" data-option="(b)">(b) 40 m²</div>
+                            <div class="option" data-option="(c)">(c) 45 m²</div>
+                            <div class="option" data-option="(d)">(d) 50 m²</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="11">
+                        <div class="question-text">The sum of interior angles of a pentagon is:</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 540°</div>
+                            <div class="option" data-option="(b)">(b) 720°</div>
+                            <div class="option" data-option="(c)">(c) 900°</div>
+                            <div class="option" data-option="(d)">(d) 1080°</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="12">
+                        <div class="question-text">A cone has a radius of <em>3 cm</em> and height of <strong>4 cm</strong>. What is its volume? (Use π ≈ 3.14)</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 36.78 cm³</div>
+                            <div class="option" data-option="(b)">(b) 37.68 cm³</div>
+                            <div class="option" data-option="(c)">(c) 38.58 cm³</div>
+                            <div class="option" data-option="(d)">(d) 39.48 cm³</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="13">
+                        <div class="question-text">A right triangle has legs of <strong>6 cm</strong> and <em>8 cm</em>. What is its hypotenuse?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 9 cm</div>
+                            <div class="option" data-option="(b)">(b) 10 cm</div>
+                            <div class="option" data-option="(c)">(c) 11 cm</div>
+                            <div class="option" data-option="(d)">(d) 12 cm</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="14">
+                        <div class="question-text">A parallelogram has a base of <strong>15 cm</strong> and height of <em>8 cm</em>. What is its area?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 110 cm²</div>
+                            <div class="option" data-option="(b)">(b) 115 cm²</div>
+                            <div class="option" data-option="(c)">(c) 120 cm²</div>
+                            <div class="option" data-option="(d)">(d) 125 cm²</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="15">
+                        <div class="question-text">A sphere has a radius of <em>6 cm</em>. What is its surface area? (Use π ≈ 3.14)</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 452.16 cm²</div>
+                            <div class="option" data-option="(b)">(b) 462.16 cm²</div>
+                            <div class="option" data-option="(c)">(c) 472.16 cm²</div>
+                            <div class="option" data-option="(d)">(d) 482.16 cm²</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="16">
+                        <div class="question-text">The midpoint of the line segment joining <strong>(1, 2)</strong> and <em>(5, 8)</em> is:</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) (2, 4)</div>
+                            <div class="option" data-option="(b)">(b) (3, 5)</div>
+                            <div class="option" data-option="(c)">(c) (4, 6)</div>
+                            <div class="option" data-option="(d)">(d) (5, 7)</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="17">
+                        <div class="question-text">A regular octagon has a side length of <em>5 cm</em>. What is its perimeter?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 35 cm</div>
+                            <div class="option" data-option="(b)">(b) 40 cm</div>
+                            <div class="option" data-option="(c)">(c) 45 cm</div>
+                            <div class="option" data-option="(d)">(d) 50 cm</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="18">
+                        <div class="question-text">A sector of a circle with radius <strong>10 cm</strong> and angle <em>60°</em> has an area of: (Use π ≈ 3.14)</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 50.24 cm²</div>
+                            <div class="option" data-option="(b)">(b) 52.33 cm²</div>
+                            <div class="option" data-option="(c)">(c) 54.42 cm²</div>
+                            <div class="option" data-option="(d)">(d) 56.51 cm²</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="19">
+                        <div class="question-text">The exterior angle of a regular hexagon is:</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 60°</div>
+                            <div class="option" data-option="(b)">(b) 72°</div>
+                            <div class="option" data-option="(c)">(c) 90°</div>
+                            <div class="option" data-option="(d)">(d) 120°</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="20">
+                        <div class="question-text">A cuboid has dimensions <strong>6 cm</strong>, <em>4 cm</em>, and <em>3 cm</em>. What is its volume?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 68 cm³</div>
+                            <div class="option" data-option="(b)">(b) 72 cm³</div>
+                            <div class="option" data-option="(c)">(c) 76 cm³</div>
+                            <div class="option" data-option="(d)">(d) 80 cm³</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="21">
+                        <div class="question-text">A triangle with sides <strong>5 cm</strong>, <em>12 cm</em>, and <em>13 cm</em> has an area of:</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 25 cm²</div>
+                            <div class="option" data-option="(b)">(b) 28 cm²</div>
+                            <div class="option" data-option="(c)">(c) 32 cm²</div>
+                            <div class="option" data-option="(d)">(d) 30 cm²</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="22">
+                        <div class="question-text">The slope of the line passing through <strong>(2, 3)</strong> and <em>(4, 7)</em> is:</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 1</div>
+                            <div class="option" data-option="(b)">(b) 3</div>
+                            <div class="option" data-option="(c)">(c) 4</div>
+                            <div class="option" data-option="(d)">(d) 2</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="23">
+                        <div class="question-text">A circle has a diameter of <strong>14 cm</strong>. What is its area? (Use π ≈ 3.14)</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 150.72 cm²</div>
+                            <div class="option" data-option="(b)">(b) 151.86 cm²</div>
+                            <div class="option" data-option="(c)">(c) 152.00 cm²</div>
+                            <div class="option" data-option="(d)">(d) 153.86 cm²</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="24">
+                        <div class="question-text">A regular pentagon has a side length of <em>10 cm</em>. What is its perimeter?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 40 cm</div>
+                            <div class="option" data-option="(b)">(b) 45 cm</div>
+                            <div class="option" data-option="(c)">(c) 50 cm</div>
+                            <div class="option" data-option="(d)">(d) 55 cm</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="25">
+                        <div class="question-text">A cone has a radius of <strong>5 cm</strong> and slant height of <em>13 cm</em>. What is its curved surface area? (Use π ≈ 3.14)</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 200.96 cm²</div>
+                            <div class="option" data-option="(b)">(b) 201.10 cm²</div>
+                            <div class="option" data-option="(c)">(c) 202.24 cm²</div>
+                            <div class="option" data-option="(d)">(d) 204.10 cm²</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="26">
+                        <div class="question-text">The sum of two angles is <strong>90°</strong>. If one angle is <em>35°</em>, what is the other?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 45°</div>
+                            <div class="option" data-option="(b)">(b) 50°</div>
+                            <div class="option" data-option="(c)">(c) 55°</div>
+                            <div class="option" data-option="(d)">(d) 60°</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="27">
+                        <div class="question-text">A cylinder has a diameter of <strong>10 cm</strong> and height of <em>12 cm</em>. What is its total surface area? (Use π ≈ 3.14)</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 628 cm²</div>
+                            <div class="option" data-option="(b)">(b) 659.4 cm²</div>
+                            <div class="option" data-option="(c)">(c) 690.8 cm²</div>
+                            <div class="option" data-option="(d)">(d) 659.4 cm²</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="28">
+                        <div class="question-text">A triangle with vertices <strong>(0, 0)</strong>, <em>(3, 0)</em>, and <em>(0, 4)</em> has an area of:</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 5 units²</div>
+                            <div class="option" data-option="(b)">(b) 7 units²</div>
+                            <div class="option" data-option="(c)">(c) 6 units²</div>
+                            <div class="option" data-option="(d)">(d) 8 units²</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="29">
+                        <div class="question-text">The interior angle of a regular octagon is:</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 120°</div>
+                            <div class="option" data-option="(b)">(b) 130°</div>
+                            <div class="option" data-option="(c)">(c) 140°</div>
+                            <div class="option" data-option="(d)">(d) 135°</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="30">
+                        <div class="question-text">A sphere has a radius of <em>4 cm</em>. What is its volume? (Use π ≈ 3.14)</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 267.95 cm³</div>
+                            <div class="option" data-option="(b)">(b) 271.09 cm³</div>
+                            <div class="option" data-option="(c)">(c) 274.23 cm³</div>
+                            <div class="option" data-option="(d)">(d) 277.37 cm³</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="31">
+                        <div class="question-text">A rectangle has a perimeter of <strong>50 cm</strong> and length of <em>15 cm</em>. What is its width?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 8 cm</div>
+                            <div class="option" data-option="(b)">(b) 9 cm</div>
+                            <div class="option" data-option="(c)">(c) 11 cm</div>
+                            <div class="option" data-option="(d)">(d) 10 cm</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="32">
+                        <div class="question-text">A sector of a circle with radius <strong>12 cm</strong> and angle <em>90°</em> has an arc length of: (Use π ≈ 3.14)</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 18.84 cm</div>
+                            <div class="option" data-option="(b)">(b) 19.84 cm</div>
+                            <div class="option" data-option="(c)">(c) 20.84 cm</div>
+                            <div class="option" data-option="(d)">(d) 21.84 cm</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="33">
+                        <div class="question-text">A right triangle has a hypotenuse of <strong>17 cm</strong> and one leg of <em>8 cm</em>. What is the other leg?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 12 cm</div>
+                            <div class="option" data-option="(b)">(b) 13 cm</div>
+                            <div class="option" data-option="(c)">(c) 14 cm</div>
+                            <div class="option" data-option="(d)">(d) 15 cm</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="34">
+                        <div class="question-text">A parallelogram has sides <strong>10 cm</strong> and <em>6 cm</em>, and one angle is <em>60°</em>. What is its area?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 51.96 cm²</div>
+                            <div class="option" data-option="(b)">(b) 54.96 cm²</div>
+                            <div class="option" data-option="(c)">(c) 57.96 cm²</div>
+                            <div class="option" data-option="(d)">(d) 60.96 cm²</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="35">
+                        <div class="question-text">The distance between points <strong>(-1, -2)</strong> and <em>(3, 4)</em> is:</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 6 units</div>
+                            <div class="option" data-option="(b)">(b) 7 units</div>
+                            <div class="option" data-option="(c)">(c) 8 units</div>
+                            <div class="option" data-option="(d)">(d) 9 units</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="36">
+                        <div class="question-text">A regular decagon has a side length of <em>4 cm</em>. What is its perimeter?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 36 cm</div>
+                            <div class="option" data-option="(b)">(b) 38 cm</div>
+                            <div class="option" data-option="(c)">(c) 42 cm</div>
+                            <div class="option" data-option="(d)">(d) 40 cm</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="37">
+                        <div class="question-text">A cylinder has a radius of <strong>6 cm</strong> and height of <em>8 cm</em>. What is its volume? (Use π ≈ 3.14)</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 904.32 cm³</div>
+                            <div class="option" data-option="(b)">(b) 914.32 cm³</div>
+                            <div class="option" data-option="(c)">(c) 924.32 cm³</div>
+                            <div class="option" data-option="(d)">(d) 934.32 cm³</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="38">
+                        <div class="question-text">The sum of two angles is <strong>180°</strong>. If one angle is <em>75°</em>, what is the other?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 95°</div>
+                            <div class="option" data-option="(b)">(b) 100°</div>
+                            <div class="option" data-option="(c)">(c) 105°</div>
+                            <div class="option" data-option="(d)">(d) 110°</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="39">
+                        <div class="question-text">A trapezoid has parallel sides of <strong>8 m</strong> and <em>12 m</em>, and height of <em>6 m</em>. What is its area?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 54 m²</div>
+                            <div class="option" data-option="(b)">(b) 58 m²</div>
+                            <div class="option" data-option="(c)">(c) 62 m²</div>
+                            <div class="option" data-option="(d)">(d) 60 m²</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="40">
+                        <div class="question-text">A circle has a radius of <strong>9 cm</strong>. What is its area? (Use π ≈ 3.14)</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 254.34 cm²</div>
+                            <div class="option" data-option="(b)">(b) 256.50 cm²</div>
+                            <div class="option" data-option="(c)">(c) 258.66 cm²</div>
+                            <div class="option" data-option="(d)">(d) 252.18 cm²</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="41">
+                        <div class="question-text">The midpoint of the line segment joining <strong>(-2, 3)</strong> and <em>(4, -5)</em> is:</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) (0, -1)</div>
+                            <div class="option" data-option="(b)">(b) (1, -1)</div>
+                            <div class="option" data-option="(c)">(c) (1, -1)</div>
+                            <div class="option" data-option="(d)">(d) (2, 0)</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="42">
+                        <div class="question-text">A cone has a radius of <em>4 cm</em> and height of <strong>3 cm</strong>. What is its volume? (Use π ≈ 3.14)</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 50.24 cm³</div>
+                            <div class="option" data-option="(b)">(b) 52.24 cm³</div>
+                            <div class="option" data-option="(c)">(c) 54.24 cm³</div>
+                            <div class="option" data-option="(d)">(d) 56.24 cm³</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="43">
+                        <div class="question-text">A regular heptagon has a side length of <em>7 cm</em>. What is its perimeter?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 42 cm</div>
+                            <div class="option" data-option="(b)">(b) 48 cm</div>
+                            <div class="option" data-option="(c)">(c) 49 cm</div>
+                            <div class="option" data-option="(d)">(d) 56 cm</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="44">
+                        <div class="question-text">A triangle with sides <strong>7 cm</strong>, <em>24 cm</em>, and <em>25 cm</em> has an area of:</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 80 cm²</div>
+                            <div class="option" data-option="(b)">(b) 82 cm²</div>
+                            <div class="option" data-option="(c)">(c) 86 cm²</div>
+                            <div class="option" data-option="(d)">(d) 84 cm²</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="45">
+                        <div class="question-text">The slope of the line passing through <strong>(1, 2)</strong> and <em>(3, -2)</em> is:</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) -1</div>
+                            <div class="option" data-option="(b)">(b) -3</div>
+                            <div class="option" data-option="(c)">(c) -2</div>
+                            <div class="option" data-option="(d)">(d) -4</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="46">
+                        <div class="question-text">A cylinder has a radius of <strong>8 cm</strong> and height of <em>10 cm</em>. What is its total surface area? (Use π ≈ 3.14)</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 1004.8 cm²</div>
+                            <div class="option" data-option="(b)">(b) 1054.8 cm²</div>
+                            <div class="option" data-option="(c)">(c) 1104.8 cm²</div>
+                            <div class="option" data-option="(d)">(d) 1154.8 cm²</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="47">
+                        <div class="question-text">A sector of a circle with radius <em>15 cm</em> and angle <strong>120°</strong> has an area of: (Use π ≈ 3.14)</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 235.5 cm²</div>
+                            <div class="option" data-option="(b)">(b) 245.5 cm²</div>
+                            <div class="option" data-option="(c)">(c) 235.5 cm²</div>
+                            <div class="option" data-option="(d)">(d) 265.5 cm²</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="48">
+                        <div class="question-text">A cuboid has dimensions <strong>8 cm</strong>, <em>5 cm</em>, and <em>3 cm</em>. What is its surface area?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 146 cm²</div>
+                            <div class="option" data-option="(b)">(b) 150 cm²</div>
+                            <div class="option" data-option="(c)">(c) 154 cm²</div>
+                            <div class="option" data-option="(d)">(d) 158 cm²</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="49">
+                        <div class="question-text">The exterior angle of a regular pentagon is:</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 60°</div>
+                            <div class="option" data-option="(b)">(b) 72°</div>
+                            <div class="option" data-option="(c)">(c) 90°</div>
+                            <div class="option" data-option="(d)">(d) 108°</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="50">
+                        <div class="question-text">A rectangle has an area of <strong>96 cm²</strong> and width of <em>8 cm</em>. What is its length?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 10 cm</div>
+                            <div class="option" data-option="(b)">(b) 11 cm</div>
+                            <div class="option" data-option="(c)">(c) 12 cm</div>
+                            <div class="option" data-option="(d)">(d) 13 cm</div>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Answers -->
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon">
+                    <i class='bx bx-key'></i>
+                </div>
+                <h2 class="topic-title">Answer Key</h2>
+            </div>
+            <p class="topic-description">
+                Correct answers for the Measurements & Geometry practice questions.
+            </p>
+            <div class="answer-table">
+                <table>
+                    <tr>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                    </tr>
+                    <tr>
+                        <td>1</td><td data-question-id="1">(a)</td>
+                        <td>2</td><td data-question-id="2">(c)</td>
+                        <td>3</td><td data-question-id="3">(b)</td>
+                        <td>4</td><td data-question-id="4">(b)</td>
+                        <td>5</td><td data-question-id="5">(a)</td>
+                    </tr>
+                    <tr>
+                        <td>6</td><td data-question-id="6">(b)</td>
+                        <td>7</td><td data-question-id="7">(a)</td>
+                        <td>8</td><td data-question-id="8">(b)</td>
+                        <td>9</td><td data-question-id="9">(b)</td>
+                        <td>10</td><td data-question-id="10">(b)</td>
+                    </tr>
+                    <tr>
+                        <td>11</td><td data-question-id="11">(a)</td>
+                        <td>12</td><td data-question-id="12">(b)</td>
+                        <td>13</td><td data-question-id="13">(b)</td>
+                        <td>14</td><td data-question-id="14">(c)</td>
+                        <td>15</td><td data-question-id="15">(a)</td>
+                    </tr>
+                    <tr>
+                        <td>16</td><td data-question-id="16">(b)</td>
+                        <td>17</td><td data-question-id="17">(b)</td>
+                        <td>18</td><td data-question-id="18">(b)</td>
+                        <td>19</td><td data-question-id="19">(a)</td>
+                        <td>20</td><td data-question-id="20">(b)</td>
+                    </tr>
+                    <tr>
+                        <td>21</td><td data-question-id="21">(d)</td>
+                        <td>22</td><td data-question-id="22">(d)</td>
+                        <td>23</td><td data-question-id="23">(d)</td>
+                        <td>24</td><td data-question-id="24">(c)</td>
+                        <td>25</td><td data-question-id="25">(d)</td>
+                    </tr>
+                    <tr>
+                        <td>26</td><td data-question-id="26">(c)</td>
+                        <td>27</td><td data-question-id="27">(d)</td>
+                        <td>28</td><td data-question-id="28">(c)</td>
+                        <td>29</td><td data-question-id="29">(d)</td>
+                        <td>30</td><td data-question-id="30">(a)</td>
+                    </tr>
+                    <tr>
+                        <td>31</td><td data-question-id="31">(d)</td>
+                        <td>32</td><td data-question-id="32">(a)</td>
+                        <td>33</td><td data-question-id="33">(d)</td>
+                        <td>34</td><td data-question-id="34">(a)</td>
+                        <td>35</td><td data-question-id="35">(c)</td>
+                    </tr>
+                    <tr>
+                        <td>36</td><td data-question-id="36">(d)</td>
+                        <td>37</td><td data-question-id="37">(a)</td>
+                        <td>38</td><td data-question-id="38">(c)</td>
+                        <td>39</td><td data-question-id="39">(d)</td>
+                        <td>40</td><td data-question-id="40">(a)</td>
+                    </tr>
+                    <tr>
+                        <td>41</td><td data-question-id="41">(c)</td>
+                        <td>42</td><td data-question-id="42">(a)</td>
+                        <td>43</td><td data-question-id="43">(c)</td>
+                        <td>44</td><td data-question-id="44">(d)</td>
+                        <td>45</td><td data-question-id="45">(c)</td>
+                    </tr>
+                    <tr>
+                        <td>46</td><td data-question-id="46">(a)</td>
+                        <td>47</td><td data-question-id="47">(c)</td>
+                        <td>48</td><td data-question-id="48">(d)</td>
+                        <td>49</td><td data-question-id="49">(b)</td>
+                        <td>50</td><td data-question-id="50">(c)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="copyright">
+                <p>© 2025 Measurements & Geometry Prep. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.querySelector('.theme-toggle');
+            const backButton = document.querySelector('.back-button');
+            const options = document.querySelectorAll('.option');
+            const answerKey = {
+                1: '(a)', 2: '(c)', 3: '(b)', 4: '(b)', 5: '(a)',
+                6: '(b)', 7: '(a)', 8: '(b)', 9: '(b)', 10: '(b)',
+                11: '(a)', 12: '(b)', 13: '(b)', 14: '(c)', 15: '(a)',
+                16: '(b)', 17: '(b)', 18: '(b)', 19: '(a)', 20: '(b)',
+                21: '(d)', 22: '(d)', 23: '(d)', 24: '(c)', 25: '(d)',
+                26: '(c)', 27: '(d)', 28: '(c)', 29: '(d)', 30: '(a)',
+                31: '(d)', 32: '(a)', 33: '(d)', 34: '(a)', 35: '(c)',
+                36: '(d)', 37: '(a)', 38: '(c)', 39: '(d)', 40: '(a)',
+                41: '(c)', 42: '(a)', 43: '(c)', 44: '(d)', 45: '(c)',
+                46: '(a)', 47: '(c)', 48: '(d)', 49: '(b)', 50: '(c)'
+            };
+
+            if (themeToggle) {
+                const themeIcon = themeToggle.querySelector('i');
+                themeToggle.addEventListener('click', function() {
+                    document.body.classList.toggle('light-theme');
+                    if (document.body.classList.contains('light-theme')) {
+                        themeIcon.classList.remove('bx-moon');
+                        themeIcon.classList.add('bx-sun');
+                        localStorage.setItem('theme', 'light');
+                    } else {
+                        themeIcon.classList.remove('bx-sun');
+                        themeIcon.classList.add('bx-moon');
+                        localStorage.setItem('theme', 'dark');
+                    }
+                });
+
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'light') {
+                    document.body.classList.add('light-theme');
+                    themeIcon.classList.remove('bx-moon');
+                    themeIcon.classList.add('bx-sun');
+                }
+            }
+
+            if (backButton) {
+                backButton.addEventListener('click', function() {
+                    window.history.back();
+                });
+            }
+
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    const question = this.closest('.question');
+                    const questionId = question.getAttribute('data-question-id');
+                    const selectedOption = this.getAttribute('data-option');
+                    const correctAnswer = answerKey[questionId];
+
+                    question.querySelectorAll('.option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+
+                    this.classList.add('selected');
+
+                    const answerCell = document.querySelector(`td[data-question-id="${questionId}"]`);
+                    if (answerCell) {
+                        answerCell.classList.remove('correct', 'incorrect');
+                        if (selectedOption === correctAnswer) {
+                            answerCell.classList.add('correct');
+                        } else {
+                            answerCell.classList.add('incorrect');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

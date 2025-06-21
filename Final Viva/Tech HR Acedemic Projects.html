@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Academic Projects</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            background-color: #0f0f0f;
+            color: #f0f0f0;
+            min-height: 100vh;
+            display: flex;
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme {
+            background-color: #f5f7fb;
+            color: #333;
+        }
+
+        .top-right-buttons {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .theme-toggle-btn, .back-btn {
+            background-color: #0a0a0a;
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 20px;
+            text-decoration: none;
+        }
+
+        body.light-theme .theme-toggle-btn, body.light-theme .back-btn {
+            background-color: #c8c8c8;
+            color: #4a90e2;
+            border: 1px solid rgba(74, 144, 226, 0.3);
+        }
+
+        .theme-toggle-btn:hover, .back-btn:hover {
+            background-color: #1a1a1a;
+            transform: scale(1.1);
+        }
+
+        body.light-theme .theme-toggle-btn:hover, body.light-theme .back-btn:hover {
+            background-color: #d3dce6;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            width: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #4CAF50, #45D149);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        body.light-theme .header h1 {
+            background: linear-gradient(45deg, #4a90e2, #357abd);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-icon {
+            font-size: 4rem;
+            color: #22c55e;
+            margin: 1rem 0;
+            display: block;
+            animation: scaleIn 0.5s ease;
+        }
+
+        body.light-theme .header-icon {
+            color: #4a90e2;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #aaa;
+            margin-top: 1rem;
+        }
+
+        body.light-theme .header p {
+            color: #6b7280;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid transparent;
+            background: linear-gradient(90deg, #22c55e, #45D149);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #22c55e, #45D149);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .section-title:hover::after {
+            transform: scaleX(1);
+        }
+
+        body.light-theme .section-title {
+            background: linear-gradient(90deg, #4a90e2, #357abd);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        body.light-theme .section-title::after {
+            background: linear-gradient(90deg, #4a90e2, #357abd);
+            height: 3px;
+        }
+
+        .question-block {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            position: relative;
+            animation: fadeInUp 0.6s ease forwards;
+            animation-delay: calc(var(--block-index) * 0.1s);
+        }
+
+        body.light-theme .question-block {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .question-block h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #22c55e;
+        }
+
+        body.light-theme .question-block h3 {
+            color: #4a90e2;
+        }
+
+        .question-block .question-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem 0;
+            font-size: 1.8rem;
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            transition: transform 0.3s ease;
+        }
+
+        body.light-theme .question-block .question-icon {
+            background: rgba(74, 144, 226, 0.2);
+            color: #4a90e2;
+        }
+
+        .question-block:hover .question-icon {
+            transform: scale(1.1);
+        }
+
+        .question-block p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #aaa;
+            margin-bottom: 1rem;
+        }
+
+        body.light-theme .question-block p {
+            color: #6b7280;
+        }
+
+        .question-block ul {
+            font-size: 0.85rem;
+            color: #ccc;
+            line-height: 1.6;
+            padding-left: 1.5rem;
+        }
+
+        body.light-theme .question-block ul {
+            color: #333;
+        }
+
+        .question-block ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sample-response {
+            margin: 1rem 0;
+            padding: 1rem;
+            border-left: 3px solid #22c55e;
+            background: rgba(55, 197, 94, 0.1);
+            border-radius: 0 8px 8px 0;
+        }
+
+        body.light-theme .sample-response {
+            border-left: 3px solid #4a90e2;
+            background: rgba(74, 144, 226, 0.1);
+        }
+
+        .sample-response p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .conversation {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            position: relative;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        body.light-theme .conversation {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .conversation h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #22c55e;
+        }
+
+        body.light-theme .conversation h3 {
+            color: #4a90e2;
+        }
+
+        .dialogue {
+            margin: 1rem 0;
+            padding: 1rem;
+            border-left: 3px solid #22c55e;
+            background: rgba(55, 197, 94, 0.1);
+            border-radius: 0 8px 8px 0;
+        }
+
+        body.light-theme .dialogue {
+            border-left: 3px solid #4a90e2;
+            background: rgba(74, 144, 226, 0.1);
+        }
+
+        .dialogue.interviewer {
+            border-left: 3px solid #f97316;
+            background: rgba(249, 115, 22, 0.1);
+        }
+
+        body.light-theme .dialogue.interviewer {
+            border-left: 3px solid #357abd;
+            background: rgba(53, 122, 189, 0.2);
+        }
+
+        .dialogue p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .dialogue strong {
+            color: #ffffff;
+        }
+
+        body.light-theme .dialogue strong {
+            color: #1f2937;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #333, transparent);
+            margin: 3rem 0;
+        }
+
+        body.light-theme .divider {
+            background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
+        }
+
+        .footer {
+            background-color: #333;
+            padding: 4rem 0 1rem;
+            margin-top: 0;
+            border-top: 1px solid #222;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        body.light-theme .footer {
+            background-color: #f0f2f5;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .footer-section h3 {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+
+        body.light-theme .footer-section h3 {
+            color: #1f2937;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 16px;
+        }
+
+        .footer-section ul li a {
+            color: #999;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        body.light-theme .footer-section ul li a {
+            color: #666;
+        }
+
+        .footer-section ul li a:hover {
+            color: #22c55e;
+        }
+
+        body.light-theme .footer-section ul li a:hover {
+            color: #4a90e2;
+        }
+
+        .copyright {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+            border-top: 1px solid #222;
+            color: #888;
+            font-size: 14px;
+        }
+
+        body.light-theme .copyright {
+            border-top: 1px solid #e5e7eb;
+            color: #6b7280;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.8); }
+            to { transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .question-block, .conversation {
+                padding: 1.2rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .footer-section {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .question-block h3, .conversation h3 {
+                font-size: 1.3rem;
+            }
+
+            .question-block p, .dialogue p, .sample-response p {
+                font-size: 0.85rem;
+            }
+
+            .question-block ul {
+                font-size: 0.8rem;
+            }
+
+            .top-right-buttons {
+                top: 10px;
+                right: 10px;
+            }
+
+            .theme-toggle-btn, .back-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+
+            .footer-section h3 {
+                font-size: 16px;
+            }
+
+            .footer-section ul li a {
+                font-size: 13px;
+            }
+
+            .copyright {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-right-buttons">
+        <button class="theme-toggle-btn" id="themeToggle" title="Toggle Theme">
+            <i class='bx bx-moon'></i>
+        </button>
+        <a href="index.html" class="back-btn" title="Back to Tech and HR Questions">
+            <i class='bx bx-arrow-back'></i>
+        </a>
+    </div>
+
+    <div class="main-content">
+        <div class="container">
+            <header class="header">
+                <i class='bx bx-book-open header-icon'></i>
+                <h1>Academic Projects</h1>
+                <p>Learn how to effectively discuss your academic projects in interviews</p>
+            </header>
+
+            <section class="section" id="academic-projects">
+                <h2 class="section-title">Key Academic Project Questions</h2>
+                <div class="question-block" style="--block-index: 1;">
+                    <h3>Can You Describe a Key Academic Project You Worked On?</h3>
+                    <div class="question-icon"><i class='bx bx-code-alt'></i></div>
+                    <p>This question assesses your ability to articulate your project’s purpose and impact.</p>
+                    <ul>
+                        <li>Start with the project’s title and objective.</li>
+                        <li>Mention the technologies or tools used.</li>
+                        <li>Highlight your specific contributions and the outcome.</li>
+                        <li>Keep it concise, focusing on relevance to the role.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p><strong>Fresher Response:</strong> One key project was [Project Name, e.g., a Library Management System] during my [Degree, e.g., B.Tech in Computer Science]. The goal was to [Objective, e.g., streamline book borrowing processes]. I used [Technologies, e.g., Python and MySQL] to [Contribution, e.g., design the database and develop the user interface]. My work resulted in [Outcome, e.g., a 30% faster borrowing process during testing]. This project enhanced my skills in [Skills, e.g., database management], which I’m eager to apply at [Company Name].</p>
+                    </div>
+                    <div class="sample-response">
+                        <p><strong>Experienced Response:</strong> During my [Degree, e.g., M.Tech], I worked on [Project Name, e.g., a Machine Learning-Based Traffic Prediction System]. The objective was to [Objective, e.g., predict traffic congestion using real-time data]. I used [Technologies, e.g., Python, TensorFlow, and AWS] to [Contribution, e.g., develop the predictive model and integrate it with a web app]. The system achieved [Outcome, e.g., 85% accuracy in predictions]. This experience strengthened my [Skills, e.g., ML model deployment], which aligns with [Company Name]’s innovative projects.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 2;">
+                    <h3>What Challenges Did You Face in Your Project?</h3>
+                    <div class="question-icon"><i class='bx bx-bug'></i></div>
+                    <p>Showcases your problem-solving skills and resilience.</p>
+                    <ul>
+                        <li>Identify a specific challenge relevant to the project.</li>
+                        <li>Explain the steps you took to overcome it.</li>
+                        <li>Highlight the positive outcome or lesson learned.</li>
+                        <li>Avoid blaming others; focus on your actions.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p><strong>Fresher Response:</strong> In my [Project Name, e.g., Library Management System], one challenge was [Challenge, e.g., optimizing database queries for faster response times]. I addressed this by [Action, e.g., analyzing query performance and implementing indexing]. This reduced [Outcome, e.g., query time by 40%]. This taught me [Lesson, e.g., the importance of database optimization], which I can apply to [Company Name]’s data-driven projects.</p>
+                    </div>
+                    <div class="sample-response">
+                        <p><strong>Experienced Response:</strong> During my [Project Name, e.g., Traffic Prediction System], a major challenge was [Challenge, e.g., handling noisy real-time data]. I tackled it by [Action, e.g., applying data preprocessing techniques and refining the ML model]. This improved [Outcome, e.g., prediction accuracy by 10%]. The experience honed my [Lesson, e.g., data cleaning skills], which I’m excited to bring to [Company Name]’s analytics initiatives.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 3;">
+                    <h3>What Was Your Role in the Project Team?</h3>
+                    <div class="question-icon"><i class='bx bx-group'></i></div>
+                    <p>Evaluates your teamwork and leadership abilities.</p>
+                    <ul>
+                        <li>Clearly state your role and responsibilities.</li>
+                        <li>Emphasize collaboration with team members.</li>
+                        <li>Mention any leadership or initiative you took.</li>
+                        <li>Connect your role to skills relevant to the job.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p><strong>Fresher Response:</strong> In my [Project Name, e.g., Library Management System], I was [Role, e.g., the database designer and frontend developer] in a [Team Size, e.g., four-member team]. I [Responsibility, e.g., designed the database schema and built the user interface]. I collaborated with teammates by [Collaboration, e.g., coordinating with the backend developer to ensure seamless integration]. I also [Initiative, e.g., suggested UI improvements], enhancing user experience. This developed my [Skills, e.g., teamwork and technical skills], which I’m ready to contribute to [Company Name].</p>
+                    </div>
+                    <div class="sample-response">
+                        <p><strong>Experienced Response:</strong> For my [Project Name, e.g., Traffic Prediction System], I served as [Role, e.g., the lead developer] in a [Team Size, e.g., five-member team]. I [Responsibility, e.g., designed the ML architecture and oversaw integration]. I worked closely with [Collaboration, e.g., data scientists to refine algorithms] and [Initiative, e.g., led weekly syncs to keep the project on track]. This strengthened my [Skills, e.g., leadership and collaboration], which I’m eager to apply at [Company Name].</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 4;">
+                    <h3>How Does Your Project Relate to This Role?</h3>
+                    <div class="question-icon"><i class='bx bx-briefcase-alt'></i></div>
+                    <p>Tests your ability to connect academic work to professional requirements.</p>
+                    <ul>
+                        <li>Identify skills or technologies from the project that match the job.</li>
+                        <li>Explain how the project prepared you for the role.</li>
+                        <li>Show enthusiasm for applying your experience.</li>
+                        <li>Tailor your answer to the company’s needs.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p><strong>Fresher Response:</strong> My [Project Name, e.g., Library Management System] involved [Relevant Aspect, e.g., developing a scalable database and user-friendly interface], which aligns with [Role Requirement, e.g., the software development skills needed at [Company Name]]. Using [Technologies, e.g., Python and MySQL] honed my [Skills, e.g., coding and problem-solving abilities]. I’m excited to apply these skills to [Company Goal, e.g., build efficient applications], contributing to [Company Name]’s success.</p>
+                    </div>
+                    <div class="sample-response">
+                        <p><strong>Experienced Response:</strong> My [Project Name, e.g., Traffic Prediction System] required [Relevant Aspect, e.g., building and deploying ML models], directly relevant to [Role Requirement, e.g., the data-driven solutions at [Company Name]]. Working with [Technologies, e.g., TensorFlow and AWS] enhanced my [Skills, e.g., expertise in ML and cloud integration]. I’m eager to leverage this experience to support [Company Goal, e.g., innovative analytics projects] at [Company Name].</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="section">
+                <h2 class="section-title">Mock Interview Conversations</h2>
+                <div class="conversation">
+                    <h3>Scenario 1: Software Engineer Role</h3>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> Can you tell me about a significant academic project you worked on?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> During my [Degree, e.g., B.Tech], I worked on [Project Name, e.g., an E-commerce Web App]. The goal was to [Objective, e.g., create a platform for online shopping]. I used [Technologies, e.g., JavaScript, Node.js, and MongoDB] to [Contribution, e.g., develop the backend and payment integration]. The project [Outcome, e.g., supported 100+ simultaneous users in testing]. This enhanced my skills in [Skills, e.g., full-stack development], which I’m excited to bring to [Company Name].</p>
+                    </div>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> What challenges did you face?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> One challenge was [Challenge, e.g., ensuring secure payment processing]. I addressed it by [Action, e.g., implementing encryption and testing with mock transactions]. This [Outcome, e.g., eliminated transaction errors], teaching me [Lesson, e.g., the importance of security protocols], which is valuable for [Company Name]’s projects.</p>
+                    </div>
+                </div>
+                <div class="conversation">
+                    <h3>Scenario 2: Data Analyst Role</h3>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> Tell me about an academic project you’re proud of.</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> In my [Degree, e.g., M.Sc. in Data Science], I developed [Project Name, e.g., a Sales Forecasting Model]. The objective was to [Objective, e.g., predict quarterly sales for a retail chain]. I used [Technologies, e.g., Python and Tableau] to [Contribution, e.g., build a regression model and visualize insights]. The model achieved [Outcome, e.g., 90% accuracy]. This project honed my [Skills, e.g., data analysis skills], which I’m eager to apply at [Company Name].</p>
+                    </div>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> How does this project relate to our role?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> The project involved [Relevant Aspect, e.g., analyzing large datasets and creating actionable insights], which matches [Role Requirement, e.g., the data analyst role at [Company Name]]. My experience with [Technologies, e.g., Python and Tableau] aligns with your needs, and I’m excited to contribute to [Company Goal, e.g., data-driven decision-making].</p>
+                    </div>
+                </div>
+                <div class="conversation">
+                    <h3>Scenario 3: Fresher for IT Company Role</h3>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> Can you describe an academic project you worked on?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> In my [Degree, e.g., B.Tech in Computer Science], I worked on [Project Name, e.g., a Student Attendance System]. The aim was to [Objective, e.g., automate attendance tracking]. I used [Technologies, e.g., HTML, CSS, and PHP] to [Contribution, e.g., develop the frontend and integrate it with a MySQL database]. The system [Outcome, e.g., reduced manual tracking time by 50%]. This project built my [Skills, e.g., web development skills], which I’m excited to bring to [Company Name].</p>
+                    </div>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> What was your role in the team?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> I was [Role, e.g., the frontend developer] in a [Team Size, e.g., three-member team]. I [Responsibility, e.g., designed the user interface and ensured database connectivity]. I collaborated with [Collaboration, e.g., my teammates to align frontend and backend], and [Initiative, e.g., proposed a responsive design for mobile access]. This experience strengthened my [Skills, e.g., teamwork and technical skills], which I’m eager to apply at [Company Name].</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <footer class="footer">
+                <div class="footer-grid">
+                    <div class="footer-section">
+                        <h3>About CrackIT</h3>
+                        <ul>
+                            <li><a href="#">Our Mission</a></li>
+                            <li><a href="#">Team</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Resources</h3>
+                        <ul>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Guides</a></li>
+                            <li><a href="#">FAQs</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Follow Us</h3>
+                        <ul>
+                            <li><a href="#">Twitter</a></li>
+                            <li><a href="#">LinkedIn</a></li>
+                            <li><a href="#">GitHub</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>© 2025 CrackIT Prep. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const themeToggleBtn = document.getElementById('themeToggle');
+            const themeIcon = themeToggleBtn.querySelector('i');
+
+            if (themeToggleBtn) {
+                themeToggleBtn.addEventListener('click', function () {
+                    document.body.classList.toggle('light-theme');
+                    const isLightTheme = document.body.classList.contains('light-theme');
+                    themeIcon.className = isLightTheme ? 'bx bx-sun' : 'bx bx-moon';
+                    localStorage.setItem('theme', isLightTheme ? 'light' : 'dark');
+                });
+            }
+
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-theme');
+                themeIcon.className = 'bx bx-sun';
+            }
+        });
+    </script>
+</body>
+</html>

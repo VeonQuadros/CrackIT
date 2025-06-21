@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train, Boat, Pipe and Tank Practice</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        .main-content {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        .topic-section {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        .question-list ol {
+            padding-left: 0;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .question {
+            max-width: 100%;
+        }
+
+        .options {
+            max-width: 100%;
+        }
+
+        * {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0f0f0f;
+            color: #f0f0f0;
+            min-height: 100vh;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body.light-theme {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .header-icons {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .header-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            background-color: #22c55e;
+            color: white;
+            border: none;
+        }
+
+        body.light-theme .header-icon {
+            background-color: #2563eb;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-icon:hover {
+            transform: scale(1.1);
+            background-color: #16a34a;
+        }
+
+        body.light-theme .header-icon:hover {
+            background-color: #1d4ed8;
+        }
+
+        .main-content {
+            padding: 80px 50px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .page-title {
+            font-size: 36px;
+            margin-bottom: 60px;
+            font-weight: 700;
+            color: #f0f0f0;
+            text-align: center;
+            position: relative;
+        }
+
+        .page-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #22c55e;
+            margin: 20px auto 0;
+            border-radius: 2px;
+        }
+
+        body.light-theme .page-title {
+            color: #333;
+        }
+
+        body.light-theme .page-title::after {
+            background-color: #2563eb;
+        }
+
+        .topic-section {
+            margin-bottom: 80px;
+            background-color: #1a1a1a;
+            border-radius: 16px;
+            padding: 40px;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme .topic-section {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .topic-section:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+            border-color: #22c55e;
+        }
+
+        body.light-theme .topic-section:hover {
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+            border-color: #3b82f6;
+        }
+
+        .topic-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .topic-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 25px;
+        }
+
+        body.light-theme .topic-icon {
+            background-color: rgba(239, 68, 68, 0.1);
+        }
+
+        .topic-icon i {
+            font-size: 28px;
+        }
+
+        .topic-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: white;
+        }
+
+        body.light-theme .topic-title {
+            color: #333;
+        }
+
+        .topic-description {
+            font-size: 17px;
+            color: #aaa;
+            line-height: 1.9;
+            margin-bottom: 30px;
+        }
+
+        body.light-theme .topic-description {
+            color: #666;
+        }
+
+        .question-list {
+            margin-top: 30px;
+            padding: 0 20px;
+        }
+
+        .question-list ol {
+            list-style-position: outside;
+            padding-left: 25px;
+            margin: 0;
+            counter-reset: item;
+        }
+
+        .question {
+            position: relative;
+            font-size: 17px;
+            color: #f0f0f0;
+            margin-bottom: 30px;
+            line-height: 1.8;
+            padding: 20px;
+            background-color: #222;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme .question {
+            color: #333;
+            background-color: #f9fafb;
+        }
+
+        .question-text {
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .option {
+            background-color: #333;
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        body.light-theme .option {
+            background-color: #e5e7eb;
+        }
+
+        .option:hover {
+            background-color: #444;
+        }
+
+        body.light-theme .option:hover {
+            background-color: #d1d5db;
+        }
+
+        .option.selected {
+            background-color: #22c55e;
+            color: white;
+            border: 2px solid #16a34a;
+        }
+
+        body.light-theme .option.selected {
+            background-color: #2563eb;
+            color: white;
+            border: 2px solid #1d4ed8;
+        }
+
+        .answer-table {
+            margin-top: 40px;
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .answer-table::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 20px;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.2));
+            pointer-events: none;
+        }
+
+        body.light-theme .answer-table {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+        }
+
+        body.light-theme .answer-table::after {
+            background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.1));
+        }
+
+        .answer-table table {
+            width: 100%;
+            min-width: 600px;
+            border-collapse: collapse;
+        }
+
+        .answer-table th, .answer-table td {
+            border: 1px solid #333;
+            padding: 15px;
+            text-align: center;
+            color: #f0f0f0;
+            font-size: 15px;
+            min-width: 60px;
+        }
+
+        body.light-theme .answer-table th,
+        body.light-theme .answer-table td {
+            border: 1px solid #ddd;
+            color: #333;
+        }
+
+        .answer-table td.correct {
+            background-color: #16a34a;
+            color: white;
+        }
+
+        body.light-theme .answer-table td.correct {
+            background-color: #16a34a;
+            color: white;
+        }
+
+        .answer-table td.incorrect {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        body.light-theme .answer-table td.incorrect {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        .footer {
+            background-color: #0f0f0f;
+            padding: 100px 0 40px;
+            margin-top: 100px;
+            border-top: 1px solid #222;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background-color: #22c55e;
+            border-radius: 2px;
+        }
+
+        body.light-theme .footer {
+            background-color: #f5f5f5;
+            border-top: 1px solid #ddd;
+        }
+
+        body.light-theme .footer::before {
+            background-color: #2563eb;
+        }
+
+        .copyright {
+            text-align: center;
+            padding: 40px 0 0;
+            margin-top: 60px;
+            border-top: 1px solid #222;
+            color: #888;
+            font-size: 15px;
+        }
+
+        body.light-theme .copyright {
+            border-top: 1px solid #ddd;
+            color: #666;
+        }
+
+        @media screen and (max-width: 1024px) {
+            .options {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .header-icons {
+                top: 10px;
+                right: 10px;
+                gap: 10px;
+            }
+
+            .header-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+
+            .main-content {
+                padding: 60px 10px;
+                margin: 0 auto;
+                max-width: 100%;
+            }
+
+            .page-title {
+                font-size: 28px;
+                margin-bottom: 40px;
+            }
+
+            .topic-section {
+                padding: 20px 12px;
+                margin: 0 auto 40px;
+                max-width: 100%;
+            }
+
+            .topic-header {
+                margin-bottom: 20px;
+            }
+
+            .topic-icon {
+                width: 50px;
+                height: 50px;
+                margin-right: 15px;
+            }
+
+            .topic-icon i {
+                font-size: 24px;
+            }
+
+            .topic-title {
+                font-size: 24px;
+            }
+
+            .topic-description {
+                font-size: 15px;
+                line-height: 1.7;
+            }
+
+            .question-list {
+                padding: 0;
+                margin: 0 auto;
+            }
+
+            .question-list ol {
+                list-style-position: inside;
+                padding-left: 0;
+                max-width: 100%;
+            }
+
+            .question {
+                font-size: 15px;
+                padding: 15px 20px;
+                margin-bottom: 20px;
+                display: flex;
+                flex-direction: column;
+                max-width: 100%;
+            }
+
+            .question::before {
+                content: counter(item) ".";
+                counter-increment: item;
+                position: absolute;
+                left: 10px;
+                top: 15px;
+                font-weight: 500;
+            }
+
+            body.light-theme .question::before {
+                color: #2563eb;
+            }
+
+            body:not(.light-theme) .question::before {
+                color: #22c55e;
+            }
+
+            .question-text {
+                position: relative;
+                padding-left: 30px;
+                margin-bottom: 12px;
+                margin-left: 10px;
+            }
+
+            .options {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 12px;
+                padding-left: 30px;
+                max-width: 100%;
+            }
+
+            .option {
+                padding: 10px;
+                font-size: 14px;
+                border-radius: 4px;
+            }
+
+            .answer-table {
+                background-color: transparent;
+            }
+
+            .answer-table table {
+                min-width: 600px;
+                border-radius: 8px;
+            }
+
+            body.light-theme .answer-table table {
+                background-color: #ffffff;
+            }
+
+            .answer-table th, 
+            .answer-table td {
+                padding: 10px 8px;
+                font-size: 13px;
+                min-width: 40px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .header-icons {
+                top: 8px;
+                right: 8px;
+                gap: 8px;
+            }
+
+            .header-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+
+            .main-content {
+                padding: 50px 8px;
+            }
+
+            .page-title {
+                font-size: 24px;
+                margin-bottom: 30px;
+            }
+
+            .topic-section {
+                padding: 15px 10px;
+                margin-bottom: 30px;
+            }
+
+            .topic-icon {
+                width: 40px;
+                height: 40px;
+                margin-right: 12px;
+            }
+
+            .topic-icon i {
+                font-size: 20px;
+            }
+
+            .topic-title {
+                font-size: 20px;
+            }
+
+            .topic-description {
+                font-size: 14px;
+            }
+
+            .question {
+                font-size: 14px;
+                padding: 12px 15px;
+                margin-bottom: 15px;
+            }
+
+            .question::before {
+                left: 8px;
+                top: 12px;
+            }
+
+            .question-text {
+                padding-left: 25px;
+                margin-left: 8px;
+            }
+
+            .options {
+                gap: 8px;
+                padding-left: 25px;
+            }
+
+            .option {
+                padding: 8px 10px;
+                font-size: 13px;
+            }
+
+            .answer-table th, 
+            .answer-table td {
+                padding: 8px 6px;
+                font-size: 12px;
+                min-width: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-icons">
+        <button class="header-icon theme-toggle" id="theme-toggle" title="Toggle Theme">
+            <i class='bx bx-moon'></i>
+        </button>
+        <button class="header-icon back-button" title="Back">
+            <i class='bx bx-arrow-back'></i>
+        </button>
+    </div>
+
+    <div class="main-content">
+        <h1 class="page-title">Practice Questions</h1>
+
+        <!-- Train, Boat, Pipe and Tank Questions -->
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon">
+                    <i class='bx bx-train'></i>
+                </div>
+                <h2 class="topic-title">Train, Boat, Pipe and Tank Problems</h2>
+            </div>
+            <p class="topic-description">
+                Test your quantitative aptitude with these 30 practice questions on train, boat, pipe, and tank problems, covering relative speed, time to fill/empty tanks, and stream-based calculations.
+            </p>
+            <div class="question-list">
+                <ol>
+                    <li class="question" data-question-id="1">
+                        <div class="question-text">A train 150 m long passes a pole in 5 seconds. What is the speed of the train in km/h?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 108 km/h</div>
+                            <div class="option" data-option="(b)">(b) 90 km/h</div>
+                            <div class="option" data-option="(c)">(c) 72 km/h</div>
+                            <div class="option" data-option="(d)">(d) 54 km/h</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="2">
+                        <div class="question-text">Two trains 120 m and 180 m long are moving towards each other at 54 km/h and 36 km/h respectively. How long will they take to pass each other?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 12 seconds</div>
+                            <div class="option" data-option="(b)">(b) 10 seconds</div>
+                            <div class="option" data-option="(c)">(c) 8 seconds</div>
+                            <div class="option" data-option="(d)">(d) 6 seconds</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="3">
+                        <div class="question-text">A boat can travel 20 km downstream in 2 hours and upstream in 4 hours. What is the speed of the stream?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 2.5 km/h</div>
+                            <div class="option" data-option="(b)">(b) 5 km/h</div>
+                            <div class="option" data-option="(c)">(c) 7.5 km/h</div>
+                            <div class="option" data-option="(d)">(d) 10 km/h</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="4">
+                        <div class="question-text">A pipe can fill a tank in 12 hours. Due to a leak, it takes 15 hours to fill the tank. How long will the leak alone take to empty the full tank?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 60 hours</div>
+                            <div class="option" data-option="(b)">(b) 48 hours</div>
+                            <div class="option" data-option="(c)">(c) 36 hours</div>
+                            <div class="option" data-option="(d)">(d) 24 hours</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="5">
+                        <div class="question-text">A train traveling at 72 km/h crosses a platform 300 m long in 30 seconds. What is the length of the train?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 200 m</div>
+                            <div class="option" data-option="(b)">(b) 250 m</div>
+                            <div class="option" data-option="(c)">(c) 300 m</div>
+                            <div class="option" data-option="(d)">(d) 350 m</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="6">
+                        <div class="question-text">A boat travels 36 km downstream in 3 hours. The speed of the stream is 4 km/h. What is the speed of the boat in still water?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 8 km/h</div>
+                            <div class="option" data-option="(b)">(b) 10 km/h</div>
+                            <div class="option" data-option="(c)">(c) 12 km/h</div>
+                            <div class="option" data-option="(d)">(d) 14 km/h</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="7">
+                        <div class="question-text">Two pipes A and B can fill a tank in 20 and 30 hours respectively. If both are opened together, how long will it take to fill the tank?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 12 hours</div>
+                            <div class="option" data-option="(b)">(b) 15 hours</div>
+                            <div class="option" data-option="(c)">(c) 18 hours</div>
+                            <div class="option" data-option="(d)">(d) 10 hours</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="8">
+                        <div class="question-text">A train 200 m long is running at 60 km/h. How long will it take to cross a bridge 400 m long?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 36 seconds</div>
+                            <div class="option" data-option="(b)">(b) 30 seconds</div>
+                            <div class="option" data-option="(c)">(c) 24 seconds</div>
+                            <div class="option" data-option="(d)">(d) 18 seconds</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="9">
+                        <div class="question-text">A boat travels 15 km upstream in 3 hours and 21 km downstream in 3 hours. What is the speed of the boat in still water?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 6 km/h</div>
+                            <div class="option" data-option="(b)">(b) 7 km/h</div>
+                            <div class="option" data-option="(c)">(c) 8 km/h</div>
+                            <div class="option" data-option="(d)">(d) 9 km/h</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="10">
+                        <div class="question-text">A pipe can fill a tank in 8 hours, and another pipe can empty it in 12 hours. If both are opened, how long will it take to fill the tank?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 24 hours</div>
+                            <div class="option" data-option="(b)">(b) 20 hours</div>
+                            <div class="option" data-option="(c)">(c) 16 hours</div>
+                            <div class="option" data-option="(d)">(d) 12 hours</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="11">
+                        <div class="question-text">Two trains start from stations 300 km apart and move towards each other at 50 km/h and 70 km/h. After how long will they meet?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 2 hours</div>
+                            <div class="option" data-option="(b)">(b) 2.5 hours</div>
+                            <div class="option" data-option="(c)">(c) 3 hours</div>
+                            <div class="option" data-option="(d)">(d) 3.5 hours</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="12">
+                        <div class="question-text">A boat’s speed in still water is 10 km/h, and the stream’s speed is 2 km/h. How long will it take to travel 24 km upstream?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 2 hours</div>
+                            <div class="option" data-option="(b)">(b) 2.5 hours</div>
+                            <div class="option" data-option="(c)">(c) 3 hours</div>
+                            <div class="option" data-option="(d)">(d) 3.5 hours</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="13">
+                        <div class="question-text">A pipe can fill a tank in 10 hours. A leak can empty it in 15 hours. If the tank is full and only the leak is opened, how long will it take to empty?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 10 hours</div>
+                            <div class="option" data-option="(b)">(b) 12 hours</div>
+                            <div class="option" data-option="(c)">(c) 15 hours</div>
+                            <div class="option" data-option="(d)">(d) 18 hours</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="14">
+                        <div class="question-text">A train 250 m long passes a man running at 10 km/h in the same direction in 20 seconds. What is the speed of the train?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 50 km/h</div>
+                            <div class="option" data-option="(b)">(b) 55 km/h</div>
+                            <div class="option" data-option="(c)">(c) 60 km/h</div>
+                            <div class="option" data-option="(d)">(d) 65 km/h</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="15">
+                        <div class="question-text">A boat covers 40 km downstream in 4 hours and 24 km upstream in 4 hours. What is the speed of the stream?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 2 km/h</div>
+                            <div class="option" data-option="(b)">(b) 3 km/h</div>
+                            <div class="option" data-option="(c)">(c) 4 km/h</div>
+                            <div class="option" data-option="(d)">(d) 5 km/h</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="16">
+                        <div class="question-text">Two pipes can fill a tank in 15 and 20 hours respectively. If both are opened, how long will it take to fill the tank?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 8 hours</div>
+                            <div class="option" data-option="(b)">(b) 9 hours</div>
+                            <div class="option" data-option="(c)">(c) 10 hours</div>
+                            <div class="option" data-option="(d)">(d) 12 hours</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="17">
+                        <div class="question-text">A train 180 m long crosses a 120 m platform in 15 seconds. What is the speed of the train in km/h?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 54 km/h</div>
+                            <div class="option" data-option="(b)">(b) 60 km/h</div>
+                            <div class="option" data-option="(c)">(c) 72 km/h</div>
+                            <div class="option" data-option="(d)">(d) 90 km/h</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="18">
+                        <div class="question-text">A boat’s speed in still water is 15 km/h, and the stream’s speed is 5 km/h. How long will it take to travel 40 km downstream?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 2 hours</div>
+                            <div class="option" data-option="(b)">(b) 2.5 hours</div>
+                            <div class="option" data-option="(c)">(c) 3 hours</div>
+                            <div class="option" data-option="(d)">(d) 3.5 hours</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id docks/dockes
+                        <div class="question-text">A pipe fills a tank in 6 hours, and a leak empties it in 10 hours. If both are opened, how long will it take to fill the tank?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 12 hours</div>
+                            <div class="option" data-option="(b)">(b) 15 hours</div>
+                            <div class="option" data-option="(c)">(c) 18 hours</div>
+                            <div class="option" data-option="(d)">(d) 24 hours</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="20">
+                        <div class="question-text">Two trains 150 m and 200 m long move towards each other at 60 km/h and 40 km/h. How long will it take to pass each other?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 12.6 seconds</div>
+                            <div class="option" data-option="(b)">(b) 10.8 seconds</div>
+                            <div class="option" data-option="(c)">(c) 9.5 seconds</div>
+                            <div class="option" data-option="(d)">(d) 8.4 seconds</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="21">
+                        <div class="question-text">A boat travels 30 km downstream in 2 hours. If the stream’s speed is 3 km/h, what is the boat’s speed in still water?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 12 km/h</div>
+                            <div class="option" data-option="(b)">(b) 15 km/h</div>
+                            <div class="option" data-option="(c)">(c) 18 km/h</div>
+                            <div class="option" data-option="(d)">(d) 21 km/h</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="22">
+                        <div class="question-text">Two pipes A and B can fill a tank in 10 and 15 hours. A third pipe C can empty it in 20 hours. If all are opened, how long will it take to fill the tank?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 12 hours</div>
+                            <div class="option" data-option="(b)">(b) 15 hours</div>
+                            <div class="option" data-option="(c)">(c) 18 hours</div>
+                            <div class="option" data-option="(d)">(d) 20 hours</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="23">
+                        <div class="question-text">A train 300 m long is running at 90 km/h. How long will it take to cross a 200 m bridge?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 15 seconds</div>
+                            <div class="option" data-option="(b)">(b) 18 seconds</div>
+                            <div class="option" data-option="(c)">(c) 20 seconds</div>
+                            <div class="option" data-option="(d)">(d) 24 seconds</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="24">
+                        <div class="question-text">A boat travels 48 km downstream in 4 hours and 32 km upstream in 4 hours. What is the speed of the stream?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 2 km/h</div>
+                            <div class="option" data-option="(b)">(b) 3 km/h</div>
+                            <div class="option" data-option="(c)">(c) 4 km/h</div>
+                            <div class="option" data-option="(d)">(d) 5 km/h</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="25">
+                        <div class="question-text">A pipe can fill a tank in 9 hours, and a leak can empty it in 12 hours. If both are opened, how long will it take to fill the tank?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 36 hours</div>
+                            <div class="option" data-option="(b)">(b) 24 hours</div>
+                            <div class="option" data-option="(c)">(c) 18 hours</div>
+                            <div class="option" data-option="(d)">(d) 12 hours</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="26">
+                        <div class="question-text">Two trains 100 m and 150 m long are moving in the same direction at 72 km/h and 36 km/h. How long will it take for the faster train to pass the slower one?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 25 seconds</div>
+                            <div class="option" data-option="(b)">(b) 20 seconds</div>
+                            <div class="option" data-option="(c)">(c) 15 seconds</div>
+                            <div class="option" data-option="(d)">(d) 10 seconds</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="27">
+                        <div class="question-text">A boat’s speed in still water is 12 km/h, and the stream’s speed is 3 km/h. How long will it take to travel 18 km upstream?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 1.5 hours</div>
+                            <div class="option" data-option="(b)">(b) 2 hours</div>
+                            <div class="option" data-option="(c)">(c) 2.5 hours</div>
+                            <div class="option" data-option="(d)">(d) 3 hours</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="28">
+                        <div class="question-text">Two pipes can fill a tank in 12 and 15 hours respectively. If both are opened and a leak empties the tank in 20 hours, how long will it take to fill the tank?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 10 hours</div>
+                            <div class="option" data-option="(b)">(b) 12 hours</div>
+                            <div class="option" data-option="(c)">(c) 15 hours</div>
+                            <div class="option" data-option="(d)">(d) 18 hours</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="29">
+                        <div class="question-text">A train 200 m long passes a pole in 8 seconds. What is the speed of the train in km/h?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 90 km/h</div>
+                            <div class="option" data-option="(b)">(b) 72 km/h</div>
+                            <div class="option" data-option="(c)">(c) 54 km/h</div>
+                            <div class="option" data-option="(d)">(d) 36 km/h</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="30">
+                        <div class="question-text">A boat covers 24 km downstream in 2 hours and 16 km upstream in 2 hours. What is the speed of the boat in still water?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 10 km/h</div>
+                            <div class="option" data-option="(b)">(b) 12 km/h</div>
+                            <div class="option" data-option="(c)">(c) 14 km/h</div>
+                            <div class="option" data-option="(d)">(d) 16 km/h</div>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Answers -->
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon">
+                    <i class='bx bx-key'></i>
+                </div>
+                <h2 class="topic-title">Answer Key</h2>
+            </div>
+            <p class="topic-description">
+                Correct answers for the Train, Boat, Pipe and Tank practice questions.
+            </p>
+            <div class="answer-table">
+                <table>
+                    <tr>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                    </tr>
+                    <tr>
+                        <td>1</td><td data-question-id="1">(a)</td>
+                        <td>2</td><td data-question-id="2">(c)</td>
+                        <td>3</td><td data-question-id="3">(a)</td>
+                        <td>4</td><td data-question-id="4">(a)</td>
+                        <td>5</td><td data-question-id="5">(b)</td>
+                    </tr>
+                    <tr>
+                        <td>6</td><td data-question-id="6">(a)</td>
+                        <td>7</td><td data-question-id="7">(a)</td>
+                        <td>8</td><td data-question-id="8">(a)</td>
+                        <td>9</td><td data-question-id="9">(a)</td>
+                        <td>10</td><td data-question-id="10">(a)</td>
+                    </tr>
+                    <tr>
+                        <td>11</td><td data-question-id="11">(b)</td>
+                        <td>12</td><td data-question-id="12">(c)</td>
+                        <td>13</td><td data-question-id="13">(c)</td>
+                        <td>14</td><td data-question-id="14">(b)</td>
+                        <td>15</td><td data-question-id="15">(b)</td>
+                    </tr>
+                    <tr>
+                        <td>16</td><td data-question-id="16">(a)</td>
+                        <td>17</td><td data-question-id="17">(c)</td>
+                        <td>18</td><td data-question-id="18">(a)</td>
+                        <td>19</td><td data-question-id="19">(b)</td>
+                        <td>20</td><td data-question-id="20">(b)</td>
+                    </tr>
+                    <tr>
+                        <td>21</td><td data-question-id="21">(a)</td>
+                        <td>22</td><td data-question-id="22">(a)</td>
+                        <td>23</td><td data-question-id="23">(c)</td>
+                        <td>24</td><td data-question-id="24">(c)</td>
+                        <td>25</td><td data-question-id="25">(a)</td>
+                    </tr>
+                    <tr>
+                        <td>26</td><td data-question-id="26">(a)</td>
+                        <td>27</td><td data-question-id="27">(b)</td>
+                        <td>28</td><td data-question-id="28">(b)</td>
+                        <td>29</td><td data-question-id="29">(a)</td>
+                        <td>30</td><td data-question-id="30">(a)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="copyright">
+                <p>© 2025 Train, Boat, Pipe and Tank Prep. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.querySelector('.theme-toggle');
+            const backButton = document.querySelector('.back-button');
+            const options = document.querySelectorAll('.option');
+            const answerKey = {
+                1: '(a)', 2: '(c)', 3: '(a)', 4: '(a)', 5: '(b)',
+                6: '(a)', 7: '(a)', 8: '(a)', 9: '(a)', 10: '(a)',
+                11: '(b)', 12: '(c)', 13: '(c)', 14: '(b)', 15: '(b)',
+                16: '(a)', 17: '(c)', 18: '(a)', 19: '(b)', 20: '(b)',
+                21: '(a)', 22: '(a)', 23: '(c)', 24: '(c)', 25: '(a)',
+                26: '(a)', 27: '(b)', 28: '(b)', 29: '(a)', 30: '(a)'
+            };
+
+            if (themeToggle) {
+                const themeIcon = themeToggle.querySelector('i');
+                themeToggle.addEventListener('click', function() {
+                    document.body.classList.toggle('light-theme');
+                    if (document.body.classList.contains('light-theme')) {
+                        themeIcon.classList.remove('bx-moon');
+                        themeIcon.classList.add('bx-sun');
+                        localStorage.setItem('theme', 'light');
+                    } else {
+                        themeIcon.classList.remove('bx-sun');
+                        themeIcon.classList.add('bx-moon');
+                        localStorage.setItem('theme', 'dark');
+                    }
+                });
+
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'light') {
+                    document.body.classList.add('light-theme');
+                    themeIcon.classList.remove('bx-moon');
+                    themeIcon.classList.add('bx-sun');
+                }
+            }
+
+            if (backButton) {
+                backButton.addEventListener('click', function() {
+                    window.history.back();
+                });
+            }
+
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    const question = this.closest('.question');
+                    const questionId = question.getAttribute('data-question-id');
+                    const selectedOption = this.getAttribute('data-option');
+                    const correctAnswer = answerKey[questionId];
+
+                    question.querySelectorAll('.option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+
+                    this.classList.add('selected');
+
+                    const answerCell = document.querySelector(`td[data-question-id="${questionId}"]`);
+                    if (answerCell) {
+                        answerCell.classList.remove('correct', 'incorrect');
+                        if (selectedOption === correctAnswer) {
+                            answerCell.classList.add('correct');
+                        } else {
+                            answerCell.classList.add('incorrect');
+                        }
+                    }
+                });
+            });
+
+            const answerTable = document.querySelector('.answer-table');
+            if (answerTable && window.innerWidth <= 768) {
+                answerTable.style.scrollSnapType = 'x mandatory';
+                answerTable.style.webkitOverflowScrolling = 'touch';
+            }
+        });
+    </script>
+</body>
+</html>

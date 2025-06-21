@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time and Work Practice</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+   <style>
+    /* For iOS Safari */
+    * {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    /* For Android Chrome (and most browsers) */
+    * {
+        -webkit-user-select: none; /* Prevents text selection */
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+        background-color: #0f0f0f;
+        color: #f0f0f0;
+        min-height: 100vh;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    body.light-theme {
+        background-color: #f5f5f5;
+        color: #333;
+    }
+
+    .header-icons {
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        display: flex;
+        gap: 15px;
+        z-index: 1000;
+    }
+
+    .header-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        background-color: #22c55e;
+        color: white;
+        border: none;
+    }
+
+    body.light-theme .header-icon {
+        background-color: #2563eb;
+        color: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-icon:hover {
+        transform: scale(1.1);
+        background-color: #16a34a;
+    }
+
+    body.light-theme .header-icon:hover {
+        background-color: #1d4ed8;
+    }
+
+    .main-content {
+        padding: 80px 50px;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .page-title {
+        font-size: 36px;
+        margin-bottom: 60px;
+        font-weight: 700;
+        color: #f0f0f0;
+        text-align: center;
+        position: relative;
+    }
+
+    .page-title::after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 4px;
+        background-color: #22c55e;
+        margin: 20px auto 0;
+        border-radius: 2px;
+    }
+
+    body.light-theme .page-title {
+        color: #333;
+    }
+
+    body.light-theme .page-title::after {
+        background-color: #2563eb;
+    }
+
+    .topic-section {
+        margin-bottom: 80px;
+        background-color: #1a1a1a;
+        border-radius: 16px;
+        padding: 40px;
+        border: 1px solid #333;
+        transition: all 0.3s ease;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    body.light-theme .topic-section {
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .topic-section:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        border-color: #22c55e;
+    }
+
+    body.light-theme .topic-section:hover {
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        border-color: #3b82f6;
+    }
+
+    .topic-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+    .topic-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: rgba(239, 68, 68, 0.2);
+        color: #ef4444;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 25px;
+    }
+
+    body.light-theme .topic-icon {
+        background-color: rgba(239, 68, 68, 0.1);
+    }
+
+    .topic-icon i {
+        font-size: 28px;
+    }
+
+    .topic-title {
+        font-size: 28px;
+        font-weight: 600;
+        color: white;
+    }
+
+    body.light-theme .topic-title {
+        color: #333;
+    }
+
+    .topic-description {
+        font-size: 17px;
+        color: #aaa;
+        line-height: 1.9;
+        margin-bottom: 30px;
+    }
+
+    body.light-theme .topic-description {
+        color: #666;
+    }
+
+    .question-list {
+        margin-top: 30px;
+        padding: 0;
+        max-width: 100%;
+    }
+
+    .question-list ol {
+        list-style-position: outside;
+        padding-left: 0;
+        margin: 0 auto;
+        max-width: 100%;
+        counter-reset: item;
+    }
+
+    .question {
+        position: relative;
+        font-size: 17px;
+        color: #f0f0f0;
+        margin-bottom: 30px;
+        line-height: 1.8;
+        padding: 20px;
+        background-color: #222;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    body.light-theme .question {
+        color: #333;
+        background-color: #f9fafb;
+    }
+
+    .question-text {
+        margin-bottom: 15px;
+        font-weight: 500;
+        padding-left: 35px;
+    }
+
+    .options {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-top: 15px;
+        padding-left: 35px;
+    }
+
+    .option {
+        background-color: #333;
+        padding: 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 16px;
+        width: 100%;
+    }
+
+    body.light-theme .option {
+        background-color: #e5e7eb;
+    }
+
+    .option:hover {
+        background-color: #444;
+    }
+
+    body.light-theme .option:hover {
+        background-color: #d1d5db;
+    }
+
+    .option.selected {
+        background-color: #22c55e;
+        color: white;
+        border: 2px solid #16a34a;
+    }
+
+    body.light-theme .option.selected {
+        background-color: #2563eb;
+        color: white;
+        border: 2px solid #1d4ed8;
+    }
+
+    .answer-table {
+        margin-top: 40px;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+        background-color: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 8px;
+        position: relative;
+    }
+
+    .answer-table::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 20px;
+        height: 100%;
+        background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.2));
+        pointer-events: none;
+    }
+
+    body.light-theme .answer-table {
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+    }
+
+    body.light-theme .answer-table::after {
+        background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.1));
+    }
+
+    .answer-table table {
+        width: 100%;
+        min-width: 600px;
+        border-collapse: collapse;
+    }
+
+    .answer-table th, .answer-table td {
+        border: 1px solid #333;
+        padding: 15px;
+        text-align: center;
+        color: #f0f0f0;
+        font-size: 15px;
+        min-width: 50px;
+    }
+
+    body.light-theme .answer-table th,
+    body.light-theme .answer-table td {
+        border: 1px solid #ddd;
+        color: #333;
+    }
+
+    .answer-table td.correct {
+        background-color: #16a34a;
+        color: white;
+    }
+
+    body.light-theme .answer-table td.correct {
+        background-color: #16a34a;
+        color: white;
+    }
+
+    .answer-table td.incorrect {
+        background-color: #ef4444;
+        color: white;
+    }
+
+    body.light-theme .answer-table td.incorrect {
+        background-color: #ef4444;
+        color: white;
+    }
+
+    .footer {
+        background-color: #0f0f0f;
+        padding: 100px 0 40px;
+        margin-top: 100px;
+        border-top: 1px solid #222;
+        position: relative;
+    }
+
+    .footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 4px;
+        background-color: #22c55e;
+        border-radius: 2px;
+    }
+
+    body.light-theme .footer {
+        background-color: #f5f5f5;
+        border-top: 1px solid #ddd;
+    }
+
+    body.light-theme .footer::before {
+        background-color: #2563eb;
+    }
+
+    .copyright {
+        text-align: center;
+        padding: 40px 0 0;
+        margin-top: 60px;
+        border-top: 1px solid #222;
+        color: #888;
+        font-size: 15px;
+    }
+
+    body.light-theme .copyright {
+        border-top: 1px solid #ddd;
+        color: #666;
+    }
+
+    @media screen and (max-width: 1024px) {
+        .options {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        .header-icons {
+            top: 10px;
+            right: 10px;
+            gap: 10px;
+        }
+
+        .header-icon {
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+        }
+
+        .main-content {
+            padding: 60px 10px;
+            margin: 0 auto;
+            max-width: 100%;
+        }
+
+        .page-title {
+            font-size: 28px;
+            margin-bottom: 40px;
+        }
+
+        .topic-section {
+            padding: 20px 12px;
+            margin: 0 auto 40px;
+            max-width: 100%;
+        }
+
+        .topic-header {
+            margin-bottom: 20px;
+        }
+
+        .topic-icon {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+        }
+
+        .topic-icon i {
+            font-size: 24px;
+        }
+
+        .topic-title {
+            font-size: 24px;
+        }
+
+        .topic-description {
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .question-list {
+            padding: 0;
+            margin: 0 auto;
+        }
+
+        .question-list ol {
+            list-style-position: inside;
+            padding-left: 0;
+            max-width: 100%;
+        }
+
+        .question {
+            font-size: 15px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            max-width: 100%;
+        }
+
+        .question::before {
+            content: counter(item) ".";
+            counter-increment: item;
+            position: absolute;
+            left: 10px;
+            top: 15px;
+            color: #22c55e;
+            font-weight: 500;
+        }
+
+        body.light-theme .question::before {
+            color: #2563eb;
+        }
+
+        .question-text {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 12px;
+            margin-left: 10px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 12px;
+            padding-left: 30px;
+            max-width: 100%;
+        }
+
+        .option {
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 4px;
+        }
+
+        .answer-table {
+            background-color: transparent;
+        }
+
+        .answer-table table {
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            min-width: 600px;
+        }
+
+        body.light-theme .answer-table table {
+            background-color: #ffffff;
+        }
+
+        .answer-table th, 
+        .answer-table td {
+            padding: 10px 8px;
+            font-size: 13px;
+            min-width: 40px;
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        .header-icons {
+            top: 8px;
+            right: 8px;
+            gap: 8px;
+        }
+
+        .header-icon {
+            width: 36px;
+            height: 36px;
+            font-size: 16px;
+        }
+
+        .main-content {
+            padding: 50px 8px;
+        }
+
+        .page-title {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        .topic-section {
+            padding: 15px 10px;
+            margin-bottom: 30px;
+        }
+
+        .topic-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 12px;
+        }
+
+        .topic-icon i {
+            font-size: 20px;
+        }
+
+        .topic-title {
+            font-size: 20px;
+        }
+
+        .topic-description {
+            font-size: 14px;
+        }
+
+        .question {
+            font-size: 14px;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+        }
+
+        .question::before {
+            left: 8px;
+            top: 12px;
+        }
+
+        .question-text {
+            padding-left: 25px;
+            margin-left: 8px;
+        }
+
+        .options {
+            gap: 8px;
+            padding-left: 25px;
+        }
+
+        .option {
+            padding: 8px 10px;
+            font-size: 13px;
+        }
+
+        .answer-table th, 
+        .answer-table td {
+            padding: 8px 6px;
+            font-size: 12px;
+            min-width: 35px;
+        }
+    }
+</style>
+</head>
+<body>
+    <div class="header-icons">
+        <button class="header-icon theme-toggle" id="theme-toggle" title="Toggle Theme">
+            <i class='bx bx-moon'></i>
+        </button>
+        <button class="header-icon back-button" title="Back">
+            <i class='bx bx-arrow-back'></i>
+        </button>
+    </div>
+
+    <div class="main-content">
+        <h1 class="page-title">Practice Questions</h1>
+
+        <!-- Combined Questions -->
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon">
+                    <i class='bx bx-time-five'></i>
+                </div>
+                <h2 class="topic-title">Time and Work</h2>
+            </div>
+            <p class="topic-description">
+                Test your skills with these 50 practice questions covering Time and Work, including individual work rates, combined work, pipes and cisterns, alternate work, and work equivalence scenarios.
+            </p>
+            <div class="question-list">
+                <ol>
+                    <li class="question" data-question-id="1">
+                        <div class="question-text">3 men = 2 women. Time for 1 man + 2 women to complete work?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 12 days</div>
+                            <div class="option" data-option="(b)">(b) 13 days</div>
+                            <div class="option" data-option="(c)">(c) 14 days</div>
+                            <div class="option" data-option="(d)">(d) 15 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="2">
+                        <div class="question-text">A does 1/3 work, B completes rest in 8 days. Total time if A (12 days)?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 9 days</div>
+                            <div class="option" data-option="(b)">(b) 9.5 days</div>
+                            <div class="option" data-option="(c)">(c) 10.5 days</div>
+                            <div class="option" data-option="(d)">(d) 10 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="3">
+                        <div class="question-text">A (12 days), B (18 days) work alternately starting with A. Total time?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 14.4 days</div>
+                            <div class="option" data-option="(b)">(b) 15 days</div>
+                            <div class="option" data-option="(c)">(c) 16 days</div>
+                            <div class="option" data-option="(d)">(d) 17 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="4">
+                        <div class="question-text">A (12 days) works 4 days, B (15 days) completes rest. Total time?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 7 days</div>
+                            <div class="option" data-option="(b)">(b) 7.5 days</div>
+                            <div class="option" data-option="(c)">(c) 8 days</div>
+                            <div class="option" data-option="(d)">(d) 8.5 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="5">
+                        <div class="question-text">A (10 days), B (15 days). A works 3 days, B completes rest. Total time?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 8 days</div>
+                            <div class="option" data-option="(b)">(b) 9 days</div>
+                            <div class="option" data-option="(c)">(c) 10 days</div>
+                            <div class="option" data-option="(d)">(d) 11 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="6">
+                        <div class="question-text">A (15 days) works 6 days, B (20 days) completes rest. Total time?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 7 days</div>
+                            <div class="option" data-option="(b)">(b) 7.5 days</div>
+                            <div class="option" data-option="(c)">(c) 8.5 days</div>
+                            <div class="option" data-option="(d)">(d) 8 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="7">
+                        <div class="question-text">3 men = 2 women. 2 men and 3 women complete work in 10 days. Time for 2 men + 2 women?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 5 days</div>
+                            <div class="option" data-option="(b)">(b) 5.5 days</div>
+                            <div class="option" data-option="(c)">(c) 6 days</div>
+                            <div class="option" data-option="(d)">(d) 6.5 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="8">
+                        <div class="question-text">A (16 days), B (20 days) work alternately starting with A. Total time?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 17.78 days</div>
+                            <div class="option" data-option="(b)">(b) 18 days</div>
+                            <div class="option" data-option="(c)">(c) 19 days</div>
+                            <div class="option" data-option="(d)">(d) 20 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="9">
+                        <div class="question-text">A (18 days), B (24 days) work alternately starting with A. Total time?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 20 days</div>
+                            <div class="option" data-option="(b)">(b) 21 days</div>
+                            <div class="option" data-option="(c)">(c) 22 days</div>
+                            <div class="option" data-option="(d)">(d) 20.57 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="10">
+                        <div class="question-text">A (15 days), B (20 days), C (30 days) together. Time to complete?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 6 days</div>
+                            <div class="option" data-option="(b)">(b) 6.5 days</div>
+                            <div class="option" data-option="(c)">(c) 7 days</div>
+                            <div class="option" data-option="(d)">(d) 6.67 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="11">
+                        <div class="question-text">A (15 days), B (20 days). A works 5 days, B completes rest. Total time?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 10 days</div>
+                            <div class="option" data-option="(b)">(b) 11 days</div>
+                            <div class="option" data-option="(c)">(c) 12 days</div>
+                            <div class="option" data-option="(d)">(d) 13 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="12">
+                        <div class="question-text">A and B can do a work in 15 days and 20 days, respectively. How many days will they take together?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 8 days</div>
+                            <div class="option" data-option="(b)">(b) 8.57 days</div>
+                            <div class="option" data-option="(c)">(c) 9 days</div>
+                            <div class="option" data-option="(d)">(d) 10 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="13">
+                        <div class="question-text">Pipe A (10h), B (12h), C (15h) fill tank. Time to fill?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 4 hours</div>
+                            <div class="option" data-option="(b)">(b) 4.5 hours</div>
+                            <div class="option" data-option="(c)">(c) 4.29 hours</div>
+                            <div class="option" data-option="(d)">(d) 5 hours</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="14">
+                        <div class="question-text">A is twice as efficient as B. B takes 20 days. Time for A and B together?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 6 days</div>
+                            <div class="option" data-option="(b)">(b) 6.67 days</div>
+                            <div class="option" data-option="(c)">(c) 7 days</div>
+                            <div class="option" data-option="(d)">(d) 7.5 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="15">
+                        <div class="question-text">A can do a work in 20 days. How many days to complete 3/5 of the work?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 12 days</div>
+                            <div class="option" data-option="(b)">(b) 10 days</div>
+                            <div class="option" data-option="(c)">(c) 14 days</div>
+                            <div class="option" data-option="(d)">(d) 15 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="16">
+                        <div class="question-text">Pipe A (20h fill), B (30h empty). Time to fill tank if both open?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 55 hours</div>
+                            <div class="option" data-option="(b)">(b) 60 hours</div>
+                            <div class="option" data-option="(c)">(c) 65 hours</div>
+                            <div class="option" data-option="(d)">(d) 70 hours</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="17">
+                        <div class="question-text">Pipe A (12h), B (8h) open for 4h, B alone completes. Total time?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 1.5 hours</div>
+                            <div class="option" data-option="(b)">(b) 1.6 hours</div>
+                            <div class="option" data-option="(c)">(c) 1.7 hours</div>
+                            <div class="option" data-option="(d)">(d) 1.8 hours</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="18">
+                        <div class="question-text">A + B (10 days), B (15 days). A works 4 days, B completes rest. Total time?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 6 days</div>
+                            <div class="option" data-option="(b)">(b) 6.5 days</div>
+                            <div class="option" data-option="(c)">(c) 7 days</div>
+                            <div class="option" data-option="(d)">(d) 7.5 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="19">
+                        <div class="question-text">A and B together take 12 days, A alone takes 18 days. Time for B alone?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 30 days</div>
+                            <div class="option" data-option="(b)">(b) 36 days</div>
+                            <div class="option" data-option="(c)">(c) 40 days</div>
+                            <div class="option" data-option="(d)">(d) 42 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="20">
+                        <div class="question-text">A (24 days), B (16 days) work alternately starting with A. Time to complete work?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 19.2 days</div>
+                            <div class="option" data-option="(b)">(b) 20 days</div>
+                            <div class="option" data-option="(c)">(c) 18 days</div>
+                            <div class="option" data-option="(d)">(d) 21 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="21">
+                        <div class="question-text">4 men = 3 women. Time for 2 men + 2 women to complete work?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 11 days</div>
+                            <div class="option" data-option="(b)">(b) 11.5 days</div>
+                            <div class="option" data-option="(c)">(c) 12 days</div>
+                            <div class="option" data-option="(d)">(d) 12.5 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="22">
+                        <div class="question-text">A is twice as efficient as B. B takes 24 days. Time for A and B together?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 7 days</div>
+                            <div class="option" data-option="(b)">(b) 7.5 days</div>
+                            <div class="option" data-option="(c)">(c) 8.5 days</div>
+                            <div class="option" data-option="(d)">(d) 8 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="23">
+                        <div class="question-text">A can complete a work in 12 days. How many days will A take to complete 1/4 of the work?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 3 days</div>
+                            <div class="option" data-option="(b)">(b) 4 days</div>
+                            <div class="option" data-option="(c)">(c) 5 days</div>
+                            <div class="option" data-option="(d)">(d) 6 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="24">
+                        <div class="question-text">A + B (8 days), A (12 days). B works 4 days, A completes rest. Total time?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 5 days</div>
+                            <div class="option" data-option="(b)">(b) 5.5 days</div>
+                            <div class="option" data-option="(c)">(c) 6 days</div>
+                            <div class="option" data-option="(d)">(d) 5.33 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="25">
+                        <div class="question-text">A (10 days), B (15 days), C (20 days) together. Time to complete?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 4 days</div>
+                            <div class="option" data-option="(b)">(b) 4.5 days</div>
+                            <div class="option" data-option="(c)">(c) 5 days</div>
+                            <div class="option" data-option="(d)">(d) 4.62 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="26">
+                        <div class="question-text">Pipe A (15h fill), B (20h empty). Time to fill tank if both open?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 55 hours</div>
+                            <div class="option" data-option="(b)">(b) 60 hours</div>
+                            <div class="option" data-option="(c)">(c) 65 hours</div>
+                            <div class="option" data-option="(d)">(d) 70 hours</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="27">
+                        <div class="question-text">A (10 days), B (12 days), C (15 days). A + B for 3 days, C completes. Total time?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 6 days</div>
+                            <div class="option" data-option="(b)">(b) 6.5 days</div>
+                            <div class="option" data-option="(c)">(c) 7 days</div>
+                            <div class="option" data-option="(d)">(d) 7.5 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="28">
+                        <div class="question-text">A and B together take 10 days, B alone takes 15 days. How long for A alone?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 25 days</div>
+                            <div class="option" data-option="(b)">(b) 30 days</div>
+                            <div class="option" data-option="(c)">(c) 35 days</div>
+                            <div class="option" data-option="(d)">(d) 40 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="29">
+                        <div class="question-text">A (15 days) works 5 days, B (20 days) completes rest. Total time?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 8 days</div>
+                            <div class="option" data-option="(b)">(b) 9 days</div>
+                            <div class="option" data-option="(c)">(c) 10 days</div>
+                            <div class="option" data-option="(d)">(d) 11 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="30">
+                        <div class="question-text">Pipe A fills a tank in 10 hours, Pipe B empties it in 15 hours. How long to fill the tank if both are open?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 25 hours</div>
+                            <div class="option" data-option="(b)">(b) 28 hours</div>
+                            <div class="option" data-option="(c)">(c) 30 hours</div>
+                            <div class="option" data-option="(d)">(d) 32 hours</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="31">
+                        <div class="question-text">A (10 days) works 5 days, B (15 days) completes rest. Total time?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 7 days</div>
+                            <div class="option" data-option="(b)">(b) 7.5 days</div>
+                            <div class="option" data-option="(c)">(c) 8 days</div>
+                            <div class="option" data-option="(d)">(d) 8.5 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="32">
+                        <div class="question-text">5 men = 3 women. Time for 2 men + 2 women to complete work?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 15 days</div>
+                            <div class="option" data-option="(b)">(b) 16 days</div>
+                            <div class="option" data-option="(c)">(c) 17 days</div>
+                            <div class="option" data-option="(d)">(d) 18 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="33">
+                        <div class="question-text">A and B together take 6 days, A alone takes 9 days. Time for B alone?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 18 days</div>
+                            <div class="option" data-option="(b)">(b) 15 days</div>
+                            <div class="option" data-option="(c)">(c) 20 days</div>
+                            <div class="option" data-option="(d)">(d) 12 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="34">
+                        <div class="question-text">A (12 days), B (18 days), C (24 days) together. Time to complete?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 5 days</div>
+                            <div class="option" data-option="(b)">(b) 5.5 days</div>
+                            <div class="option" data-option="(c)">(c) 6 days</div>
+                            <div class="option" data-option="(d)">(d) 5.54 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="35">
+                        <div class="question-text">Pipe A (6h fill), B (12h empty), C (8h fill). Time to fill tank?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 8 hours</div>
+                            <div class="option" data-option="(b)">(b) 9 hours</div>
+                            <div class="option" data-option="(c)">(c) 10 hours</div>
+                            <div class="option" data-option="(d)">(d) 7 hours</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="36">
+                        <div class="question-text">A (12 days) and B (15 days). A works 5 days, B completes the rest. Total time?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 6 days</div>
+                            <div class="option" data-option="(b)">(b) 7 days</div>
+                            <div class="option" data-option="(c)">(c) 8 days</div>
+                            <div class="option" data-option="(d)">(d) 9 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="37">
+                        <div class="question-text">A (2× B), B (24 days), A + B + C (6 days). Time for C alone?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 45 days</div>
+                            <div class="option" data-option="(b)">(b) 46 days</div>
+                            <div class="option" data-option="(c)">(c) 47 days</div>
+                            <div class="option" data-option="(d)">(d) 48 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="38">
+                        <div class="question-text">A + B (8 days), B + C (10 days), A + C (12 days). Time for A alone?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 14 days</div>
+                            <div class="option" data-option="(b)">(b) 14.5 days</div>
+                            <div class="option" data-option="(c)">(c) 15 days</div>
+                            <div class="option" data-option="(d)">(d) 15.5 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="39">
+                        <div class="question-text">A (2× B), B (16 days), A + B + C (5 days). Time for C alone?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 35 days</div>
+                            <div class="option" data-option="(b)">(b) 38 days</div>
+                            <div class="option" data-option="(c)">(c) 40 days</div>
+                            <div class="option" data-option="(d)">(d) 42 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="40">
+                        <div class="question-text">A (20 days), B (30 days) work alternately starting with A. Total time?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 24 days</div>
+                            <div class="option" data-option="(b)">(b) 25 days</div>
+                            <div class="option" data-option="(c)">(c) 26 days</div>
+                            <div class="option" data-option="(d)">(d) 27 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="41">
+                        <div class="question-text">2 men + 3 boys (12 days), 1 man + 2 boys (15 days). Time for 1 man?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 18 days</div>
+                            <div class="option" data-option="(b)">(b) 19 days</div>
+                            <div class="option" data-option="(c)">(c) 20 days</div>
+                            <div class="option" data-option="(d)">(d) 21 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="42">
+                        <div class="question-text">Pipe A fills in 12 hours, Pipe B in 8 hours. Time to fill tank together?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 4 hours</div>
+                            <div class="option" data-option="(b)">(b) 4.5 hours</div>
+                            <div class="option" data-option="(c)">(c) 5 hours</div>
+                            <div class="option" data-option="(d)">(d) 4.8 hours</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="43">
+                        <div class="question-text">A (20 days), B (30 days). A works 10 days, B completes rest. Total time?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 9 days</div>
+                            <div class="option" data-option="(b)">(b) 10 days</div>
+                            <div class="option" data-option="(c)">(c) 11 days</div>
+                            <div class="option" data-option="(d)">(d) 12 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="44">
+                        <div class="question-text">Pipe A (8h), B (12h), C (24h) fill tank. Time to fill?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 4 hours</div>
+                            <div class="option" data-option="(b)">(b) 4.5 hours</div>
+                            <div class="option" data-option="(c)">(c) 4.36 hours</div>
+                            <div class="option" data-option="(d)">(d) 5 hours</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="45">
+                        <div class="question-text">A is twice as efficient as B. If B takes 18 days, how long for A and B together?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 5 days</div>
+                            <div class="option" data-option="(b)">(b) 5.5 days</div>
+                            <div class="option" data-option="(c)">(c) 6.5 days</div>
+                            <div class="option" data-option="(d)">(d) 6 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="46">
+                        <div class="question-text">A (8 days), B (12 days) work 4 days each. Time to complete rest?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 2 days</div>
+                            <div class="option" data-option="(b)">(b) 2.5 days</div>
+                            <div class="option" data-option="(c)">(c) 3 days</div>
+                            <div class="option" data-option="(d)">(d) 3.5 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="47">
+                        <div class="question-text">A and B together take 9 days, A alone takes 12 days. Time for B alone?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 36 days</div>
+                            <div class="option" data-option="(b)">(b) 30 days</div>
+                            <div class="option" data-option="(c)">(c) 24 days</div>
+                            <div class="option" data-option="(d)">(d) 18 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="48">
+                        <div class="question-text">A (9 days), B (12 days), C (18 days) work together. Time to complete work?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 3 days</div>
+                            <div class="option" data-option="(b)">(b) 3.5 days</div>
+                            <div class="option" data-option="(c)">(c) 4 days</div>
+                            <div class="option" data-option="(d)">(d) 4.5 days</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="49">
+                        <div class="question-text">Pipe A (15h), B (10h) open for 5h, then A alone completes. Total time?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 7 hours</div>
+                            <div class="option" data-option="(b)">(b) 7.5 hours</div>
+                            <div class="option" data-option="(c)">(c) 8 hours</div>
+                            <div class="option" data-option="(d)">(d) 8.5 hours</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="50">
+                        <div class="question-text">Pipe A (10h fill), B (15h empty) open 5h, A completes rest. Total time?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 7 hours</div>
+                            <div class="option" data-option="(b)">(b) 7.5 hours</div>
+                            <div class="option" data-option="(c)">(c) 8 hours</div>
+                            <div class="option" data-option="(d)">(d) 8.5 hours</div>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Answers -->
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon">
+                    <i class='bx bx-key'></i>
+                </div>
+                <h2 class="topic-title">Answer Key</h2>
+            </div>
+            <p class="topic-description">
+                Correct answers for the Time and Work practice questions.
+            </p>
+            <div class="answer-table">
+                <table>
+                    <tr>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                    </tr>
+                    <tr>
+                        <td>1</td><td data-question-id="1">(a)</td>
+                        <td>2</td><td data-question-id="2">(d)</td>
+                        <td>3</td><td data-question-id="3">(a)</td>
+                        <td>4</td><td data-question-id="4">(c)</td>
+                        <td>5</td><td data-question-id="5">(b)</td>
+                    </tr>
+                    <tr>
+                        <td>6</td><td data-question-id="6">(d)</td>
+                        <td>7</td><td data-question-id="7">(c)</td>
+                        <td>8</td><td data-question-id="8">(a)</td>
+                        <td>9</td><td data-question-id="9">(d)</td>
+                        <td>10</td><td data-question-id="10">(d)</td>
+                    </tr>
+                    <tr>
+                        <td>11</td><td data-question-id="11">(b)</td>
+                        <td>12</td><td data-question-id="12">(b)</td>
+                        <td>13</td><td data-question-id="13">(c)</td>
+                        <td>14</td><td data-question-id="14">(b)</td>
+                        <td>15</td><td data-question-id="15">(a)</td>
+                    </tr>
+                    <tr>
+                        <td>16</td><td data-question-id="16">(b)</td>
+                        <td>17</td><td data-question-id="17">(b)</td>
+                        <td>18</td><td data-question-id="18">(c)</td>
+                        <td>19</td><td data-question-id="19">(b)</td>
+                        <td>20</td><td data-question-id="20">(a)</td>
+                    </tr>
+                    <tr>
+                        <td>21</td><td data-question-id="21">(c)</td>
+                        <td>22</td><td data-question-id="22">(d)</td>
+                        <td>23</td><td data-question-id="23">(a)</td>
+                        <td>24</td><td data-question-id="24">(d)</td>
+                        <td>25</td><td data-question-id="25">(d)</td>
+                    </tr>
+                    <tr>
+                        <td>26</td><td data-question-id="26">(b)</td>
+                        <td>27</td><td data-question-id="27">(a)</td>
+                        <td>28</td><td data-question-id="28">(b)</td>
+                        <td>29</td><td data-question-id="29">(b)</td>
+                        <td>30</td><td data-question-id="30">(c)</td>
+                    </tr>
+                    <tr>
+                        <td>31</td><td data-question-id="31">(c)</td>
+                        <td>32</td><td data-question-id="32">(a)</td>
+                        <td>33</td><td data-question-id="33">(a)</td>
+                        <td>34</td><td data-question-id="34">(d)</td>
+                        <td>35</td><td data-question-id="35">(a)</td>
+                    </tr>
+                    <tr>
+                        <td>36</td><td data-question-id="36">(b)</td>
+                        <td>37</td><td data-question-id="37">(d)</td>
+                        <td>38</td><td data-question-id="38">(c)</td>
+                        <td>39</td><td data-question-id="39">(c)</td>
+                        <td>40</td><td data-question-id="40">(a)</td>
+                    </tr>
+                    <tr>
+                        <td>41</td><td data-question-id="41">(c)</td>
+                        <td>42</td><td data-question-id="42">(d)</td>
+                        <td>43</td><td data-question-id="43">(b)</td>
+                        <td>44</td><td data-question-id="44">(c)</td>
+                        <td>45</td><td data-question-id="45">(d)</td>
+                    </tr>
+                    <tr>
+                        <td>46</td><td data-question-id="46">(a)</td>
+                        <td>47</td><td data-question-id="47">(a)</td>
+                        <td>48</td><td data-question-id="48">(c)</td>
+                        <td>49</td><td data-question-id="49">(b)</td>
+                        <td>50</td><td data-question-id="50">(d)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="copyright">
+                <p>© 2025 Time and Work Prep. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.querySelector('.theme-toggle');
+            const backButton = document.querySelector('.back-button');
+            const options = document.querySelectorAll('.option');
+            const answerKey = {
+                1: '(a)', 2: '(d)', 3: '(a)', 4: '(c)', 5: '(b)',
+                6: '(d)', 7: '(c)', 8: '(a)', 9: '(d)', 10: '(d)',
+                11: '(b)', 12: '(b)', 13: '(c)', 14: '(b)', 15: '(a)',
+                16: '(b)', 17: '(b)', 18: '(c)', 19: '(b)', 20: '(a)',
+                21: '(c)', 22: '(d)', 23: '(a)', 24: '(d)', 25: '(d)',
+                26: '(b)', 27: '(a)', 28: '(b)', 29: '(b)', 30: '(c)',
+                31: '(c)', 32: '(a)', 33: '(a)', 34: '(d)', 35: '(a)',
+                36: '(b)', 37: '(d)', 38: '(c)', 39: '(c)', 40: '(a)',
+                41: '(c)', 42: '(d)', 43: '(b)', 44: '(c)', 45: '(d)',
+                46: '(a)', 47: '(a)', 48: '(c)', 49: '(b)', 50: '(d)'
+            };
+
+            if (themeToggle) {
+                const themeIcon = themeToggle.querySelector('i');
+                themeToggle.addEventListener('click', function() {
+                    document.body.classList.toggle('light-theme');
+                    if (document.body.classList.contains('light-theme')) {
+                        themeIcon.classList.remove('bx-moon');
+                        themeIcon.classList.add('bx-sun');
+                        localStorage.setItem('theme', 'light');
+                    } else {
+                        themeIcon.classList.remove('bx-sun');
+                        themeIcon.classList.add('bx-moon');
+                        localStorage.setItem('theme', 'dark');
+                    }
+                });
+
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'light') {
+                    document.body.classList.add('light-theme');
+                    themeIcon.classList.remove('bx-moon');
+                    themeIcon.classList.add('bx-sun');
+                }
+            }
+
+            if (backButton) {
+                backButton.addEventListener('click', function() {
+                    window.history.back();
+                });
+            }
+
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    const question = this.closest('.question');
+                    const questionId = question.getAttribute('data-question-id');
+                    const selectedOption = this.getAttribute('data-option');
+                    const correctAnswer = answerKey[questionId];
+
+                    question.querySelectorAll('.option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+
+                    this.classList.add('selected');
+
+                    const answerCell = document.querySelector(`td[data-question-id="${questionId}"]`);
+                    if (answerCell) {
+                        answerCell.classList.remove('correct', 'incorrect');
+                        if (selectedOption === correctAnswer) {
+                            answerCell.classList.add('correct');
+                        } else {
+                            answerCell.classList.add('incorrect');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

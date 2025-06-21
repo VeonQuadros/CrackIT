@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Practice</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        /* Prevent content overflow and ensure full-width responsiveness */
+        .main-content {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        .topic-section {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        .question-list ol {
+            padding-left: 0;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .question {
+            max-width: 100%;
+        }
+
+        .options {
+            max-width: 100%;
+        }
+
+        /* For iOS Safari tap highlight */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Disable text selection for better mobile interaction */
+        * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0f0f0f;
+            color: #f0f0f0;
+            min-height: 100vh;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body.light-theme {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .header-icons {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .header-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            background-color: #22c55e;
+            color: white;
+            border: none;
+        }
+
+        body.light-theme .header-icon {
+            background-color: #2563eb;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-icon:hover {
+            transform: scale(1.1);
+            background-color: #16a34a;
+        }
+
+        body.light-theme .header-icon:hover {
+            background-color: #1d4ed8;
+        }
+
+        .main-content {
+            padding: 80px 50px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .page-title {
+            font-size: 36px;
+            margin-bottom: 60px;
+            font-weight: 700;
+            color: #f0f0f0;
+            text-align: center;
+            position: relative;
+        }
+
+        .page-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #22c55e;
+            margin: 20px auto 0;
+            border-radius: 2px;
+        }
+
+        body.light-theme .page-title {
+            color: #333;
+        }
+
+        body.light-theme .page-title::after {
+            background-color: #2563eb;
+        }
+
+        .topic-section {
+            margin-bottom: 80px;
+            background-color: #1a1a1a;
+            border-radius: 16px;
+            padding: 40px;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme .topic-section {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .topic-section:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+            border-color: #22c55e;
+        }
+
+        body.light-theme .topic-section:hover {
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+            border-color: #3b82f6;
+        }
+
+        .topic-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .topic-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 25px;
+        }
+
+        body.light-theme .topic-icon {
+            background-color: rgba(239, 68, 68, 0.1);
+        }
+
+        .topic-icon i {
+            font-size: 28px;
+        }
+
+        .topic-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: white;
+        }
+
+        body.light-theme .topic-title {
+            color: #333;
+        }
+
+        .topic-description {
+            font-size: 17px;
+            color: #aaa;
+            line-height: 1.9;
+            margin-bottom: 30px;
+        }
+
+        body.light-theme .topic-description {
+            color: #666;
+        }
+
+        .question-list {
+            margin-top: 30px;
+            padding: 0 20px;
+        }
+
+        .question-list ol {
+            list-style-position: outside;
+            padding-left: 25px;
+            margin: 0;
+            counter-reset: item;
+        }
+
+        .question {
+            position: relative;
+            font-size: 17px;
+            color: #f0f0f0;
+            margin-bottom: 30px;
+            line-height: 1.8;
+            padding: 20px;
+            background-color: #222;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme .question {
+            color: #333;
+            background-color: #f9fafb;
+        }
+
+        .question-text {
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .option {
+            background-color: #333;
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        body.light-theme .option {
+            background-color: #e5e7eb;
+        }
+
+        .option:hover {
+            background-color: #444;
+        }
+
+        body.light-theme .option:hover {
+            background-color: #d1d5db;
+        }
+
+        .option.selected {
+            background-color: #22c55e;
+            color: white;
+            border: 2px solid #16a34a;
+        }
+
+        body.light-theme .option.selected {
+            background-color: #2563eb;
+            color: white;
+            border: 2px solid #1d4ed8;
+        }
+
+        .answer-table {
+            margin-top: 40px;
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .answer-table::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 20px;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.2));
+            pointer-events: none;
+        }
+
+        body.light-theme .answer-table {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+        }
+
+        body.light-theme .answer-table::after {
+            background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.1));
+        }
+
+        .answer-table table {
+            width: 100%;
+            min-width: 600px;
+            border-collapse: collapse;
+        }
+
+        .answer-table th, .answer-table td {
+            border: 1px solid #333;
+            padding: 15px;
+            text-align: center;
+            color: #f0f0f0;
+            font-size: 15px;
+            min-width: 60px;
+        }
+
+        body.light-theme .answer-table th,
+        body.light-theme .answer-table td {
+            border: 1px solid #ddd;
+            color: #333;
+        }
+
+        .answer-table td.correct {
+            background-color: #16a34a;
+            color: white;
+        }
+
+        body.light-theme .answer-table td.correct {
+            background-color: #16a34a;
+            color: white;
+        }
+
+        .answer-table td.incorrect {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        body.light-theme .answer-table td.incorrect {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        .footer {
+            background-color: #0f0f0f;
+            padding: 100px 0 40px;
+            margin-top: 100px;
+            border-top: 1px solid #222;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background-color: #22c55e;
+            border-radius: 2px;
+        }
+
+        body.light-theme .footer {
+            background-color: #f5f5f5;
+            border-top: 1px solid #ddd;
+        }
+
+        body.light-theme .footer::before {
+            background-color: #2563eb;
+        }
+
+        .copyright {
+            text-align: center;
+            padding: 40px 0 0;
+            margin-top: 60px;
+            border-top: 1px solid #222;
+            color: #888;
+            font-size: 15px;
+        }
+
+        body.light-theme .copyright {
+            border-top: 1px solid #ddd;
+            color: #666;
+        }
+
+        /* Media query for screens up to 1024px */
+        @media screen and (max-width: 1024px) {
+            .options {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Media query for screens up to 768px */
+        @media screen and (max-width: 768px) {
+            .header-icons {
+                top: 10px;
+                right: 10px;
+                gap: 10px;
+            }
+
+            .header-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+
+            .main-content {
+                padding: 60px 10px;
+                margin: 0 auto;
+                max-width: 100%;
+            }
+
+            .page-title {
+                font-size: 28px;
+                margin-bottom: 40px;
+            }
+
+            .topic-section {
+                padding: 20px 12px;
+                margin: 0 auto 40px;
+                max-width: 100%;
+            }
+
+            .topic-header {
+                margin-bottom: 20px;
+            }
+
+            .topic-icon {
+                width: 50px;
+                height: 50px;
+                margin-right: 15px;
+            }
+
+            .topic-icon i {
+                font-size: 24px;
+            }
+
+            .topic-title {
+                font-size: 24px;
+            }
+
+            .topic-description {
+                font-size: 15px;
+                line-height: 1.7;
+            }
+
+            .question-list {
+                padding: 0;
+                margin: 0 auto;
+            }
+
+            .question-list ol {
+                list-style-position: inside;
+                padding-left: 0;
+                max-width: 100%;
+            }
+
+            .question {
+                font-size: 15px;
+                padding: 15px 20px;
+                margin-bottom: 20px;
+                display: flex;
+                flex-direction: column;
+                max-width: 100%;
+            }
+
+            .question::before {
+                content: counter(item) ".";
+                counter-increment: item;
+                position: absolute;
+                left: 10px;
+                top: 15px;
+                font-weight: 500;
+            }
+
+            body.light-theme .question::before {
+                color: #2563eb;
+            }
+
+            body:not(.light-theme) .question::before {
+                color: #22c55e;
+            }
+
+            .question-text {
+                position: relative;
+                padding-left: 30px;
+                margin-bottom: 12px;
+                margin-left: 10px;
+            }
+
+            .options {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 12px;
+                padding-left: 30px;
+                max-width: 100%;
+            }
+
+            .option {
+                padding: 10px;
+                font-size: 14px;
+                border-radius: 4px;
+            }
+
+            .answer-table {
+                background-color: transparent;
+            }
+
+            .answer-table table {
+                min-width: 600px;
+                border-radius: 8px;
+            }
+
+            body.light-theme .answer-table table {
+                background-color: #ffffff;
+            }
+
+            .answer-table th, 
+            .answer-table td {
+                padding: 10px 8px;
+                font-size: 13px;
+                min-width: 40px;
+            }
+        }
+
+        /* Media query for screens up to 480px */
+        @media screen and (max-width: 480px) {
+            .header-icons {
+                top: 8px;
+                right: 8px;
+                gap: 8px;
+            }
+
+            .header-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+
+            .main-content {
+                padding: 50px 8px;
+            }
+
+            .page-title {
+                font-size: 24px;
+                margin-bottom: 30px;
+            }
+
+            .topic-section {
+                padding: 15px 10px;
+                margin-bottom: 30px;
+            }
+
+            .topic-icon {
+                width: 40px;
+                height: 40px;
+                margin-right: 12px;
+            }
+
+            .topic-icon i {
+                font-size: 20px;
+            }
+
+            .topic-title {
+                font-size: 20px;
+            }
+
+            .topic-description {
+                font-size: 14px;
+            }
+
+            .question {
+                font-size: 14px;
+                padding: 12px 15px;
+                margin-bottom: 15px;
+            }
+
+            .question::before {
+                left: 8px;
+                top: 12px;
+            }
+
+            .question-text {
+                padding-left: 25px;
+                margin-left: 8px;
+            }
+
+            .options {
+                gap: 8px;
+                padding-left: 25px;
+            }
+
+            .option {
+                padding: 8px 10px;
+                font-size: 13px;
+            }
+
+            .answer-table th, 
+            .answer-table td {
+                padding: 8px 6px;
+                font-size: 12px;
+                min-width: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-icons">
+        <button class="header-icon theme-toggle" id="theme-toggle" title="Toggle Theme">
+            <i class='bx bx-moon'></i>
+        </button>
+        <button class="header-icon back-button" title="Back">
+            <i class='bx bx-arrow-back'></i>
+        </button>
+    </div>
+
+    <div class="main-content">
+        <h1 class="page-title">Practice Questions</h1>
+
+        <!-- Java Questions -->
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon">
+                    <i class='bx bxl-java'></i>
+                </div>
+                <h2 class="topic-title">Java Programming</h2>
+            </div>
+            <p class="topic-description">
+                Test your Java skills with these 30 practice questions covering OOP, collections, exception handling, multithreading, streams, and more.
+            </p>
+            <div class="question-list">
+                <ol>
+                    <li class="question" data-question-id="1">
+                        <div class="question-text">What is the output of: <code>String s = new String("test"); System.out.println(s == new String("test"));</code>?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) true</div>
+                            <div class="option" data-option="(b)">(b) false</div>
+                            <div class="option" data-option="(c)">(c) Compilation error</div>
+                            <div class="option" data-option="(d)">(d) NullPointerException</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="2">
+                        <div class="question-text">Which collection class guarantees insertion order and allows duplicates?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) HashSet</div>
+                            <div class="option" data-option="(b)">(b) TreeSet</div>
+                            <div class="option" data-option="(c)">(c) LinkedList</div>
+                            <div class="option" data-option="(d)">(d) HashMap</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="3">
+                        <div class="question-text">What happens when a method declares <code>throws IOException</code> but doesn’t throw it?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Compilation error</div>
+                            <div class="option" data-option="(b)">(b) Runtime error</div>
+                            <div class="option" data-option="(c)">(c) No error</div>
+                            <div class="option" data-option="(d)">(d) NullPointerException</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="4">
+                        <div class="question-text">What is the output of: <code>List<Integer> list = Arrays.asList(1, 2); list.add(3);</code>?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) [1, 2, 3]</div>
+                            <div class="option" data-option="(b)">(b) Compilation error</div>
+                            <div class="option" data-option="(c)">(c) UnsupportedOperationException</div>
+                            <div class="option" data-option="(d)">(d) [1, 2]</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="5">
+                        <div class="question-text">Which keyword ensures a block of code is executed after a try-catch block?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) final</div>
+                            <div class="option" data-option="(b)">(b) finally</div>
+                            <div class="option" data-option="(c)">(c) finalize</div>
+                            <div class="option" data-option="(d)">(d) catch</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="6">
+                        <div class="question-text">What is the output of: <code>Integer x = 100; Integer y = 100; System.out.println(x == y);</code>?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) false</div>
+                            <div class="option" data-option="(b)">(b) true</div>
+                            <div class="option" data-option="(c)">(c) Compilation error</div>
+                            <div class="option" data-option="(d)">(d) NullPointerException</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="7">
+                        <div class="question-text">Which interface must a class implement to be used in a for-each loop?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Iterable</div>
+                            <div class="option" data-option="(b)">(b) Iterator</div>
+                            <div class="option" data-option="(c)">(c) Comparable</div>
+                            <div class="option" data-option="(d)">(d) Serializable</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="8">
+                        <div class="question-text">What is the default access modifier for a method in an interface?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) private</div>
+                            <div class="option" data-option="(b)">(b) protected</div>
+                            <div class="option" data-option="(c)">(c) public</div>
+                            <div class="option" data-option="(d)">(d) default</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="9">
+                        <div class="question-text">What is the output of: <code>StringBuilder sb = new StringBuilder("test"); sb.reverse(); System.out.println(sb);</code>?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) test</div>
+                            <div class="option" data-option="(b)">(b) tset</div>
+                            <div class="option" data-option="(c)">(c) Compilation error</div>
+                            <div class="option" data-option="(d)">(d) NullPointerException</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="10">
+                        <div class="question-text">Which method is used to start a thread in Java?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) run()</div>
+                            <div class="option" data-option="(b)">(b) begin()</div>
+                            <div class="option" data-option="(c)">(c) start()</div>
+                            <div class="option" data-option="(d)">(d) execute()</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="11">
+                        <div class="question-text">What is the output of: <code>List<String> list = new ArrayList<>(); list.add(null); System.out.println(list.size());</code>?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 1</div>
+                            <div class="option" data-option="(b)">(b) 0</div>
+                            <div class="option" data-option="(c)">(c) NullPointerException</div>
+                            <div class="option" data-option="(d)">(d) Compilation error</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="12">
+                        <div class="question-text">Which of the following is a marker interface?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Comparable</div>
+                            <div class="option" data-option="(b)">(b) Serializable</div>
+                            <div class="option" data-option="(c)">(c) Iterable</div>
+                            <div class="option" data-option="(d)">(d) Iterator</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="13">
+                        <div class="question-text">What is the output of: <code>try { throw new RuntimeException(); } catch (Exception e) { System.out.println("Caught"); }</code>?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Compilation error</div>
+                            <div class="option" data-option="(b)">(b) Runtime error</div>
+                            <div class="option" data-option="(c)">(c) Caught</div>
+                            <div class="option" data-option="(d)">(d) Nothing</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="14">
+                        <div class="question-text">Which stream method is used to filter elements based on a predicate?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) map</div>
+                            <div class="option" data-option="(b)">(b) filter</div>
+                            <div class="option" data-option="(c)">(c) forEach</div>
+                            <div class="option" data-option="(d)">(d) reduce</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="15">
+                        <div class="question-text">What is the output of: <code>HashMap<String, Integer> map = new HashMap<>(); map.put(null, 1); System.out.println(map.get(null));</code>?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) null</div>
+                            <div class="option" data-option="(b)">(b) 1</div>
+                            <div class="option" data-option="(c)">(c) NullPointerException</div>
+                            <div class="option" data-option="(d)">(d) Compilation error</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="16">
+                        <div class="question-text">Which modifier allows a method to be overridden in a subclass?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) final</div>
+                            <div class="option" data-option="(b)">(b) static</div>
+                            <div class="option" data-option="(c)">(c) private</div>
+                            <div class="option" data-option="(d)">(d) public</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="17">
+                        <div class="question-text">What is the output of: <code>Optional<String> opt = Optional.ofNullable(null); System.out.println(opt.orElse("default"));</code>?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) null</div>
+                            <div class="option" data-option="(b)">(b) default</div>
+                            <div class="option" data-option="(c)">(c) Optional[null]</div>
+                            <div class="option" data-option="(d)">(d) Compilation error</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="18">
+                        <div class="question-text">Which class is thread-safe and synchronized by default?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) ArrayList</div>
+                            <div class="option" data-option="(b)">(b) Vector</div>
+                            <div class="option" data-option="(c)">(c) LinkedList</div>
+                            <div class="option" data-option="(d)">(d) HashMap</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="19">
+                        <div class="question-text">What is the output of: <code>String s = "test"; s.concat("ing"); System.out.println(s);</code>?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) testing</div>
+                            <div class="option" data-option="(b)">(b) test</div>
+                            <div class="option" data-option="(c)">(c) Compilation error</div>
+                            <div class="option" data-option="(d)">(d) NullPointerException</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="20">
+                        <div class="question-text">Which functional interface is used for a function that takes no arguments and returns a value?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Consumer</div>
+                            <div class="option" data-option="(b)">(b) Supplier</div>
+                            <div class="option" data-option="(c)">(c) Predicate</div>
+                            <div class="option" data-option="(d)">(d) Function</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="21">
+                        <div class="question-text">What is the output of: <code>AtomicInteger ai = new AtomicInteger(5); ai.incrementAndGet(); System.out.println(ai);</code>?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 5</div>
+                            <div class="option" data-option="(b)">(b) 6</div>
+                            <div class="option" data-option="(c)">(c) Compilation error</div>
+                            <div class="option" data-option="(d)">(d) NullPointerException</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="22">
+                        <div class="question-text">Which annotation is used to indicate a method is a unit test in JUnit 5?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) @RunWith</div>
+                            <div class="option" data-option="(b)">(b) @Test</div>
+                            <div class="option" data-option="(c)">(c) @Suite</div>
+                            <div class="option" data-option="(d)">(d) @Before</div>
+                        </li>
+                    </li>
+                    <li class="question" data-question-id="23">
+                        <div class="question-text">What is the output of: <code>Stream.of(1, 2, 3).map(x -> x * 2).forEach(System.out::print);</code>?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 123</div>
+                            <div class="option" data-option="(b)">(b) 246</div>
+                            <div class="option" data-option="(c)">(c) Compilation error</div>
+                            <div class="option" data-option="(d)">(d) [2, 4, 6]</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="24">
+                        <div class="question-text">Which method makes a class immutable when used with all fields being final?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) No setters</div>
+                            <div class="option" data-option="(b)">(b) Public constructors</div>
+                            <div class="option" data-option="(c)">(c) Static methods</div>
+                            <div class="option" data-option="(d)">(d) Private methods</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="25">
+                        <div class="question-text">What is the output of: <code>synchronized(this) { System.out.println("Locked"); }</code> inside a method?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Compilation error</div>
+                            <div class="option" data-option="(b)">(b) Locked</div>
+                            <div class="option" data-option="(c)">(c) NullPointerException</div>
+                            <div class="option" data-option="(d)">(d) Nothing</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="26">
+                        <div class="question-text">Which exception is thrown when a resource is accessed after being closed?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) NullPointerException</div>
+                            <div class="option" data-option="(b)">(b) IOException</div>
+                            <div class="option" data-option="(c)">(c) IllegalStateException</div>
+                            <div class="option" data-option="(d)">(d) ClassCastException</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="27">
+                        <div class="question-text">What is the output of: <code>TreeSet<Integer> set = new TreeSet<>(); set.add(3); set.add(1); System.out.println(set);</code>?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) [3, 1]</div>
+                            <div class="option" data-option="(b)">(b) [1, 3]</div>
+                            <div class="option" data-option="(c)">(c) Compilation error</div>
+                            <div class="option" data-option="(d)">(d) NullPointerException</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="28">
+                        <div class="question-text">Which keyword is used to inherit a class in Java?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) implements</div>
+                            <div class="option" data-option="(b)">(b) super</div>
+                            <div class="option" data-option="(c)">(c) extends</div>
+                            <div class="option" data-option="(d)">(d) this</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="29">
+                        <div class="question-text">What is the output of: <code>LocalDate date = LocalDate.of(2023, 2, 28); date.plusDays(1); System.out.println(date);</code>?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 2023-03-01</div>
+                            <div class="option" data-option="(b)">(b) 2023-02-28</div>
+                            <div class="option" data-option="(c)">(c) Compilation error</div>
+                            <div class="option" data-option="(d)">(d) NullPointerException</div>
+                        </li>
+                    </li>
+                    <li class="question" data-question-id="30">
+                        <div class="question-text">Which collection does not allow duplicate keys but allows duplicate values?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) HashSet</div>
+                            <div class="option" data-option="(b)">(b) ArrayList</div>
+                            <div class="option" data-option="(c)">(c) TreeSet</div>
+                            <div class="option" data-option="(d)">(d) HashMap</div>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Answers -->
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon">
+                    <i class='bx bx-key'></i>
+                </div>
+                <h2 class="topic-title">Answer Key</h2>
+            </div>
+            <p class="topic-description">
+                Correct answers for the Java practice questions.
+            </p>
+            <div class="answer-table">
+                <table>
+                    <tr>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                    </tr>
+                    <tr>
+                        <td>1</td><td data-question-id="1">(b)</td>
+                        <td>2</td><td data-question-id="2">(c)</td>
+                        <td>3</td><td data-question-id="3">(c)</td>
+                        <td>4</td><td data-question-id="4">(c)</td>
+                        <td>5</td><td data-question-id="5">(b)</td>
+                    </tr>
+                    <tr>
+                        <td>6</td><td data-question-id="6">(b)</td>
+                        <td>7</td><td data-question-id="7">(a)</td>
+                        <td>8</td><td data-question-id="8">(c)</td>
+                        <td>9</td><td data-question-id="9">(b)</td>
+                        <td>10</td><td data-question-id="10">(c)</td>
+                    </tr>
+                    <tr>
+                        <td>11</td><td data-question-id="11">(a)</td>
+                        <td>12</td><td data-question-id="12">(b)</td>
+                        <td>13</td><td data-question-id="13">(c)</td>
+                        <td>14</td><td data-question-id="14">(b)</td>
+                        <td>15</td><td data-question-id="15">(b)</td>
+                    </tr>
+                    <tr>
+                        <td>16</td><td data-question-id="16">(d)</td>
+                        <td>17</td><td data-question-id="17">(b)</td>
+                        <td>18</td><td data-question-id="18">(b)</td>
+                        <td>19</td><td data-question-id="19">(b)</td>
+                        <td>20</td><td data-question-id="20">(b)</td>
+                    </tr>
+                    <tr>
+                        <td>21</td><td data-question-id="21">(b)</td>
+                        <td>22</td><td data-question-id="22">(b)</td>
+                        <td>23</td><td data-question-id="23">(b)</td>
+                        <td>24</td><td data-question-id="24">(a)</td>
+                        <td>25</td><td data-question-id="25">(b)</td>
+                    </tr>
+                    <tr>
+                        <td>26</td><td data-question-id="26">(c)</td>
+                        <td>27</td><td data-question-id="27">(b)</td>
+                        <td>28</td><td data-question-id="28">(c)</td>
+                        <td>29</td><td data-question-id="29">(b)</td>
+                        <td>30</td><td data-question-id="30">(d)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="copyright">
+                <p>© 2025 Java Prep. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.querySelector('.theme-toggle');
+            const backButton = document.querySelector('.back-button');
+            const options = document.querySelectorAll('.option');
+            const answerKey = {
+                1: '(b)', 2: '(c)', 3: '(c)', 4: '(c)', 5: '(b)',
+                6: '(b)', 7: '(a)', 8: '(c)', 9: '(b)', 10: '(c)',
+                11: '(a)', 12: '(b)', 13: '(c)', 14: '(b)', 15: '(b)',
+                16: '(d)', 17: '(b)', 18: '(b)', 19: '(b)', 20: '(b)',
+                21: '(b)', 22: '(b)', 23: '(b)', 24: '(a)', 25: '(b)',
+                26: '(c)', 27: '(b)', 28: '(c)', 29: '(b)', 30: '(d)'
+            };
+
+            if (themeToggle) {
+                const themeIcon = themeToggle.querySelector('i');
+                themeToggle.addEventListener('click', function() {
+                    document.body.classList.toggle('light-theme');
+                    if (document.body.classList.contains('light-theme')) {
+                        themeIcon.classList.remove('bx-moon');
+                        themeIcon.classList.add('bx-sun');
+                        localStorage.setItem('theme', 'light');
+                    } else {
+                        themeIcon.classList.remove('bx-sun');
+                        themeIcon.classList.add('bx-moon');
+                        localStorage.setItem('theme', 'dark');
+                    }
+                });
+
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'light') {
+                    document.body.classList.add('light-theme');
+                    themeIcon.classList.remove('bx-moon');
+                    themeIcon.classList.add('bx-sun');
+                }
+            }
+
+            if (backButton) {
+                backButton.addEventListener('click', function() {
+                    window.history.back();
+                });
+            }
+
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    const question = this.closest('.question');
+                    const questionId = question.getAttribute('data-question-id');
+                    const selectedOption = this.getAttribute('data-option');
+                    const correctAnswer = answerKey[questionId];
+
+                    question.querySelectorAll('.option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+
+                    this.classList.add('selected');
+
+                    const answerCell = document.querySelector(`td[data-question-id="${questionId}"]`);
+                    if (answerCell) {
+                        answerCell.classList.remove('correct', 'incorrect');
+                        if (selectedOption === correctAnswer) {
+                            answerCell.classList.add('correct');
+                        } else {
+                            answerCell.classList.add('incorrect');
+                        }
+                    }
+                });
+            });
+
+            // Enhance table scroll behavior on mobile
+            const answerTable = document.querySelector('.answer-table');
+            if (answerTable && window.innerWidth <= 768) {
+                answerTable.style.scrollSnapType = 'x mandatory';
+                answerTable.style.webkitOverflowScrolling = 'touch';
+            }
+        });
+    </script>
+</body>
+</html>

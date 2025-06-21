@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional CrackIT Loading Animations</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #e0e7ff 0%, #d1fae5 100%);
+      font-family: 'Montserrat', sans-serif;
+      overflow: hidden;
+    }
+    .loader-container {
+      margin: 30px;
+      text-align: center;
+      position: relative;
+    }
+    .loader {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      height: 80px;
+      padding: 20px;
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    }
+    .loader-text {
+      font-size: 2.8em;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .loader-text .char {
+      display: inline-block;
+      animation: jump 1.4s ease-in-out infinite;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    }
+    .loader-text .char:nth-child(1) { animation-delay: 0s; }
+    .loader-text .char:nth-child(2) { animation-delay: 0.1s; }
+    .loader-text .char:nth-child(3) { animation-delay: 0.2s; }
+    .loader-text .char:nth-child(4) { animation-delay: 0.3s; }
+    .loader-text .char:nth-child(5) { animation-delay: 0.4s; }
+    .loader-text .char:nth-child(6) { animation-delay: 0.5s; }
+    .loader-text .char:nth-child(7) { animation-delay: 0.6s; }
+    .loader-text .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin: 0 3px;
+      animation: jump 1.4s ease-in-out infinite;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    .loader-text .dot:nth-child(1) { animation-delay: 0.7s; }
+    .loader-text .dot:nth-child(2) { animation-delay: 0.8s; }
+    .loader::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, transparent 70%);
+      animation: glow 2s ease-in-out infinite;
+    }
+
+    /* Green Loader (#4CAF50) */
+    .loader-green .loader-text .cra {
+      color: #4CAF50;
+      background: linear-gradient(180deg, #4CAF50, #2e7d32);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .loader-green .loader-text .ckit {
+      color: #1a1a1a;
+    }
+    .loader-green .loader-text .dot {
+      background: #4CAF50;
+    }
+    .loader-green::before {
+      background: radial-gradient(circle, rgba(76, 175, 80, 0.3) 0%, transparent 70%);
+    }
+
+    /* Blue Loader (#2196F3) */
+    .loader-blue .loader-text .cra {
+      color: #2196F3;
+      background: linear-gradient(180deg, #2196F3, #0d47a1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .loader-blue .loader-text .ckit {
+      color: #1a1a1a;
+    }
+    .loader-blue .loader-text .dot {
+      background: #2196F3;
+    }
+    .loader-blue::before {
+      background: radial-gradient(circle, rgba(33, 150, 243, 0.3) 0%, transparent 70%);
+    }
+
+    @keyframes jump {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    @keyframes glow {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="loader-container">
+    <div class="loader loader-green">
+      <div class="loader-text">
+        <span class="char cra">C</span>
+        <span class="char cra">r</span>
+        <span class="char cra">a</span>
+        <span class="char ckit">c</span>
+        <span class="char ckit">k</span>
+        <span class="char ckit">I</span>
+        <span class="char ckit">T</span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="loader-container">
+    <div class="loader loader-blue">
+      <div class="loader-text">
+        <span class="char cra">C</span>
+        <span class="char cra">r</span>
+        <span class="char cra">a</span>
+        <span class="char ckit">c</span>
+        <span class="char ckit">k</span>
+        <span class="char ckit">I</span>
+        <span class="char ckit">T</span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.onload = function() {
+      setTimeout(() => {
+        console.log("CrackIT Loading Complete!");
+        // Remove loaders or redirect when loading is done
+        // Example: document.querySelectorAll('.loader-container').forEach(el => el.style.display = 'none');
+      }, 3000);
+    };
+  </script>
+</body>
+</html>

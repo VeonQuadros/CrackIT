@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Percentages Practice</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        
+    /* For iOS Safari */
+    * {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    /* For Android Chrome (and most browsers) */
+    * {
+        -webkit-user-select: none; /* Prevents text selection */
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+        background-color: #0f0f0f;
+        color: #f0f0f0;
+        min-height: 100vh;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    body.light-theme {
+        background-color: #f5f5f5;
+        color: #333;
+    }
+
+    .header-icons {
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        display: flex;
+        gap: 15px;
+        z-index: 1000;
+    }
+
+    .header-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        background-color: #22c55e;
+        color: white;
+        border: none;
+    }
+
+    body.light-theme .header-icon {
+        background-color: #2563eb;
+        color: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-icon:hover {
+        transform: scale(1.1);
+        background-color: #16a34a;
+    }
+
+    body.light-theme .header-icon:hover {
+        background-color: #1d4ed8;
+    }
+
+    .main-content {
+        padding: 80px 50px;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .page-title {
+        font-size: 36px;
+        margin-bottom: 60px;
+        font-weight: 700;
+        color: #f0f0f0;
+        text-align: center;
+        position: relative;
+    }
+
+    .page-title::after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 4px;
+        background-color: #22c55e;
+        margin: 20px auto 0;
+        border-radius: 2px;
+    }
+
+    body.light-theme .page-title {
+        color: #333;
+    }
+
+    body.light-theme .page-title::after {
+        background-color: #2563eb;
+    }
+
+    .topic-section {
+        margin-bottom: 80px;
+        background-color: #1a1a1a;
+        border-radius: 16px;
+        padding: 40px;
+        border: 1px solid #333;
+        transition: all 0.3s ease;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    body.light-theme .topic-section {
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .topic-section:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        border-color: #22c55e;
+    }
+
+    body.light-theme .topic-section:hover {
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        border-color: #3b82f6;
+    }
+
+    .topic-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+    .topic-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: rgba(239, 68, 68, 0.2);
+        color: #ef4444;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 25px;
+    }
+
+    body.light-theme .topic-icon {
+        background-color: rgba(239, 68, 68, 0.1);
+    }
+
+    .topic-icon i {
+        font-size: 28px;
+    }
+
+    .topic-title {
+        font-size: 28px;
+        font-weight: 600;
+        color: white;
+    }
+
+    body.light-theme .topic-title {
+        color: #333;
+    }
+
+    .topic-description {
+        font-size: 17px;
+        color: #aaa;
+        line-height: 1.9;
+        margin-bottom: 30px;
+    }
+
+    body.light-theme .topic-description {
+        color: #666;
+    }
+
+    .question-list {
+        margin-top: 30px;
+        padding: 0;
+        max-width: 100%;
+    }
+
+    .question-list ol {
+        list-style-position: outside;
+        padding-left: 0;
+        margin: 0 auto;
+        max-width: 100%;
+        counter-reset: item;
+    }
+
+    .question {
+        position: relative;
+        font-size: 17px;
+        color: #f0f0f0;
+        margin-bottom: 30px;
+        line-height: 1.8;
+        padding: 20px;
+        background-color: #222;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    body.light-theme .question {
+        color: #333;
+        background-color: #f9fafb;
+    }
+
+    .question-text {
+        margin-bottom: 15px;
+        font-weight: 500;
+        padding-left: 35px;
+    }
+
+    .options {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-top: 15px;
+        padding-left: 35px;
+    }
+
+    .option {
+        background-color: #333;
+        padding: 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 16px;
+        width: 100%;
+    }
+
+    body.light-theme .option {
+        background-color: #e5e7eb;
+    }
+
+    .option:hover {
+        background-color: #444;
+    }
+
+    body.light-theme .option:hover {
+        background-color: #d1d5db;
+    }
+
+    .option.selected {
+        background-color: #22c55e;
+        color: white;
+        border: 2px solid #16a34a;
+    }
+
+    body.light-theme .option.selected {
+        background-color: #2563eb;
+        color: white;
+        border: 2px solid #1d4ed8;
+    }
+
+    .answer-table {
+        margin-top: 40px;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+        background-color: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 8px;
+        position: relative;
+    }
+
+    .answer-table::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 20px;
+        height: 100%;
+        background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.2));
+        pointer-events: none;
+    }
+
+    body.light-theme .answer-table {
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+    }
+
+    body.light-theme .answer-table::after {
+        background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.1));
+    }
+
+    .answer-table table {
+        width: 100%;
+        min-width: 600px;
+        border-collapse: collapse;
+    }
+
+    .answer-table th, .answer-table td {
+        border: 1px solid #333;
+        padding: 15px;
+        text-align: center;
+        color: #f0f0f0;
+        font-size: 15px;
+        min-width: 50px;
+    }
+
+    body.light-theme .answer-table th,
+    body.light-theme .answer-table td {
+        border: 1px solid #ddd;
+        color: #333;
+    }
+
+    .answer-table td.correct {
+        background-color: #16a34a;
+        color: white;
+    }
+
+    body.light-theme .answer-table td.correct {
+        background-color: #16a34a;
+        color: white;
+    }
+
+    .answer-table td.incorrect {
+        background-color: #ef4444;
+        color: white;
+    }
+
+    body.light-theme .answer-table td.incorrect {
+        background-color: #ef4444;
+        color: white;
+    }
+
+    .footer {
+        background-color: #0f0f0f;
+        padding: 100px 0 40px;
+        margin-top: 100px;
+        border-top: 1px solid #222;
+        position: relative;
+    }
+
+    .footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 4px;
+        background-color: #22c55e;
+        border-radius: 2px;
+    }
+
+    body.light-theme .footer {
+        background-color: #f5f5f5;
+        border-top: 1px solid #ddd;
+    }
+
+    body.light-theme .footer::before {
+        background-color: #2563eb;
+    }
+
+    .copyright {
+        text-align: center;
+        padding: 40px 0 0;
+        margin-top: 60px;
+        border-top: 1px solid #222;
+        color: #888;
+        font-size: 15px;
+    }
+
+    body.light-theme .copyright {
+        border-top: 1px solid #ddd;
+        color: #666;
+    }
+
+    @media screen and (max-width: 1024px) {
+        .options {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        .header-icons {
+            top: 10px;
+            right: 10px;
+            gap: 10px;
+        }
+
+        .header-icon {
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+        }
+
+        .main-content {
+            padding: 60px 10px;
+            margin: 0 auto;
+            max-width: 100%;
+        }
+
+        .page-title {
+            font-size: 28px;
+            margin-bottom: 40px;
+        }
+
+        .topic-section {
+            padding: 20px 12px;
+            margin: 0 auto 40px;
+            max-width: 100%;
+        }
+
+        .topic-header {
+            margin-bottom: 20px;
+        }
+
+        .topic-icon {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+        }
+
+        .topic-icon i {
+            font-size: 24px;
+        }
+
+        .topic-title {
+            font-size: 24px;
+        }
+
+        .topic-description {
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .question-list {
+            padding: 0;
+            margin: 0 auto;
+        }
+
+        .question-list ol {
+            list-style-position: inside;
+            padding-left: 0;
+            max-width: 100%;
+        }
+
+        .question {
+            font-size: 15px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            max-width: 100%;
+        }
+
+        .question::before {
+            content: counter(item) ".";
+            counter-increment: item;
+            position: absolute;
+            left: 10px;
+            top: 15px;
+            color: #22c55e;
+            font-weight: 500;
+        }
+
+        body.light-theme .question::before {
+            color: #2563eb;
+        }
+
+        .question-text {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 12px;
+            margin-left: 10px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 12px;
+            padding-left: 30px;
+            max-width: 100%;
+        }
+
+        .option {
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 4px;
+        }
+
+        .answer-table {
+            background-color: transparent;
+        }
+
+        .answer-table table {
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            min-width: 600px;
+        }
+
+        body.light-theme .answer-table table {
+            background-color: #ffffff;
+        }
+
+        .answer-table th, 
+        .answer-table td {
+            padding: 10px 8px;
+            font-size: 13px;
+            min-width: 40px;
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        .header-icons {
+            top: 8px;
+            right: 8px;
+            gap: 8px;
+        }
+
+        .header-icon {
+            width: 36px;
+            height: 36px;
+            font-size: 16px;
+        }
+
+        .main-content {
+            padding: 50px 8px;
+        }
+
+        .page-title {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        .topic-section {
+            padding: 15px 10px;
+            margin-bottom: 30px;
+        }
+
+        .topic-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 12px;
+        }
+
+        .topic-icon i {
+            font-size: 20px;
+        }
+
+        .topic-title {
+            font-size: 20px;
+        }
+
+        .topic-description {
+            font-size: 14px;
+        }
+
+        .question {
+            font-size: 14px;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+        }
+
+        .question::before {
+            left: 8px;
+            top: 12px;
+        }
+
+        .question-text {
+            padding-left: 25px;
+            margin-left: 8px;
+        }
+
+        .options {
+            gap: 8px;
+            padding-left: 25px;
+        }
+
+        .option {
+            padding: 8px 10px;
+            font-size: 13px;
+        }
+
+        .answer-table th, 
+        .answer-table td {
+            padding: 8px 6px;
+            font-size: 12px;
+            min-width: 35px;
+        }
+    }
+</style>
+   
+</head>
+<body>
+    <div class="header-icons">
+        <button class="header-icon theme-toggle" id="theme-toggle" title="Toggle Theme">
+            <i class='bx bx-moon'></i>
+        </button>
+        <button class="header-icon back-button" title="Back">
+            <i class='bx bx-arrow-back'></i>
+        </button>
+    </div>
+
+    <div class="main-content">
+        <h1 class="page-title">Practice Questions</h1>
+
+        <!-- Combined Questions -->
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon">
+                    <i class='bx bx-calculator'></i>
+                </div>
+                <h2 class="topic-title">Percentages</h2>
+            </div>
+            <p class="topic-description">
+                Test your skills with these 50 practice questions covering percentages, including percentage of a number, percentage increase/decrease, discounts, taxes, and profit/loss calculations.
+            </p>
+            <div class="question-list">
+                <ol>
+                    <li class="question" data-question-id="1">
+                        <div class="question-text">What is 25% of 200?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 50</div>
+                            <div class="option" data-option="(b)">(b) 45</div>
+                            <div class="option" data-option="(c)">(c) 55</div>
+                            <div class="option" data-option="(d)">(d) 60</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="2">
+                        <div class="question-text">A shirt costs $80 and is discounted by 20%. What is the sale price?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $60</div>
+                            <div class="option" data-option="(b)">(b) $64</div>
+                            <div class="option" data-option="(c)">(c) $68</div>
+                            <div class="option" data-option="(d)">(d) $72</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="3">
+                        <div class="question-text">A number is increased by 40% to become 140. What was the original number?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 90</div>
+                            <div class="option" data-option="(b)">(b) 95</div>
+                            <div class="option" data-option="(c)">(c) 100</div>
+                            <div class="option" data-option="(d)">(d) 105</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="4">
+                        <div class="question-text">If 30% of a number is 90, what is the number?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 270</div>
+                            <div class="option" data-option="(b)">(b) 280</div>
+                            <div class="option" data-option="(c)">(c) 290</div>
+                            <div class="option" data-option="(d)">(d) 300</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="5">
+                        <div class="question-text">A store sells an item for $120 after a 20% discount. What was the original price?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $130</div>
+                            <div class="option" data-option="(b)">(b) $135</div>
+                            <div class="option" data-option="(c)">(c) $140</div>
+                            <div class="option" data-option="(d)">(d) $150</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="6">
+                        <div class="question-text">A population of 600 increases by 10%. What is the new population?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 650</div>
+                            <div class="option" data-option="(b)">(b) 660</div>
+                            <div class="option" data-option="(c)">(c) 670</div>
+                            <div class="option" data-option="(d)">(d) 680</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="7">
+                        <div class="question-text">If 50% of a number is 125, what is the number?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 225</div>
+                            <div class="option" data-option="(b)">(b) 250</div>
+                            <div class="option" data-option="(c)">(c) 275</div>
+                            <div class="option" data-option="(d)">(d) 300</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="8">
+                        <div class="question-text">A price of $150 is increased by 20%. What is the new price?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $170</div>
+                            <div class="option" data-option="(b)">(b) $180</div>
+                            <div class="option" data-option="(c)">(c) $190</div>
+                            <div class="option" data-option="(d)">(d) $200</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="9">
+                        <div class="question-text">A product is marked at $200 and sold at a 25% discount. What is the selling price?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $140</div>
+                            <div class="option" data-option="(b)">(b) $145</div>
+                            <div class="option" data-option="(c)">(c) $150</div>
+                            <div class="option" data-option="(d)">(d) $155</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="10">
+                        <div class="question-text">If 70% of a class of 50 students passed an exam, how many students passed?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 32</div>
+                            <div class="option" data-option="(b)">(b) 34</div>
+                            <div class="option" data-option="(c)">(c) 35</div>
+                            <div class="option" data-option="(d)">(d) 36</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="11">
+                        <div class="question-text">A number is decreased by 10% to become 90. What was the original number?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 95</div>
+                            <div class="option" data-option="(b)">(b) 100</div>
+                            <div class="option" data-option="(c)">(c) 105</div>
+                            <div class="option" data-option="(d)">(d) 110</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="12">
+                        <div class="question-text">What is 5% of 800?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 35</div>
+                            <div class="option" data-option="(b)">(b) 40</div>
+                            <div class="option" data-option="(c)">(c) 45</div>
+                            <div class="option" data-option="(d)">(d) 50</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="13">
+                        <div class="question-text">If 25% of a number is 50, what is the number?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 180</div>
+                            <div class="option" data-option="(b)">(b) 190</div>
+                            <div class="option" data-option="(c)">(c) 195</div>
+                            <div class="option" data-option="(d)">(d) 200</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="14">
+                        <div class="question-text">If 60% of a number is 180, what is the number?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 280</div>
+                            <div class="option" data-option="(b)">(b) 290</div>
+                            <div class="option" data-option="(c)">(c) 300</div>
+                            <div class="option" data-option="(d)">(d) 310</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="15">
+                        <div class="question-text">A book costs $100 after a 20% discount. What was the original price?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $120</div>
+                            <div class="option" data-option="(b)">(b) $125</div>
+                            <div class="option" data-option="(c)">(c) $130</div>
+                            <div class="option" data-option="(d)">(d) $135</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="16">
+                        <div class="question-text">If 20% of a budget is $400, what is the total budget?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $1800</div>
+                            <div class="option" data-option="(b)">(b) $1900</div>
+                            <div class="option" data-option="(c)">(c) $2000</div>
+                            <div class="option" data-option="(d)">(d) $2100</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="17">
+                        <div class="question-text">A store offers a 15% discount on a $300 item. What is the discount amount?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $40</div>
+                            <div class="option" data-option="(b)">(b) $45</div>
+                            <div class="option" data-option="(c)">(c) $50</div>
+                            <div class="option" data-option="(d)">(d) $55</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="18">
+                        <div class="question-text">A number is increased by 25% to become 125. What was the original number?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 90</div>
+                            <div class="option" data-option="(b)">(b) 95</div>
+                            <div class="option" data-option="(c)">(c) 100</div>
+                            <div class="option" data-option="(d)">(d) 105</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="19">
+                        <div class="question-text">What is 80% of 250?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 190</div>
+                            <div class="option" data-option="(b)">(b) 200</div>
+                            <div class="option" data-option="(c)">(c) 210</div>
+                            <div class="option" data-option="(d)">(d) 220</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="20">
+                        <div class="question-text">A price of $400 is decreased by 15%. What is the new price?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $330</div>
+                            <div class="option" data-option="(b)">(b) $340</div>
+                            <div class="option" data-option="(c)">(c) $350</div>
+                            <div class="option" data-option="(d)">(d) $360</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="21">
+                        <div class="question-text">A population of 400 increases by 15%. What is the new population?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 440</div>
+                            <div class="option" data-option="(b)">(b) 445</div>
+                            <div class="option" data-option="(c)">(c) 450</div>
+                            <div class="option" data-option="(d)">(d) 460</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="22">
+                        <div class="question-text">A product is sold for $180 after a 20% profit. What was the cost price?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $140</div>
+                            <div class="option" data-option="(b)">(b) $150</div>
+                            <div class="option" data-option="(c)">(c) $160</div>
+                            <div class="option" data-option="(d)">(d) $170</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="23">
+                        <div class="question-text">If 45% of a class of 60 students are girls, how many girls are there?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 25</div>
+                            <div class="option" data-option="(b)">(b) 27</div>
+                            <div class="option" data-option="(c)">(c) 29</div>
+                            <div class="option" data-option="(d)">(d) 31</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="24">
+                        <div class="question-text">A number is decreased by 25% to become 75. What was the original number?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 90</div>
+                            <div class="option" data-option="(b)">(b) 95</div>
+                            <div class="option" data-option="(c)">(c) 100</div>
+                            <div class="option" data-option="(d)">(d) 105</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="25">
+                        <div class="question-text">What is 10% of 500?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 45</div>
+                            <div class="option" data-option="(b)">(b) 50</div>
+                            <div class="option" data-option="(c)">(c) 55</div>
+                            <div class="option" data-option="(d)">(d) 60</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="26">
+                        <div class="question-text">A store marks an item at $500 and offers a 20% discount. What is the selling price?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $380</div>
+                            <div class="option" data-option="(b)">(b) $400</div>
+                            <div class="option" data-option="(c)">(c) $420</div>
+                            <div class="option" data-option="(d)">(d) $440</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="27">
+                        <div class="question-text">If 15% of a budget is $300, what is the total budget?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $1800</div>
+                            <div class="option" data-option="(b)">(b) $1900</div>
+                            <div class="option" data-option="(c)">(c) $2000</div>
+                            <div class="option" data-option="(d)">(d) $2100</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="28">
+                        <div class="question-text">A number is increased by 50% to become 150. What was the original number?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 90</div>
+                            <div class="option" data-option="(b)">(b) 100</div>
+                            <div class="option" data-option="(c)">(c) 110</div>
+                            <div class="option" data-option="(d)">(d) 120</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="29">
+                        <div class="question-text">What is 18% of 500?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 80</div>
+                            <div class="option" data-option="(b)">(b) 85</div>
+                            <div class="option" data-option="(c)">(c) 88</div>
+                            <div class="option" data-option="(d)">(d) 90</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="30">
+                        <div class="question-text">A price of $300 is decreased by 20%. What is the new price?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $230</div>
+                            <div class="option" data-option="(b)">(b) $240</div>
+                            <div class="option" data-option="(c)">(c) $250</div>
+                            <div class="option" data-option="(d)">(d) $260</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="31">
+                        <div class="question-text">If 25% of a number is 100, what is the number?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 380</div>
+                            <div class="option" data-option="(b)">(b) 390</div>
+                            <div class="option" data-option="(c)">(c) 400</div>
+                            <div class="option" data-option="(d)">(d) 410</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="32">
+                        <div class="question-text">A product is sold for $240 after a 20% profit. What was the cost price?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $190</div>
+                            <div class="option" data-option="(b)">(b) $200</div>
+                            <div class="option" data-option="(c)">(c) $210</div>
+                            <div class="option" data-option="(d)">(d) $220</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="33">
+                        <div class="question-text">If 60% of a class of 80 students are boys, how many boys are there?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 46</div>
+                            <div class="option" data-option="(b)">(b) 48</div>
+                            <div class="option" data-option="(c)">(c) 50</div>
+                            <div class="option" data-option="(d)">(d) 52</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="34">
+                        <div class="question-text">A number is decreased by 30% to become 70. What was the original number?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 90</div>
+                            <div class="option" data-option="(b)">(b) 95</div>
+                            <div class="option" data-option="(c)">(c) 100</div>
+                            <div class="option" data-option="(d)">(d) 105</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="35">
+                        <div class="question-text">What is 8% of 1000?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 75</div>
+                            <div class="option" data-option="(b)">(b) 80</div>
+                            <div class="option" data-option="(c)">(c) 85</div>
+                            <div class="option" data-option="(d)">(d) 90</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="36">
+                        <div class="question-text">A store marks an item at $600 and offers a 25% discount. What is the selling price?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $425</div>
+                            <div class="option" data-option="(b)">(b) $450</div>
+                            <div class="option" data-option="(c)">(c) $475</div>
+                            <div class="option" data-option="(d)">(d) $500</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="37">
+                        <div class="question-text">If 5% of a budget is $150, what is the total budget?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $2800</div>
+                            <div class="option" data-option="(b)">(b) $2900</div>
+                            <div class="option" data-option="(c)">(c) $3000</div>
+                            <div class="option" data-option="(d)">(d) $3100</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="38">
+                        <div class="question-text">A number is increased by 60% to become 160. What was the original number?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 90</div>
+                            <div class="option" data-option="(b)">(b) 100</div>
+                            <div class="option" data-option="(c)">(c) 110</div>
+                            <div class="option" data-option="(d)">(d) 120</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="39">
+                        <div class="question-text">A product is sold for $200 after a 25% profit. What was the cost price?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $140</div>
+                            <div class="option" data-option="(b)">(b) $145</div>
+                            <div class="option" data-option="(c)">(c) $150</div>
+                            <div class="option" data-option="(d)">(d) $160</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="40">
+                        <div class="question-text">A price of $500 is decreased by 10%. What is the new price?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $440</div>
+                            <div class="option" data-option="(b)">(b) $450</div>
+                            <div class="option" data-option="(c)">(c) $460</div>
+                            <div class="option" data-option="(d)">(d) $470</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="41">
+                        <div class="question-text">If 20% of a number is 80, what is the number?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 380</div>
+                            <div class="option" data-option="(b)">(b) 400</div>
+                            <div class="option" data-option="(c)">(c) 410</div>
+                            <div class="option" data-option="(d)">(d) 420</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="42">
+                        <div class="question-text">A product is sold for $150 after a 25% loss. What was the cost price?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $190</div>
+                            <div class="option" data-option="(b)">(b) $200</div>
+                            <div class="option" data-option="(c)">(c) $210</div>
+                            <div class="option" data-option="(d)">(d) $220</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="43">
+                        <div class="question-text">If 55% of a class of 100 students are present, how many students are present?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 50</div>
+                            <div class="option" data-option="(b)">(b) 53</div>
+                            <div class="option" data-option="(c)">(c) 55</div>
+                            <div class="option" data-option="(d)">(d) 58</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="44">
+                        <div class="question-text">A number is decreased by 40% to become 60. What was the original number?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 90</div>
+                            <div class="option" data-option="(b)">(b) 95</div>
+                            <div class="option" data-option="(c)">(c) 100</div>
+                            <div class="option" data-option="(d)">(d) 105</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="45">
+                        <div class="question-text">What is 12% of 700?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 80</div>
+                            <div class="option" data-option="(b)">(b) 84</div>
+                            <div class="option" data-option="(c)">(c) 88</div>
+                            <div class="option" data-option="(d)">(d) 92</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="46">
+                        <div class="question-text">A store marks an item at $800 and offers a 15% discount. What is the selling price?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $660</div>
+                            <div class="option" data-option="(b)">(b) $680</div>
+                            <div class="option" data-option="(c)">(c) $700</div>
+                            <div class="option" data-option="(d)">(d) $720</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="47">
+                        <div class="question-text">If 5% of a budget is $150, what is the total budget?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $2800</div>
+                            <div class="option" data-option="(b)">(b) $2900</div>
+                            <div class="option" data-option="(c)">(c) $3000</div>
+                            <div class="option" data-option="(d)">(d) $3100</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="48">
+                        <div class="question-text">A number is increased by 80% to become 180. What was the original number?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 90</div>
+                            <div class="option" data-option="(b)">(b) 100</div>
+                            <div class="option" data-option="(c)">(c) 110</div>
+                            <div class="option" data-option="(d)">(d) 120</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="49">
+                        <div class="question-text">What is 30% of 900?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 260</div>
+                            <div class="option" data-option="(b)">(b) 270</div>
+                            <div class="option" data-option="(c)">(c) 280</div>
+                            <div class="option" data-option="(d)">(d) 290</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="50">
+                        <div class="question-text">A price of $600 is decreased by 30%. What is the new price?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $400</div>
+                            <div class="option" data-option="(b)">(b) $410</div>
+                            <div class="option" data-option="(c)">(c) $420</div>
+                            <div class="option" data-option="(d)">(d) $430</div>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Answers -->
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon">
+                    <i class='bx bx-key'></i>
+                </div>
+                <h2 class="topic-title">Answer Key</h2>
+            </div>
+            <p class="topic-description">
+                Correct answers for the Percentage practice questions.
+            </p>
+            <div class="answer-table">
+                <table>
+                    <tr>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                    </tr>
+                    <tr>
+                        <td>1</td><td data-question-id="1">(a)</td>
+                        <td>2</td><td data-question-id="2">(b)</td>
+                        <td>3</td><td data-question-id="3">(c)</td>
+                        <td>4</td><td data-question-id="4">(d)</td>
+                        <td>5</td><td data-question-id="5">(d)</td>
+                    </tr>
+                    <tr>
+                        <td>6</td><td data-question-id="6">(b)</td>
+                        <td>7</td><td data-question-id="7">(b)</td>
+                        <td>8</td><td data-question-id="8">(b)</td>
+                        <td>9</td><td data-question-id="9">(c)</td>
+                        <td>10</td><td data-question-id="10">(c)</td>
+                    </tr>
+                    <tr>
+                        <td>11</td><td data-question-id="11">(b)</td>
+                        <td>12</td><td data-question-id="12">(b)</td>
+                        <td>13</td><td data-question-id="13">(d)</td>
+                        <td>14</td><td data-question-id="14">(c)</td>
+                        <td>15</td><td data-question-id="15">(b)</td>
+                    </tr>
+                    <tr>
+                        <td>16</td><td data-question-id="16">(c)</td>
+                        <td>17</td><td data-question-id="17">(b)</td>
+                        <td>18</td><td data-question-id="18">(c)</td>
+                        <td>19</td><td data-question-id="19">(b)</td>
+                        <td>20</td><td data-question-id="20">(b)</td>
+                    </tr>
+                    <tr>
+                        <td>21</td><td data-question-id="21">(d)</td>
+                        <td>22</td><td data-question-id="22">(b)</td>
+                        <td>23</td><td data-question-id="23">(b)</td>
+                        <td>24</td><td data-question-id="24">(c)</td>
+                        <td>25</td><td data-question-id="25">(b)</td>
+                    </tr>
+                    <tr>
+                        <td>26</td><td data-question-id="26">(b)</td>
+                        <td>27</td><td data-question-id="27">(c)</td>
+                        <td>28</td><td data-question-id="28">(b)</td>
+                        <td>29</td><td data-question-id="29">(d)</td>
+                        <td>30</td><td data-question-id="30">(b)</td>
+                    </tr>
+                    <tr>
+                        <td>31</td><td data-question-id="31">(c)</td>
+                        <td>32</td><td data-question-id="32">(b)</td>
+                        <td>33</td><td data-question-id="33">(b)</td>
+                        <td>34</td><td data-question-id="34">(c)</td>
+                        <td>35</td><td data-question-id="35">(b)</td>
+                    </tr>
+                    <tr>
+                        <td>36</td><td data-question-id="36">(b)</td>
+                        <td>37</td><td data-question-id="37">(c)</td>
+                        <td>38</td><td data-question-id="38">(b)</td>
+                        <td>39</td><td data-question-id="39">(d)</td>
+                        <td>40</td><td data-question-id="40">(b)</td>
+                    </tr>
+                    <tr>
+                        <td>41</td><td data-question-id="41">(b)</td>
+                        <td>42</td><td data-question-id="42">(b)</td>
+                        <td>43</td><td data-question-id="43">(c)</td>
+                        <td>44</td><td data-question-id="44">(c)</td>
+                        <td>45</td><td data-question-id="45">(b)</td>
+                    </tr>
+                    <tr>
+                        <td>46</td><td data-question-id="46">(d)</td>
+                        <td>47</td><td data-question-id="47">(c)</td>
+                        <td>48</td><td data-question-id="48">(b)</td>
+                        <td>49</td><td data-question-id="49">(b)</td>
+                        <td>50</td><td data-question-id="50">(c)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="copyright">
+                <p>© 2025 Percentage Prep. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.querySelector('.theme-toggle');
+            const backButton = document.querySelector('.back-button');
+            const options = document.querySelectorAll('.option');
+            const answerKey = {
+                1: '(a)', 2: '(b)', 3: '(c)', 4: '(d)', 5: '(d)',
+                6: '(b)', 7: '(b)', 8: '(b)', 9: '(c)', 10: '(c)',
+                11: '(b)', 12: '(b)', 13: '(d)', 14: '(c)', 15: '(b)',
+                16: '(c)', 17: '(b)', 18: '(c)', 19: '(b)', 20: '(b)',
+                21: '(d)', 22: '(b)', 23: '(b)', 24: '(c)', 25: '(b)',
+                26: '(b)', 27: '(c)', 28: '(b)', 29: '(d)', 30: '(b)',
+                31: '(c)', 32: '(b)', 33: '(b)', 34: '(c)', 35: '(b)',
+                36: '(b)', 37: '(c)', 38: '(b)', 39: '(d)', 40: '(b)',
+                41: '(b)', 42: '(b)', 43: '(c)', 44: '(c)', 45: '(b)',
+                46: '(d)', 47: '(c)', 48: '(b)', 49: '(b)', 50: '(c)'
+            };
+
+            if (themeToggle) {
+                const themeIcon = themeToggle.querySelector('i');
+                themeToggle.addEventListener('click', function() {
+                    document.body.classList.toggle('light-theme');
+                    if (document.body.classList.contains('light-theme')) {
+                        themeIcon.classList.remove('bx-moon');
+                        themeIcon.classList.add('bx-sun');
+                        localStorage.setItem('theme', 'light');
+                    } else {
+                        themeIcon.classList.remove('bx-sun');
+                        themeIcon.classList.add('bx-moon');
+                        localStorage.setItem('theme', 'dark');
+                    }
+                });
+
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'light') {
+                    document.body.classList.add('light-theme');
+                    themeIcon.classList.remove('bx-moon');
+                    themeIcon.classList.add('bx-sun');
+                }
+            }
+
+            if (backButton) {
+                backButton.addEventListener('click', function() {
+                    window.history.back();
+                });
+            }
+
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    const question = this.closest('.question');
+                    const questionId = question.getAttribute('data-question-id');
+                    const selectedOption = this.getAttribute('data-option');
+                    const correctAnswer = answerKey[questionId];
+
+                    question.querySelectorAll('.option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+
+                    this.classList.add('selected');
+
+                    const answerCell = document.querySelector(`td[data-question-id="${questionId}"]`);
+                    if (answerCell) {
+                        answerCell.classList.remove('correct', 'incorrect');
+                        if (selectedOption === correctAnswer) {
+                            answerCell.classList.add('correct');
+                        } else {
+                            answerCell.classList.add('incorrect');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

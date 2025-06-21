@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logical Reasoning Practice</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        /* For iOS Safari */
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* For Android Chrome (and most browsers) */
+    * {
+      -webkit-user-select: none; /* Prevents text selection */
+      -moz-user-select: none;
+      -ms-user-select: none;
+       user-select: none;
+      }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0f0f0f;
+            color: #f0f0f0;
+            min-height: 100vh;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body.light-theme {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .header-icons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .header-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            background-color: #22c55e;
+            color: white;
+            border: none;
+        }
+
+        body.light-theme .header-icon {
+            background-color: #2563eb;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-icon:hover {
+            transform: scale(1.1);
+            background-color: #16a34a;
+        }
+
+        body.light-theme .header-icon:hover {
+            background-color: #1d4ed8;
+        }
+
+        .main-content {
+            padding: 80px 50px;
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .page-title {
+            font-size: 36px;
+            margin-bottom: 60px;
+            font-weight: 700;
+            color: #f0f0f0;
+            text-align: center;
+            position: relative;
+        }
+
+        .page-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #22c55e;
+            margin: 20px auto 0;
+            border-radius: 2px;
+        }
+
+        body.light-theme .page-title {
+            color: #333;
+        }
+
+        body.light-theme .page-title::after {
+            background-color: #2563eb;
+        }
+
+        .topic-section {
+            margin-bottom: 80px;
+            background-color: #1a1a1a;
+            border-radius: 16px;
+            padding: 40px;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        body.light-theme .topic-section {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .topic-section:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+            border-color: #22c55e;
+        }
+
+        body.light-theme .topic-section:hover {
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+            border-color: #3b82f6;
+        }
+
+        .topic-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .topic-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 25px;
+        }
+
+        body.light-theme .topic-icon {
+            background-color: rgba(239, 68, 68, 0.1);
+        }
+
+        .topic-icon i {
+            font-size: 28px;
+        }
+
+        .topic-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: white;
+        }
+
+        body.light-theme .topic-title {
+            color: #333;
+        }
+
+        .topic-description {
+            font-size: 17px;
+            color: #aaa;
+            line-height: 1.9;
+            margin-bottom: 30px;
+        }
+
+        body.light-theme .topic-description {
+            color: #666;
+        }
+
+        .question-list {
+            margin-top: 30px;
+            padding: 0;
+            max-width: 100%;
+        }
+
+        .question-list ol {
+            list-style-position: outside;
+            padding-left: 0;
+            margin: 0 auto;
+            max-width: 100%;
+            counter-reset: item;
+        }
+
+        .question {
+            position: relative;
+            font-size: 17px;
+            color: #f0f0f0;
+            margin-bottom: 30px;
+            line-height: 1.8;
+            padding: 20px;
+            background-color: #222;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        body.light-theme .question {
+            color: #333;
+            background-color: #f9fafb;
+        }
+
+        .question-text {
+            margin-bottom: 15px;
+            font-weight: 500;
+            padding-left: 35px;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+            padding-left: 35px;
+        }
+
+        .option {
+            background-color: #333;
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        body.light-theme .option {
+            background-color: #e5e7eb;
+        }
+
+        .option:hover {
+            background-color: #444;
+        }
+
+        body.light-theme .option:hover {
+            background-color: #d1d5db;
+        }
+
+        .option.selected {
+            background-color: #22c55e;
+            color: white;
+            border: 2px solid #16a34a;
+        }
+
+        body.light-theme .option.selected {
+            background-color: #2563eb;
+            color: white;
+            border: 2px solid #1d4ed8;
+        }
+
+        .answer-table {
+            margin-top: 40px;
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .answer-table::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 20px;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.2));
+            pointer-events: none;
+        }
+
+        body.light-theme .answer-table {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+        }
+
+        body.light-theme .answer-table::after {
+            background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.1));
+        }
+
+        .answer-table table {
+            width: 100%;
+            min-width: 600px;
+            border-collapse: collapse;
+        }
+
+        .answer-table th, .answer-table td {
+            border: 1px solid #333;
+            padding: 15px;
+            text-align: center;
+            color: #f0f0f0;
+            font-size: 15px;
+            min-width: 50px;
+        }
+
+        body.light-theme .answer-table th,
+        body.light-theme .answer-table td {
+            border: 1px solid #ddd;
+            color: #333;
+        }
+
+        .answer-table td.correct {
+            background-color: #16a34a;
+            color: white;
+        }
+
+        body.light-theme .answer-table td.correct {
+            background-color: #16a34a;
+            color: white;
+        }
+
+        .answer-table td.incorrect {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        body.light-theme .answer-table td.incorrect {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        .footer {
+            background-color: #0f0f0f;
+            padding: 100px 0 40px;
+            margin-top: 100px;
+            border-top: 1px solid #222;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background-color: #22c55e;
+            border-radius: 2px;
+        }
+
+        body.light-theme .footer {
+            background-color: #f5f5f5;
+            border-top: 1px solid #ddd;
+        }
+
+        body.light-theme .footer::before {
+            background-color: #2563eb;
+        }
+
+        .copyright {
+            text-align: center;
+            padding: 40px 0 0;
+            margin-top: 60px;
+            border-top: 1px solid #222;
+            color: #888;
+            font-size: 15px;
+        }
+
+        body.light-theme .copyright {
+            border-top: 1px solid #ddd;
+            color: #666;
+        }
+
+        @media screen and (max-width: 1024px) {
+            .options {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .header-icons {
+                top: 10px;
+                right: 10px;
+                gap: 10px;
+            }
+
+            .header-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+
+            .main-content {
+                padding: 60px 10px;
+                margin: 0 auto;
+                max-width: 100%;
+            }
+
+            .page-title {
+                font-size: 28px;
+                margin-bottom: 40px;
+            }
+
+            .topic-section {
+                padding: 20px 12px;
+                margin: 0 auto 40px;
+                max-width: 100%;
+            }
+
+            .topic-header {
+                margin-bottom: 20px;
+            }
+
+            .topic-icon {
+                width: 50px;
+                height: 50px;
+                margin-right: 15px;
+            }
+
+            .topic-icon i {
+                font-size: 24px;
+            }
+
+            .topic-title {
+                font-size: 24px;
+            }
+
+            .topic-description {
+                font-size: 15px;
+                line-height: 1.7;
+            }
+
+            .question-list {
+                padding: 0;
+                margin: 0 auto;
+            }
+
+            .question-list ol {
+                list-style-position: inside;
+                padding-left: 0;
+                max-width: 100%;
+            }
+
+            .question {
+                font-size: 15px;
+                padding: 15px 20px;
+                margin-bottom: 20px;
+                display: flex;
+                flex-direction: column;
+                max-width: 100%;
+            }
+
+            .question::before {
+                content: counter(item) ".";
+                counter-increment: item;
+                position: absolute;
+                left: 10px;
+                top: 15px;
+                color: #22c55e;
+                font-weight: 500;
+            }
+
+            body.light-theme .question::before {
+                color: #2563eb;
+            }
+
+            .question-text {
+                position: relative;
+                padding-left: 30px;
+                margin-bottom: 12px;
+                margin-left: 10px;
+            }
+
+            .options {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 12px;
+                padding-left: 30px;
+                max-width: 100%;
+            }
+
+            .option {
+                padding: 10px;
+                font-size: 14px;
+                border-radius: 4px;
+            }
+
+            .answer-table {
+                background-color: transparent;
+            }
+
+            .answer-table table {
+                background-color: #1a1a1a;
+                border-radius: 8px;
+                min-width: 600px;
+            }
+
+            body.light-theme .answer-table table {
+                background-color: #ffffff;
+            }
+
+            .answer-table th, 
+            .answer-table td {
+                padding: 10px 8px;
+                font-size: 13px;
+                min-width: 40px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .header-icons {
+                top: 8px;
+                right: 8px;
+                gap: 8px;
+            }
+
+            .header-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+
+            .main-content {
+                padding: 50px 8px;
+            }
+
+            .page-title {
+                font-size: 24px;
+                margin-bottom: 30px;
+            }
+
+            .topic-section {
+                padding: 15px 10px;
+                margin-bottom: 30px;
+            }
+
+            .topic-icon {
+                width: 40px;
+                height: 40px;
+                margin-right: 12px;
+            }
+
+            .topic-icon i {
+                font-size: 20px;
+            }
+
+            .topic-title {
+                font-size: 20px;
+            }
+
+            .topic-description {
+                font-size: 14px;
+            }
+
+            .question {
+                font-size: 14px;
+                padding: 12px 15px;
+                margin-bottom: 15px;
+            }
+
+            .question::before {
+                left: 8px;
+                top: 12px;
+            }
+
+            .question-text {
+                padding-left: 25px;
+                margin-left: 8px;
+            }
+
+            .options {
+                gap: 8px;
+                padding-left: 25px;
+            }
+
+            .option {
+                padding: 8px 10px;
+                font-size: 13px;
+            }
+
+            .answer-table th, 
+            .answer-table td {
+                padding: 8px 6px;
+                font-size: 12px;
+                min-width: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-icons">
+        <button class="header-icon theme-toggle" id="theme-toggle" title="Toggle Theme">
+            <i class='bx bx-moon'></i>
+        </button>
+        <button class="header-icon back-button" title="Back">
+            <i class='bx bx-arrow-back'></i>
+        </button>
+    </div>
+
+    <div class="main-content">
+        <h1 class="page-title">Practice Questions</h1>
+
+        <!-- Logical Reasoning Questions -->
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon">
+                    <i class='bx bx-brain'></i>
+                </div>
+                <h2 class="topic-title">Logical Reasoning</h2>
+            </div>
+            <p class="topic-description">
+                Test your logical reasoning skills with these 50 practice questions covering various topics.
+            </p>
+            <div class="question-list">
+                <ol>
+                    <li class="question" data-question-id="1">
+                        <div class="question-text">If the day after tomorrow is Wednesday, what day is it today?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Monday</div>
+                            <div class="option" data-option="(b)">(b) Tuesday</div>
+                            <div class="option" data-option="(c)">(c) Wednesday</div>
+                            <div class="option" data-option="(d)">(d) Thursday</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="2">
+                        <div class="question-text">A is B's brother, B is C's sister, C is D's daughter. What is A to D?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Son</div>
+                            <div class="option" data-option="(b)">(b) Daughter</div>
+                            <div class="option" data-option="(c)">(c) Brother</div>
+                            <div class="option" data-option="(d)">(d) Father</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="3">
+                        <div class="question-text">If all roses are flowers and some flowers are red, which statement must be true?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) All roses are red</div>
+                            <div class="option" data-option="(b)">(b) Some roses are red</div>
+                            <div class="option" data-option="(c)">(c) Some flowers are roses</div>
+                            <div class="option" data-option="(d)">(d) All flowers are roses</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="4">
+                        <div class="question-text">If the code for CAT is 312, what is the code for DOG?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 415</div>
+                            <div class="option" data-option="(b)">(b) 416</div>
+                            <div class="option" data-option="(c)">(c) 417</div>
+                            <div class="option" data-option="(d)">(d) 418</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="5">
+                        <div class="question-text">If 5th of a month is a Monday, what day is the 12th?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Sunday</div>
+                            <div class="option" data-option="(b)">(b) Monday</div>
+                            <div class="option" data-option="(c)">(c) Tuesday</div>
+                            <div class="option" data-option="(d)">(d) Wednesday</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="6">
+                        <div class="question-text">If P is Q's father and Q is R's mother, what is P to R?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Father</div>
+                            <div class="option" data-option="(b)">(b) Grandfather</div>
+                            <div class="option" data-option="(c)">(c) Son</div>
+                            <div class="option" data-option="(d)">(d) Brother</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="7">
+                        <div class="question-text">If all dogs bark and some animals are dogs, which is true?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) All animals bark</div>
+                            <div class="option" data-option="(b)">(b) Some animals bark</div>
+                            <div class="option" data-option="(c)">(c) No animals bark</div>
+                            <div class="option" data-option="(d)">(d) Some dogs do not bark</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="8">
+                        <div class="question-text">If the day after tomorrow is Friday, what day is it today?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Wednesday</div>
+                            <div class="option" data-option="(b)">(b) Thursday</div>
+                            <div class="option" data-option="(c)">(c) Friday</div>
+                            <div class="option" data-option="(d)">(d) Saturday</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="9">
+                        <div class="question-text">If 1 = 5, 2 = 10, 3 = 15, what is 4?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 16</div>
+                            <div class="option" data-option="(b)">(b) 18</div>
+                            <div class="option" data-option="(c)">(c) 20</div>
+                            <div class="option" data-option="(d)">(d) 22</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="10">
+                        <div class="question-text">If X is Y's sister and Y is Z's brother, what is X to Z?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Brother</div>
+                            <div class="option" data-option="(b)">(b) Sister</div>
+                            <div class="option" data-option="(c)">(c) Father</div>
+                            <div class="option" data-option="(d)">(d) Mother</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="11">
+                        <div class="question-text">If all birds fly and some animals are birds, which is true?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) All animals fly</div>
+                            <div class="option" data-option="(b)">(b) Some animals fly</div>
+                            <div class="option" data-option="(c)">(c) No animals fly</div>
+                            <div class="option" data-option="(d)">(d) Some birds do not fly</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="12">
+                        <div class="question-text">If the code for BAT is 213, what is the code for CAT?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 312</div>
+                            <div class="option" data-option="(b)">(b) 313</div>
+                            <div class="option" data-option="(c)">(c) 314</div>
+                            <div class="option" data-option="(d)">(d) 315</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="13">
+                        <div class="question-text">If 10th of a month is a Tuesday, what day is the 17th?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Monday</div>
+                            <div class="option" data-option="(b)">(b) Tuesday</div>
+                            <div class="option" data-option="(c)">(c) Wednesday</div>
+                            <div class="option" data-option="(d)">(d) Thursday</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="14">
+                        <div class="question-text">If M is N's mother and N is O's brother, what is M to O?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Mother</div>
+                            <div class="option" data-option="(b)">(b) Father</div>
+                            <div class="option" data-option="(c)">(c) Sister</div>
+                            <div class="option" data-option="(d)">(d) Brother</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="15">
+                        <div class="question-text">If all cats meow and some animals are cats, which is true?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) All animals meow</div>
+                            <div class="option" data-option="(b)">(b) Some animals meow</div>
+                            <div class="option" data-option="(c)">(c) No animals meow</div>
+                            <div class="option" data-option="(d)">(d) Some cats do not meow</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="16">
+                        <div class="question-text">If the day after tomorrow is Thursday, what day is it today?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Tuesday</div>
+                            <div class="option" data-option="(b)">(b) Wednesday</div>
+                            <div class="option" data-option="(c)">(c) Thursday</div>
+                            <div class="option" data-option="(d)">(d) Friday</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="17">
+                        <div class="question-text">If 2 = 4, 3 = 9, 4 = 16, what is 5?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 20</div>
+                            <div class="option" data-option="(b)">(b) 25</div>
+                            <div class="option" data-option="(c)">(c) 30</div>
+                            <div class="option" data-option="(d)">(d) 35</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="18">
+                        <div class="question-text">If P is Q's brother and Q is R's sister, what is P to R?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Brother</div>
+                            <div class="option" data-option="(b)">(b) Sister</div>
+                            <div class="option" data-option="(c)">(c) Father</div>
+                            <div class="option" data-option="(d)">(d) Mother</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="19">
+                        <div class="question-text">If all fish swim and some animals are fish, which is true?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) All animals swim</div>
+                            <div class="option" data-option="(b)">(b) Some animals swim</div>
+                            <div class="option" data-option="(c)">(c) No animals swim</div>
+                            <div class="option" data-option="(d)">(d) Some fish do not swim</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="20">
+                        <div class="question-text">If the code for HAT is 813, what is the code for MAT?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 131</div>
+                            <div class="option" data-option="(b)">(b) 132</div>
+                            <div class="option" data-option="(c)">(c) 133</div>
+                            <div class="option" data-option="(d)">(d) 134</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="21">
+                        <div class="question-text">If 15th of a month is a Wednesday, what day is the 22nd?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Tuesday</div>
+                            <div class="option" data-option="(b)">(b) Wednesday</div>
+                            <div class="option" data-option="(c)">(c) Thursday</div>
+                            <div class="option" data-option="(d)">(d) Friday</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="22">
+                        <div class="question-text">If X is Y's father and Y is Z's mother, what is X to Z?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Father</div>
+                            <div class="option" data-option="(b)">(b) Grandfather</div>
+                            <div class="option" data-option="(c)">(c) Son</div>
+                            <div class="option" data-option="(d)">(d) Brother</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="23">
+                        <div class="question-text">If all lions roar and some animals are lions, which is true?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) All animals roar</div>
+                            <div class="option" data-option="(b)">(b) Some animals roar</div>
+                            <div class="option" data-option="(c)">(c) No animals roar</div>
+                            <div class="option" data-option="(d)">(d) Some lions do not roar</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="24">
+                        <div class="question-text">If the day after tomorrow is Monday, what day is it today?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Saturday</div>
+                            <div class="option" data-option="(b)">(b) Sunday</div>
+                            <div class="option" data-option="(c)">(c) Monday</div>
+                            <div class="option" data-option="(d)">(d) Tuesday</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="25">
+                        <div class="question-text">If 1 = 2, 2 = 4, 3 = 6, what is 4?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 6</div>
+                            <div class="option" data-option="(b)">(b) 8</div>
+                            <div class="option" data-option="(c)">(c) 10</div>
+                            <div class="option" data-option="(d)">(d) 12</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="26">
+                        <div class="question-text">If M is N's sister and N is O's brother, what is M to O?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Sister</div>
+                            <div class="option" data-option="(b)">(b) Brother</div>
+                            <div class="option" data-option="(c)">(c) Father</div>
+                            <div class="option" data-option="(d)">(d) Mother</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="27">
+                        <div class="question-text">If all elephants are big and some animals are elephants, which is true?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) All animals are big</div>
+                            <div class="option" data-option="(b)">(b) Some animals are big</div>
+                            <div class="option" data-option="(c)">(c) No animals are big</div>
+                            <div class="option" data-option="(d)">(d) Some elephants are not big</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="28">
+                        <div class="question-text">If the code for FAN is 617, what is the code for MAN?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 131</div>
+                            <div class="option" data-option="(b)">(b) 132</div>
+                            <div class="option" data-option="(c)">(c) 133</div>
+                            <div class="option" data-option="(d)">(d) 134</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="29">
+                        <div class="question-text">If 20th of a month is a Thursday, what day is the 27th?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Wednesday</div>
+                            <div class="option" data-option="(b)">(b) Thursday</div>
+                            <div class="option" data-option="(c)">(c) Friday</div>
+                            <div class="option" data-option="(d)">(d) Saturday</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="30">
+                        <div class="question-text">If P is Q's mother and Q is R's sister, what is P to R?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Mother</div>
+                            <div class="option" data-option="(b)">(b) Father</div>
+                            <div class="option" data-option="(c)">(c) Sister</div>
+                            <div class="option" data-option="(d)">(d) Brother</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="31">
+                        <div class="question-text">If all monkeys climb and some animals are monkeys, which is true?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) All animals climb</div>
+                            <div class="option" data-option="(b)">(b) Some animals climb</div>
+                            <div class="option" data-option="(c)">(c) No animals climb</div>
+                            <div class="option" data-option="(d)">(d) Some monkeys do not climb</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="32">
+                        <div class="question-text">If the day after tomorrow is Tuesday, what day is it today?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Sunday</div>
+                            <div class="option" data-option="(b)">(b) Monday</div>
+                            <div class="option" data-option="(c)">(c) Tuesday</div>
+                            <div class="option" data-option="(d)">(d) Wednesday</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="33">
+                        <div class="question-text">If 3 = 6, 4 = 12, 5 = 20, what is 6?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 24</div>
+                            <div class="option" data-option="(b)">(b) 28</div>
+                            <div class="option" data-option="(c)">(c) 30</div>
+                            <div class="option" data-option="(d)">(d) 36</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="34">
+                        <div class="question-text">If X is Y's brother and Y is Z's sister, what is X to Z?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Brother</div>
+                            <div class="option" data-option="(b)">(b) Sister</div>
+                            <div class="option" data-option="(c)">(c) Father</div>
+                            <div class="option" data-option="(d)">(d) Mother</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="35">
+                        <div class="question-text">If all tigers hunt and some animals are tigers, which is true?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) All animals hunt</div>
+                            <div class="option" data-option="(b)">(b) Some animals hunt</div>
+                            <div class="option" data-option="(c)">(c) No animals hunt</div>
+                            <div class="option" data-option="(d)">(d) Some tigers do not hunt</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="36">
+                        <div class="question-text">If the code for TAP is 201, what is the code for MAP?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 131</div>
+                            <div class="option" data-option="(b)">(b) 132</div>
+                            <div class="option" data-option="(c)">(c) 133</div>
+                            <div class="option" data-option="(d)">(d) 134</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="37">
+                        <div class="question-text">If 25th of a month is a Friday, what day is the 1st of the next month?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Thursday</div>
+                            <div class="option" data-option="(b)">(b) Friday</div>
+                            <div class="option" data-option="(c)">(c) Saturday</div>
+                            <div class="option" data-option="(d)">(d) Sunday</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="38">
+                        <div class="question-text">If M is N's father and N is O's sister, what is M to O?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Father</div>
+                            <div class="option" data-option="(b)">(b) Mother</div>
+                            <div class="option" data-option="(c)">(c) Brother</div>
+                            <div class="option" data-option="(d)">(d) Sister</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="39">
+                        <div class="question-text">If all wolves howl and some animals are wolves, which is true?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) All animals howl</div>
+                            <div class="option" data-option="(b)">(b) Some animals howl</div>
+                            <div class="option" data-option="(c)">(c) No animals howl</div>
+                            <div class="option" data-option="(d)">(d) Some wolves do not howl</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="40">
+                        <div class="question-text">If the day after tomorrow is Wednesday, what day is it today?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Monday</div>
+                            <div class="option" data-option="(b)">(b) Tuesday</div>
+                            <div class="option" data-option="(c)">(c) Wednesday</div>
+                            <div class="option" data-option="(d)">(d) Thursday</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="41">
+                        <div class="question-text">If 1 = 1, 2 = 4, 3 = 9, what is 4?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 14</div>
+                            <div class="option" data-option="(b)">(b) 16</div>
+                            <div class="option" data-option="(c)">(c) 18</div>
+                            <div class="option" data-option="(d)">(d) 20</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="42">
+                        <div class="question-text">If P is Q's sister and Q is R's brother, what is P to R?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Sister</div>
+                            <div class="option" data-option="(b)">(b) Brother</div>
+                            <div class="option" data-option="(c)">(c) Father</div>
+                            <div class="option" data-option="(d)">(d) Mother</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="43">
+                        <div class="question-text">If all bears sleep and some animals are bears, which is true?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) All animals sleep</div>
+                            <div class="option" data-option="(b)">(b) Some animals sleep</div>
+                            <div class="option" data-option="(c)">(c) No animals sleep</div>
+                            <div class="option" data-option="(d)">(d) Some bears do not sleep</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="44">
+                        <div class="question-text">If the code for CAP is 312, what is the code for MAP?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 131</div>
+                            <div class="option" data-option="(b)">(b) 132</div>
+                            <div class="option" data-option="(c)">(c) 133</div>
+                            <div class="option" data-option="(d)">(d) 134</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="45">
+                        <div class="question-text">If 30th of a month is a Saturday, what day is the 6th of the next month?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Friday</div>
+                            <div class="option" data-option="(b)">(b) Saturday</div>
+                            <div class="option" data-option="(c)">(c) Sunday</div>
+                            <div class="option" data-option="(d)">(d) Monday</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="46">
+                        <div class="question-text">If X is Y's mother and Y is Z's brother, what is X to Z?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Mother</div>
+                            <div class="option" data-option="(b)">(b) Father</div>
+                            <div class="option" data-option="(c)">(c) Sister</div>
+                            <div class="option" data-option="(d)">(d) Brother</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="47">
+                        <div class="question-text">If all eagles soar and some animals are eagles, which is true?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) All animals soar</div>
+                            <div class="option" data-option="(b)">(b) Some animals soar</div>
+                            <div class="option" data-option="(c)">(c) No animals soar</div>
+                            <div class="option" data-option="(d)">(d) Some eagles do not soar</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="48">
+                        <div class="question-text">If the day after tomorrow is Thursday, what day is it today?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Tuesday</div>
+                            <div class="option" data-option="(b)">(b) Wednesday</div>
+                            <div class="option" data-option="(c)">(c) Thursday</div>
+                            <div class="option" data-option="(d)">(d) Friday</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="49">
+                        <div class="question-text">If 2 = 8, 3 = 18, 4 = 32, what is 5?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 40</div>
+                            <div class="option" data-option="(b)">(b) 45</div>
+                            <div class="option" data-option="(c)">(c) 50</div>
+                            <div class="option" data-option="(d)">(d) 55</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="50">
+                        <div class="question-text">If M is N's brother and N is O's sister, what is M to O?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Brother</div>
+                            <div class="option" data-option="(b)">(b) Sister</div>
+                            <div class="option" data-option="(c)">(c) Father</div>
+                            <div class="option" data-option="(d)">(d) Mother</div>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Answers -->
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon">
+                    <i class='bx bx-key'></i>
+                </div>
+                <h2 class="topic-title">Answer Key</h2>
+            </div>
+            <p class="topic-description">
+                Correct answers for the logical reasoning practice questions.
+            </p>
+            <div class="answer-table">
+                <table>
+                    <tr>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                    </tr>
+                    <tr>
+                        <td>1</td><td data-question-id="1">(a)</td>
+                        <td>2</td><td data-question-id="2">(a)</td>
+                        <td>3</td><td data-question-id="3">(c)</td>
+                        <td>4</td><td data-question-id="4">(c)</td>
+                        <td>5</td><td data-question-id="5">(b)</td>
+                    </tr>
+                    <tr>
+                        <td>6</td><td data-question-id="6">(b)</td>
+                        <td>7</td><td data-question-id="7">(b)</td>
+                        <td>8</td><td data-question-id="8">(a)</td>
+                        <td>9</td><td data-question-id="9">(c)</td>
+                        <td>10</td><td data-question-id="10">(b)</td>
+                    </tr>
+                    <tr>
+                        <td>11</td><td data-question-id="11">(b)</td>
+                        <td>12</td><td data-question-id="12">(a)</td>
+                        <td>13</td><td data-question-id="13">(c)</td>
+                        <td>14</td><td data-question-id="14">(a)</td>
+                        <td>15</td><td data-question-id="15">(b)</td>
+                    </tr>
+                    <tr>
+                        <td>16</td><td data-question-id="16">(a)</td>
+                        <td>17</td><td data-question-id="17">(b)</td>
+                        <td>18</td><td data-question-id="18">(a)</td>
+                        <td>19</td><td data-question-id="19">(b)</td>
+                        <td>20</td><td data-question-id="20">(c)</td>
+                    </tr>
+                    <tr>
+                        <td>21</td><td data-question-id="21">(c)</td>
+                        <td>22</td><td data-question-id="22">(b)</td>
+                        <td>23</td><td data-question-id="23">(b)</td>
+                        <td>24</td><td data-question-id="24">(a)</td>
+                        <td>25</td><td data-question-id="25">(b)</td>
+                    </tr>
+                    <tr>
+                        <td>26</td><td data-question-id="26">(a)</td>
+                        <td>27</td><td data-question-id="27">(b)</td>
+                        <td>28</td><td data-question-id="28">(c)</td>
+                        <td>29</td><td data-question-id="29">(c)</td>
+                        <td>30</td><td data-question-id="30">(a)</td>
+                    </tr>
+                    <tr>
+                        <td>31</td><td data-question-id="31">(b)</td>
+                        <td>32</td><td data-question-id="32">(a)</td>
+                        <td>33</td><td data-question-id="33">(c)</td>
+                        <td>34</td><td data-question-id="34">(a)</td>
+                        <td>35</td><td data-question-id="35">(b)</td>
+                    </tr>
+                    <tr>
+                        <td>36</td><td data-question-id="36">(c)</td>
+                        <td>37</td><td data-question-id="37">(c)</td>
+                        <td>38</td><td data-question-id="38">(a)</td>
+                        <td>39</td><td data-question-id="39">(b)</td>
+                        <td>40</td><td data-question-id="40">(a)</td>
+                    </tr>
+                    <tr>
+                        <td>41</td><td data-question-id="41">(c)</td>
+                        <td>42</td><td data-question-id="42">(a)</td>
+                        <td>43</td><td data-question-id="43">(b)</td>
+                        <td>44</td><td data-question-id="44">(c)</td>
+                        <td>45</td><td data-question-id="45">(c)</td>
+                    </tr>
+                    <tr>
+                        <td>46</td><td data-question-id="46">(a)</td>
+                        <td>47</td><td data-question-id="47">(b)</td>
+                        <td>48</td><td data-question-id="48">(a)</td>
+                        <td>49</td><td data-question-id="49">(c)</td>
+                        <td>50</td><td data-question-id="50">(a)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="copyright">
+                <p>© 2025 Logical Reasoning Prep. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.querySelector('.theme-toggle');
+            const backButton = document.querySelector('.back-button');
+            const options = document.querySelectorAll('.option');
+            const answerKey = {
+                1: '(a)', 2: '(a)', 3: '(c)', 4: '(c)', 5: '(b)',
+                6: '(b)', 7: '(b)', 8: '(a)', 9: '(c)', 10: '(b)',
+                11: '(b)', 12: '(a)', 13: '(c)', 14: '(a)', 15: '(b)',
+                16: '(a)', 17: '(b)', 18: '(a)', 19: '(b)', 20: '(c)',
+                21: '(c)', 22: '(b)', 23: '(b)', 24: '(a)', 25: '(b)',
+                26: '(a)', 27: '(b)', 28: '(c)', 29: '(c)', 30: '(a)',
+                31: '(b)', 32: '(a)', 33: '(c)', 34: '(a)', 35: '(b)',
+                36: '(c)', 37: '(c)', 38: '(a)', 39: '(b)', 40: '(a)',
+                41: '(c)', 42: '(a)', 43: '(b)', 44: '(c)', 45: '(c)',
+                46: '(a)', 47: '(b)', 48: '(a)', 49: '(c)', 50: '(a)'
+            };
+
+            if (themeToggle) {
+                const themeIcon = themeToggle.querySelector('i');
+                themeToggle.addEventListener('click', function() {
+                    document.body.classList.toggle('light-theme');
+                    if (document.body.classList.contains('light-theme')) {
+                        themeIcon.classList.remove('bx-moon');
+                        themeIcon.classList.add('bx-sun');
+                        localStorage.setItem('theme', 'light');
+                    } else {
+                        themeIcon.classList.remove('bx-sun');
+                        themeIcon.classList.add('bx-moon');
+                        localStorage.setItem('theme', 'dark');
+                    }
+                });
+
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'light') {
+                    document.body.classList.add('light-theme');
+                    themeIcon.classList.remove('bx-moon');
+                    themeIcon.classList.add('bx-sun');
+                }
+            }
+
+            if (backButton) {
+                backButton.addEventListener('click', function() {
+                    window.history.back();
+                });
+            }
+
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    const question = this.closest('.question');
+                    const questionId = question.getAttribute('data-question-id');
+                    const selectedOption = this.getAttribute('data-option');
+                    const correctAnswer = answerKey[questionId];
+
+                    // Remove selected class from all options in this question
+                    question.querySelectorAll('.option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
+
+                    // Update answer table cell
+                    const answerCell = document.querySelector(`td[data-question-id="${questionId}"]`);
+                    if (answerCell) {
+                        answerCell.classList.remove('correct', 'incorrect');
+                        if (selectedOption === correctAnswer) {
+                            answerCell.classList.add('correct');
+                        } else {
+                            answerCell.classList.add('incorrect');
+                        }
+                    }
+                });
+            });
+
+            // Enhance table scroll behavior on mobile
+            const answerTable = document.querySelector('.answer-table');
+            if (answerTable && window.innerWidth <= 768) {
+                answerTable.style.scrollSnapType = 'x mandatory';
+                answerTable.style.webkitOverflowScrolling = 'touch';
+            }
+        });
+    </script>
+</body>
+</html>

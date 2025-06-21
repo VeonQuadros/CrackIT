@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple & Compound Interest Practice</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        /* For iOS Safari */
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* For Android Chrome (and most browsers) */
+    * {
+      -webkit-user-select: none; /* Prevents text selection */
+      -moz-user-select: none;
+      -ms-user-select: none;
+       user-select: none;
+      }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0f0f0f;
+            color: #f0f0f0;
+            min-height: 100vh;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body.light-theme {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .header-icons {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .header-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            background-color: #22c55e;
+            color: white;
+            border: none;
+        }
+
+        body.light-theme .header-icon {
+            background-color: #2563eb;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-icon:hover {
+            transform: scale(1.1);
+            background-color: #16a34a;
+        }
+
+        body.light-theme .header-icon:hover {
+            background-color: #1d4ed8;
+        }
+
+        .main-content {
+            padding: 80px 50px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .page-title {
+            font-size: 36px;
+            margin-bottom: 60px;
+            font-weight: 700;
+            color: #f0f0f0;
+            text-align: center;
+            position: relative;
+        }
+
+        .page-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #22c55e;
+            margin: 20px auto 0;
+            border-radius: 2px;
+        }
+
+        body.light-theme .page-title {
+            color: #333;
+        }
+
+        body.light-theme .page-title::after {
+            background-color: #2563eb;
+        }
+
+        .topic-section {
+            margin-bottom: 80px;
+            background-color: #1a1a1a;
+            border-radius: 16px;
+            padding: 40px;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme .topic-section {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .topic-section:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+            border-color: #22c55e;
+        }
+
+        body.light-theme .topic-section:hover {
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+            border-color: #3b82f6;
+        }
+
+        .topic-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .topic-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 25px;
+        }
+
+        body.light-theme .topic-icon {
+            background-color: rgba(239, 68, 68, 0.1);
+        }
+
+        .topic-icon i {
+            font-size: 28px;
+        }
+
+        .topic-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: white;
+        }
+
+        body.light-theme .topic-title {
+            color: #333;
+        }
+
+        .topic-description {
+            font-size: 17px;
+            color: #aaa;
+            line-height: 1.9;
+            margin-bottom: 30px;
+        }
+
+        body.light-theme .topic-description {
+            color: #666;
+        }
+
+        .question-list {
+            margin-top: 30px;
+            padding: 0 20px;
+        }
+
+        .question-list ol {
+            list-style-position: outside;
+            padding-left: 30px;
+            margin: 0;
+        }
+
+        .question {
+            position: relative;
+            font-size: 17px;
+            color: #f0f0f0;
+            margin-bottom: 30px;
+            line-height: 1.8;
+            padding: 20px;
+            background-color: #222;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme .question {
+            color: #333;
+            background-color: #f9fafb;
+        }
+
+        .question-text {
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .option {
+            background-color: #333;
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            font-weight: normal;
+        }
+
+        body.light-theme .option {
+            background-color: #e5e7eb;
+        }
+
+        .option:hover {
+            background-color: #444;
+        }
+
+        body.light-theme .option:hover {
+            background-color: #d1d5db;
+        }
+
+        .option.selected {
+            background-color: #22c55e;
+            color: white;
+            border: 2px solid #16a34a;
+        }
+
+        body.light-theme .option.selected {
+            background-color: #2563eb;
+            color: white;
+            border: 2px solid #1d4ed8;
+        }
+
+        .answer-table {
+            margin-top: 40px;
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+        }
+
+        body.light-theme .answer-table {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+        }
+
+        .answer-table table {
+            width: 100%;
+            min-width: 800px;
+            border-collapse: collapse;
+        }
+
+        .answer-table th {
+            border: 1px solid #333;
+            padding: 15px;
+            text-align: center;
+            color: #f0f0f0;
+            font-size: 15px;
+            min-width: 60px;
+            font-weight: bold;
+        }
+
+        .answer-table td {
+            border: 1px solid #333;
+            padding: 15px;
+            text-align: center;
+            color: #f0f0f0;
+            font-size: 15px;
+            min-width: 60px;
+            font-weight: normal;
+        }
+
+        body.light-theme .answer-table th {
+            border: 1px solid #ddd;
+            color: #333;
+        }
+
+        body.light-theme .answer-table td {
+            border: 1px solid #ddd;
+            color: #333;
+        }
+
+        .answer-table td.correct {
+            background-color: #16a34a;
+            color: white;
+        }
+
+        body.light-theme .answer-table td.correct {
+            background-color: #16a34a;
+            color: white;
+        }
+
+        .answer-table td.incorrect {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        body.light-theme .answer-table td.incorrect {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        .footer {
+            background-color: #0f0f0f;
+            padding: 100px 0 40px;
+            margin-top: 100px;
+            border-top: 1px solid #222;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background-color: #22c55e;
+            border-radius: 2px;
+        }
+
+        body.light-theme .footer {
+            background-color: #f5f5f5;
+            border-top: 1px solid #ddd;
+        }
+
+        body.light-theme .footer::before {
+            background-color: #2563eb;
+        }
+
+        .copyright {
+            text-align: center;
+            padding: 40px 0 0;
+            margin-top: 60px;
+            border-top: 1px solid #222;
+            color: #888;
+            font-size: 15px;
+        }
+
+        body.light-theme .copyright {
+            border-top: 1px solid #ddd;
+            color: #666;
+        }
+
+        @media screen and (max-width: 1024px) {
+            .options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .main-content {
+                padding: 40px 15px;
+                margin: 0 auto;
+                max-width: 100%;
+            }
+
+            .topic-section {
+                padding: 20px 15px;
+                margin: 0 auto 40px;
+                max-width: 600px;
+            }
+
+            .question-list {
+                padding: 0;
+            }
+
+            .question-list ol {
+                list-style-position: outside;
+                padding-left: 20px;
+            }
+
+            .question {
+                font-size: 15px;
+                padding: 15px;
+                margin-bottom: 20px;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .question-text {
+                margin-bottom: 12px;
+            }
+
+            .options {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 8px;
+                margin-top: 12px;
+            }
+
+            .option {
+                padding: 8px 12px;
+                font-size: 14px;
+                border-radius: 4px;
+            }
+
+            .answer-table {
+                background-color: transparent;
+            }
+
+            .answer-table table {
+                background-color: #1a1a1a;
+                border-radius: 8px;
+            }
+
+            body.light-theme .answer-table table {
+                background-color: #ffffff;
+            }
+
+            .answer-table th, 
+            .answer-table td {
+                padding: 10px 8px;
+                font-size: 14px;
+                min-width: 50px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .topic-section {
+                padding: 15px 12px;
+            }
+
+            .question {
+                font-size: 14px;
+                padding: 12px;
+            }
+
+            .options {
+                grid-template-columns: 1fr;
+            }
+
+            .option {
+                padding: 6px 10px;
+                font-size: 13px;
+            }
+
+            .answer-table th, 
+            .answer-table td {
+                padding: 8px 6px;
+                font-size: 13px;
+                min-width: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-icons">
+        <button class="header-icon theme-toggle" id="theme-toggle" title="Toggle Theme">
+            <i class='bx bx-moon'></i>
+        </button>
+        <button class="header-icon back-button" title="Back">
+            <i class='bx bx-arrow-back'></i>
+        </button>
+    </div>
+
+    <div class="main-content">
+        <h1 class="page-title">Practice Questions</h1>
+
+        <!-- Questions -->
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon">
+                    <i class='bx bx-calculator'></i>
+                </div>
+                <h2 class="topic-title">Simple & Compound Interest</h2>
+            </div>
+            <p class="topic-description">
+                Test your skills with these 50 practice questions on Simple and Compound Interest, covering calculations of interest, principal, rate, time, amount, and comparisons between SI and CI.
+            </p>
+            <div class="question-list">
+                <ol>
+                    <li class="question" data-question-id="1">
+                        <div class="question-text">Calculate the simple interest on <strong>$5000</strong> at <em>4%</em> per annum for <em>2 years</em>.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $400</div>
+                            <div class="option" data-option="(b)">(b) $450</div>
+                            <div class="option" data-option="(c)">(c) $500</div>
+                            <div class="option" data-option="(d)">(d) $550</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="2">
+                        <div class="question-text">What is the principal if simple interest of <em>$600</em> is earned at <strong>5%</strong> per annum in <em>3 years</em>?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $3500</div>
+                            <div class="option" data-option="(b)">(b) $3750</div>
+                            <div class="option" data-option="(c)">(c) $4000</div>
+                            <div class="option" data-option="(d)">(d) $4250</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="3">
+                        <div class="question-text">Find the compound interest on <strong>$10000</strong> at <em>6%</em> per annum for <em>2 years</em>, compounded annually.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $1200</div>
+                            <div class="option" data-option="(b)">(b) $1236</div>
+                            <div class="option" data-option="(c)">(c) $1300</div>
+                            <div class="option" data-option="(d)">(d) $1350</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="4">
+                        <div class="question-text">A sum of <em>$8000</em> earns <strong>$1200</strong> simple interest in <em>2 years</em>. What is the rate of interest per annum?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 6%</div>
+                            <div class="option" data-option="(b)">(b) 7.5%</div>
+                            <div class="option" data-option="(c)">(c) 8%</div>
+                            <div class="option" data-option="(d)">(d) 9%</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="5">
+                        <div class="question-text">What is the amount after <em>3 years</em> on <strong>$6000</strong> at <em>5%</em> simple interest?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $6900</div>
+                            <div class="option" data-option="(b)">(b) $7000</div>
+                            <div class="option" data-option="(c)">(c) $7100</div>
+                            <div class="option" data-option="(d)">(d) $7200</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="6">
+                        <div class="question-text">Find the time required for <strong>$4000</strong> to earn <em>$600</em> simple interest at <em>5%</em> per annum.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 2 years</div>
+                            <div class="option" data-option="(b)">(b) 3 years</div>
+                            <div class="option" data-option="(c)">(c) 4 years</div>
+                            <div class="option" data-option="(d)">(d) 5 years</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="7">
+                        <div class="question-text">Calculate the compound amount on <em>$5000</em> at <strong>8%</strong> per annum for <em>2 years</em>, compounded annually.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $5832</div>
+                            <div class="option" data-option="(b)">(b) $5900</div>
+                            <div class="option" data-option="(c)">(c) $6000</div>
+                            <div class="option" data-option="(d)">(d) $6100</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="8">
+                        <div class="question-text">What is the difference between CI and SI on <strong>$10000</strong> at <em>10%</em> per annum for <em>2 years</em>?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $50</div>
+                            <div class="option" data-option="(b)">(b) $100</div>
+                            <div class="option" data-option="(c)">(c) $150</div>
+                            <div class="option" data-option="(d)">(d) $200</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="9">
+                        <div class="question-text">A sum of <em>$12000</em> at <strong>5%</strong> simple interest amounts to <em>$13500</em>. Find the time.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 2 years</div>
+                            <div class="option" data-option="(b)">(b) 2.5 years</div>
+                            <div class="option" data-option="(c)">(c) 3 years</div>
+                            <div class="option" data-option="(d)">(d) 3.5 years</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="10">
+                        <div class="question-text">Find the principal if compound interest of <em>$1272</em> is earned at <strong>6%</strong> per annum in <em>2 years</em>, compounded annually.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $9000</div>
+                            <div class="option" data-option="(b)">(b) $10000</div>
+                            <div class="option" data-option="(c)">(c) $11000</div>
+                            <div class="option" data-option="(d)">(d) $12000</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="11">
+                        <div class="question-text">Calculate the simple interest on <strong>$2000</strong> at <em>3%</em> per annum for <em>4 years</em>.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $240</div>
+                            <div class="option" data-option="(b)">(b) $250</div>
+                            <div class="option" data-option="(c)">(c) $260</div>
+                            <div class="option" data-option="(d)">(d) $270</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="12">
+                        <div class="question-text">What is the rate of interest if <em>$5000</em> earns <strong>$750</strong> simple interest in <em>3 years</em>?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 4%</div>
+                            <div class="option" data-option="(b)">(b) 5%</div>
+                            <div class="option" data-option="(c)">(c) 6%</div>
+                            <div class="option" data-option="(d)">(d) 7%</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="13">
+                        <div class="question-text">Find the compound interest on <strong>$8000</strong> at <em>4%</em> per annum for <em>3 years</em>, compounded annually.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $950</div>
+                            <div class="option" data-option="(b)">(b) $998.27</div>
+                            <div class="option" data-option="(c)">(c) $1050</div>
+                            <div class="option" data-option="(d)">(d) $1100</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="14">
+                        <div class="question-text">What is the amount after <em>2 years</em> on <strong>$7000</strong> at <em>6%</em> simple interest?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $7700</div>
+                            <div class="option" data-option="(b)">(b) $7800</div>
+                            <div class="option" data-option="(c)">(c) $7840</div>
+                            <div class="option" data-option="(d)">(d) $7900</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="15">
+                        <div class="question-text">Calculate the compound amount on <em>$10000</em> at <strong>5%</strong> per annum for <em>2 years</em>, compounded semi-annually.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $11025.06</div>
+                            <div class="option" data-option="(b)">(b) $11050</div>
+                            <div class="option" data-option="(c)">(c) $11100</div>
+                            <div class="option" data-option="(d)">(d) $11150</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="16">
+                        <div class="question-text">Find the time for <strong>$3000</strong> to earn <em>$450</em> simple interest at <em>5%</em> per annum.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 2 years</div>
+                            <div class="option" data-option="(b)">(b) 3 years</div>
+                            <div class="option" data-option="(c)">(c) 4 years</div>
+                            <div class="option" data-option="(d)">(d) 5 years</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="17">
+                        <div class="question-text">What is the principal if simple interest of <em>$900</em> is earned at <strong>6%</strong> per annum in <em>3 years</em>?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $4500</div>
+                            <div class="option" data-option="(b)">(b) $5000</div>
+                            <div class="option" data-option="(c)">(c) $5500</div>
+                            <div class="option" data-option="(d)">(d) $6000</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="18">
+                        <div class="question-text">Find the compound interest on <strong>$15000</strong> at <em>7%</em> per annum for <em>2 years</em>, compounded annually.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $2100</div>
+                            <div class="option" data-option="(b)">(b) $2244.15</div>
+                            <div class="option" data-option="(c)">(c) $2300</div>
+                            <div class="option" data-option="(d)">(d) $2400</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="19">
+                        <div class="question-text">A sum of <em>$10000</em> at <strong>4%</strong> simple interest amounts to <em>$11200</em>. Find the time.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 3 years</div>
+                            <div class="option" data-option="(b)">(b) 3.5 years</div>
+                            <div class="option" data-option="(c)">(c) 4 years</div>
+                            <div class="option" data-option="(d)">(d) 4.5 years</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="20">
+                        <div class="question-text">What is the rate if <em>$6000</em> earns <strong>$1080</strong> simple interest in <em>3 years</em>?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 5%</div>
+                            <div class="option" data-option="(b)">(b) 6%</div>
+                            <div class="option" data-option="(c)">(c) 7%</div>
+                            <div class="option" data-option="(d)">(d) 8%</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="21">
+                        <div class="question-text">Find the compound amount on <strong>$4000</strong> at <em>10%</em> per annum for <em>2 years</em>, compounded annually.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $4800</div>
+                            <div class="option" data-option="(b)">(b) $4820</div>
+                            <div class="option" data-option="(c)">(c) $4840</div>
+                            <div class="option" data-option="(d)">(d) $4840</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="22">
+                        <div class="question-text">What is the difference between CI and SI on <strong>$5000</strong> at <em>8%</em> per annum for <em>2 years</em>?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $30</div>
+                            <div class="option" data-option="(b)">(b) $32</div>
+                            <div class="option" data-option="(c)">(c) $34</div>
+                            <div class="option" data-option="(d)">(d) $32</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="23">
+                        <div class="question-text">Calculate the simple interest on <em>$9000</em> at <strong>7%</strong> per annum for <em>2 years</em>.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $1200</div>
+                            <div class="option" data-option="(b)">(b) $1250</div>
+                            <div class="option" data-option="(c)">(c) $1300</div>
+                            <div class="option" data-option="(d)">(d) $1260</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="24">
+                        <div class="question-text">Find the principal if compound interest of <em>$2592</em> is earned at <strong>8%</strong> per annum in <em>2 years</em>, compounded annually.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $14000</div>
+                            <div class="option" data-option="(b)">(b) $14500</div>
+                            <div class="option" data-option="(c)">(c) $15000</div>
+                            <div class="option" data-option="(d)">(d) $15500</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="25">
+                        <div class="question-text">What is the amount after <em>4 years</em> on <strong>$5000</strong> at <em>6%</em> simple interest?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $6200</div>
+                            <div class="option" data-option="(b)">(b) $6250</div>
+                            <div class="option" data-option="(c)">(c) $6300</div>
+                            <div class="option" data-option="(d)">(d) $6200</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="26">
+                        <div class="question-text">Find the time for <strong>$8000</strong> to earn <em>$1920</em> simple interest at <em>6%</em> per annum.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 3 years</div>
+                            <div class="option" data-option="(b)">(b) 3.5 years</div>
+                            <div class="option" data-option="(c)">(c) 4 years</div>
+                            <div class="option" data-option="(d)">(d) 4.5 years</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="27">
+                        <div class="question-text">Calculate the compound interest on <em>$6000</em> at <strong>5%</strong> per annum for <em>3 years</em>, compounded annually.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $946.13</div>
+                            <div class="option" data-option="(b)">(b) $950</div>
+                            <div class="option" data-option="(c)">(c) $960</div>
+                            <div class="option" data-option="(d)">(d) $970</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="28">
+                        <div class="question-text">What is the rate if <em>$4000</em> earns <strong>$600</strong> simple interest in <em>3 years</em>?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 4%</div>
+                            <div class="option" data-option="(b)">(b) 4.5%</div>
+                            <div class="option" data-option="(c)">(c) 5%</div>
+                            <div class="option" data-option="(d)">(d) 5.5%</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="29">
+                        <div class="question-text">Find the compound amount on <strong>$7000</strong> at <em>6%</em> per annum for <em>2 years</em>, compounded semi-annually.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $7850</div>
+                            <div class="option" data-option="(b)">(b) $7867.64</div>
+                            <div class="option" data-option="(c)">(c) $7900</div>
+                            <div class="option" data-option="(d)">(d) $7867.64</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="30">
+                        <div class="question-text">A sum of <em>$5000</em> at <strong>8%</strong> simple interest amounts to <em>$6200</em>. Find the time.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 3 years</div>
+                            <div class="option" data-option="(b)">(b) 3.5 years</div>
+                            <div class="option" data-option="(c)">(c) 4 years</div>
+                            <div class="option" data-option="(d)">(d) 4.5 years</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="31">
+                        <div class="question-text">What is the difference between CI and SI on <strong>$8000</strong> at <em>5%</em> per annum for <em>2 years</em>?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $20</div>
+                            <div class="option" data-option="(b)">(b) $25</div>
+                            <div class="option" data-option="(c)">(c) $30</div>
+                            <div class="option" data-option="(d)">(d) $20</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="32">
+                        <div class="question-text">Calculate the simple interest on <strong>$10000</strong> at <em>4%</em> per annum for <em>5 years</em>.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $2000</div>
+                            <div class="option" data-option="(b)">(b) $2100</div>
+                            <div class="option" data-option="(c)">(c) $2200</div>
+                            <div class="option" data-option="(d)">(d) $2300</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="33">
+                        <div class="question-text">Find the principal if compound interest of <em>$1656.10</em> is earned at <strong>10%</strong> per annum in <em>2 years</em>, compounded annually.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $7000</div>
+                            <div class="option" data-option="(b)">(b) $7500</div>
+                            <div class="option" data-option="(c)">(c) $8000</div>
+                            <div class="option" data-option="(d)">(d) $7500</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="34">
+                        <div class="question-text">What is the amount after <em>2 years</em> on <strong>$9000</strong> at <em>7%</em> simple interest?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $10314</div>
+                            <div class="option" data-option="(b)">(b) $10350</div>
+                            <div class="option" data-option="(c)">(c) $10400</div>
+                            <div class="option" data-option="(d)">(d) $10450</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="35">
+                        <div class="question-text">Find the time for <strong>$5000</strong> to earn <em>$1500</em> simple interest at <em>6%</em> per annum.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 4 years</div>
+                            <div class="option" data-option="(b)">(b) 4.5 years</div>
+                            <div class="option" data-option="(c)">(c) 5 years</div>
+                            <div class="option" data-option="(d)">(d) 5.5 years</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="36">
+                        <div class="question-text">What is the rate if <em>$7000</em> earns <strong>$1260</strong> simple interest in <em>3 years</em>?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 5%</div>
+                            <div class="option" data-option="(b)">(b) 5.5%</div>
+                            <div class="option" data-option="(c)">(c) 6%</div>
+                            <div class="option" data-option="(d)">(d) 6%</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="37">
+                        <div class="question-text">Calculate the compound interest on <strong>$12000</strong> at <em>5%</em> per annum for <em>2 years</em>, compounded annually.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $1230</div>
+                            <div class="option" data-option="(b)">(b) $1250</div>
+                            <div class="option" data-option="(c)">(c) $1270</div>
+                            <div class="option" data-option="(d)">(d) $1290</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="38">
+                        <div class="question-text">Find the principal if simple interest of <em>$1200</em> is earned at <strong>8%</strong> per annum in <em>3 years</em>?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $4500</div>
+                            <div class="option" data-option="(b)">(b) $4750</div>
+                            <div class="option" data-option="(c)">(c) $5000</div>
+                            <div class="option" data-option="(d)">(d) $5250</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="39">
+                        <div class="question-text">Find the compound amount on <strong>$10000</strong> at <em>4%</em> per annum for <em>3 years</em>, compounded annually.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $11200</div>
+                            <div class="option" data-option="(b)">(b) $11248.64</div>
+                            <div class="option" data-option="(c)">(c) $11300</div>
+                            <div class="option" data-option="(d)">(d) $11248.64</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="40">
+                        <div class="question-text">A sum of <em>$6000</em> at <strong>5%</strong> simple interest amounts to <em>$7200</em>. Find the time.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 4 years</div>
+                            <div class="option" data-option="(b)">(b) 4.5 years</div>
+                            <div class="option" data-option="(c)">(c) 5 years</div>
+                            <div class="option" data-option="(d)">(d) 5.5 years</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="41">
+                        <div class="question-text">What is the difference between CI and SI on <strong>$6000</strong> at <em>10%</em> per annum for <em>2 years</em>?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $50</div>
+                            <div class="option" data-option="(b)">(b) $60</div>
+                            <div class="option" data-option="(c)">(c) $60</div>
+                            <div class="option" data-option="(d)">(d) $70</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="42">
+                        <div class="question-text">Calculate the simple interest on <em>$8000</em> at <strong>6%</strong> per annum for <em>2 years</em>.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $950</div>
+                            <div class="option" data-option="(b)">(b) $960</div>
+                            <div class="option" data-option="(c)">(c) $970</div>
+                            <div class="option" data-option="(d)">(d) $960</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="43">
+                        <div class="question-text">Find the principal if compound interest of <em>$824.32</em> is earned at <strong>4%</strong> per annum in <em>2 years</em>, compounded annually.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $9500</div>
+                            <div class="option" data-option="(b)">(b) $9750</div>
+                            <div class="option" data-option="(c)">(c) $10000</div>
+                            <div class="option" data-option="(d)">(d) $10250</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="44">
+                        <div class="question-text">What is the amount after <em>3 years</em> on <strong>$10000</strong> at <em>5%</em> simple interest?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $11400</div>
+                            <div class="option" data-option="(b)">(b) $11450</div>
+                            <div class="option" data-option="(c)">(c) $11500</div>
+                            <div class="option" data-option="(d)">(d) $11500</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="45">
+                        <div class="question-text">Find the time for <strong>$4000</strong> to earn <em>$960</em> simple interest at <em>8%</em> per annum.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 2 years</div>
+                            <div class="option" data-option="(b)">(b) 2.5 years</div>
+                            <div class="option" data-option="(c)">(c) 3 years</div>
+                            <div class="option" data-option="(d)">(d) 3.5 years</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="46">
+                        <div class="question-text">Calculate the compound interest on <strong>$5000</strong> at <em>6%</em> per annum for <em>2 years</em>, compounded semi-annually.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $630.81</div>
+                            <div class="option" data-option="(b)">(b) $640</div>
+                            <div class="option" data-option="(c)">(c) $650</div>
+                            <div class="option" data-option="(d)">(d) $660</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="47">
+                        <div class="question-text">What is the rate if <em>$9000</em> earns <strong>$1620</strong> simple interest in <em>3 years</em>?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 5%</div>
+                            <div class="option" data-option="(b)">(b) 5.5%</div>
+                            <div class="option" data-option="(c)">(c) 6%</div>
+                            <div class="option" data-option="(d)">(d) 6.5%</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="48">
+                        <div class="question-text">Find the compound amount on <strong>$8000</strong> at <em>5%</em> per annum for <em>2 years</em>, compounded annually.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $8800</div>
+                            <div class="option" data-option="(b)">(b) $8820</div>
+                            <div class="option" data-option="(c)">(c) $8840</div>
+                            <div class="option" data-option="(d)">(d) $8820</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="49">
+                        <div class="question-text">A sum of <em>$10000</em> at <strong>6%</strong> simple interest amounts to <em>$12400</em>. Find the time.</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) 3 years</div>
+                            <div class="option" data-option="(b)">(b) 4 years</div>
+                            <div class="option" data-option="(c)">(c) 5 years</div>
+                            <div class="option" data-option="(d)">(d) 6 years</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="50">
+                        <div class="question-text">What is the difference between CI and SI on <strong>$10000</strong> at <em>5%</em> per annum for <em>3 years</em>?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) $75</div>
+                            <div class="option" data-option="(b)">(b) $76.25</div>
+                            <div class="option" data-option="(c)">(c) $76.25</div>
+                            <div class="option" data-option="(d)">(d) $80</div>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Answers -->
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon">
+                    <i class='bx bx-key'></i>
+                </div>
+                <h2 class="topic-title">Answer Key</h2>
+            </div>
+            <p class="topic-description">
+                Correct answers for the Simple & Compound Interest practice questions.
+            </p>
+            <div class="answer-table">
+                <table>
+                    <tr>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                    </tr>
+                    <tr>
+                        <td>1</td><td data-question-id="1">(a)</td>
+                        <td>2</td><td data-question-id="2">(c)</td>
+                        <td>3</td><td data-question-id="3">(b)</td>
+                        <td>4</td><td data-question-id="4">(b)</td>
+                        <td>5</td><td data-question-id="5">(a)</td>
+                    </tr>
+                    <tr>
+                        <td>6</td><td data-question-id="6">(b)</td>
+                        <td>7</td><td data-question-id="7">(a)</td>
+                        <td>8</td><td data-question-id="8">(b)</td>
+                        <td>9</td><td data-question-id="9">(b)</td>
+                        <td>10</td><td data-question-id="10">(b)</td>
+                    </tr>
+                    <tr>
+                        <td>11</td><td data-question-id="11">(a)</td>
+                        <td>12</td><td data-question-id="12">(b)</td>
+                        <td>13</td><td data-question-id="13">(b)</td>
+                        <td>14</td><td data-question-id="14">(c)</td>
+                        <td>15</td><td data-question-id="15">(a)</td>
+                    </tr>
+                    <tr>
+                        <td>16</td><td data-question-id="16">(b)</td>
+                        <td>17</td><td data-question-id="17">(b)</td>
+                        <td>18</td><td data-question-id="18">(b)</td>
+                        <td>19</td><td data-question-id="19">(a)</td>
+                        <td>20</td><td data-question-id="20">(b)</td>
+                    </tr>
+                    <tr>
+                        <td>21</td><td data-question-id="21">(d)</td>
+                        <td>22</td><td data-question-id="22">(d)</td>
+                        <td>23</td><td data-question-id="23">(d)</td>
+                        <td>24</td><td data-question-id="24">(c)</td>
+                        <td>25</td><td data-question-id="25">(d)</td>
+                    </tr>
+                    <tr>
+                        <td>26</td><td data-question-id="26">(c)</td>
+                        <td>27</td><td data-question-id="27">(a)</td>
+                        <td>28</td><td data-question-id="28">(c)</td>
+                        <td>29</td><td data-question-id="29">(d)</td>
+                        <td>30</td><td data-question-id="30">(a)</td>
+                    </tr>
+                    <tr>
+                        <td>31</td><td data-question-id="31">(d)</td>
+                        <td>32</td><td data-question-id="32">(a)</td>
+                        <td>33</td><td data-question-id="33">(d)</td>
+                        <td>34</td><td data-question-id="34">(a)</td>
+                        <td>35</td><td data-question-id="35">(c)</td>
+                    </tr>
+                    <tr>
+                        <td>36</td><td data-question-id="36">(d)</td>
+                        <td>37</td><td data-question-id="37">(a)</td>
+                        <td>38</td><td data-question-id="38">(c)</td>
+                        <td>39</td><td data-question-id="39">(d)</td>
+                        <td>40</td><td data-question-id="40">(a)</td>
+                    </tr>
+                    <tr>
+                        <td>41</td><td data-question-id="41">(c)</td>
+                        <td>42</td><td data-question-id="42">(d)</td>
+                        <td>43</td><td data-question-id="43">(c)</td>
+                        <td>44</td><td data-question-id="44">(d)</td>
+                        <td>45</td><td data-question-id="45">(c)</td>
+                    </tr>
+                    <tr>
+                        <td>46</td><td data-question-id="46">(a)</td>
+                        <td>47</td><td data-question-id="47">(c)</td>
+                        <td>48</td><td data-question-id="48">(d)</td>
+                        <td>49</td><td data-question-id="49">(b)</td>
+                        <td>50</td><td data-question-id="50">(c)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="copyright">
+                <p>© 2025 Simple & Compound Interest Prep. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.querySelector('.theme-toggle');
+            const backButton = document.querySelector('.back-button');
+            const options = document.querySelectorAll('.option');
+            const answerKey = {
+                1: '(a)', 2: '(c)', 3: '(b)', 4: '(b)', 5: '(a)',
+                6: '(b)', 7: '(a)', 8: '(b)', 9: '(b)', 10: '(b)',
+                11: '(a)', 12: '(b)', 13: '(b)', 14: '(c)', 15: '(a)',
+                16: '(b)', 17: '(b)', 18: '(b)', 19: '(a)', 20: '(b)',
+                21: '(d)', 22: '(d)', 23: '(d)', 24: '(c)', 25: '(d)',
+                26: '(c)', 27: '(a)', 28: '(c)', 29: '(d)', 30: '(a)',
+                31: '(d)', 32: '(a)', 33: '(d)', 34: '(a)', 35: '(c)',
+                36: '(d)', 37: '(a)', 38: '(c)', 39: '(d)', 40: '(a)',
+                41: '(c)', 42: '(d)', 43: '(c)', 44: '(d)', 45: '(c)',
+                46: '(a)', 47: '(c)', 48: '(d)', 49: '(b)', 50: '(c)'
+            };
+
+            if (themeToggle) {
+                const themeIcon = themeToggle.querySelector('i');
+                themeToggle.addEventListener('click', function() {
+                    document.body.classList.toggle('light-theme');
+                    if (document.body.classList.contains('light-theme')) {
+                        themeIcon.classList.remove('bx-moon');
+                        themeIcon.classList.add('bx-sun');
+                        localStorage.setItem('theme', 'light');
+                    } else {
+                        themeIcon.classList.remove('bx-sun');
+                        themeIcon.classList.add('bx-moon');
+                        localStorage.setItem('theme', 'dark');
+                    }
+                });
+
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'light') {
+                    document.body.classList.add('light-theme');
+                    themeIcon.classList.remove('bx-moon');
+                    themeIcon.classList.add('bx-sun');
+                }
+            }
+
+            if (backButton) {
+                backButton.addEventListener('click', function() {
+                    window.history.back();
+                });
+            }
+
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    const question = this.closest('.question');
+                    const questionId = question.getAttribute('data-question-id');
+                    const selectedOption = this.getAttribute('data-option');
+                    const correctAnswer = answerKey[questionId];
+
+                    question.querySelectorAll('.option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+
+                    this.classList.add('selected');
+
+                    const answerCell = document.querySelector(`td[data-question-id="${questionId}"]`);
+                    if (answerCell) {
+                        answerCell.classList.remove('correct', 'incorrect');
+                        if (selectedOption === correctAnswer) {
+                            answerCell.classList.add('correct');
+                        } else {
+                            answerCell.classList.add('incorrect');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Problem Solving Questions</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            background-color: #0f0f0f;
+            color: #f0f0f0;
+            min-height: 100vh;
+            display: flex;
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme {
+            background-color: #f5f7fb;
+            color: #333;
+        }
+
+        .top-right-buttons {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .theme-toggle-btn, .back-btn {
+            background-color: #0a0a0a;
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 20px;
+            text-decoration: none;
+        }
+
+        body.light-theme .theme-toggle-btn, body.light-theme .back-btn {
+            background-color: #c8c8c8;
+            color: #4a90e2;
+            border: 1px solid rgba(74, 144, 226, 0.3);
+        }
+
+        .theme-toggle-btn:hover, .back-btn:hover {
+            background-color: #1a1a1a;
+            transform: scale(1.1);
+        }
+
+        body.light-theme .theme-toggle-btn:hover, body.light-theme .back-btn:hover {
+            background-color: #d3dce6;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            width: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #4CAF50, #45D149);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        body.light-theme .header h1 {
+            background: linear-gradient(45deg, #4a90e2, #357abd);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-icon {
+            font-size: 4rem;
+            color: #22c55e;
+            margin: 1rem 0;
+            display: block;
+            animation: scaleIn 0.5s ease;
+        }
+
+        body.light-theme .header-icon {
+            color: #4a90e2;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #aaa;
+            margin-top: 1rem;
+        }
+
+        body.light-theme .header p {
+            color: #6b7280;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid transparent;
+            background: linear-gradient(90deg, #22c55e, #45D149);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #22c55e, #45D149);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .section-title:hover::after {
+            transform: scaleX(1);
+        }
+
+        body.light-theme .section-title {
+            background: linear-gradient(90deg, #4a90e2, #357abd);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        body.light-theme .section-title::after {
+            background: linear-gradient(90deg, #4a90e2, #357abd);
+            height: 3px;
+        }
+
+        .question-block {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            position: relative;
+            animation: fadeInUp 0.6s ease forwards;
+            animation-delay: calc(var(--block-index) * 0.1s);
+        }
+
+        body.light-theme .question-block {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .question-block h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #22c55e;
+        }
+
+        body.light-theme .question-block h3 {
+            color: #4a90e2;
+        }
+
+        .question-block .question-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem 0;
+            font-size: 1.8rem;
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            transition: transform 0.3s ease;
+        }
+
+        body.light-theme .question-block .question-icon {
+            background: rgba(74, 144, 226, 0.2);
+            color: #4a90e2;
+        }
+
+        .question-block:hover .question-icon {
+            transform: scale(1.1);
+        }
+
+        .question-block p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #aaa;
+            margin-bottom: 1rem;
+        }
+
+        body.light-theme .question-block p {
+            color: #6b7280;
+        }
+
+        .question-block ul {
+            font-size: 0.85rem;
+            color: #ccc;
+            line-height: 1.6;
+            padding-left: 1.5rem;
+        }
+
+        body.light-theme .question-block ul {
+            color: #333;
+        }
+
+        .question-block ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sample-response {
+            margin: 1rem 0;
+            padding: 1rem;
+            border-left: 3px solid #22c55e;
+            background: rgba(55, 197, 94, 0.1);
+            border-radius: 0 8px 8px 0;
+        }
+
+        body.light-theme .sample-response {
+            border-left: 3px solid #4a90e2;
+            background: rgba(74, 144, 226, 0.1);
+        }
+
+        .sample-response p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .conversation {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            position: relative;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        body.light-theme .conversation {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .conversation h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #22c55e;
+        }
+
+        body.light-theme .conversation h3 {
+            color: #4a90e2;
+        }
+
+        .dialogue {
+            margin: 1rem 0;
+            padding: 1rem;
+            border-left: 3px solid #22c55e;
+            background: rgba(55, 197, 94, 0.1);
+            border-radius: 0 8px 8px 0;
+        }
+
+        body.light-theme .dialogue {
+            border-left: 3px solid #4a90e2;
+            background: rgba(74, 144, 226, 0.1);
+        }
+
+        .dialogue.interviewer {
+            border-left: 3px solid #f97316;
+            background: rgba(249, 115, 22, 0.1);
+        }
+
+        body.light-theme .dialogue.interviewer {
+            border-left: 3px solid #357abd;
+            background: rgba(53, 122, 189, 0.2);
+        }
+
+        .dialogue p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .dialogue strong {
+            color: #ffffff;
+        }
+
+        body.light-theme .dialogue strong {
+            color: #1f2937;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #333, transparent);
+            margin: 3rem 0;
+        }
+
+        body.light-theme .divider {
+            background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.8); }
+            to { transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .question-block, .conversation {
+                padding: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .question-block h3, .conversation h3 {
+                font-size: 1.3rem;
+            }
+
+            .question-block p, .dialogue p, .sample-response p {
+                font-size: 0.85rem;
+            }
+
+            .question-block ul {
+                font-size: 0.8rem;
+            }
+
+            .top-right-buttons {
+                top: 10px;
+                right: 10px;
+            }
+
+            .theme-toggle-btn, .back-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-right-buttons">
+        <button class="theme-toggle-btn" id="themeToggle" title="Toggle Theme">
+            <i class='bx bx-moon'></i>
+        </button>
+        <a href="Tech and HR Questions.html" class="back-btn" title="Back to Tech and HR Questions">
+            <i class='bx bx-arrow-back'></i>
+        </a>
+    </div>
+
+    <div class="main-content">
+        <div class="container">
+            <header class="header">
+                <i class='bx bx-puzzle header-icon'></i>
+                <h1>Problem Solving Questions</h1>
+                <p>Tackle IT interview challenges with effective problem-solving strategies</p>
+            </header>
+
+            <section class="section" id="problem-solving-questions">
+                <h2 class="section-title">Key Problem Solving Questions</h2>
+                <div class="question-block" style="--block-index: 1;">
+                    <h3>Can you figure out the first character in a string that doesn’t repeat?</h3>
+                    <div class="question-icon"><i class='bx bx-text'></i></div>
+                    <p>Tests your ability to design efficient string algorithms.</p>
+                    <ul>
+                        <li>Use a hash map for character counts.</li>
+                        <li>Explain time and space complexity.</li>
+                        <li>Clarify logic before coding.</li>
+                        <li>Consider edge cases like empty strings.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>I’d count characters with a hash map, then scan the string for the first with count 1. In Python: <code>def first_non_repeating(s): count = {}; for c in s: count[c] = count.get(c, 0) + 1; for c in s: if count[c] == 1: return c; return None</code>. Time is O(n), space is O(1) due to limited characters. I used this in a text processing project for unique identifiers.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 2;">
+                    <h3>How would you design a system to manage a parking lot?</h3>
+                    <div class="question-icon"><i class='bx bx-car'></i></div>
+                    <p>Assesses your object-oriented design skills.</p>
+                    <ul>
+                        <li>Define classes and their interactions.</li>
+                        <li>Outline key features like parking and exiting.</li>
+                        <li>Address scalability.</li>
+                        <li>Handle edge cases like full lots.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>I’d create classes like ParkingLot, Level, and ParkingSpot. ParkingLot tracks Levels, each with Spots for different vehicle sizes. I’d use a queue for O(1) spot allocation. In a project, I designed a similar system, ensuring it scaled for multiple vehicle types and handled full-lot scenarios.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 3;">
+                    <h3>Could you check if a string reads the same backward, ignoring spaces and punctuation?</h3>
+                    <div class="question-icon"><i class='bx bx-refresh'></i></div>
+                    <p>Tests your string manipulation and edge case handling.</p>
+                    <ul>
+                        <li>Filter out non-alphanumeric characters.</li>
+                        <li>Use two pointers for efficiency.</li>
+                        <li>Explain complexity.</li>
+                        <li>Test cases like "A man, a plan, a canal: Panama".</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>I’d use two pointers to compare alphanumeric characters. In Python: <code>def is_palindrome(s): s = ''.join(c.lower() for c in s if c.isalnum()); left, right = 0, len(s)-1; while left < right: if s[left] != s[right]: return False; left += 1; right -= 1; return True</code>. Time is O(n), space is O(1). I solved this in a project for input validation.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 4;">
+                    <h3>Any ideas on spotting a loop in a linked list?</h3>
+                    <div class="question-icon"><i class='bx bx-link'></i></div>
+                    <p>Evaluates your linked list algorithm knowledge.</p>
+                    <ul>
+                        <li>Use Floyd’s cycle detection.</li>
+                        <li>Explain slow and fast pointers.</li>
+                        <li>Discuss complexity.</li>
+                        <li>Handle empty lists.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>I’d use Floyd’s algorithm with two pointers moving at different speeds. In Python: <code>def has_cycle(head): slow = fast = head; while fast and fast.next: slow = slow.next; fast = fast.next.next; if slow == fast: return True; return False</code>. Time is O(n), space is O(1). I used this in a graph traversal project to detect cycles.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 5;">
+                    <h3>What’s your approach to finding a missing number in a list from 0 to n?</h3>
+                    <div class="question-icon"><i class='bx bx-search'></i></div>
+                    <p>Tests mathematical and algorithmic thinking.</p>
+                    <ul>
+                        <li>Use XOR or sum formula.</li>
+                        <li>Explain logic clearly.</li>
+                        <li>Analyze complexity.</li>
+                        <li>Consider range constraints.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>I’d XOR all numbers from 0 to n and the array; the result is the missing number. In Python: <code>def missing_number(nums): res = len(nums); for i in range(len(nums)): res ^= i ^ nums[i]; return res</code>. Time is O(n), space is O(1). I applied this in a data validation project.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 6;">
+                    <h3>Can you combine two sorted linked lists into one?</h3>
+                    <div class="question-icon"><i class='bx bx-merge'></i></div>
+                    <p>Assesses linked list manipulation skills.</p>
+                    <ul>
+                        <li>Use iterative or recursive method.</li>
+                        <li>Explain pointer handling.</li>
+                        <li>Discuss complexity.</li>
+                        <li>Handle empty lists.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>I’d iterate both lists, merging based on node values. In Python: <code>def merge_lists(l1, l2): dummy = ListNode(0); curr = dummy; while l1 and l2: if l1.val <= l2.val: curr.next = l1; l1 = l1.next; else: curr.next = l2; l2 = l2.next; curr = curr.next; curr.next = l1 or l2; return dummy.next</code>. Time is O(n+m), space is O(1). I used this in a data merging project.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 7;">
+                    <h3>How would you check if a binary tree stays balanced?</h3>
+                    <div class="question-icon"><i class='bx bx-sitemap'></i></div>
+                    <p>Tests tree algorithm understanding.</p>
+                    <ul>
+                        <li>Recursively check height differences.</li>
+                        <li>Explain balancing criteria.</li>
+                        <li>Discuss complexity.</li>
+                        <li>Mention AVL trees if relevant.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>I’d verify subtree heights differ by at most 1. In Python: <code>def is_balanced(root): def check(node): if not node: return 0; left = check(node.left); if left == -1: return -1; right = check(node.right); if right == -1 or abs(left - right) > 1: return -1; return max(left, right) + 1; return check(root) != -1</code>. Time is O(n), space is O(h). I used this in a project for tree operations.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 8;">
+                    <h3>Suppose you need a cache that evicts the oldest accessed item. How’d you do it?</h3>
+                    <div class="question-icon"><i class='bx bx-memory-card'></i></div>
+                    <p>Evaluates data structure design skills.</p>
+                    <ul>
+                        <li>Use hash map and doubly linked list.</li>
+                        <li>Explain get/put operations.</li>
+                        <li>Discuss complexity.</li>
+                        <li>Handle capacity limits.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>I’d implement an LRU cache with a hash map and doubly linked list. In Python: <code>class LRUCache: def __init__(self, capacity): self.cache = {}; self.capacity = capacity; self.head = Node(0, 0); self.tail = Node(0, 0); self.head.next = self.tail; self.tail.prev = self.head'; def get(self, key): if key in self.cache: node = self.cache[key]; self._remove(node); self._add(node); return node.value; return -1; def put(self, key, value): if key in self.cache: self._remove(self.cache[key]); node = Node(key, value); self._add(node); self.cache[key] = node; if len(self.cache) > self.capacity: node = self.head.next; self._remove(node); del self.cache[node.key]</code>. Time is O(1), space is O(capacity). I built this for a project’s caching system.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 9;">
+                    <h3>What’s the best way to find the largest sum of any contiguous subarray?</h3>
+                    <div class="question-icon"><i class='bx bx-bar-chart'></i></div>
+                    <p>Tests array optimization skills.</p>
+                    <ul>
+                        <li>Use Kadane’s algorithm.</li>
+                        <li>Explain logic clearly.</li>
+                        <li>Discuss complexity.</li>
+                        <li>Handle negative numbers.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>I’d use Kadane’s to track max sum. In Python: <code>def max_subarray(nums): max_sum = current_sum = nums[0]; for num in nums[1:]: current_sum = max(num, current_sum + num); max_sum = max(max_sum, current_sum); return max_sum</code>. Time is O(n), space is O(1). I used this in a project for stock price analysis.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 10;">
+                    <h3>Imagine you’re scheduling tasks where some depend on others. How do you order them?</h3>
+                    <div class="question-icon"><i class='bx bx-task'></i></div>
+                    <p>Assesses graph algorithm knowledge.</p>
+                    <ul>
+                        <li>Use topological sort.</li>
+                        <li>Explain graph setup.</li>
+                        <li>Discuss complexity.</li>
+                        <li>Handle cycles.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>I’d use topological sort with a graph and in-degree tracking. In Python: <code>from collections import defaultdict, deque; def schedule_tasks(tasks, dependencies): graph = defaultdict(list); in_degree = {t: 0 for t in tasks}; for a, b in dependencies: graph[a].append(b); in_degree[b] += 1; queue = deque([t for t in tasks if in_degree[t] == 0]); result = []; while queue: node = queue.popleft(); result.append(node); for neighbor in graph[node]: in_degree[neighbor] -= 1; if in_degree[neighbor] == 0: queue.append(neighbor); return result if len(result) == len(tasks) else []</code>. Time is O(V+E), space is O(V). I used this in a build system.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 11;">
+                    <h3>Could you flip a binary tree’s structure down?</h3>
+                    <div class="question-icon"><i class='bx bx-network-chart'></i></i></div>
+                    <p>Tests tree manipulation skills.</p>
+                    <ul>
+                        <li>Use recursive approach.</li>
+                        <li>Explain swapping logic.</li>
+                        <li>Discuss complexity.</li>
+                        <li>Handle edge cases.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>I’d recursively swap left and right children. In Python: <code>def invert_tree(root): if not root: return root; root.left, root.right = invert_tree(root.right), invert_tree(root.left); return root</code>. Time is O(n), space is O(h). I used this in a project for tree symmetry tasks.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 12;">
+                    <h3>How might you locate all anagrams of a word within a larger string?</h3>
+                    <div class="question-icon"><i class='bx bx-sort'></i></div>
+                    <p>
+                    <ul>
+                        <li>Use sliding window with hash map.</li>
+                        <li>Explain character matching.</li>
+                        <li>Discuss complexity.</li>
+                        <li>Handle edge cases.</li>
+                    </ul>
+                    <div>
+                    <div class="sample-response">
+                        <p>I’d use a sliding window to match character counts. In Python: <code>from collections import Counter; def find_anagrams(s, p): if len(p) > len(s): return []; p_count = Counter(p); s_count = Counter(s[:len(p)]); result = [0] if s_count == p_count else []; for i in range(len(p), len(s)); s_count[s[i]] = s_count.get(s[i], 0) + 1; s_count[s[i-len(p)] -= 1; if s_count[s[i-len(p)]] == 0: del s_count[s[i-len(p)]]; if s_count == p_count: result.append(i-len(p)+1); return result</code>. Time is O(n), space is O(1). I used this in a search project.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 13;">
+                    <h3>Walk me through fixing a sluggish web application.</h3>
+                    <div class="question-icon"><i class='bx bx-bug'></i></div>
+                    <p>Tests systematic debugging skills.</p>
+                    <ul>
+                        <li>Outline a diagnostic process.</li>
+                        <li>Mention tools like profilers.</li>
+                        <li>Discuss optimizations.</li>
+                        <li>Provide a practical example.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>I’d use Chrome DevTools to profile, check server logs for slow queries, and analyze network calls. In a project, I found a slow API, indexed the database, and cached results, cutting load time by 50%. I also optimized frontend rendering.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 14;">
+                    <h3>What’s your strategy for finding the shortest path between two nodes in a graph?</h3>
+                    <div class="question-icon"><i class='bx bx-map'></i></div>
+                    <p>Assesses graph algorithm skills.</p>
+                    <ul>
+                        <li>Use BFS for unweighted graphs.</li>
+                        <li>Explain traversal logic.</li>
+                        <li>Discuss complexity.</li>
+                        <li>Handle disconnected graphs.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>For unweighted graphs, I’d use BFS. In Python: <code>from collections import deque; def shortest_path(graph, start, end): queue = deque([(start, [start])]); visited = {start}; while queue: node, path = queue.popleft(); if node == end: return path; for neighbor in graph[node]: if neighbor not in visited: visited.add(neighbor); queue.append((neighbor, path + [neighbor])); return []</code>. Time is O(V+E), space is O(V). I used this in a network path project.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 15;">
+                    <h3>Suppose you’re limiting API hits per user. How would you build that?</h3>
+                    <div class="question-icon"><i class='bx bx-timer'></i></div>
+                    <p>Tests system design and concurrency.</p>
+                    <ul>
+                        <li>Use token bucket algorithm.</li>
+                        <li>Explain data structures.</li>
+                        <li>Discuss thread safety.</li>
+                        <li>Mention use cases.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>I’d implement a token bucket with timestamps. In Python: <code>from time import time; class RateLimiter: def __init__(self, rate, per): self.rate = rate; self.per = per; self.tokens = rate; self.last = time(); def allow_request(self): now = time(); self.tokens += (now - self.last) * (self.rate / self.per); self.last = now; self.tokens = min(self.tokens, self.rate); if self.tokens >= 1: self.tokens -= 1; return True; return False</code>. Time is O(1), thread-safe with locks. I used this in an API project.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 16;">
+                    <h3>How would you count separate land patches in a grid map?</h3>
+                    <div class="question-icon"><i class='bx bx-grid'></i></div>
+                    <p>Tests graph traversal skills.</p>
+                    <ul>
+                        <li>Use DFS to mark regions.</li>
+                        <li>Explain grid traversal.</li>
+                        <li>Discuss complexity.</li>
+                        <li>Handle empty grids.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>I’d use DFS to mark connected land. In Python: <code>def num_islands(grid): if not grid: return 0; rows, cols = len(grid), len(grid[0]); count = 0; def dfs(i, j): if i < 0 or i >= rows or j < 0 or j >= cols or grid[i][j] != 1: return None; grid[i][j] = 0; dfs(i+1, j); dfs(i-1, j); dfs(i, j+1); dfs(i, j-1); for i in range(rows): for j in range(cols): if grid[i][j] == 1: count += 1; dfs(i, j); return count</code>. Time is O(rows*cols), space is O(rows*cols). I used this in a map analysis project.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 17;">
+                    <h3>Got a slow database query dragging performance? How do you speed it up?</h3>
+                    <div class="question-icon"><i class='bx bx-data'></i></div>
+                    <p>Evaluates database optimization skills.</p>
+                    <ul>
+                        <li>Use EXPLAIN to diagnose.</li>
+                        <li>Add indexes, optimize joins.</li>
+                        <li>Consider caching.</li>
+                        <li>Provide an example.</li>
+                    </ul>
+                    <div class="sample-response">
+                    <p>
+                        <p>I’d use EXPLAIN to analyze queries, index key columns, and cache results. In a project, I optimized a slow search query by indexing and using Redis, reducing response time from 2s to 200ms.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 18;">
+                    <h3>Can you find the longest shared sequence of two strings?</h3>
+                    <div class="question-icon"><i class='bx bx-align-left'></i></div>
+                    <p>Tests dynamic programming skills.</p>
+                    <ul>
+                        <li>Use DP table for lengths.</li>
+                        <li>Explain bottom-up logic.</li>
+                        <li>Discuss complexity.</li>
+                        <li>Handle edge cases.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>I’d use a DP table to track lengths. In Python: <code>def longest_common_subsequence(s1, s2): m, n = len(s1), len(s2); dp = [[0] * (n+1) for _ in range(m+1)]; for i in range(1, m+1): for j in range(1, n+1): if s1[i-1] == s2[j-1]: dp[i][j] = dp[i-1][j-1] + 1; else: dp[i][j] = max(dp[i-1][j], dp[i][j-1]); return dp[m][n]</code>. Time is O(m*n), space is O(m*n). I used this in a text comparison project.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 19;">
+                    <h3>How would you create a system to shorten URLs like bit.ly?</h3>
+                    <div class="question-icon"><i class='bx bx-link-alt'></i></i></div>
+                    <p>Assesses system design skills.</p>
+                    <ul>
+                        <li>Define components.</li>
+                        <li>Explain URL encoding.</li>
+                        <li>Discuss scalability.</li>
+                        <li>Choose a database.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>I’d store mappings in a database, generate short codes with base62, and use a web server for redirects. For scale, I’d add Redis caching. In a project, I built a prototype handling 10K daily requests with MySQL.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 20;">
+                    <h3>What’s your method for finding the median of two sorted lists?</h3>
+                    <div class="question-icon"><i class='bx bx-calculator'></i></div>
+                    <p>Tests binary search and partitioning.</p>
+                    <ul>
+                        <li>Use binary search on smaller list.</li>
+                        <li>Explain partition logic.</li>
+                        <li>Discuss complexity.</li>
+                        <li>Handle edge cases.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>I’d use binary search to partition. In Python: <code>def find_median_sorted_arrays(nums1, nums2): if len(nums1) > len(nums2): nums1, nums2 = nums2, nums1; m, n = len(nums1), len(nums2); left, right = 0, m; while left <= right: i = (left + right) // 2; j = (m + n + 1) // 2 - i; if i > 0 and nums1[i-1] > nums2[j]: right = i - 1; elif i < m and nums2[j-1] > nums1[i]: left = i + 1; else: if i == 0: max_left = nums2[j-1]; elif j == 0: max_left = nums1[i-1]; else: max_left = max(nums1[i-1], nums2[j-1]); if (m+n) % 2 == 1: return max_left; if i == m: min_right = nums2[j]; elif j == n: min_right = nums1[i]; else: min_right = min(nums1[i], nums2[j]); return (max_left + min_right) / 2; return 0</code>. Time is O(log(min(m,n))), space is O(1). I used this in a data project.</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="section">
+                <h2 class="section-title">Mock Interview Conversations</h2>
+                <div class="conversation">
+                    <h3>Mock Interview 1</h3>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> Let’s say you’ve got two sorted arrays. How do you find their common elements?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> I’d use two pointers to compare elements. In Python: <code>def intersect(nums1, nums2): nums1.sort(); nums2.sort(); result = []; i = j = 0; while i < len(nums1) and j < len(nums2): if nums1[i] == nums2[j]: result.append(nums1[i]); i += 1; j += 1; elif nums1[i] < nums2[j]: i += 1; else: j += 1; return result</code>. Time is O(n log n + m log m) due to sorting, space is O(min(n,m)). I used this in a deduplication project.</p>
+                    </div>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> Imagine your app goes down in production. What steps do you take?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> I’d check Grafana for alerts, review logs for errors, and isolate the issue. In a project, a memory spike crashed our server; I restarted it, added monitoring, and optimized queries, reducing downtime to 10 minutes.</p>
+                    </div>
+                </div>
+                <div class="conversation">
+                    <h3>Mock Interview 2</h3>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> How would you build a data structure for an autocomplete feature?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> I’d use a trie for prefix searches. In Python: <code>class TrieNode: def __init__(self): self.children = {}; self.is_end = False; class Trie: def __init__(self): self.root = TrieNode(); def insert(self, word): node = self.root; for c in word: if c not in node.children: node.children[c] = TrieNode(); node = node.children[c]; node.is_end = True; def search_prefix(self, prefix): node = self.root; for c in prefix: if c not in node.children: return []; node = node.children[c]; return self._find_words(node, prefix); def _find_words(self, node, prefix): result = []; if node.is_end: result.append(prefix); for c in node.children: result.extend(self._find_words(node.children[c], prefix + c)); return result</code>. Time is O(m) for insert, O(p+n) for search. I used this in a search project.</p>
+                    </div>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> Got any tricks to make file transfers faster over a network?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> I’d compress files, use chunked transfers, and add retries. In a project, I used gzip and TCP window scaling, boosting speed by 30% and handling failures with backoff.</p>
+                    </div>
+                </div>
+                <div class="conversation">
+                    <h3>Mock Interview 3</h3>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> Can you verify if a binary tree follows BST properties?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> I’d check if nodes are in ascending order with range checks. In Python: <code>def is_valid_bst(root): def validate(node, min_val, max_val): if not node: return True; if node.val <= min_val or node.val >= max_val: return False; return validate(node.left, min_val, node.val) and validate(node.right, node.val, max_val); return validate(root, float('-inf'), float('inf'))</code>. Time is O(n), space is O(h). I used this in a project for tree validation.</p>
+                    </div>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> How do you track down memory leaks in a C++ app?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> I’d use Valgrind to detect memory leaks, use smart pointers, and track allocations. In a project, I found a leak in an array, switched to unique_ptr, and cut memory usage by 20%.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const themeToggleBtn = document.getElementById('themeToggle');
+            const themeIcon = themeToggleBtn.querySelector('i');
+
+            if (themeToggleBtn) {
+                themeToggleBtn.addEventListener('click', function () {
+                    document.body.classList.toggle('light-theme');
+                    const isLightTheme = document.body.classList.contains('light-theme');
+                    themeIcon.className = isLightTheme ? 'bx bx-sun' : 'bx bx-moon';
+                    localStorage.setItem('theme', isLightTheme ? 'light' : 'dark');
+                });
+            }
+
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-theme');
+                themeIcon.className = 'bx bx-sun';
+            }
+        });
+    </script>
+</body>
+</html>
