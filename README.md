@@ -2,17 +2,17 @@
 My BCA Final year project . An Aptitude and Technical round Preperation website for IT Students.
 
 
-CrackIT – A Comprehensive IT Aptitude & Interview Preparation Platform
+##CrackIT – A Comprehensive IT Aptitude & Interview Preparation Platform
 
 CrackIT is an online training platform designed to help IT students prepare for aptitude tests, technical interviews, and mock assessments. The platform provides a structured, interactive, and responsive learning environment, integrating a curated set of questions, mock tests, and personalized feedback tools.
 
 
-🚀 Introduction
+##🚀 Introduction
 
 CrackIT bridges the gap between academic learning and industry demands. With categorized practice areas, timed mock tests, and real-time performance analytics, it prepares students for placement exams and technical rounds efficiently.
 
 
-🎯 Key Features
+##🎯 Key Features
 
     📚 Topic-wise preparation across aptitude, programming, and reasoning
 
@@ -31,9 +31,9 @@ CrackIT bridges the gap between academic learning and industry demands. With cat
     🎯 Admin CRUD functionality for managing question banks
 
 
-🧩 Modules
+##🧩 Modules
 
-👨‍🎓 User Module
+###👨‍🎓 User Module
 
     Authentication – Gmail/Google-based login and password reset
 
@@ -47,7 +47,7 @@ CrackIT bridges the gap between academic learning and industry demands. With cat
 
     Feedback System – Bug reporting and user queries with EmailJS integration
 
-👨‍💼 Admin Module
+###👨‍💼 Admin Module
 
     CRUD Questions – Add, update, delete, and manage questions
 
@@ -55,9 +55,9 @@ CrackIT bridges the gap between academic learning and industry demands. With cat
 
 
 
-🛠️ Tech Stack
+##🛠️ Tech Stack
 
-Frontend
+###Frontend
 
     HTML, CSS, JavaScript
 
@@ -67,7 +67,7 @@ Frontend
 
     Google Fonts (Inter)
 
-Backend / Database
+###Backend / Database
 
     Firebase – Authentication & user data
 
@@ -75,43 +75,43 @@ Backend / Database
 
     EmailJS – Feedback and email automation
 
-Deployment & Tools
+###Deployment & Tools
 
     Netlify – Frontend deployment
 
     VS Code – Development IDE
 
 
-📦 Database Schema Highlights
+##📦 Database Schema Highlights
 
-🔐 User Table
+###🔐 User Table
 
     id, name, email, password_hash
 
-🧾 Questions Table
+###🧾 Questions Table
 
     id, question, option1-4, correct_option, explanation, difficulty
 
-📝 Mock Test Table
+###📝 Mock Test Table
 
     Same structure + topic, subtopic
 
 
 
-🖥️ System Requirements
+##🖥️ System Requirements
 
-Hardware
+###Hardware
 
     8 GB RAM, Quad-core CPU, SSD storage
 
-Software
+###Software
 
     Windows/Linux/macOS
 
     Netlify / Firebase / Supabase accounts
 
 
-📈 Project Scope
+##📈 Project Scope
 
     Responsive across devices
 
@@ -122,7 +122,7 @@ Software
     Built for scalability and future integrations
 
 
-⚠️ Known Limitations
+##⚠️ Known Limitations
 
     No native backend server (if hosted only on Netlify)
 
@@ -133,7 +133,7 @@ Software
     No SMS/email alerts for test progress
 
 
-🔮 Future Enhancements
+##🔮 Future Enhancements
 
     Mobile app version (Android/iOS)
 
