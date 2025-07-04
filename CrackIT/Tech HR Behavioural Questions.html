@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Behavioural Questions</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            background-color: #0f0f0f;
+            color: #f0f0f0;
+            min-height: 100vh;
+            display: flex;
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme {
+            background-color: #f5f7fb;
+            color: #333;
+        }
+
+        .top-right-buttons {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .theme-toggle-btn, .back-btn {
+            background-color: #0a0a0a;
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 20px;
+            text-decoration: none;
+        }
+
+        body.light-theme .theme-toggle-btn, body.light-theme .back-btn {
+            background-color: #c8c8c8;
+            color: #4a90e2;
+            border: 1px solid rgba(74, 144, 226, 0.3);
+        }
+
+        .theme-toggle-btn:hover, .back-btn:hover {
+            background-color: #1a1a1a;
+            transform: scale(1.1);
+        }
+
+        body.light-theme .theme-toggle-btn:hover, body.light-theme .back-btn:hover {
+            background-color: #d3dce6;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            width: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #4CAF50, #45D149);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        body.light-theme .header h1 {
+            background: linear-gradient(45deg, #4a90e2, #357abd);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-icon {
+            font-size: 4rem;
+            color: #22c55e;
+            margin: 1rem 0;
+            display: block;
+            animation: scaleIn 0.5s ease;
+        }
+
+        body.light-theme .header-icon {
+            color: #4a90e2;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #aaa;
+            margin-top: 1rem;
+        }
+
+        body.light-theme .header p {
+            color: #6b7280;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid transparent;
+            background: linear-gradient(90deg, #22c55e, #45D149);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #22c55e, #45D149);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .section-title:hover::after {
+            transform: scaleX(1);
+        }
+
+        body.light-theme .section-title {
+            background: linear-gradient(90deg, #4a90e2, #357abd);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        body.light-theme .section-title::after {
+            background: linear-gradient(90deg, #4a90e2, #357abd);
+            height: 3px;
+        }
+
+        .question-block {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            position: relative;
+            animation: fadeInUp 0.6s ease forwards;
+            animation-delay: calc(var(--block-index) * 0.1s);
+        }
+
+        body.light-theme .question-block {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .question-block h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #22c55e;
+        }
+
+        body.light-theme .question-block h3 {
+            color: #4a90e2;
+        }
+
+        .question-block .question-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem 0;
+            font-size: 1.8rem;
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            transition: transform 0.3s ease;
+        }
+
+        body.light-theme .question-block .question-icon {
+            background: rgba(74, 144, 226, 0.2);
+            color: #4a90e2;
+        }
+
+        .question-block:hover .question-icon {
+            transform: scale(1.1);
+        }
+
+        .question-block p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #aaa;
+            margin-bottom: 1rem;
+        }
+
+        body.light-theme .question-block p {
+            color: #6b7280;
+        }
+
+        .question-block ul {
+            font-size: 0.85rem;
+            color: #ccc;
+            line-height: 1.6;
+            padding-left: 1.5rem;
+        }
+
+        body.light-theme .question-block ul {
+            color: #333;
+        }
+
+        .question-block ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sample-response {
+            margin: 1rem 0;
+            padding: 1rem;
+            border-left: 3px solid #22c55e;
+            background: rgba(55, 197, 94, 0.1);
+            border-radius: 0 8px 8px 0;
+        }
+
+        body.light-theme .sample-response {
+            border-left: 3px solid #4a90e2;
+            background: rgba(74, 144, 226, 0.1);
+        }
+
+        .sample-response p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .conversation {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            position: relative;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        body.light-theme .conversation {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .conversation h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #22c55e;
+        }
+
+        body.light-theme .conversation h3 {
+            color: #4a90e2;
+        }
+
+        .dialogue {
+            margin: 1rem 0;
+            padding: 1rem;
+            border-left: 3px solid #22c55e;
+            background: rgba(55, 197, 94, 0.1);
+            border-radius: 0 8px 8px 0;
+        }
+
+        body.light-theme .dialogue {
+            border-left: 3px solid #4a90e2;
+            background: rgba(74, 144, 226, 0.1);
+        }
+
+        .dialogue.interviewer {
+            border-left: 3px solid #f97316;
+            background: rgba(249, 115, 22, 0.1);
+        }
+
+        body.light-theme .dialogue.interviewer {
+            border-left: 3px solid #357abd;
+            background: rgba(53, 122, 189, 0.2);
+        }
+
+        .dialogue p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .dialogue strong {
+            color: #ffffff;
+        }
+
+        body.light-theme .dialogue strong {
+            color: #1f2937;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #333, transparent);
+            margin: 3rem 0;
+        }
+
+        body.light-theme .divider {
+            background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.8); }
+            to { transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .question-block, .conversation {
+                padding: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .question-block h3, .conversation h3 {
+                font-size: 1.3rem;
+            }
+
+            .question-block p, .dialogue p, .sample-response p {
+                font-size: 0.85rem;
+            }
+
+            .question-block ul {
+                font-size: 0.8rem;
+            }
+
+            .top-right-buttons {
+                top: 10px;
+                right: 10px;
+            }
+
+            .theme-toggle-btn, .back-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-right-buttons">
+        <button class="theme-toggle-btn" id="themeToggle" title="Toggle Theme">
+            <i class='bx bx-moon'></i>
+        </button>
+        <a href="Tech and HR Questions.html" class="back-btn" title="Back to Tech and HR Questions">
+            <i class='bx bx-arrow-back'></i>
+        </a>
+    </div>
+
+    <div class="main-content">
+        <div class="container">
+            <header class="header">
+                <i class='bx bx-conversation header-icon'></i>
+                <h1>Behavioural Questions</h1>
+                <p>Master HR behavioural questions for IT interviews with effective responses</p>
+            </header>
+
+            <section class="section" id="behavioural-questions">
+                <h2 class="section-title">Key Behavioural Questions</h2>
+                <div class="question-block" style="--block-index: 1;">
+                    <h3>Describe a Time You Worked in a Team</h3>
+                    <div class="question-icon"><i class='bx bx-group'></i></div>
+                    <p>Assesses your collaboration and interpersonal skills.</p>
+                    <ul>
+                        <li>Use the STAR method (Situation, Task, Action, Result).</li>
+                        <li>Highlight your role and contributions.</li>
+                        <li>Emphasize positive team dynamics.</li>
+                        <li>Relate to IT teamwork.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>In a group project, we developed a web app for student records. My task was to design the database. I collaborated with frontend developers to ensure data compatibility, held regular syncs, and resolved conflicts by suggesting a standardized API. Our app was delivered on time, earning high praise from our professor.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 2;">
+                    <h3>How Do You Handle a Tight Deadline?</h3>
+                    <div class="question-icon"><i class='bx bx-time'></i></div>
+                    <p>Evaluates your time management and pressure-handling skills.</p>
+                    <ul>
+                        <li>Describe a specific high-pressure situation.</li>
+                        <li>Explain your prioritization strategy.</li>
+                        <li>Highlight a successful outcome.</li>
+                        <li>Avoid mentioning burnout.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>During a hackathon, we had 24 hours to build an app. I prioritized core features, delegated UI tasks, and coded the backend. By setting hourly milestones, we completed a functional prototype, which won second place. This taught me to focus on critical tasks under time constraints.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 3;">
+                    <h3>Tell Me About a Time You Faced a Conflict</h3>
+                    <div class="question-icon"><i class='bx bx-shield-alt'></i></div>
+                    <p>Tests your conflict resolution and communication skills.</p>
+                    <ul>
+                        <li>Choose a professional conflict.</li>
+                        <li>Focus on your actions to resolve it.</li>
+                        <li>Show empathy and collaboration.</li>
+                        <li>End with a positive result.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>In a project, a teammate and I disagreed on the tech stack. I listened to their concerns, proposed a pros-cons analysis, and we compromised on a hybrid solution. This improved team morale and led to a successful project delivery, enhancing our collaboration.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 4;">
+                    <h3>Describe a Time You Took Initiative</h3>
+                    <div class="question-icon"><i class='bx bx-bulb'></i></div>
+                    <p>Assesses your proactivity and leadership potential.</p>
+                    <ul>
+                        <li>Highlight a situation where you acted without being asked.</li>
+                        <li>Explain the impact of your initiative.</li>
+                        <li>Keep it relevant to IT.</li>
+                        <li>Show measurable results if possible.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>In an internship, I noticed slow API responses. Without prompting, I analyzed the code, identified redundant queries, and optimized them, reducing response time by 30%. My manager adopted the changes, improving the app’s user experience.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 5;">
+                    <h3>How Do You Handle Feedback?</h3>
+                    <div class="question-icon"><i class='bx bx-comment'></i></div>
+                    <p>Evaluates your openness to growth and adaptability.</p>
+                    <ul>
+                        <li>Choose a constructive feedback example.</li>
+                        <li>Show how you applied it.</li>
+                        <li>Emphasize a positive attitude.</li>
+                        <li>Relate to professional improvement.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>During a code review, my mentor suggested improving my function modularity. I studied best practices, refactored my code, and reduced complexity by 20%. This feedback enhanced my coding skills and made my work more maintainable.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 6;">
+                    <h3>Describe a Time You Failed</h3>
+                    <div class="question-icon"><i class='bx bx-error'></i></div>
+                    <p>Tests your resilience and learning ability.</p>
+                    <ul>
+                        <li>Choose a non-critical failure.</li>
+                        <li>Focus on lessons learned.</li>
+                        <li>Show how you improved.</li>
+                        <li>Avoid blaming others.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>In a group project, I underestimated testing time, causing bugs in our app. I learned to allocate buffer time and implemented automated tests in the next project, which ran smoothly. This taught me the importance of thorough planning.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 7;">
+                    <h3>How Do You Prioritize Tasks?</h3>
+                    <div class="question-icon"><i class='bx bx-list-check'></i></div>
+                    <p>Assesses your organizational skills.</p>
+                    <ul>
+                        <li>Describe a specific prioritization method.</li>
+                        <li>Provide an example from IT work.</li>
+                        <li>Highlight efficiency.</li>
+                        <li>Mention tools if applicable.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>In a project with multiple features, I used the Eisenhower Matrix to prioritize tasks. I focused on critical backend APIs first, using Trello to track progress. This ensured we met the deadline for core functionality, delivering a stable app.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 8;">
+                    <h3>Tell Me About a Time You Solved a Problem</h3>
+                    <div class="question-icon"><i class='bx bx-wrench'></i></div>
+                    <p>Evaluates your problem-solving skills.</p>
+                    <ul>
+                        <li>Describe a technical or team issue.</li>
+                        <li>Explain your approach and actions.</li>
+                        <li>Highlight the outcome.</li>
+                        <li>Keep it IT-relevant.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>Our app crashed due to a memory leak. I used debugging tools to trace it to an unclosed database connection, fixed it, and added monitoring. This resolved the issue and improved app stability by 40%.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 9;">
+                    <h3>How Do You Handle Change?</h3>
+                    <div class="question-icon"><i class='bx bx-refresh'></i></div>
+                    <p>Tests your adaptability in dynamic environments.</p>
+                    <ul>
+                        <li>Choose an example of sudden change.</li>
+                        <li>Show flexibility and positive attitude.</li>
+                        <li>Highlight successful adaptation.</li>
+                        <li>Relate to IT contexts.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>When our project’s framework was switched mid-development, I quickly learned the new tech via tutorials and adapted our codebase. This kept us on schedule, and I gained expertise in the new framework.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 10;">
+                    <h3>Describe a Time You Led a Project</h3>
+                    <div class="question-icon"><i class='bx bx-crown'></i></div>
+                    <p>Assesses your leadership and management skills.</p>
+                    <ul>
+                        <li>Highlight your leadership role.</li>
+                        <li>Explain how you motivated the team.</li>
+                        <li>Show measurable success.</li>
+                        <li>Keep it IT-focused.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>I led a team to build an inventory app. I assigned roles based on strengths, held daily stand-ups, and resolved bottlenecks. We delivered the app a week early, reducing manual tracking time by 50%.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 11;">
+                    <h3>How Do You Stay Motivated?</h3>
+                    <div class="question-icon"><i class='bx bx-rocket'></i></div>
+                    <p>Evaluates your drive and passion for work.</p>
+                    <ul>
+                        <li>Mention specific motivators.</li>
+                        <li>Relate to IT challenges.</li>
+                        <li>Show enthusiasm.</li>
+                        <li>Avoid generic answers.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>Solving complex coding problems keeps me motivated. In a project, debugging a tricky algorithm was challenging but rewarding when it improved performance by 25%. I also stay inspired by learning new tech trends.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 12;">
+                    <h3>Tell Me About a Time You Helped a Colleague</h3>
+                    <div class="question-icon"><i class='bx bx-hand'></i></div>
+                    <p>Tests your teamwork and empathy.</p>
+                    <ul>
+                        <li>Choose a specific instance.</li>
+                        <li>Highlight your supportive actions.</li>
+                        <li>Show positive impact.</li>
+                        <li>Keep it professional.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>A teammate struggled with a JavaScript bug. I paired with them, explained debugging techniques, and we fixed it together. This boosted their confidence and kept our project on track.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 13;">
+                    <h3>How Do You Ensure Quality in Your Work?</h3>
+                    <div class="question-icon"><i class='bx bx-check-circle'></i></div>
+                    <p>Assesses your attention to detail and process.</p>
+                    <ul>
+                        <li>Mention specific quality practices.</li>
+                        <li>Provide an IT example.</li>
+                        <li>Highlight outcomes.</li>
+                        <li>Show consistency.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>I ensure quality by writing unit tests and conducting peer reviews. In a web app project, my tests caught 90% of bugs early, and reviews improved code readability, leading to a reliable product.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 14;">
+                    <h3>Describe a Time You Exceeded Expectations</h3>
+                    <div class="question-icon"><i class='bx bx-star'></i></div>
+                    <p>Evaluates your ability to go above and beyond.</p>
+                    <ul>
+                        <li>Choose a specific achievement.</li>
+                        <li>Explain your extra effort.</li>
+                        <li>Highlight impact.</li>
+                        <li>Relate to IT work.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>In an internship, I was tasked with basic UI updates but also automated form validation, saving 10 hours weekly. My manager praised the initiative, and it improved user satisfaction by 15%.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 15;">
+                    <h3>How Do You Handle Stressful Situations?</h3>
+                    <div class="question-icon"><i class='bx bx-cloud-rain'></i></div>
+                    <p>Tests your resilience and coping strategies.</p>
+                    <ul>
+                        <li>Describe a stressful IT situation.</li>
+                        <li>Explain your coping mechanism.</li>
+                        <li>Show a positive outcome.</li>
+                        <li>Avoid negativity.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>During a server outage, I stayed calm, prioritized critical services, and used logs to identify the issue. By coordinating with the team, we restored services in two hours, minimizing downtime and user impact.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 16;">
+                    <h3>Tell Me About a Time You Learned Something New</h3>
+                    <div class="question-icon"><i class='bx bx-book-open'></i></div>
+                    <p>Assesses your learning agility.</p>
+                    <ul>
+                        <li>Choose a relevant IT skill.</li>
+                        <li>Explain how you learned it.</li>
+                        <li>Show application and impact.</li>
+                        <li>Highlight enthusiasm.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>I learned Docker to streamline deployments. I took an online course and practiced containerizing a web app. This reduced deployment time by 40% in a project, enhancing team efficiency.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 17;">
+                    <h3>How Do You Communicate Complex Ideas?</h3>
+                    <div class="question-icon"><i class='bx bx-chat'></i></div>
+                    <p>Evaluates your communication skills.</p>
+                    <ul>
+                        <li>Choose a technical example.</li>
+                        <li>Explain simplification techniques.</li>
+                        <li>Show successful communication.</li>
+                        <li>Relate to IT contexts.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>I explained a database schema to non-technical stakeholders using diagrams and analogies, comparing tables to spreadsheets. This clarity led to their approval of the design, ensuring project alignment.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 18;">
+                    <h3>Describe a Time You Managed Multiple Responsibilities</h3>
+                    <div class="question-icon"><i class='bx bx-task'></i></div>
+                    <p>Tests your multitasking abilities.</p>
+                    <ul>
+                        <li>Describe a busy IT scenario.</li>
+                        <li>Explain your organization strategy.</li>
+                        <li>Highlight successful outcomes.</li>
+                        <li>Mention tools if relevant.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>During a semester, I balanced two projects and an internship. I used Jira to track tasks and prioritized deadlines. This allowed me to deliver both projects on time and improve an app’s performance by 20% at work.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 19;">
+                    <h3>How Do You Handle Ambiguity?</h3>
+                    <div class="question-icon"><i class='bx bx-question-mark'></i></div>
+                    <p>Assesses your ability to work with unclear requirements.</p>
+                    <ul>
+                        <li>Choose an unclear IT situation.</li>
+                        <li>Explain how you clarified needs.</li>
+                        <li>Show a successful result.</li>
+                        <li>Highlight proactivity.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>In a project with vague UI requirements, I met with stakeholders to gather details and prototyped options. Their feedback refined the design, leading to a user-friendly app completed on schedule.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 20;">
+                    <h3>Tell Me About a Time You Demonstrated Integrity</h3>
+                    <div class="question-icon"><i class='bx bx-shield'></i></div>
+                    <p>Evaluates your ethics and trustworthiness.</p>
+                    <ul>
+                        <li>Choose a situation showing honesty.</li>
+                        <li>Explain your actions and reasoning.</li>
+                        <li>Highlight positive impact.</li>
+                        <li>Keep it professional.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>I found a security flaw in our app but was tempted to ignore it due to deadlines. I reported it, worked overtime to fix it, and prevented potential data breaches, earning trust from my team.</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="section">
+                <h2 class="section-title">Mock Interview Conversations</h2>
+                <div class="conversation">
+                    <h3>Mock Interview 1</h3>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> Describe a time you had to persuade someone.</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> In a project, my team preferred a complex framework, but I believed a simpler one suited our timeline. I presented a comparison of development speeds and risks, convincing them to switch. This saved us two weeks, ensuring on-time delivery.</p>
+                    </div>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> How do you build relationships with teammates?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> I build relationships by actively listening and offering support. During a sprint, I organized knowledge-sharing sessions and helped a new developer with Git. This fostered trust and improved our team’s collaboration on a tight deadline.</p>
+                    </div>
+                </div>
+                <div class="conversation">
+                    <h3>Mock Interview 2</h3>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> Tell me about a time you missed a deadline.</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> In a project, I misjudged the time for integrating an API, missing a deadline by a day. I communicated the delay early, worked extra hours to complete it, and added buffer time in future plans. This ensured subsequent deadlines were met.</p>
+                    </div>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> How do you handle repetitive tasks?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> I automate repetitive tasks to stay efficient. In an internship, I scripted data entry tasks in Python, reducing weekly effort from 5 hours to 30 minutes. This allowed me to focus on coding new features, adding value to the project.</p>
+                    </div>
+                </div>
+                <div class="conversation">
+                    <h3>Mock Interview 3</h3>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> Describe a time you adapted to a new process.</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> My team adopted Agile mid-project. I studied Scrum, attended workshops, and became the sprint planner. This streamlined our workflow, reducing delivery time by 15% and improving team coordination.</p>
+                    </div>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> How do you ensure accountability?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> I ensure accountability by setting clear goals and tracking progress. In a group project, I used a shared dashboard to monitor tasks. When I fell behind on a module, I updated the team and caught up, ensuring we met our deadline.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const themeToggleBtn = document.getElementById('themeToggle');
+            const themeIcon = themeToggleBtn.querySelector('i');
+
+            if (themeToggleBtn) {
+                themeToggleBtn.addEventListener('click', function () {
+                    document.body.classList.toggle('light-theme');
+                    const isLightTheme = document.body.classList.contains('light-theme');
+                    themeIcon.className = isLightTheme ? 'bx bx-sun' : 'bx bx-moon';
+                    localStorage.setItem('theme', isLightTheme ? 'light' : 'dark');
+                });
+            }
+
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-theme');
+                themeIcon.className = 'bx bx-sun';
+            }
+        });
+    </script>
+</body>
+</html>

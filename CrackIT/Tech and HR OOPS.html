@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>OOPS Interview Questions</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            background-color: #0f0f0f;
+            color: #f0f0f0;
+            min-height: 100vh;
+            display: flex;
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme {
+            background-color: #f5f7fb;
+            color: #333;
+        }
+
+        .top-right-buttons {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .theme-toggle-btn, .back-btn {
+            background-color: #0a0a0a;
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 20px;
+            text-decoration: none;
+        }
+
+        body.light-theme .theme-toggle-btn, body.light-theme .back-btn {
+            background-color: #c8c8c8;
+            color: #4a90e2;
+            border: 1px solid rgba(74, 144, 226, 0.3);
+        }
+
+        .theme-toggle-btn:hover, .back-btn:hover {
+            background-color: #1a1a1a;
+            transform: scale(1.1);
+        }
+
+        body.light-theme .theme-toggle-btn:hover, body.light-theme .back-btn:hover {
+            background-color: #d3dce6;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            width: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #4CAF50, #45D149);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        body.light-theme .header h1 {
+            background: linear-gradient(45deg, #4a90e2, #357abd);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-icon {
+            font-size: 4rem;
+            color: #22c55e;
+            margin: 1rem 0;
+            display: block;
+            animation: scaleIn 0.5s ease;
+        }
+
+        body.light-theme .header-icon {
+            color: #4a90e2;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #aaa;
+            margin-top: 1rem;
+        }
+
+        body.light-theme .header p {
+            color: #6b7280;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid transparent;
+            background: linear-gradient(90deg, #22c55e, #45D149);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #22c55e, #45D149);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .section-title:hover::after {
+            transform: scaleX(1);
+        }
+
+        body.light-theme .section-title {
+            background: linear-gradient(90deg, #4a90e2, #357abd);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        body.light-theme .section-title::after {
+            background: linear-gradient(90deg, #4a90e2, #357abd);
+            height: 3px;
+        }
+
+        .question-block {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            position: relative;
+            animation: fadeInUp 0.6s ease forwards;
+            animation-delay: calc(var(--block-index) * 0.1s);
+        }
+
+        body.light-theme .question-block {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .question-block h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #22c55e;
+        }
+
+        body.light-theme .question-block h3 {
+            color: #4a90e2;
+        }
+
+        .question-block .question-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem 0;
+            font-size: 1.8rem;
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            transition: transform 0.3s ease;
+        }
+
+        body.light-theme .question-block .question-icon {
+            background: rgba(74, 153, 226, 0.1);
+            color: #4a90e2;
+        }
+
+        .question-block:hover .question-icon {
+            transform: scale(1.1);
+        }
+
+        .question-block p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #aaa;
+            margin-bottom: 1rem;
+        }
+
+        body.light-theme .question-block p {
+            color: #6b7280;
+        }
+
+        .question-block ul {
+            font-size: 0.85rem;
+            color: #ccc;
+            line-height: 1.6;
+            padding-left: 1.2rem;
+        }
+
+        body.light-theme .question-block ul {
+            color: #333;
+        }
+
+        .question-block ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sample-response {
+            margin: 1rem 0;
+            padding: 1rem;
+            border-left: 3px solid #22c55e;
+            background: rgba(55, 197, 94, 0.1);
+            border-radius: 0 8px 8px 0;
+        }
+
+        body.light-theme .sample-response {
+            border-left: 3px solid #4a90e2;
+            background: rgba(74, 153, 226, 0.1);
+        }
+
+        .sample-response p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .conversation {
+            margin: 1.5 rem;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: relative;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        body.light-theme .conversation {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .conversation h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #22c55e;
+        }
+
+        body.light-theme .conversation h3 {
+            color: #4a90e2;
+        }
+
+        .dialogue {
+            margin: 1rem 0;
+            padding: 12px;
+            border-left: 3px solid #22c55e;
+            background: rgba(53, 197, 94, 0.1);
+            border-radius: 0 8px 8px 0;
+        }
+
+        body.light-theme .dialogue {
+            border-left: 3px solid #4a90e2;
+            background: rgba(74, 153, 226, 0.1);
+        }
+
+        .dialogue.interviewer {
+            border-left: 3px solid #f97316;
+            background: rgba(249, 115, 14, 0.2);
+        }
+
+        body.light-theme .dialogue.interviewer {
+            border-left: 3px solid #357abd;
+            background: rgba(53, 75, 189, 0.2);
+        }
+
+        .dialogue p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .dialogue strong {
+            color: #ffffff;
+        }
+
+        body.light-theme .dialogue strong {
+            color: #333;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #333, transparent);
+            margin: 3rem 0;
+        }
+
+        body.light-theme .divider {
+            background: linear-gradient(to right, transparent, #e5e7eb, transparent);
+        }
+
+        /* Syntax highlighting styles for code blocks */
+        pre {
+            background: #2d2d2d;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin: 1rem 0;
+        }
+
+        body.light-theme pre {
+            background: #f4f4f4;
+        }
+
+        code {
+            color: #f8f8f2;
+        }
+
+        body.light-theme code {
+            color: #333;
+        }
+
+        .keyword {
+            color: #ff79c6;
+        }
+
+        body.light-theme .keyword {
+            color: #d73a49;
+        }
+
+        .type {
+            color: #8be9fd;
+        }
+
+        body.light-theme .type {
+            color: #005cc5;
+        }
+
+        .string {
+            color: #f1fa8c;
+        }
+
+        body.light-theme .string {
+            color: #032f62;
+        }
+
+        .comment {
+            color: #6272a4;
+            font-style: italic;
+        }
+
+        body.light-theme .comment {
+            color: #6a737d;
+        }
+
+        .function {
+            color: #50fa7b;
+        }
+
+        body.light-theme .function {
+            color: #22863a;
+        }
+
+        .number {
+            color: #bd93f9;
+        }
+
+        body.light-theme .number {
+            color: #005cc5;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.8); }
+            to { transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .question-block, .conversation {
+                padding: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .question-block h3, .conversation h3 {
+                font-size: 1.3rem;
+            }
+
+            .question-block p, .dialogue p, .sample-response p {
+                font-size: 0.85rem;
+            }
+
+            .question-block ul {
+                font-size: 0.8rem;
+            }
+
+            .top-right-buttons {
+                top: 10px;
+                right: 10px;
+            }
+
+            .theme-toggle-btn, .back-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-right-buttons">
+        <button class="theme-toggle-btn" id="themeToggle" title="Toggle Theme">
+            <i class='bx bx-moon'></i>
+        </button>
+        <a href="Tech and HR Questions.html" class="back-btn" title="Back to Tech and HR Questions">
+            <i class='bx bx-arrow-back'></i>
+        </a>
+    </div>
+
+    <div class="main-content">
+        <div class="container">
+            <header class="header">
+                <i class='bx bx-code-alt header-icon'></i>
+                <h1>OOPS Interview Questions</h1>
+                <p>Master key Object-Oriented Programming concepts for technical interviews</p>
+            </header>
+
+            <section class="section" id="oops-questions">
+                <h2 class="section-title">Key OOPS Questions</h2>
+                <div class="question-block" style="--block-index: 1;">
+                    <h3>What is Object-Oriented Programming (OOPS)?</h3>
+                    <div class="question-icon"><i class='bx bx-code-block'></i></div>
+                    <p>Object-Oriented Programming is a methodology to design programs using classes and objects, simplifying software development and maintenance.</p>
+                    <ul>
+                        <li><strong>Class:</strong> A user-defined data type defining properties and functions (e.g., Human as a class with body parts as properties and actions as functions).</li>
+                        <li><strong>Object:</strong> A runtime instance of a class, representing entities like a person or place, operating on data and functions.</li>
+                        <li><strong>Note:</strong> Classes don’t occupy memory until objects are instantiated.</li>
+                        <li><strong>C++ Class Syntax Example:</strong></li>
+                    </ul>
+                    <div class="sample-response">
+                        <pre><code>
+<span class="keyword">class</span> <span class="type">student</span> {
+    <span class="keyword">public</span>:
+        <span class="type">int</span> id; // data member
+        <span class="type">int</span> mobile;
+        <span class="type">string</span> name;
+        <span class="type">int</span> <span class="function">add</span>(<span class="type">int</span> x, <span class="type">int</span> y) { // member function
+            <span class="keyword">return</span> x + y;
+        }
+};
+</code></pre>
+                        <p><strong>Object Creation:</strong> <code>student s = new student();</code></p>
+                        <p><strong>Note:</strong> Using <code>new</code> allocates memory in the heap; without it, the object is null in stack memory.</p>
+                        <p><strong>Sample Answer:</strong> Object-Oriented Programming (OOPS) is a programming paradigm that uses classes and objects to structure software. A class is a blueprint defining properties and behaviors, while an object is an instance of a class. For example, a "Car" class might have properties like color and methods like drive(). OOPS supports inheritance, encapsulation, polymorphism, and abstraction, enhancing code reusability and maintainability.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 2;">
+                    <h3>What is Inheritance?</h3>
+                    <div class="question-icon"><i class='bx bx-sitemap'></i></div>
+                    <p>Inheritance allows a class to inherit properties and behaviors from another class, promoting code reuse and extensibility.</p>
+                    <ul>
+                        <li><strong>Derived Class:</strong> Inherits from a base class.</li>
+                        <li><strong>Base Class:</strong> The class whose members are inherited.</li>
+                        <li><strong>Visibility Modes:</strong> private, protected, public.</li>
+                        <li><strong>Types:</strong> 
+                            <ul>
+                                <li>Single: One class inherits another.</li>
+                                <li>Multiple: A class inherits from multiple classes.</li>
+                                <li>Hierarchical: Multiple classes inherit from one base class.</li>
+                                <li>Multilevel: A class is derived from another derived class.</li>
+                                <li>Hybrid: Combination of multiple and hierarchical inheritance.</li>
+                            </ul>
+                        </li>
+                        <li><strong>C++ Syntax:</strong> <code>class derived_class : visibility-mode base_class;</code></li>
+                    </ul>
+                    <div class="sample-response">
+                        <p><strong>Sample Answer:</strong> Inheritance enables a derived class to inherit attributes and methods from a base class, promoting code reuse. For example, a "Vehicle" base class can have a "Car" derived class inheriting properties like speed, adding specific features like model type. C++ supports single, multiple, hierarchical, multilevel, and hybrid inheritance, with visibility modes (public, private, protected) controlling access to inherited members.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 3;">
+                    <h3>What is Encapsulation?</h3>
+                    <div class="question-icon"><i class='bx bx-lock'></i></div>
+                    <p>Encapsulation combines data and functions into a class, hiding data from direct access using getter/setter methods, enabling data hiding.</p>
+                    <ul>
+                        <li>Data is kept private; accessed via public methods.</li>
+                        <li>Reduces dependencies and supports data hiding (e.g., using protected/private in C++).</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p><strong>Sample Answer:</strong> Encapsulation bundles data and methods into a class, restricting direct data access to ensure security. For example, in a "BankAccount" class, the balance is private, accessed via public methods like <code>getBalance()</code>. This promotes data hiding, reducing dependencies and enhancing maintainability. In C++, private and protected access specifiers enforce encapsulation.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 4;">
+                    <h3>What is Abstraction?</h3>
+                    <div class="question-icon"><i class='bx bx-filter'></i></div>
+                    <p>Abstraction provides an abstract view of a problem, hiding unnecessary details and focusing on essential properties and operations.</p>
+                    <ul>
+                        <li><strong>Data Binding:</strong> Connects application UI with business logic, reflecting changes instantly.</li>
+                        <li>Simplifies complex problems by modeling standard solutions.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p><strong>Sample Answer:</strong> Abstraction simplifies real-world problems by focusing on essential features while hiding irrelevant details. For example, in a "Car" class, users interact with methods like <code>drive()</code> without needing to know engine mechanics. Abstraction supports data binding, where UI changes reflect business logic updates, and enables reusable models for problems with similar properties, improving efficiency.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 5;">
+                    <h3>What is Polymorphism?</h3>
+                    <div class="question-icon"><i class='bx bx-shape-circle'></i></div>
+                    <p>Polymorphism allows different classes to share the same interface with varying implementations, supporting multiple forms.</p>
+                    <ul>
+                        <li><strong>Compile-Time (Static):</strong> Via method overloading or operator overloading.</li>
+                        <li><strong>Runtime (Dynamic):</strong> Via method overriding using virtual functions.</li>
+                        <li><strong>Method Overloading Example:</strong></li>
+                    </ul>
+                    <div class="sample-response">
+                        <pre><code>
+#include <bits/stdc++.h>
+using namespace <span class="type">std</span>;
+<span class="keyword">class</span> <span class="type">Add</span> {
+    <span class="keyword">public</span>:
+        <span class="type">int</span> <span class="function">add</span>(<span class="type">int</span> a, <span class="type">int</span> b) {
+            <span class="keyword">return</span> (a + b);
+        }
+        <span class="type">int</span> <span class="function">add</span>(<span class="type">int</span> a, <span class="type">int</span> b, <span class="type">int</span> c) {
+            <span class="keyword">return</span> (a + b + c);
+        }
+};
+<span class="type">int</span> <span class="function">main</span>() {
+    <span class="type">Add</span> obj;
+    <span class="type">int</span> res1 = obj.<span class="function">add</span>(<span class="number">2</span>, <span class="number">3</span>);
+    <span class="type">int</span> res2 = obj.<span class="function">add</span>(<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>);
+    cout << res1 << <span class="string">" "</span> << res2 << endl;
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+</code></pre>
+                        <p><strong>Output:</strong> 5 9</p>
+                        <p><strong>Sample Answer:</strong> Polymorphism, meaning "many forms," allows classes to share interfaces with different implementations. Compile-time polymorphism, like method overloading, uses different parameter lists for the same function name, resolved at compile time. Runtime polymorphism, achieved via virtual functions and overriding, determines the method to call at runtime based on the object’s type, enabling flexible inheritance hierarchies.</p>
+                    </div>
+                    <div class="sample-response">
+                        <p><strong>Runtime Polymorphism Example:</strong></p>
+                        <pre><code>
+#include <bits/stdc++.h>
+using namespace <span class="type">std</span>;
+<span class="keyword">class</span> <span class="type">Base</span> {
+<span class="keyword">public</span>:
+    <span class="keyword">virtual</span> <span class="type">void</span> <span class="function">show</span>() {
+        cout << <span class="string">"Apni Kaksha base"</span> << endl;
+    }
+};
+<span class="keyword">class</span> <span class="type">Derived</span> : <span class="keyword">public</span> <span class="type">Base</span> {
+<span class="keyword">public</span>:
+    <span class="type">void</span> <span class="function">show</span>() {
+        cout << <span class="string">"Apni Kaksha derived"</span> << endl;
+    }
+};
+<span class="type">int</span> <span class="function">main</span>() {
+    <span class="type">Base</span>* b;
+    <span class="type">Derived</span> d;
+    b = &d;
+    b-><span class="function">show</span>(); // prints "Apni Kaksha derived"
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+</code></pre>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 6;">
+                    <h3>What are Constructors and Destructors?</h3>
+                    <div class="question-icon"><i class='bx bx-cog'></i></div>
+                    <p>Constructors initialize objects, while destructors clean up resources when objects are destroyed.</p>
+                    <ul>
+                        <li><strong>Default Constructor:</strong> No parameters, invoked automatically.</li>
+                        <li><strong>Parameterized Constructor:</strong> Takes parameters for custom initialization.</li>
+                        <li><strong>Copy Constructor:</strong> Initializes an object using another object.</li>
+                        <li><strong>Destructor:</strong> Cleans up resources, prefixed with ~, invoked automatically.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <pre><code>
+#include <bits/stdc++.h>
+using namespace <span class="type">std</span>;
+<span class="keyword">class</span> <span class="type">go</span> {
+<span class="keyword">public</span>:
+    <span class="type">int</span> x;
+    <span class="function">go</span>(<span class="type">int</span> a) { // parameterized constructor
+        x = a;
+    }
+    <span class="function">go</span>(<span class="type">go</span> &i) { // copy constructor
+        x = i.x;
+    }
+};
+<span class="type">int</span> <span class="function">main</span>() {
+    <span class="type">go</span> a1(<span class="number">20</span>);
+    <span class="type">go</span> a2(a1);
+    cout << a2.x << endl;
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+</code></pre>
+                        <p><strong>Output:</strong> 20</p>
+                        <p><strong>Destructor Example:</strong></p>
+                        <pre><code>
+#include <bits/stdc++.h>
+using namespace <span class="type">std</span>;
+<span class="keyword">class</span> <span class="type">A</span> {
+<span class="keyword">public</span>:
+    <span class="function">A</span>() {
+        cout << <span class="string">"Constructor in use"</span> << endl;
+    }
+    ~<span class="function">A</span>() {
+        cout << <span class="string">"Destructor in use"</span> << endl;
+    }
+};
+<span class="type">int</span> <span class="function">main</span>() {
+    <span class="type">A</span> a;
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+</code></pre>
+                        <p><strong>Sample Answer:</strong> Constructors are special methods invoked automatically to initialize objects. Default constructors take no parameters, parameterized constructors accept arguments, and copy constructors initialize from another object. Destructors, prefixed with ~, are called automatically to free resources when an object is destroyed, ensuring proper cleanup, like deallocating memory.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 7;">
+                    <h3>What is a Friend Function?</h3>
+                    <div class="question-icon"><i class='bx bx-link'></i></div>
+                    <p>A friend function is a non-member function that can access a class’s private and protected members.</p>
+                    <ul>
+                        <li>Declared in the class but defined outside.</li>
+                        <li>Uses object name and dot operator to access members.</li>
+                        <li>Takes objects as arguments.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p><strong>Sample Answer:</strong> A friend function is a non-member function granted access to a class’s private and protected members. It’s declared inside the class with the <code>friend</code> keyword but defined outside, accessing members via objects and the dot operator. For example, a friend function can access a private variable like balance in a "BankAccount" class, useful when external functions need controlled access to class data.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 8;">
+                    <h3>What is a Virtual Function?</h3>
+                    <div class="question-icon"><i class='bx bx-git-branch'></i></div>
+                    <p>A virtual function enables runtime polymorphism by allowing derived classes to override base class implementations.</p>
+                    <ul>
+                        <li>Declared with the <code>virtual</code> keyword in the base class.</li>
+                        <li>Resolved at runtime based on the object type.</li>
+                        <li>Cannot be static; destructors can be virtual, but not constructors.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <pre><code>
+#include <bits/stdc++.h>
+using namespace <span class="type">std</span>;
+<span class="keyword">class</span> <span class="type">base</span> {
+<span class="keyword">public</span>:
+    <span class="keyword">virtual</span> <span class="type">void</span> <span class="function">print</span>() {
+        cout << <span class="string">"print base class"</span> << endl;
+    }
+    <span class="type">void</span> <span class="function">show</span>() {
+        cout << <span class="string">"show base class"</span> << endl;
+    }
+};
+<span class="keyword">class</span> <span class="type">derived</span> : <span class="keyword">public</span> <span class="type">base</span> {
+<span class="keyword">public</span>:
+    <span class="type">void</span> <span class="function">print</span>() {
+        cout << <span class="string">"print derived class"</span> << endl;
+    }
+    <span class="type">void</span> <span class="function">show</span>() {
+        cout << <span class="string">"show derived class"</span> << endl;
+    }
+};
+<span class="type">int</span> <span class="function">main</span>() {
+    <span class="type">base</span>* bptr;
+    <span class="type">derived</span> d;
+    bptr = &d;
+    bptr-><span class="function">print</span>(); // prints "print derived class"
+    bptr-><span class="function">show</span>(); // prints "show base class"
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+</code></pre>
+                        <p><strong>Sample Answer:</strong> A virtual function, marked with <code>virtual</code> in a base class, allows derived classes to override it, enabling runtime polymorphism. The function called depends on the object’s type, not the pointer type. For example, a base class pointer to a derived object calls the derived class’s virtual function, ensuring dynamic behavior. Virtual functions cannot be static, and destructors can be virtual, but not constructors.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 9;">
+                    <h3>What is a Pure Virtual Function?</h3>
+                    <div class="question-icon"><i class='bx bx-layer'></i></div>
+                    <p>A pure virtual function is a placeholder in a base class with no implementation, making the class abstract.</p>
+                    <ul>
+                        <li>Declared with <code>= 0</code>.</li>
+                        <li>Abstract classes cannot be instantiated.</li>
+                        <li>Derived classes must implement the function.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <pre><code>
+#include <bits/stdc++.h>
+using namespace <span class="type">std</span>;
+<span class="keyword">class</span> <span class="type">Shape</span> {
+<span class="keyword">public</span>:
+    <span class="keyword">virtual</span> <span class="type">void</span> <span class="function">draw</span>() = <span class="number">0</span>;
+};
+<span class="keyword">class</span> <span class="type">Rectangle</span> : <span class="keyword">public</span> <span class="type">Shape</span> {
+<span class="keyword">public</span>:
+    <span class="type">void</span> <span class="function">draw</span>() {
+        cout << <span class="string">"Rectangle"</span> << endl;
+    }
+};
+<span class="keyword">class</span> <span class="type">Square</span> : <span class="keyword">public</span> <span class="type">Shape</span> {
+<span class="keyword">public</span>:
+    <span class="type">void</span> <span class="function">draw</span>() {
+        cout << <span class="string">"Square"</span> << endl;
+    }
+};
+<span class="type">int</span> <span class="function">main</span>() {
+    <span class="type">Shape</span>* s1 = <span class="keyword">new</span> <span class="type">Rectangle</span>();
+    <span class="type">Shape</span>* s2 = <span class="keyword">new</span> <span class="type">Square</span>();
+    s1-><span class="function">draw</span>();
+    s2-><span class="function">draw</span>();
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+</code></pre>
+                        <p><strong>Output:</strong> Rectangle<br>Square</p>
+                        <p><strong>Sample Answer:</strong> A pure virtual function, declared with <code>= 0</code> in a base class, has no implementation and makes the class abstract, preventing instantiation. Derived classes must provide implementations. For example, a "Shape" class with a pure virtual <code>draw()</code> ensures derived classes like "Rectangle" define their own drawing logic, supporting runtime polymorphism.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 10;">
+                    <h3>What are Namespaces?</h3>
+                    <div class="question-icon"><i class='bx bx-folder'></i></div>
+                    <p>Namespaces provide a logical division of code to prevent naming conflicts.</p>
+                    <ul>
+                        <li>Define scope for identifiers like variables, classes, and functions.</li>
+                        <li>Prevent ambiguity when multiple entities share the same name.</li>
+                        <li>C++’s standard namespace is <code>std</code>, included via <code>using namespace std;</code>.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <pre><code>
+#include <bits/stdc++.h>
+using namespace <span class="type">std</span>;
+<span class="keyword">namespace</span> <span class="type">Add</span> {
+    <span class="type">int</span> a = <span class="number">5</span>, b = <span class="number">5</span>;
+    <span class="type">int</span> <span class="function">add</span>() {
+        <span class="keyword">return</span> (a + b);
+    }
+}
+<span class="type">int</span> <span class="function">main</span>() {
+    <span class="type">int</span> res = <span class="type">Add</span>::<span class="function">add</span>();
+    cout << res;
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+</code></pre>
+                        <p><strong>Output:</strong> 10</p>
+                        <p><strong>Sample Answer:</strong> Namespaces logically group code to avoid naming conflicts. For example, two functions named <code>add()</code> can exist in different namespaces without ambiguity. C++’s <code>std</code> namespace includes standard library components. Using <code>namespace Add</code>, you can define variables and functions, accessed via the scope resolution operator <code>::</code>, ensuring clarity and organization.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 11;">
+                    <h3>What are Access Specifiers?</h3>
+                    <div class="question-icon"><i class='bx bx-shield'></i></div>
+                    <p>Access specifiers define how class members can be accessed from outside the class.</p>
+                    <ul>
+                        <li><strong>Private:</strong> Accessible only within the class.</li>
+                        <li><strong>Public:</strong> Accessible from anywhere.</li>
+                        <li><strong>Protected:</strong> Accessible within the class and its derived classes.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p><strong>Sample Answer:</strong> Access specifiers control access to class members. Private members are accessible only within the class, public members are accessible everywhere, and protected members are accessible in the class and its derived classes, commonly used in inheritance. For example, a private variable in a "Car" class can only be accessed via public methods, ensuring controlled access and encapsulation.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 12;">
+                    <h3>What is the Difference Between Overloading and Overriding?</h3>
+                    <div class="question-icon"><i class='bx bx-git-compare'></i></div>
+                    <p>Overloading and overriding are mechanisms to achieve polymorphism but differ in scope and binding.</p>
+                    <ul>
+                        <li><strong>Overloading:</strong> Static binding; same method name with different parameters in the same class.</li>
+                        <li><strong>Overriding:</strong> Dynamic binding; same method name and signature in base and derived classes.</li>
+                        <li><strong>Key Notes:</strong> 
+                            <ul>
+                                <li><code>delete</code> releases a single object; <code>delete[]</code> releases an array.</li>
+                                <li>Virtual inheritance ensures one copy of a base class in multiple inheritance.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="sample-response">
+                        <p><strong>Sample Answer:</strong> Overloading occurs within a class, where multiple methods share the same name but differ in parameters, resolved at compile time (static binding). For example, multiple <code>add()</code> methods with different argument counts. Overriding occurs when a derived class redefines a base class’s virtual method with the same signature, resolved at runtime (dynamic binding). This enables runtime polymorphism, like a derived class overriding a base class’s virtual function.</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="section">
+                <h2 class="section-title">Mock Interview Conversations</h2>
+                <div class="conversation">
+                    <h3>Scenario 1: Software Engineer Role</h3>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> Can you explain what Object-Oriented Programming is?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> Object-Oriented Programming (OOPS) is a paradigm that organizes code into classes and objects. A class is a blueprint defining properties and methods, while an object is an instance of a class. For example, a "Car" class has attributes like speed and methods like drive(). OOPS supports inheritance, encapsulation, polymorphism, and abstraction, making code reusable, maintainable, and modular.</p>
+                    </div>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> What is the difference between compile-time and runtime polymorphism?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> Compile-time polymorphism, or static polymorphism, is achieved through method overloading or operator overloading, where the method is chosen at compile time based on parameters. For example, multiple <code>add()</code> methods with different parameter counts. Runtime polymorphism, or dynamic polymorphism, uses virtual functions and overriding, where the method called is determined at runtime based on the object’s type, like a base class pointer calling a derived class’s virtual function.</p>
+                    </div>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> Can you explain what a pure virtual function is?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> A pure virtual function is declared in a base class with <code>= 0</code>, serving as a placeholder without implementation, making the class abstract. Abstract classes cannot be instantiated, and derived classes must implement the function. For example, a "Shape" class with a pure virtual <code>draw()</code> ensures derived classes like "Rectangle" provide their own drawing logic, enabling runtime polymorphism.</p>
+                    </div>
+                </div>
+                <div class="conversation">
+                    <h3>Scenario 2: Junior Developer Role</h3>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> What is encapsulation, and why is it important?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> Encapsulation bundles data and methods into a class, restricting direct data access using private or protected specifiers and providing public getter/setter methods. For example, in a "BankAccount" class, the balance is private, accessed via <code>getBalance()</code>. It ensures data security, reduces dependencies, and enhances maintainability by hiding implementation details, a key aspect of OOPS.</p>
+                    </div>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> What are access specifiers in C++?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> Access specifiers in C++ control access to class members. Private members are only accessible within the class, public members are accessible everywhere, and protected members are accessible in the class and its derived classes. For example, in a "Car" class, a private variable like <code>engineNumber</code> can only be accessed via public methods, supporting encapsulation and inheritance.</p>
+                    </div>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> What is a friend function?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> A friend function is a non-member function declared with the <code>friend</code> keyword in a class, allowing it to access private and protected members. It’s defined outside the class and uses objects to access members. For example, a friend function can access a private variable like balance in a "BankAccount" class, useful for external operations requiring controlled access.</p>
+                    </div>
+                </div>
+                <div class="conversation">
+                    <h3>Scenario 3: Fresher for IT Company Role</h3>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> What is abstraction in OOPS?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> Abstraction simplifies complex problems by focusing on essential features and hiding unnecessary details. For example, in a "Car" class, users interact with methods like <code>drive()</code> without knowing engine details. It supports data binding, where UI changes reflect business logic, and allows reusable models for similar problems, improving code efficiency and clarity.</p>
+                    </div>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> Can you explain constructors and destructors?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> Constructors are special methods invoked automatically to initialize objects. A default constructor has no parameters, a parameterized constructor takes arguments, and a copy constructor initializes from another object. Destructors, prefixed with ~, are called automatically to free resources when an object is destroyed. For example, a destructor in a class might deallocate dynamically allocated memory, ensuring proper cleanup.</p>
+                    </div>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> What is the difference between overloading and overriding?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> Overloading involves multiple methods with the same name but different parameters in the same class, resolved at compile time, like different <code>add()</code> methods. Overriding occurs when a derived class redefines a base class’s virtual method with the same signature, resolved at runtime for dynamic polymorphism. For example, a virtual <code>draw()</code> in a "Shape" class can be overridden by a "Circle" class.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const themeToggleBtn = document.getElementById('themeToggle');
+            const themeIcon = themeToggleBtn.querySelector('i');
+
+            if (themeToggleBtn) {
+                themeToggleBtn.addEventListener('click', function () {
+                    document.body.classList.toggle('light-theme');
+                    const isLightTheme = document.body.classList.contains('light-theme');
+                    themeIcon.className = isLightTheme ? 'bx bx-sun' : 'bx bx-moon';
+                    localStorage.setItem('theme', isLightTheme ? 'light' : 'dark');
+                });
+            }
+
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-theme');
+                themeIcon.className = 'bx bx-sun';
+            }
+        });
+    </script>
+</body>
+</html>

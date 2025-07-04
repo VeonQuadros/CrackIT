@@ -1,0 +1,2603 @@
+
+apply  the same functionality for the second code alo just keep the questions and answer key from the topic Ratio and Proportion
+
+CREATE TABLE data_structure_algorithms (
+    id INT PRIMARY KEY,
+    question TEXT,
+    option1 TEXT,
+    option2 TEXT,
+    option3 TEXT,
+    option4 TEXT,
+    correct_option INT,
+    explanation TEXT,
+    difficulty TEXT
+);
+
+CREATE TABLE general_aptitude (
+    id INT PRIMARY KEY,
+    question TEXT,
+    option1 TEXT,
+    option2 TEXT,
+    option3 TEXT,
+    option4 TEXT,
+    correct_option INT,
+    explanation TEXT,
+    topic TEXT,
+    subtopic TEXT,
+    difficulty TEXT
+);
+
+    1.General Aptitude
+
+        Logical Reasoning
+
+        Ratio & Proportion
+
+        Averages, Profit & Loss
+
+        HCF & LCM, Simplification
+
+        Probability, Permutations & Combinations
+
+    2.Arithmetic Aptitude
+
+        Percentages
+
+        Time & Work
+
+        Time, Speed & Distance
+
+        Measurements & Geometry
+
+        Simple & Compound Interest
+
+    3.Technical MCQs
+
+        Operating Systems
+
+        Computer Networks
+
+        Computer Architecture
+
+        Database Management
+
+        Data Structures & Algorithms
+
+    4.Programming Languages
+
+        Java
+
+        Python
+
+        C & C++
+
+        JavaScript
+
+        Modern Languages
+
+    5.BrainRot Topics
+
+        Blood Relations
+       
+        Direction Problems
+
+        Coding and Decoding
+
+        Seating Arrangements
+
+        Train,Boat,Tank and Pipe Problems
+
+    6.Verbal and Reasoning
+
+        Verbal Ability
+
+        English Grammar
+
+        Verbal Reasoning
+
+        Non Verbal Reasoning
+
+        Antonyms & Synonyms, Fill in the blanks
+
+    7.Extra Concepts
+
+        Cloud Computing
+        
+        Artificial Intelligence
+        
+        Software Engineering
+        
+        Situational Questions
+        
+        Web Content Management
+
+INSERT INTO ratio_proportion (id, question, option1, option2, option3, option4, correct_option, explanation, difficulty)
+VALUES
+-- Question 1
+(
+    1,
+    'If the ratio of boys to girls in a class is 3:2, what is the ratio of boys to the total number of students?',
+    '3:5',
+    '2:5',
+    '3:2',
+    '2:3',
+    1,
+    'The ratio of boys to girls is 3:2, so for every 3 boys, there are 2 girls. The total number of students is 3 + 2 = 5. Thus, the ratio of boys to total students is 3:5.',
+    'easy'
+),
+-- Question 2
+(
+    2,
+    'If 4 pens cost $8, how much will 6 pens cost?',
+    '$10',
+    '$12',
+    '$14',
+    '$16',
+    2,
+    'The cost of pens is directly proportional to the number of pens. If 4 pens cost $8, the cost of 1 pen is $8 ÷ 4 = $2. Therefore, 6 pens cost 6 × $2 = $12.',
+    'easy'
+),
+-- Question 3
+(
+    3,
+    'The ratio of apples to oranges is 5:3. If there are 15 apples, how many oranges are there?',
+    '6',
+    '9',
+    '12',
+    '18',
+    2,
+    'The ratio of apples to oranges is 5:3. If there are 15 apples, we set up the proportion 5/3 = 15/x. Cross-multiplying, 5x = 45, so x = 9. Thus, there are 9 oranges.',
+    'easy'
+);
+
+
+
+INSERT INTO general_aptitude (id, question, option1, option2, option3, option4, correct_option, explanation, topic, subtopic, difficulty)
+VALUES
+-- General Aptitude: Logical Reasoning
+(2, 'If all cats are mammals and some mammals are black, which of the following is true?', 'All cats are black', 'Some cats are black', 'Some mammals are cats', 'No cats are black', 3, 'Since all cats are mammals and some mammals are black, it follows that some mammals are cats (as cats are a subset of mammals). The other options are not necessarily true.', 'General Aptitude', 'Logical Reasoning', 'easy'),
+(3, 'If A is taller than B and B is taller than C, who is the tallest?', 'A', 'B', 'C', 'Cannot be determined', 1, 'Since A is taller than B and B is taller than C, A is taller than both B and C, making A the tallest.', 'General Aptitude', 'Logical Reasoning', 'easy'),
+(4, 'If today is Monday, what day will it be after 3 days?', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 3, 'Starting from Monday, adding 3 days gives: Monday + 1 = Tuesday, +2 = Wednesday, +3 = Thursday.', 'General Aptitude', 'Logical Reasoning', 'easy'),
+(5, 'All roses are flowers. Some flowers are red. Which is true?', 'All roses are red', 'Some roses are red', 'Some flowers are roses', 'No roses are red', 3, 'Since all roses are flowers and some flowers are red, some flowers must be roses (as roses are a type of flower). Other options are not necessarily true.', 'General Aptitude', 'Logical Reasoning', 'easy'),
+(6, 'If P is the brother of Q and Q is the sister of R, how is P related to R?', 'Brother', 'Sister', 'Father', 'Mother', 1, 'P is the brother of Q, and Q is the sister of R, so P, Q, and R are siblings. Thus, P is the brother of R.', 'General Aptitude', 'Logical Reasoning', 'easy'),
+
+-- General Aptitude: Ratio & Proportion
+(7, 'If the ratio of apples to oranges is 4:3, what is the ratio of apples to total fruits?', '4:7', '3:7', '4:3', '3:4', 1, 'The ratio of apples to oranges is 4:3, so for every 4 apples, there are 3 oranges. The total number of fruits is 4 + 3 = 7. Thus, the ratio of apples to total fruits is 4:7.', 'General Aptitude', 'Ratio & Proportion', 'easy'),
+(8, 'If 2 pens cost $4, how much do 5 pens cost?', '$8', '$10', '$12', '$14', 2, 'The cost of 1 pen is $4 ÷ 2 = $2. For 5 pens, the cost is 5 × $2 = $10.', 'General Aptitude', 'Ratio & Proportion', 'easy'),
+(9, 'If a recipe for 4 people requires 8 eggs, how many eggs are needed for 2 people?', '4', '6', '8', '10', 1, 'The ratio of people to eggs is 4:8, or 1:2. For 2 people, the number of eggs is 2 × 2 = 4.', 'General Aptitude', 'Ratio & Proportion', 'easy'),
+(10, 'If the ratio of cats to dogs is 5:2, what is the ratio of dogs to total animals?', '2:7', '5:7', '2:5', '5:2', 1, 'The ratio of cats to dogs is 5:2, so the total animals are 5 + 2 = 7. The ratio of dogs to total animals is 2:7.', 'General Aptitude', 'Ratio & Proportion', 'easy'),
+(11, 'If 3 books cost $9, how much do 6 books cost?', '$15', '$18', '$21', '$24', 2, 'The cost of 1 book is $9 ÷ 3 = $3. For 6 books, the cost is 6 × $3 = $18.', 'General Aptitude', 'Ratio & Proportion', 'easy'),
+
+-- General Aptitude: Averages, Profit & Loss
+(12, 'What is the average of 10, 20, and 30?', '15', '20', '25', '30', 2, 'The average is (10 + 20 + 30) ÷ 3 = 60 ÷ 3 = 20.', 'General Aptitude', 'Averages, Profit & Loss', 'easy'),
+(13, 'If a shopkeeper sells an item for $50 and makes a profit of $10, what is the cost price?', '$30', '$40', '$50', '$60', 2, 'Profit is selling price minus cost price. So, cost price = $50 - $10 = $40.', 'General Aptitude', 'Averages, Profit & Loss', 'easy'),
+(14, 'What is the average of 5, 10, 15, and 20?', '10', '12.5', '15', '17.5', 2, 'The average is (5 + 10 + 15 + 20) ÷ 4 = 50 ÷ 4 = 12.5.', 'General Aptitude', 'Averages, Profit & Loss', 'easy'),
+(15, 'If an item is bought for $100 and sold for $120, what is the profit?', '$10', '$20', '$30', '$40', 2, 'Profit is selling price minus cost price: $120 - $100 = $20.', 'General Aptitude', 'Averages, Profit & Loss', 'easy'),
+(16, 'The average of 4 numbers is 25. What is their sum?', '75', '100', '125', '150', 2, 'The sum is average × number of items: 25 × 4 = 100.', 'General Aptitude', 'Averages, Profit & Loss', 'easy'),
+
+-- General Aptitude: HCF & LCM, Simplification
+(17, 'What is the HCF of 12 and 18?', '3', '6', '9', '12', 2, 'Factors of 12: 1, 2, 3, 4, 6, 12. Factors of 18: 1, 2, 3, 6, 9, 18. The highest common factor is 6.', 'General Aptitude', 'HCF & LCM, Simplification', 'easy'),
+(18, 'Simplify: 15 ÷ 3 × 2', '5', '10', '15', '20', 2, 'Follow the order of operations: 15 ÷ 3 = 5, then 5 × 2 = 10.', 'General Aptitude', 'HCF & LCM, Simplification', 'easy'),
+(19, 'What is the LCM of 6 and 8?', '12', '24', '36', '48', 2, 'Multiples of 6: 6, 12, 18, 24, ... Multiples of 8: 8, 16, 24, ... The least common multiple is 24.', 'General Aptitude', 'HCF & LCM, Simplification', 'easy'),
+(20, 'Simplify: (20 + 10) ÷ 5', '4', '6', '8', '10', 2, 'First, 20 + 10 = 30. Then, 30 ÷ 5 = 6.', 'General Aptitude', 'HCF & LCM, Simplification', 'easy'),
+(21, 'What is the HCF of 10 and 15?', '5', '10', '15', '30', 1, 'Factors of 10: 1, 2, 5, 10. Factors of 15: 1, 3, 5, 15. The highest common factor is 5.', 'General Aptitude', 'HCF & LCM, Simplification', 'easy'),
+
+-- General Aptitude: Probability, Permutations & Combinations
+(22, 'What is the probability of rolling a 3 on a six-sided die?', '1/6', '1/3', '1/2', '1/4', 1, 'A die has 6 faces, and only one face has a 3. Probability = 1/6.', 'General Aptitude', 'Probability, Permutations & Combinations', 'easy'),
+(23, 'In how many ways can you arrange 3 books on a shelf?', '3', '6', '9', '12', 2, 'The number of ways to arrange 3 books is 3! = 3 × 2 × 1 = 6.', 'General Aptitude', 'Probability, Permutations & Combinations', 'easy'),
+(24, 'What is the probability of drawing a red card from a standard deck of 52 cards?', '1/4', '1/2', '1/3', '1/5', 2, 'A deck has 52 cards, with 26 red cards. Probability = 26/52 = 1/2.', 'General Aptitude', 'Probability, Permutations & Combinations', 'easy'),
+(25, 'In how many ways can you choose 2 fruits from 3 fruits?', '2', '3', '6', '9', 2, 'The number of ways to choose 2 fruits from 3 is C(3,2) = 3!/(2!1!) = 3.', 'General Aptitude', 'Probability, Permutations & Combinations', 'easy'),
+(26, 'What is the probability of flipping a head on a fair coin?', '1/4', '1/2', '1/3', '1', 2, 'A coin has 2 outcomes (head or tail), so the probability of heads is 1/2.', 'General Aptitude', 'Probability, Permutations & Combinations', 'easy'),
+
+-- Arithmetic Aptitude: Percentages
+(27, 'What is 25% of 200?', '25', '50', '75', '100', 2, '25% of 200 = (25/100) × 200 = 50.', 'Arithmetic Aptitude', 'Percentages', 'easy'),
+(28, 'If a shirt costs $40 and is discounted by 10%, what is the sale price?', '$30', '$36', '$38', '$40', 2, 'Discount = 10% of $40 = $4. Sale price = $40 - $4 = $36.', 'Arithmetic Aptitude', 'Percentages', 'easy'),
+(29, 'What is 50% of 80?', '20', '40', '60', '80', 2, '50% of 80 = (50/100) × 80 = 40.', 'Arithmetic Aptitude', 'Percentages', 'easy'),
+(30, 'If 20% of a number is 10, what is the number?', '40', '50', '60', '70', 2, 'Let the number be x. Then, 20% of x = 10, so (20/100) × x = 10. Solving, x = 10 × 5 = 50.', 'Arithmetic Aptitude', 'Percentages', 'easy'),
+(31, 'A price increases from $100 to $120. What is the percentage increase?', '10%', '20%', '25%', '30%', 2, 'Increase = $120 - $100 = $20. Percentage increase = (20/100) × 100 = 20%.', 'Arithmetic Aptitude', 'Percentages', 'easy'),
+
+-- Arithmetic Aptitude: Time & Work
+(32, 'If a man can complete a job in 5 days, how many days will it take for 2 men to complete it?', '2', '2.5', '3', '4', 2, 'One man’s work rate is 1/5 job per day. Two men’s work rate is 2/5 job per day. Time = 1 ÷ (2/5) = 5/2 = 2.5 days.', 'Arithmetic Aptitude', 'Time & Work', 'easy'),
+(33, 'If 3 workers can paint a house in 6 days, how many days will 1 worker take?', '12', '18', '24', '30', 2, 'Three workers’ rate is 1/6 house per day. One worker’s rate is (1/6) ÷ 3 = 1/18. Time = 1 ÷ (1/18) = 18 days.', 'Arithmetic Aptitude', 'Time & Work', 'easy'),
+(34, 'If a task takes 10 hours for 2 people, how long will it take for 1 person?', '15', '20', '25', '30', 2, 'Two people’s rate is 1/10 task per hour. One person’s rate is (1/10) ÷ 2 = 1/20. Time = 1 ÷ (1/20) = 20 hours.', 'Arithmetic Aptitude', 'Time & Work', 'easy'),
+(35, 'If 4 workers finish a job in 8 days, how many days will 8 workers take?', '2', '4', '6', '8', 2, 'Four workers’ rate is 1/8 job per day. Eight workers’ rate is (1/8) × (8/4) = 1/4. Time = 1 ÷ (1/4) = 4 days.', 'Arithmetic Aptitude', 'Time & Work', 'easy'),
+(36, 'If 1 person paints a room in 12 hours, how long will 3 people take?', '3', '4', '6', '8', 2, 'One person’s rate is 1/12 room per hour. Three people’s rate is 3/12 = 1/4. Time = 1 ÷ (1/4) = 4 hours.', 'Arithmetic Aptitude', 'Time & Work', 'easy'),
+
+-- Arithmetic Aptitude: Time, Speed & Distance
+(37, 'If a car travels 60 km in 2 hours, what is its speed?', '20 km/h', '30 km/h', '40 km/h', '50 km/h', 2, 'Speed = Distance ÷ Time = 60 km ÷ 2 h = 30 km/h.', 'Arithmetic Aptitude', 'Time, Speed & Distance', 'easy'),
+(38, 'How long does it take to travel 100 km at 50 km/h?', '1 hour', '2 hours', '3 hours', '4 hours', 2, 'Time = Distance ÷ Speed = 100 km ÷ 50 km/h = 2 hours.', 'Arithmetic Aptitude', 'Time, Speed & Distance', 'easy'),
+(39, 'If a train travels at 40 km/h, how far will it go in 3 hours?', '80 km', '100 km', '120 km', '140 km', 3, 'Distance = Speed × Time = 40 km/h × 3 h = 120 km.', 'Arithmetic Aptitude', 'Time, Speed & Distance', 'easy'),
+(40, 'A bike covers 150 km in 5 hours. What is its speed?', '20 km/h', '25 km/h', '30 km/h', '35 km/h', 3, 'Speed = Distance ÷ Time = 150 km ÷ 5 h = 30 km/h.', 'Arithmetic Aptitude', 'Time, Speed & Distance', 'easy'),
+(41, 'How far will a car travel in 4 hours at 60 km/h?', '200 km', '240 km', '280 km', '320 km', 2, 'Distance = Speed × Time = 60 km/h × 4 h = 240 km.', 'Arithmetic Aptitude', 'Time, Speed & Distance', 'easy'),
+
+-- Arithmetic Aptitude: Measurements & Geometry
+(42, 'What is the area of a rectangle with length 5 cm and width 3 cm?', '8 cm²', '15 cm²', '18 cm²', '20 cm²', 2, 'Area = Length × Width = 5 cm × 3 cm = 15 cm².', 'Arithmetic Aptitude', 'Measurements & Geometry', 'easy'),
+(43, 'What is the perimeter of a square with side 4 cm?', '12 cm', '16 cm', '20 cm', '24 cm', 2, 'Perimeter = 4 × Side = 4 × 4 cm = 16 cm.', 'Arithmetic Aptitude', 'Measurements & Geometry', 'easy'),
+(44, 'What is the area of a circle with radius 2 cm? (Use π ≈ 3.14)', '12.56 cm²', '6.28 cm²', '18.84 cm²', '25.12 cm²', 1, 'Area = π × Radius² = 3.14 × 2² = 3.14 × 4 = 12.56 cm².', 'Arithmetic Aptitude', 'Measurements & Geometry', 'easy'),
+(45, 'What is the perimeter of a rectangle with length 6 cm and width 4 cm?', '16 cm', '20 cm', '24 cm', '28 cm', 2, 'Perimeter = 2 × (Length + Width) = 2 × (6 + 4) = 20 cm.', 'Arithmetic Aptitude', 'Measurements & Geometry', 'easy'),
+(46, 'What is the area of a triangle with base 10 cm and height 5 cm?', '25 cm²', '50 cm²', '75 cm²', '100 cm²', 1, 'Area = (1/2) × Base × Height = (1/2) × 10 × 5 = 25 cm².', 'Arithmetic Aptitude', 'Measurements & Geometry', 'easy'),
+
+-- Arithmetic Aptitude: Simple & Compound Interest
+(47, 'What is the simple interest on $1000 at 5% per year for 2 years?', '$50', '$100', '$150', '$200', 2, 'Simple Interest = Principal × Rate × Time = 1000 × (5/100) × 2 = $100.', 'Arithmetic Aptitude', 'Simple & Compound Interest', 'easy'),
+(48, 'If $500 is invested at 4% simple interest for 3 years, what is the interest?', '$60', '$80', '$100', '$120', 1, 'Simple Interest = 500 × (4/100) × 3 = $60.', 'Arithmetic Aptitude', 'Simple & Compound Interest', 'easy'),
+(49, 'What is the amount after 1 year on $2000 at 10% simple interest?', '$2100', '$2200', '$2300', '$2400', 2, 'Simple Interest = 2000 × (10/100) × 1 = $200. Amount = Principal + Interest = 2000 + 200 = $2200.', 'Arithmetic Aptitude', 'Simple & Compound Interest', 'easy'),
+(50, 'What is the simple interest on $1500 at 6% per year for 2 years?', '$90', '$180', '$270', '$360', 2, 'Simple Interest = 1500 × (6/100) × 2 = $180.', 'Arithmetic Aptitude', 'Simple & Compound Interest', 'easy'),
+(51, 'If $1000 earns $150 simple interest in 3 years, what is the rate?', '5%', '10%', '15%', '20%', 1, 'Rate = (Interest × 100) ÷ (Principal × Time) = (150 × 100) ÷ (1000 × 3) = 5%.', 'Arithmetic Aptitude', 'Simple & Compound Interest', 'easy'),
+
+-- Technical MCQs: Operating Systems
+(52, 'What is the main function of an operating system?', 'Manage hardware resources', 'Run applications only', 'Store data', 'Connect to the internet', 1, 'The operating system manages hardware resources like CPU, memory, and storage, and provides services for applications.', 'Technical MCQs', 'Operating Systems', 'easy'),
+(53, 'Which of the following is an operating system?', 'Microsoft Word', 'Windows', 'Google Chrome', 'Notepad', 2, 'Windows is an operating system that manages computer resources, unlike the others, which are applications.', 'Technical MCQs', 'Operating Systems', 'easy'),
+(54, 'What is a process in an operating system?', 'A program in execution', 'A file on disk', 'A hardware component', 'A user interface', 1, 'A process is a program that is currently being executed by the operating system.', 'Technical MCQs', 'Operating Systems', 'easy'),
+(55, 'What does CPU scheduling do?', 'Manages memory', 'Allocates processor time', 'Handles storage', 'Controls input devices', 2, 'CPU scheduling determines which process gets the processor’s time and for how long.', 'Technical MCQs', 'Operating Systems', 'easy'),
+(56, 'What is the role of a kernel in an operating system?', 'Manages user interface', 'Core component managing resources', 'Runs applications', 'Stores files', 2, 'The kernel is the core part of the OS that manages system resources like CPU, memory, and devices.', 'Technical MCQs', 'Operating Systems', 'easy'),
+
+-- Technical MCQs: Computer Networks
+(57, 'What does LAN stand for?', 'Local Area Network', 'Large Area Network', 'Long Area Network', 'Linked Area Network', 1, 'LAN stands for Local Area Network, which connects devices within a small area like an office.', 'Technical MCQs', 'Computer Networks', 'easy'),
+(58, 'What is the purpose of an IP address?', 'Identify a device on a network', 'Store data', 'Run applications', 'Manage memory', 1, 'An IP address uniquely identifies a device on a network for communication.', 'Technical MCQs', 'Computer Networks', 'easy'),
+(59, 'Which device connects multiple networks?', 'Router', 'Monitor', 'Keyboard', 'Printer', 1, 'A router connects multiple networks and directs data between them.', 'Technical MCQs', 'Computer Networks', 'easy'),
+(60, 'What is HTTP used for?', 'Transferring web pages', 'Managing memory', 'Running programs', 'Storing files', 1, 'HTTP (HyperText Transfer Protocol) is used to transfer web pages over the internet.', 'Technical MCQs', 'Computer Networks', 'easy'),
+(61, 'What does Wi-Fi enable?', 'Wireless networking', 'Wired networking', 'Data storage', 'Program execution', 1, 'Wi-Fi enables wireless networking, allowing devices to connect to a network without cables.', 'Technical MCQs', 'Computer Networks', 'easy'),
+
+-- Technical MCQs: Computer Architecture
+(62, 'What is the function of the CPU?', 'Process instructions', 'Store data', 'Display output', 'Connect networks', 1, 'The CPU (Central Processing Unit) processes instructions by executing computations.', 'Technical MCQs', 'Computer Architecture', 'easy'),
+(63, 'What does RAM stand for?', 'Read Access Memory', 'Random Access Memory', 'Run Access Memory', 'Real Access Memory', 2, 'RAM stands for Random Access Memory, used for temporary data storage during processing.', 'Technical MCQs', 'Computer Architecture', 'easy'),
+(64, 'What is the role of a motherboard?', 'Connects all components', 'Runs software', 'Stores files', 'Manages networks', 1, 'The motherboard connects all computer components, like CPU, RAM, and storage.', 'Technical MCQs', 'Computer Architecture', 'easy'),
+(65, 'Which component stores data permanently?', 'RAM', 'Hard Disk', 'CPU', 'Monitor', 2, 'A hard disk stores data permanently, unlike RAM, which is temporary.', 'Technical MCQs', 'Computer Architecture', 'easy'),
+(66, 'What is a GPU used for?', 'Graphics processing', 'General processing', 'Data storage', 'Network management', 1, 'A GPU (Graphics Processing Unit) handles graphics rendering and processing.', 'Technical MCQs', 'Computer Architecture', 'easy'),
+
+-- Technical MCQs: Database Management
+(67, 'What is a database?', 'A collection of data', 'A programming language', 'A hardware component', 'A network protocol', 1, 'A database is an organized collection of data, typically stored and accessed electronically.', 'Technical MCQs', 'Database Management', 'easy'),
+(68, 'What does SQL stand for?', 'Standard Query Language', 'Structured Query Language', 'Simple Query Language', 'System Query Language', 2, 'SQL stands for Structured Query Language, used to manage and query databases.', 'Technical MCQs', 'Database Management', 'easy'),
+(69, 'What is a primary key in a database?', 'A unique identifier for a record', 'A type of query', 'A storage device', 'A network address', 1, 'A primary key uniquely identifies each record in a database table.', 'Technical MCQs', 'Database Management', 'easy'),
+(70, 'What is the purpose of a table in a database?', 'Store related data', 'Run programs', 'Manage hardware', 'Connect networks', 1, 'A table in a database stores related data in rows and columns.', 'Technical MCQs', 'Database Management', 'easy'),
+(71, 'Which command retrieves data from a database?', 'SELECT', 'INSERT', 'UPDATE', 'DELETE', 1, 'The SELECT command is used to retrieve data from a database table.', 'Technical MCQs', 'Database Management', 'easy'),
+
+-- Technical MCQs: Data Structures & Algorithms
+(72, 'What is an array?', 'A collection of elements', 'A single variable', 'A program', 'A hardware component', 1, 'An array is a data structure that stores a collection of elements of the same type.', 'Technical MCQs', 'Data Structures & Algorithms', 'easy'),
+(73, 'What is the time complexity of accessing an element in an array?', 'O(1)', 'O(n)', 'O(log n)', 'O(n²)', 1, 'Array elements are accessed directly via index, so the time complexity is O(1).', 'Technical MCQs', 'Data Structures & Algorithms', 'easy'),
+(74, 'What is a linked list?', 'A sequence of nodes', 'A single variable', 'A database table', 'A network protocol', 1, 'A linked list is a data structure where elements are stored as nodes linked by pointers.', 'Technical MCQs', 'Data Structures & Algorithms', 'easy'),
+(75, 'Which algorithm sorts by comparing adjacent elements?', 'Bubble Sort', 'Quick Sort', 'Merge Sort', 'Heap Sort', 1, 'Bubble Sort compares and swaps adjacent elements to sort the list.', 'Technical MCQs', 'Data Structures & Algorithms', 'easy'),
+(76, 'What is a stack?', 'A last-in, first-out structure', 'A first-in, first-out structure', 'A sorted structure', 'A random structure', 1, 'A stack follows the Last-In, First-Out (LIFO) principle.', 'Technical MCQs', 'Data Structures & Algorithms', 'easy'),
+
+-- Programming Languages: Java
+(77, 'What is the correct syntax for the main method in Java?', 'public static void main(String[] args)', 'void main(String args)', 'public void main(String[] args)', 'static void main(String args)', 1, 'The main method in Java must be public, static, void, and take a String array argument.', 'Programming Languages', 'Java', 'easy'),
+(78, 'Which keyword is used to create a class in Java?', 'class', 'struct', 'object', 'interface', 1, 'The `class` keyword is used to define a class in Java.', 'Programming Languages', 'Java', 'easy'),
+(79, 'What is the output of System.out.println(5 + 3); in Java?', '5', '3', '8', '53', 3, 'The expression 5 + 3 evaluates to 8, which is printed.', 'Programming Languages', 'Java', 'easy'),
+(80, 'Which data type stores whole numbers in Java?', 'int', 'float', 'String', 'boolean', 1, 'The `int` data type is used to store whole numbers in Java.', 'Programming Languages', 'Java', 'easy'),
+(81, 'What is used to create an object in Java?', 'new', 'create', 'object', 'instance', 1, 'The `new` keyword is used to create an object of a class in Java.', 'Programming Languages', 'Java', 'easy'),
+
+-- Programming Languages: Python
+(82, 'What is the output of print(2 + 3) in Python?', '5', '23', '6', '8', 1, 'The expression 2 + 3 evaluates to 5, which is printed.', 'Programming Languages', 'Python', 'easy'),
+(83, 'Which symbol is used for comments in Python?', '#', '//', '/*', '--', 1, 'The `#` symbol is used for single-line comments in Python.', 'Programming Languages', 'Python', 'easy'),
+(84, 'What is the data type of [1, 2, 3] in Python?', 'List', 'Tuple', 'Dictionary', 'Set', 1, '[1, 2, 3] is a list, an ordered and mutable collection in Python.', 'Programming Languages', 'Python', 'easy'),
+(85, 'How do you define a function in Python?', 'def', 'function', 'func', 'define', 1, 'The `def` keyword is used to define a function in Python.', 'Programming Languages', 'Python', 'easy'),
+(86, 'What is the output of print("Hello" + "World") in Python?', 'Hello World', 'HelloWorld', 'Hello+World', 'Error', 2, 'String concatenation in Python joins "Hello" and "World" to produce "HelloWorld".', 'Programming Languages', 'Python', 'easy'),
+
+-- Programming Languages: C & C++
+(87, 'What is the output of printf("%d", 5 + 3); in C?', '5', '3', '8', '53', 3, 'The expression 5 + 3 evaluates to 8, which is printed using %d.', 'Programming Languages', 'C & C++', 'easy'),
+(88, 'Which keyword is used to declare a variable in C?', 'int', 'var', 'let', 'define', 1, 'The `int` keyword is used to declare an integer variable in C.', 'Programming Languages', 'C & C++', 'easy'),
+(89, 'What is the purpose of #include in C?', 'Include a library', 'Define a variable', 'Start a function', 'End a program', 1, '#include is used to include libraries like stdio.h for input/output functions.', 'Programming Languages', 'C & C++', 'easy'),
+(90, 'In C++, what is used to output text?', 'cout', 'printf', 'print', 'echo', 1, 'In C++, `cout` (with `<<`) is used to output text to the console.', 'Programming Languages', 'C & C++', 'easy'),
+(91, 'What is the correct syntax for a C main function?', 'int main()', 'void main()', 'main()', 'int main(String args)', 1, 'The standard C main function returns an int, so `int main()` is correct.', 'Programming Languages', 'C & C++', 'easy'),
+
+-- Programming Languages: JavaScript
+(92, 'What is the output of console.log(4 + 2); in JavaScript?', '6', '42', '8', '10', 1, 'The expression 4 + 2 evaluates to 6, which is logged to the console.', 'Programming Languages', 'JavaScript', 'easy'),
+(93, 'How do you declare a variable in JavaScript?', 'var', 'int', 'define', 'set', 1, 'The `var` keyword is used to declare a variable in JavaScript (also `let` or `const`).', 'Programming Languages', 'JavaScript', 'easy'),
+(94, 'What is the data type of ["a", "b"] in JavaScript?', 'Array', 'Object', 'String', 'Number', 1, '["a", "b"] is an array, a collection of elements in JavaScript.', 'Programming Languages', 'JavaScript', 'easy'),
+(95, 'Which function displays a message box in JavaScript?', 'alert()', 'print()', 'log()', 'message()', 1, 'The `alert()` function displays a message box in the browser.', 'Programming Languages', 'JavaScript', 'easy'),
+(96, 'What is the output of console.log("Hi" + " " + "JS"); in JavaScript?', 'Hi JS', 'HiJS', 'Hi + JS', 'Error', 1, 'String concatenation joins "Hi", " ", and "JS" to produce "Hi JS".', 'Programming Languages', 'JavaScript', 'easy'),
+
+-- Programming Languages: Modern Languages
+(97, 'In Go, what is the keyword to declare a variable?', 'var', 'let', 'int', 'define', 1, 'The `var` keyword is used to declare a variable in Go.', 'Programming Languages', 'Modern Languages', 'easy'),
+(98, 'What is the output of println!("Hello"); in Rust?', 'Hello', 'Hello!', 'Error', 'None', 1, 'The `println!` macro in Rust outputs "Hello" to the console.', 'Programming Languages', 'Modern Languages', 'easy'),
+(99, 'In Kotlin, which keyword defines a function?', 'fun', 'def', 'function', 'proc', 1, 'The `fun` keyword is used to define a function in Kotlin.', 'Programming Languages', 'Modern Languages', 'easy'),
+(100, 'What is the purpose of `val` in Scala?', 'Declare a constant', 'Declare a variable', 'Define a function', 'Include a library', 1, '`val` in Scala declares a constant (immutable) value.', 'Programming Languages', 'Modern Languages', 'easy'),
+(101, 'In Swift, what is used to print to the console?', 'print()', 'console.log()', 'printf()', 'echo()', 1, 'The `print()` function in Swift outputs text to the console.', 'Programming Languages', 'Modern Languages', 'easy'),
+
+-- Theory Concepts: Operating Systems
+(102, 'What is multitasking in an operating system?', 'Running multiple processes', 'Running one process', 'Storing data', 'Connecting networks', 1, 'Multitasking allows an OS to run multiple processes by switching between them.', 'Theory Concepts', 'Operating Systems', 'easy'),
+(103, 'What is a file system in an operating system?', 'Organizes and stores files', 'Runs programs', 'Manages memory', 'Handles networks', 1, 'A file system organizes and stores files on storage devices.', 'Theory Concepts', 'Operating Systems', 'easy'),
+(104, 'What is the purpose of virtual memory?', 'Simulate more memory', 'Store permanent data', 'Run applications', 'Manage networks', 1, 'Virtual memory simulates additional memory by using disk space.', 'Theory Concepts', 'Operating Systems', 'easy'),
+(105, 'What is a thread in an operating system?', 'A unit of execution', 'A type of file', 'A hardware component', 'A network protocol', 1, 'A thread is a unit of execution within a process in an OS.', 'Theory Concepts', 'Operating Systems', 'easy'),
+(106, 'What does an operating system do with interrupts?', 'Handles hardware signals', 'Stores data', 'Runs applications', 'Manages files', 1, 'Interrupts are signals from hardware that the OS handles to manage tasks.', 'Theory Concepts', 'Operating Systems', 'easy'),
+
+-- Theory Concepts: Computer Networks
+(107, 'What is a protocol in networking?', 'A set of rules', 'A hardware device', 'A programming language', 'A database', 1, 'A protocol is a set of rules for data communication in a network.', 'Theory Concepts', 'Computer Networks', 'easy'),
+(108, 'What is the purpose of a firewall?', 'Protects networks', 'Stores data', 'Runs programs', 'Manages memory', 1, 'A firewall protects networks by controlling incoming and outgoing traffic.', 'Theory Concepts', 'Computer Networks', 'easy'),
+(109, 'What does DNS stand for?', 'Domain Name System', 'Data Network System', 'Dynamic Name System', 'Direct Network System', 1, 'DNS stands for Domain Name System, which translates domain names to IP addresses.', 'Theory Concepts', 'Computer Networks', 'easy'),
+(110, 'What is a packet in networking?', 'A unit of data', 'A hardware component', 'A program', 'A file', 1, 'A packet is a unit of data transmitted over a network.', 'Theory Concepts', 'Computer Networks', 'easy'),
+(111, 'What is the role of a switch in a network?', 'Connects devices', 'Stores data', 'Runs programs', 'Manages memory', 1, 'A switch connects devices in a network by forwarding data to the correct destination.', 'Theory Concepts', 'Computer Networks', 'easy'),
+
+-- Theory Concepts: Software Engineering
+(112, 'What is software engineering?', 'Designing software systems', 'Building hardware', 'Managing networks', 'Storing data', 1, 'Software engineering involves designing, developing, and maintaining software systems.', 'Theory Concepts', 'Software Engineering', 'easy'),
+(113, 'What is a software requirement?', 'A needed feature', 'A hardware component', 'A network protocol', 'A database', 1, 'A software requirement specifies a feature or function the software must have.', 'Theory Concepts', 'Software Engineering', 'easy'),
+(114, 'What is the purpose of testing in software engineering?', 'Find defects', 'Write code', 'Design hardware', 'Manage networks', 1, 'Testing identifies defects and ensures software works as intended.', 'Theory Concepts', 'Software Engineering', 'easy'),
+(115, 'What is a software lifecycle?', 'Stages of development', 'A type of hardware', 'A network system', 'A data structure', 1, 'The software lifecycle includes stages like planning, development, testing, and maintenance.', 'Theory Concepts', 'Software Engineering', 'easy'),
+(116, 'What is version control in software engineering?', 'Tracks code changes', 'Stores data', 'Runs programs', 'Manages hardware', 1, 'Version control systems track and manage changes to software code.', 'Theory Concepts', 'Software Engineering', 'easy'),
+
+-- Theory Concepts: Database Management
+(117, 'What is a relational database?', 'Tables with relationships', 'A single file', 'A network system', 'A programming language', 1, 'A relational database uses tables related by keys to store and retrieve data.', 'Theory Concepts', 'Database Management', 'easy'),
+(118, 'What is normalization in databases?', 'Organizing data', 'Deleting data', 'Running queries', 'Managing hardware', 1, 'Normalization organizes data to eliminate redundancy and improve efficiency.', 'Theory Concepts', 'Database Management', 'easy'),
+(119, 'What is a foreign key in a database?', 'Links tables', 'Stores data', 'Runs queries', 'Manages memory', 1, 'A foreign key is a field in one table that links to the primary key in another.', 'Theory Concepts', 'Database Management', 'easy'),
+(120, 'What is a query in a database?', 'A data request', 'A hardware component', 'A network protocol', 'A program', 1, 'A query is a request to retrieve or manipulate data in a database.', 'Theory Concepts', 'Database Management', 'easy'),
+(121, 'What is the purpose of a database schema?', 'Defines structure', 'Stores data', 'Runs programs', 'Manages networks', 1, 'A schema defines the structure and organization of a database.', 'Theory Concepts', 'Database Management', 'easy'),
+
+-- Theory Concepts: Theory of Computation
+(122, 'What is an automaton?', 'A computational model', 'A hardware device', 'A database', 'A network protocol', 1, 'An automaton is a mathematical model of computation, like a finite state machine.', 'Theory Concepts', 'Theory of Computation', 'easy'),
+(123, 'What is a Turing machine?', 'A theoretical computer', 'A physical computer', 'A database', 'A network', 1, 'A Turing machine is a theoretical model of computation that defines computability.', 'Theory Concepts', 'Theory of Computation', 'easy'),
+(124, 'What is a regular language?', 'Accepted by a finite automaton', 'A programming language', 'A database query', 'A network protocol', 1, 'A regular language is one that can be accepted by a finite automaton.', 'Theory Concepts', 'Theory of Computation', 'easy'),
+(125, 'What is the halting problem?', 'Deciding if a program stops', 'Running a program', 'Storing data', 'Managing networks', 1, 'The halting problem involves determining if a program will halt, and it’s undecidable.', 'Theory Concepts', 'Theory of Computation', 'easy'),
+(126, 'What is a finite state machine?', 'A model with states', 'A database', 'A hardware component', 'A network', 1, 'A finite state machine is a computational model with a finite number of states.', 'Theory Concepts', 'Theory of Computation', 'easy'),
+
+-- Verbal and Reasoning: Verbal Ability
+(127, 'What is the meaning of "big"?', 'Large', 'Small', 'Tall', 'Short', 1, '"Big" means large in size or amount.', 'Verbal and Reasoning', 'Verbal Ability', 'easy'),
+(128, 'Choose the correct spelling:', 'Recieve', 'Receive', 'Receeve', 'Recive', 2, 'The correct spelling is "Receive".', 'Verbal and Reasoning', 'Verbal Ability', 'easy'),
+(129, 'What is a synonym for "happy"?', 'Sad', 'Joyful', 'Angry', 'Tired', 2, 'A synonym for "happy" is "joyful".', 'Verbal and Reasoning', 'Verbal Ability', 'easy'),
+(130, 'What does "fast" mean?', 'Quick', 'Slow', 'Heavy', 'Light', 1, '"Fast" means quick or rapid.', 'Verbal and Reasoning', 'Verbal Ability', 'easy'),
+(131, 'Which word means the opposite of "open"?', 'Close', 'Start', 'Begin', 'Run', 1, 'The opposite of "open" is "close".', 'Verbal and Reasoning', 'Verbal Ability', 'easy'),
+
+-- Verbal and Reasoning: English Grammar
+(132, 'Choose the correct sentence:', 'She go to school.', 'She goes to school.', 'She going to school.', 'She gone to school.', 2, 'The correct sentence is "She goes to school," using the third person singular verb form.', 'Verbal and Reasoning', 'English Grammar', 'easy'),
+(133, 'What is the past tense of "run"?', 'Ran', 'Run', 'Running', 'Runs', 1, 'The past tense of "run" is "ran".', 'Verbal and Reasoning', 'English Grammar', 'easy'),
+(134, 'Which is correct?', 'He don’t like it.', 'He doesn’t like it.', 'He not like it.', 'He isn’t like it.', 2, 'The correct sentence is "He doesn’t like it," using the correct auxiliary verb.', 'Verbal and Reasoning', 'English Grammar', 'easy'),
+(135, 'What is the plural of "cat"?', 'Cats', 'Cat', 'Cates', 'Cat’s', 1, 'The plural of "cat" is "cats".', 'Verbal and Reasoning', 'English Grammar', 'easy'),
+(136, 'Choose the correct pronoun: ___ is my friend.', 'He', 'Him', 'His', 'Hes', 1, 'The correct pronoun is "He" for the subject of the sentence.', 'Verbal and Reasoning', 'English Grammar', 'easy'),
+
+-- Verbal and Reasoning: Verbal Reasoning
+(137, 'If "pen" is related to "write," then "knife" is related to:', 'Cut', 'Eat', 'Draw', 'Read', 1, 'A pen is used to write, and a knife is used to cut.', 'Verbal and Reasoning', 'Verbal Reasoning', 'easy'),
+(138, 'Complete the analogy: Big is to small as tall is to:', 'Short', 'Long', 'High', 'Wide', 1, 'Big is the opposite of small, so tall is the opposite of short.', 'Verbal and Reasoning', 'Verbal Reasoning', 'easy'),
+(139, 'If "book" is to "read," then "kitchen" is to:', 'Cook', 'Sleep', 'Study', 'Play', 1, 'A book is used to read, and a kitchen is used to cook.', 'Verbal and Reasoning', 'Verbal Reasoning', 'easy'),
+(140, 'Which word completes the sequence: Sun, Moon, ____?', 'Star', 'Cloud', 'Sky', 'Rain', 1, 'Sun and Moon are celestial bodies, so Star fits the sequence.', 'Verbal and Reasoning', 'Verbal Reasoning', 'easy'),
+(141, 'If "tree" is to "forest," then "drop" is to:', 'Ocean', 'River', 'Puddle', 'Rain', 1, 'A tree is part of a forest, and a drop is part of an ocean.', 'Verbal and Reasoning', 'Verbal Reasoning', 'easy'),
+
+-- Verbal and Reasoning: Non Verbal Reasoning
+(142, 'Which number comes next in the sequence: 2, 4, 6, 8, ___?', '10', '12', '14', '16', 1, 'The sequence increases by 2 each time: 2 + 2 = 4, 4 + 2 = 6, ..., 8 + 2 = 10.', 'Verbal and Reasoning', 'Non Verbal Reasoning', 'easy'),
+(143, 'What is the missing number: 1, 3, 5, ___, 9?', '6', '7', '8', '10', 2, 'The sequence increases by 2: 1 + 2 = 3, 3 + 2 = 5, 5 + 2 = 7, 7 + 2 = 9.', 'Verbal and Reasoning', 'Non Verbal Reasoning', 'easy'),
+(144, 'Which shape completes the pattern: Circle, Square, Circle, ___?', 'Square', 'Triangle', 'Circle', 'Rectangle', 1, 'The pattern alternates: Circle, Square, Circle, so the next is Square.', 'Verbal and Reasoning', 'Non Verbal Reasoning', 'easy'),
+(145, 'What is the next number: 10, 20, 30, ___?', '40', '50', '60', '70', 1, 'The sequence increases by 10: 10 + 10 = 20, 20 + 10 = 30, 30 + 10 = 40.', 'Verbal and Reasoning', 'Non Verbal Reasoning', 'easy'),
+(146, 'Which number completes: 5, 10, 15, ___?', '20', '25', '30', '35', 1, 'The sequence increases by 5: 5 + 5 = 10, 10 + 5 = 15, 15 + 5 = 20.', 'Verbal and Reasoning', 'Non Verbal Reasoning', 'easy'),
+
+-- Verbal and Reasoning: Antonyms & Synonyms, Fill in the blanks
+(147, 'What is a synonym for "big"?', 'Large', 'Small', 'Tiny', 'Short', 1, 'A synonym for "big" is "large".', 'Verbal and Reasoning', 'Antonyms & Synonyms, Fill in the blanks', 'easy'),
+(148, 'What is the antonym of "hot"?', 'Cold', 'Warm', 'Burning', 'Heated', 1, 'The antonym of "hot" is "cold".', 'Verbal and Reasoning', 'Antonyms & Synonyms, Fill in the blanks', 'easy'),
+(149, 'Fill in the blank: The cat is ___ the table.', 'On', 'In', 'At', 'By', 1, 'The preposition "on" is correct for a cat’s position relative to a table.', 'Verbal and Reasoning', 'Antonyms & Synonyms, Fill in the blanks', 'easy'),
+(150, 'What is a synonym for "fast"?', 'Quick', 'Slow', 'Heavy', 'Light', 1, 'A synonym for "fast" is "quick".', 'Verbal and Reasoning', 'Antonyms & Synonyms, Fill in the blanks', 'easy'),
+(151, 'Fill in the blank: She ___ to school every day.', 'Walks', 'Walk', 'Walking', 'Walked', 1, 'The correct verb form is "walks" for present tense, third person singular.', 'Verbal and Reasoning', 'Antonyms & Synonyms, Fill in the blanks', 'easy'),
+
+-- Extra Concepts: Cybersecurity
+(152, 'What is a password used for?', 'Secure access', 'Store data', 'Run programs', 'Connect networks', 1, 'A password is used to secure access to systems or accounts.', 'Extra Concepts', 'Cybersecurity', 'easy'),
+(153, 'What is phishing?', 'A type of cyberattack', 'A programming language', 'A hardware device', 'A database', 1, 'Phishing is a cyberattack that tricks users into revealing sensitive information.', 'Extra Concepts', 'Cybersecurity', 'easy'),
+(154, 'What does a firewall do?', 'Blocks unauthorized access', 'Stores data', 'Runs programs', 'Manages memory', 1, 'A firewall blocks unauthorized access to a network.', 'Extra Concepts', 'Cybersecurity', 'easy'),
+(155, 'What is encryption?', 'Data protection', 'Data deletion', 'Data storage', 'Data execution', 1, 'Encryption protects data by converting it into a secure format.', 'Extra Concepts', 'Cybersecurity', 'easy'),
+(156, 'What is malware?', 'Malicious software', 'A hardware component', 'A network protocol', 'A database', 1, 'Malware is malicious software designed to harm systems or networks.', 'Extra Concepts', 'Cybersecurity', 'easy'),
+
+-- Extra Concepts: Design Patterns
+(157, 'What is a design pattern?', 'A reusable solution', 'A hardware component', 'A network protocol', 'A database', 1, 'A design pattern is a reusable solution to common software design problems.', 'Extra Concepts', 'Design Patterns', 'easy'),
+(158, 'What is the Singleton pattern?', 'Ensures one instance', 'Creates multiple instances', 'Sorts data', 'Stores files', 1, 'The Singleton pattern ensures a class has only one instance.', 'Extra Concepts', 'Design Patterns', 'easy'),
+(159, 'What is the Factory pattern used for?', 'Object creation', 'Data storage', 'Program execution', 'Network management', 1, 'The Factory pattern is used to create objects without specifying the exact class.', 'Extra Concepts', 'Design Patterns', 'easy'),
+(160, 'What is the Observer pattern?', 'Notifies changes', 'Stores data', 'Runs programs', 'Manages memory', 1, 'The Observer pattern notifies multiple objects of state changes.', 'Extra Concepts', 'Design Patterns', 'easy'),
+(161, 'What is the purpose of the Decorator pattern?', 'Add functionality', 'Remove functionality', 'Sort data', 'Store files', 1, 'The Decorator pattern adds functionality to objects dynamically.', 'Extra Concepts', 'Design Patterns', 'easy'),
+
+-- Extra Concepts: Cloud Computing
+(162, 'What is cloud computing?', 'On-demand resources', 'Local storage', 'Hardware manufacturing', 'Network protocols', 1, 'Cloud computing provides on-demand computing resources over the internet.', 'Extra Concepts', 'Cloud Computing', 'easy'),
+(163, 'What is a cloud service?', 'Hosted application', 'Local software', 'Hardware component', 'Database', 1, 'A cloud service is an application or resource hosted on the cloud.', 'Extra Concepts', 'Cloud Computing', 'easy'),
+(164, 'What does SaaS stand for?', 'Software as a Service', 'System as a Service', 'Storage as a Service', 'Security as a Service', 1, 'SaaS stands for Software as a Service, delivering software over the internet.', 'Extra Concepts', 'Cloud Computing', 'easy'),
+(165, 'What is a virtual machine in cloud computing?', 'Simulated computer', 'Physical computer', 'Network protocol', 'Database', 1, 'A virtual machine simulates a computer within a cloud environment.', 'Extra Concepts', 'Cloud Computing', 'easy'),
+(166, 'What is scalability in cloud computing?', 'Adjusting resources', 'Storing data', 'Running programs', 'Managing hardware', 1, 'Scalability allows cloud systems to adjust resources based on demand.', 'Extra Concepts', 'Cloud Computing', 'easy'),
+
+-- Extra Concepts: Machine Learning
+(167, 'What is machine learning?', 'Computers learning from data', 'Manual programming', 'Hardware design', 'Network management', 1, 'Machine learning enables computers to learn from data without explicit programming.', 'Extra Concepts', 'Machine Learning', 'easy'),
+(168, 'What is a dataset in machine learning?', 'Collection of data', 'A program', 'A hardware component', 'A network', 1, 'A dataset is a collection of data used to train machine learning models.', 'Extra Concepts', 'Machine Learning', 'easy'),
+(169, 'What is supervised learning?', 'Learning with labeled data', 'Learning without data', 'Manual coding', 'Hardware design', 1, 'Supervised learning uses labeled data to train models for predictions.', 'Extra Concepts', 'Machine Learning', 'easy'),
+(170, 'What is a neural network?', 'A model inspired by the brain', 'A database', 'A network protocol', 'A hardware device', 1, 'A neural network is a machine learning model inspired by the human brain.', 'Extra Concepts', 'Machine Learning', 'easy'),
+(171, 'What is overfitting in machine learning?', 'Model too specific to data', 'Model too general', 'Model runs too fast', 'Model stores data', 1, 'Overfitting occurs when a model is too specific to the training data and performs poorly on new data.', 'Extra Concepts', 'Machine Learning', 'easy'),
+
+-- Extra Concepts: Blockchain Technology
+(172, 'What is a blockchain?', 'A decentralized ledger', 'A centralized database', 'A hardware component', 'A network protocol', 1, 'A blockchain is a decentralized, distributed ledger for recording transactions.', 'Extra Concepts', 'Blockchain Technology', 'easy'),
+(173, 'What is a block in a blockchain?', 'A set of transactions', 'A program', 'A hardware device', 'A database', 1, 'A block is a set of transactions recorded in a blockchain.', 'Extra Concepts', 'Blockchain Technology', 'easy'),
+(174, 'What is a cryptocurrency?', 'Digital currency', 'Physical currency', 'A database', 'A network', 1, 'A cryptocurrency is a digital currency secured by cryptography.', 'Extra Concepts', 'Blockchain Technology', 'easy'),
+(175, 'What is the purpose of a hash in blockchain?', 'Secure data', 'Store data', 'Run programs', 'Manage networks', 1, 'A hash secures data by creating a unique fingerprint for each block.', 'Extra Concepts', 'Blockchain Technology', 'easy'),
+(176, 'What is decentralization in blockchain?', 'No single authority', 'Single authority', 'Local storage', 'Hardware design', 1, 'Decentralization means no single authority controls the blockchain.', 'Extra Concepts', 'Blockchain Technology', 'easy');
+
+Here are **10 common topics** interviewers or HR professionals may ask IT students during job interviews, along with **sample questions** for each:
+
+---
+
+### 1. **Self-Introduction / Personal Background**
+
+**Purpose:** Assess communication skills and personality fit.
+
+**Common HR Questions:**
+
+* Tell me about yourself.
+* Walk me through your resume.
+* What are your strengths and weaknesses?
+* Why did you choose IT as your career?
+
+---
+
+### 2. **Academic Projects**
+
+**Purpose:** Understand hands-on experience and problem-solving ability.
+
+**Common Interviewer Questions:**
+
+* Describe your final year project.
+* What challenges did you face during your project?
+* How did you implement it technically?
+* What technologies did you use and why?
+
+---
+
+### 3. **Programming Knowledge**
+
+**Purpose:** Test technical proficiency in languages.
+
+**Common Interviewer Questions:**
+
+* Which programming languages are you comfortable with?
+* Can you write a program to reverse a string or find factorial?
+* What is the difference between C++ and Java?
+* Explain OOP concepts with examples.
+
+---
+
+### 4. **Data Structures and Algorithms**
+
+**Purpose:** Evaluate problem-solving and coding logic.
+
+**Common Interviewer Questions:**
+
+* What is the difference between array and linked list?
+* How does a stack differ from a queue?
+* Explain binary search.
+* Solve a problem using recursion.
+
+---
+
+### 5. **Database Management Systems (DBMS)**
+
+**Purpose:** Assess understanding of data handling and storage.
+
+**Common Interviewer Questions:**
+
+* What is normalization?
+* What is the difference between SQL and NoSQL?
+* Write an SQL query to fetch top 3 students by marks.
+* What are primary keys and foreign keys?
+
+---
+
+### 6. **Operating Systems & Networking**
+
+**Purpose:** Check foundational IT knowledge.
+
+**Common Interviewer Questions:**
+
+* What is the difference between a process and a thread?
+* Explain deadlock and how to avoid it.
+* What is the OSI model?
+* Difference between TCP and UDP?
+
+---
+
+### 7. **Web Development / Full Stack Knowledge**
+
+**Purpose:** Understand exposure to frontend/backend technologies.
+
+**Common Interviewer Questions:**
+
+* What is the difference between HTML and HTML5?
+* What is REST API?
+* Can you explain the client-server architecture?
+* How does JavaScript differ from Java?
+
+---
+
+### 8. **Cybersecurity / Ethical Hacking (if applicable)**
+
+**Purpose:** Assess knowledge in securing systems.
+
+**Common Interviewer Questions:**
+
+* What is phishing?
+* What are firewalls and how do they work?
+* What is the difference between hashing and encryption?
+* How do you secure a web application?
+
+---
+
+### 9. **Version Control / Tools**
+
+**Purpose:** Evaluate familiarity with industry tools.
+
+**Common Interviewer Questions:**
+
+* What is Git and GitHub?
+* Explain the difference between Git pull and fetch.
+* How do you handle code conflicts in a team?
+
+---
+
+### 10. **Behavioral / HR Questions**
+
+**Purpose:** Test cultural fit and attitude.
+
+**Common HR Questions:**
+
+* Why should we hire you?
+* Where do you see yourself in 5 years?
+* Describe a time when you worked in a team.
+* Are you open to relocation or night shifts?
+
+---
+
+Let me know if you want **answers or tips** on how to respond to any of these questions!
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mock Test</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <style>
+    /* Prevent text selection and tap highlight on interactive elements only */
+    .option-btn,
+    .nav-button,
+    .difficulty-btn,
+    .theme-toggle,
+    .try-again-btn,
+    .question-dot,
+    .start-btn,
+    .analysis-btn {
+      -webkit-tap-highlight-color: transparent;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    :root {
+      --background: #121212;
+      --text-primary: #e0e0e0;
+      --text-secondary: #888888;
+      --card-bg: #1e1e1e;
+      --border: #333333;
+      --button-bg: #2a2a2a;
+      --primary: #4CAF50;
+      --primary-light: rgba(76, 175, 80, 0.2);
+      --primary-bg: rgba(76, 175, 80, 0.1);
+      --error: #f44336;
+      --error-light: rgba(244, 67, 54, 0.2);
+      --error-bg: rgba(244, 67, 54, 0.1);
+      --warning: #FF9800;
+      --warning-light: rgba(255, 152, 0, 0.2);
+      --warning-bg: rgba(255, 152, 0, 0.1);
+      --info: #2196F3;
+      --info-light: rgba(33, 150, 243, 0.1);
+      --accent: #21CBF3;
+      --shadow: rgba(0, 0, 0, 0.2);
+      --gradient: linear-gradient(45deg, #4CAF50, #45D149);
+      --correct-green: #4CAF50;
+      --try-again: #4CAF50;
+    }
+
+    [data-theme="light"] {
+      --background: #ffffff;
+      --text-primary: #333333;
+      --text-secondary: #666666;
+      --card-bg: #f5f5f5;
+      --border: #e0e0e0;
+      --button-bg: #e0e0e0;
+      --primary: #0288D1;
+      --primary-light: rgba(2, 136, 209, 0.2);
+      --primary-bg: rgba(2, 136, 209, 0.05);
+      --error: #d32f2f;
+      --error-light: rgba(244, 67, 54, 0.1);
+      --error-bg: rgba(244, 67, 54, 0.05);
+      --warning: #f57c00;
+      --warning-light: rgba(255, 152, 0, 0.1);
+      --warning-bg: rgba(255, 152, 0, 0.05);
+      --info: #1976d2;
+      --info-light: rgba(33, 150, 243, 0.1);
+      --accent: #40c4ff;
+      --shadow: rgba(0, 0, 0, 0.1);
+      --gradient: linear-gradient(45deg, #2196F3, #21CBF3);
+      --correct-green: #4CAF50;
+      --try-again: #0288D1;
+    }
+
+    [data-theme="dark"] .answer-content {
+      background-color: rgba(30, 30, 30, 0.9);
+      color: #e0e0e0;
+    }
+
+    [data-theme="dark"] .result[data-status="correct"] .result-content {
+      background-color: rgba(76, 175, 80, 0.1);
+      color: #e0e0e0;
+    }
+
+    [data-theme="dark"] .result[data-status="incorrect"] .result-content {
+      background-color: rgba(244, 67, 54, 0.1);
+      color: #e0e0e0;
+    }
+
+    [data-theme="dark"] .result[data-status="unanswered"] .result-content {
+      background-color: rgba(255, 152, 0, 0.1);
+      color: #e0e0e0;
+    }
+
+    [data-theme="dark"] .instructions-section {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    [data-theme="dark"] .option-btn {
+      color: #f5f5f5;
+    }
+
+    [data-theme="dark"] .option-btn .option-text {
+      color: #f5f5f5;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: var(--background);
+      color: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 20px 10px;
+      box-sizing: border-box;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    h1, h2, h3 {
+      color: var(--text-primary);
+      text-align: center;
+    }
+
+    .theme-toggle {
+      background: var(--button-bg);
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: absolute;
+      top: -40px;
+      right: 0;
+      z-index: 1000;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 2px 4px var(--shadow);
+    }
+
+    .theme-toggle i {
+      font-size: 20px;
+      color: var(--text-primary);
+    }
+
+    .back-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-primary);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      background-color: var(--button-bg);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .back-link:hover {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .back-link i {
+      font-size: 18px;
+    }
+
+    .instructions-section {
+      text-align: center;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      max-width: 600px;
+      width: 90%;
+      position: relative;
+      margin-top: 20px;
+    }
+
+    .instructions-section .back-link {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+    }
+
+    .instructions-section h2 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: var(--primary);
+    }
+
+    .instructions-section p {
+      margin-bottom: 20px;
+      font-size: 16px;
+      color: var(--text-primary);
+    }
+
+    .instructions-section ul {
+      list-style-type: disc;
+      padding-left: 20px;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .instructions-section li {
+      margin-bottom: 10px;
+      font-size: 16px;
+      color: var(--text-primary);
+    }
+
+    .instructions-section li::marker {
+      color: var(--primary);
+    }
+
+    .start-btn {
+      display: block;
+      width: 100%;
+      max-width: 280px;
+      margin: 10px auto;
+      padding: 12px 15px;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      position: relative;
+    }
+
+    .start-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px var(--shadow);
+    }
+
+    #quiz-container {
+      width: 100%;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    #question-display {
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .question-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      background-color: var(--card-bg);
+      width: 100%;
+      max-width: 600px;
+      box-sizing: border-box;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .question-text {
+      font-size: 1.1rem;
+      line-height: 1.5;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      padding: 12px;
+      background: var(--card-bg);
+      border-radius: 8px;
+      box-shadow: 0 2px 4px var(--shadow);
+      min-height: 80px;
+      height: auto;
+      width: 100%;
+      box-sizing: border-box;
+      overflow-y: auto;
+      white-space: normal;
+      word-wrap: break-word;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 16px;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .option-btn {
+      background: var(--button-bg);
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 50px;
+      width: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .option-text {
+      flex: 1;
+      text-align: left;
+      font-size: 0.9rem;
+      white-space: normal;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+    }
+
+    .option-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px var(--shadow);
+      border-color: var(--primary);
+    }
+
+    .option-btn.selected {
+      background: var(--gradient);
+      color: white;
+      transform: scale(1.02);
+      box-shadow: 0 6px 12px var(--shadow);
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1.02); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1.02); }
+    }
+
+    .result {
+      background: var(--card-bg);
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      overflow-y: auto;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .result-status {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 8px 16px;
+      border-bottom-left-radius: 10px;
+      font-weight: bold;
+    }
+
+    .correct-status {
+      background-color: var(--correct-green);
+      color: white;
+    }
+
+    .wrong-status {
+      background-color: var(--error-light);
+      color: var(--error);
+    }
+
+    .unanswered-status {
+      background-color: var(--warning-light);
+      color: var(--warning);
+    }
+
+    .result-content {
+      margin-top: 10px;
+      padding: 15px;
+      border-radius: 8px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+    }
+
+    .result[data-status="correct"] .result-content {
+      background-color: var(--primary-bg);
+      border-left: 4px solid var(--correct-green);
+    }
+
+    .result[data-status="incorrect"] .result-content {
+      background-color: var(--error-bg);
+      border-left: 4px solid var(--error);
+    }
+
+    .result[data-status="unanswered"] .result-content {
+      background-color: var(--warning-bg);
+      border-left: 4px solid var(--warning);
+    }
+
+    .answer-row {
+      margin: 12px 0;
+      padding: 10px;
+      border-radius: 8px;
+      background: var(--button-bg);
+    }
+
+    .answer-label {
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
+
+    .answer-content {
+      font-size: 0.9rem;
+      line-height: 1.4;
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    .explanation {
+      margin-top: 12px;
+      padding: 10px;
+      border-radius: 6px;
+      background-color: var(--info-light);
+      border-left: 4px solid var(--info);
+      font-size: 0.9rem;
+    }
+
+    #timer {
+      font-size: 1rem;
+      color: var(--primary);
+      text-align: right;
+      position: relative;
+    }
+
+    .debug-info {
+      background-color: var(--button-bg);
+      padding: 10px;
+      border: 1px solid var(--border);
+      margin: 15px 0;
+      border-radius: 5px;
+      display: none;
+      font-size: 0.8rem;
+    }
+
+    .controls {
+      margin: 10px 0;
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+      padding: 0 5px;
+      box-sizing: border-box;
+      min-height: 60px;
+      align-items: center;
+    }
+
+    .nav-button {
+      padding: 10px 20px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      min-width: 80px;
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .nav-button.next-btn {
+      position: relative;
+    }
+
+    .nav-button:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px var(--shadow);
+    }
+
+    .nav-button:disabled {
+      background-color: var(--button-bg);
+      color: var(--text-secondary);
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    .progress-container {
+      width: 100%;
+      height: 6px;
+      background-color: var(--button-bg);
+      border-radius: 4px;
+      margin: 15px 0;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background-color: var(--primary);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .quiz-header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      position: relative;
+    }
+
+    #question-counter {
+      text-align: left;
+      flex: 1;
+    }
+
+    .results-container {
+      display: none;
+      width: 100%;
+      max-width: 600px;
+      position: relative;
+      margin-top: 20px;
+    }
+
+    .results-summary {
+      text-align: center;
+      margin-bottom: 20px;
+      padding: 20px;
+      background: var(--card-bg);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      position: relative;
+    }
+
+    .results-container .back-link {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      padding: 4px 8px;
+      font-size: 0.8rem;
+    }
+
+    .results-container .back-link i {
+      font-size: 14px;
+    }
+
+    .score-circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: conic-gradient(var(--primary) 0%, var(--primary) var(--percentage), var(--button-bg) var(--percentage), var(--button-bg) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 15px;
+    }
+
+    .score-inner {
+      width: 100px;
+      height: 100px;
+      background-color: var(--card-bg);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .score-value {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--text-primary);
+    }
+
+    .score-label {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .time-taken {
+      margin-top: 15px;
+      padding: 8px;
+      background-color: var(--info-light);
+      border-radius: 5px;
+      font-size: 0.9rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .stat-card {
+      background-color: var(--button-bg);
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .try-again-btn, .analysis-btn {
+      padding: 10px 20px;
+      background-color: var(--try-again);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      margin: 10px 5px;
+      transition: transform 0.2s;
+      display: inline-block;
+    }
+
+    .try-again-btn:hover, .analysis-btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
+
+    .question-indicators {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      max-width: 400px;
+      margin: 15px auto;
+      padding: 0 5px;
+    }
+
+    .question-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: bold;
+      color: white;
+      transition: transform 0.2s;
+      flex: 0 0 28px;
+    }
+
+    .question-dot:hover {
+      transform: scale(1.2);
+    }
+
+    .dot-correct {
+      background-color: #4CAF50;
+    }
+
+    .dot-wrong {
+      background-color: #f44336;
+    }
+
+    .dot-unanswered {
+      background-color: #FF9800;
+    }
+
+    .loading-container {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 40px 0;
+      text-align: center;
+    }
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid var(--button-bg);
+      border-top: 5px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 15px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      font-size: 18px;
+      color: var(--text-primary);
+      font-weight: bold;
+    }
+
+    .analysis-section {
+      display: none;
+      margin-top: 30px;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .topic-scores {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .topic-score-card {
+      background-color: var(--card-bg);
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+
+    .topic-score-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px var(--shadow);
+    }
+
+    .topic-name {
+      font-size: 18px;
+      font-weight: bold;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+    }
+
+    .topic-score {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    .analysis-table {
+      width: 100%;
+      max-width: 600px;
+      border-collapse: collapse;
+      background: var(--card-bg);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px var(--shadow);
+      margin: 0 auto;
+    }
+
+    .analysis-table th,
+    .analysis-table td {
+      padding: 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    .analysis-table th {
+      background-color: var(--button-bg);
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .analysis-table td {
+      color: var(--text-primary);
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .question-number {
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    .status-correct,
+    .status-incorrect,
+    .status-unanswered {
+      font-weight: bold;
+      min-width: 100px;
+      display: flex;
+      align-items: center;
+    }
+
+    .status-correct {
+      color: var(--correct-green);
+    }
+
+    .status-correct i {
+      color: var(--correct-green);
+    }
+
+    .status-incorrect {
+      color: var(--error);
+    }
+
+    .status-incorrect i {
+      color: var(--error);
+    }
+
+    .status-unanswered {
+      color: var(--warning);
+    }
+
+    .status-unanswered i {
+      color: var(--warning);
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 20px;
+      color: var(--text-secondary);
+      font-size: 16px;
+    }
+
+    /* Media Queries for Responsiveness */
+    @media (max-width: 768px) {
+      .container {
+        width: 100%;
+        padding: 15px;
+        justify-content: flex-start;
+        padding-top: 60px;
+      }
+
+      .instructions-section {
+        width: 95%;
+        margin-top: 10px;
+        padding: 15px;
+      }
+
+      .quiz-header {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      #timer {
+        font-size: 0.9rem;
+      }
+
+      #quiz-container {
+        width: 95%;
+        margin-top: 10px;
+      }
+
+      #question-display {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .question-card {
+        padding: 15px;
+        min-height: auto;
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .question-text {
+        font-size: 1rem;
+        min-height: 70px;
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .options {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 5px;
+      }
+
+      .option-btn {
+        padding: 10px 12px;
+        min-height: 48px;
+        font-size: 0.85rem;
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .question-indicators {
+        max-width: 300px;
+        gap: 5px;
+      }
+
+      .question-dot {
+        width: 24px;
+        height: 24px;
+        font-size: 10px;
+        flex: 0 0 24px;
+      }
+
+      .controls {
+        padding: 0;
+        margin: 8px 0;
+        flex-direction: row;
+        gap: 10px;
+        min-height: 50px;
+      }
+
+      .nav-button {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+        min-width: 70px;
+      }
+
+      .score-circle {
+        width: 100px;
+        height: 100px;
+      }
+
+      .score-inner {
+        width: 80px;
+        height: 80px;
+      }
+
+      .score-value {
+        font-size: 1.2rem;
+      }
+
+      .score-label {
+        font-size: 0.7rem;
+      }
+
+      .result {
+        padding: 15px;
+      }
+
+      .theme-toggle {
+        top: -36px;
+        right: 0;
+      }
+
+      .analysis-section {
+        margin-top: 20px;
+      }
+
+      .analysis-table {
+        display: block;
+        overflow-x: auto;
+        max-width: 95%;
+      }
+
+      .analysis-table thead {
+        display: none;
+      }
+
+      .analysis-table tbody {
+        display: block;
+      }
+
+      .analysis-table tr {
+        display: block;
+        margin-bottom: 15px;
+        padding: 15px;
+        background: var(--card-bg);
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        box-shadow: 0 2px 4px var(--shadow);
+      }
+
+      .analysis-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 12px;
+        font-size: 13px;
+        border-bottom: none;
+      }
+
+      .analysis-table td:before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: var(--text-secondary);
+        width: 40%;
+        flex-shrink: 0;
+      }
+
+      .analysis-table td:not(:last-child) {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .topic-scores {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 10px;
+        padding-top: 50px;
+      }
+
+      .theme-toggle {
+        width: 32px;
+        height: 32px;
+        top: -34px;
+        right: 0;
+      }
+
+      .theme-toggle i {
+        font-size: 18px;
+      }
+
+      .back-link {
+        padding: 4px 8px;
+        font-size: 0.75rem;
+      }
+
+      .back-link i {
+        font-size: 12px;
+      }
+
+      .instructions-section h2 {
+        font-size: 20px;
+      }
+
+      .instructions-section p,
+      .instructions-section li {
+        font-size: 14px;
+      }
+
+      .start-btn {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+      }
+
+      .question-text {
+        font-size: 0.9rem;
+        min-height: 60px;
+        width: 100%;
+        max-width: 100%;
+      }
+
+      #question-display {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .question-card {
+        width: 100%;
+        max-width: 100%;
+        padding: 10px;
+      }
+
+      .options {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 2px;
+      }
+
+      .option-btn {
+        min-height: 45px;
+        font-size: 0.8rem;
+        width: 100%;
+        max-width: 100%;
+        padding: 8px 10px;
+      }
+
+      .nav-button {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+      }
+
+      .answer-content {
+        font-size: 0.8rem;
+      }
+
+      .explanation {
+        font-size: 0.8rem;
+      }
+
+      .controls {
+        margin: 8px 0;
+        min-height: 48px;
+      }
+
+      .timer {
+        font-size: 0.8rem;
+      }
+
+      #question-counter {
+        font-size: 1.2rem;
+      }
+
+      .analysis-table tr {
+        padding: 10px;
+      }
+
+      .analysis-table td {
+        font-size: 12px;
+        padding: 6px 10px;
+      }
+
+      .analysis-table td:before {
+        width: 45%;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .container {
+        padding: 8px;
+        padding-top: 45px;
+      }
+
+      .question-text {
+        font-size: 0.85rem;
+        padding: 8px;
+      }
+
+      .options {
+        gap: 8px;
+      }
+
+      .option-btn {
+        padding: 6px 8px;
+        font-size: 0.75rem;
+        min-height: 40px;
+      }
+
+      .question-card {
+        padding: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="instructions-section" id="instructions-section">
+    <a href="Topics.html#testarea" class="back-link" id="difficulty-back">
+      <i class='bx bx-arrow-back'></i>
+      Back
+    </a>
+    <h2>Mock Test</h2>
+    <p>
+      This contains the combined questions from all the above topics from Practice Area section. The questions are selected in a specific order from each topic to ensure a balanced assessment.
+    </p>
+    <ul>
+      <li>There are <b>7</b> Topics and each Topic has <b>5</b> Subtopics.</li>
+      <li>There will be <b>1</b> question from each Subtopic.</li>
+      <li>There is no <b>Back</b> button in this test, so if you go to the next question you cannot go back.</li>
+      <li>Total number of questions: <strong>35</strong>.</li>
+      <li>Time allotted: <strong>45 minutes</strong>.</li>
+      <li>Each question carries 1 mark; there are <strong>no negative marks</strong>.</li>
+      <li><strong>DO NOT</strong> refresh the page.</li>
+      <li>All the best!</li>
+    </ul>
+    <button class="start-btn" onclick="startTest()">Start Test</button>
+  </div>
+
+  <div class="loading-container" id="loading-container">
+    <div class="spinner"></div>
+    <div class="loading-text">Loading Questions...</div>
+  </div>
+
+  <div class="debug-info" id="debug-info"></div>
+
+  <div id="quiz-container" style="display: none;">
+    <div class="quiz-header">
+      <h2 id="question-counter">Question 1</h2>
+      <div id="timer">Time left: <span id="time">45:00</span>
+        <button class="theme-toggle" id="theme-toggle" title="Toggle Theme">
+          <i class='bx bx-moon'></i>
+        </button>
+      </div>
+    </div>
+    <div class="progress-container">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+    <div id="question-display"></div>
+    <div class="controls" id="nav-buttons" style="display: none;">
+      <button id="next-btn" class="nav-button next-btn" disabled>Next</button>
+    </div>
+  </div>
+
+  <div id="results-container" class="results-container">
+    <div class="results-summary" id="results-summary"></div>
+    <div class="question-indicators" id="question-indicators"></div>
+    <div id="detailed-results"></div>
+    <div class="analysis-section" id="analysis-section">
+      <h2>Detailed Performance Analysis</h2>
+      <div class="topic-scores" id="topic-scores"></div>
+      <table class="analysis-table" id="analysis-table">
+        <thead>
+          <tr>
+            <th>Question</th>
+            <th>Topic</th>
+            <th>Subtopic</th>
+            <th>Status</th>
+            <th>Time Taken</th>
+          </tr>
+        </thead>
+        <tbody id="analysis-body"></tbody>
+      </table>
+    </div>
+    <div style="text-align: center; margin-top: 20px;">
+      <button id="try-again-btn" class="try-again-btn">Try Again</button>
+      <button id="analysis-btn" class="analysis-btn">View Detailed Analysis</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// Supabase configuration
+const supabaseUrl = 'https://zfmakkkhbgizrtpmzjmh.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpmbWFra2toYmdpenJ0cG16am1oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY3MTg4OTUsImV4cCI6MjA2MjI5NDg5NX0.Q-uoMbcws92SHrT28i930w5iL-DBf1x30Kl0SpFtxhk';
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+// Global state
+let questions = [];
+let userAnswers = {};
+let timerSeconds = 2700; // 45 minutes
+let timeTaken = 0;
+let timerInterval;
+let currentQuestionIndex = 0;
+let startTime;
+const questionCount = 35;
+let questionTimes = new Array(questionCount).fill(0);
+let currentDifficulty = 'easy';
+
+// Theme toggle functionality
+const themeToggle = document.getElementById('theme-toggle');
+const themeIcon = themeToggle.querySelector('i');
+
+function setTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  themeIcon.classList.toggle('bx-moon', theme === 'dark');
+  themeIcon.classList.toggle('bx-sun', theme === 'light');
+  localStorage.setItem('theme', theme);
+}
+
+function toggleTheme() {
+  const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  setTheme(newTheme);
+}
+
+const savedTheme = localStorage.getItem('theme') || 'dark';
+setTheme(savedTheme);
+
+themeToggle.addEventListener('click', toggleTheme);
+
+// Debug toggle
+function toggleDebug() {
+  const debugEl = document.getElementById('debug-info');
+  debugEl.style.display = debugEl.style.display === 'none' ? 'block' : 'none';
+}
+
+// Start the test
+function startTest() {
+  const urlParams = new URLSearchParams(window.location.search);
+  currentDifficulty = urlParams.get('difficulty') || 'easy';
+  
+  document.getElementById('instructions-section').style.display = 'none';
+  document.getElementById('loading-container').style.display = 'flex';
+  document.getElementById('quiz-container').style.display = 'none';
+  document.getElementById('nav-buttons').style.display = 'none';
+  document.getElementById('difficulty-back').style.display = 'none';
+  resetQuiz();
+}
+
+// Reset quiz state
+function resetQuiz() {
+  clearInterval(timerInterval);
+  questions = [];
+  userAnswers = {};
+  questionTimes = new Array(questionCount).fill(0);
+  timerSeconds = 2700;
+  timeTaken = 0;
+  currentQuestionIndex = 0;
+  
+  document.getElementById('time').textContent = formatTime(timerSeconds);
+  document.getElementById('question-display').innerHTML = '';
+  document.getElementById('detailed-results').innerHTML = '';
+  document.getElementById('results-summary').innerHTML = '';
+  document.getElementById('question-indicators').innerHTML = '';
+  document.getElementById('analysis-section').style.display = 'none';
+  document.getElementById('results-container').style.display = 'none';
+  document.getElementById('quiz-container').style.display = 'flex';
+  document.getElementById('nav-buttons').style.display = 'flex';
+  
+  document.getElementById('difficulty-back').style.display = 'none';
+  
+  updateProgressBar();
+  fetchQuestions();
+}
+
+// Start timer
+function startTimer() {
+  startTime = new Date();
+  document.getElementById('time').textContent = formatTime(timerSeconds);
+  timerInterval = setInterval(() => {
+    timerSeconds--;
+    document.getElementById('time').textContent = formatTime(timerSeconds);
+    
+    const timerElement = document.getElementById('timer');
+    if (timerSeconds <= 60) {
+      timerElement.style.color = 'var(--error)';
+    } else if (timerSeconds <= 180) {
+      timerElement.style.color = 'var(--warning)';
+    } else {
+      timerElement.style.color = 'var(--primary)';
+    }
+    
+    if (timerSeconds <= 0) {
+      clearInterval(timerInterval);
+      submitQuiz();
+    }
+  }, 1000);
+}
+
+// Calculate total time taken
+function calculateTimeTaken() {
+  const endTime = new Date();
+  timeTaken = Math.floor((endTime - startTime) / 1000);
+  return timeTaken;
+}
+
+// Format time as MM:SS
+function formatTime(seconds) {
+  const minutes = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+}
+
+// Utility function to get a random item from an array
+function getRandomItem(array) {
+  if (!array || array.length === 0) return null;
+  const randomIndex = Math.floor(Math.random() * array.length);
+  return array[randomIndex];
+}
+
+// Fetch questions from Supabase with randomization
+async function fetchQuestions() {
+  try {
+    const questionStructure = [
+      {
+        topic: "General Aptitude",
+        subtopics: [
+          "Logical Reasoning",
+          "Ratio & Proportion",
+          "Averages, Profit & Loss",
+          "HCF & LCM, Simplification",
+          "Probability, Permutations & Combinations"
+        ]
+      },
+      {
+        topic: "Arithmetic Aptitude",
+        subtopics: [
+          "Percentages",
+          "Time & Work",
+          "Time, Speed & Distance",
+          "Measurements & Geometry",
+          "Simple & Compound Interest"
+        ]
+      },
+      {
+        topic: "Technical MCQs",
+        subtopics: [
+          "Operating Systems",
+          "Computer Networks",
+          "Computer Architecture",
+          "Database Management",
+          "Data Structures & Algorithms"
+        ]
+      },
+      {
+        topic: "Programming Languages",
+        subtopics: [
+          "Java",
+          "Python",
+          "C & C++",
+          "JavaScript",
+          "Modern Languages"
+        ]
+      },
+      {
+        topic: "BrainRot Topics",
+        subtopics: [
+          "Blood Relations",
+          "Direction Problems",
+          "Coding and Decoding",
+          "Seating Arrangements",
+          "Train, Boat, Tank and Pipe Problems"
+        ]
+      },
+      {
+        topic: "Verbal and Reasoning",
+        subtopics: [
+          "Verbal Ability",
+          "English Grammar",
+          "Verbal Reasoning",
+          "Non Verbal Reasoning",
+          "Antonyms & Synonyms, Fill in the blanks"
+        ]
+      },
+      {
+        topic: "Extra Concepts",
+        subtopics: [
+          "Cloud Computing",
+          "Artificial Intelligence",
+          "Software Engineering",
+          "Situational Questions",
+          "Web Content Management"
+        ]
+      }
+    ];
+
+    let tableName;
+    switch (currentDifficulty.toLowerCase()) {
+      case 'easy':
+        tableName = 'general_aptitude';
+        break;
+      case 'medium':
+        tableName = 'general_aptitude_medium';
+        break;
+      case 'hard':
+        tableName = 'general_aptitude_hard';
+        break;
+      default:
+        tableName = 'general_aptitude';
+    }
+
+    questions = [];
+    let debugInfo = [];
+
+    for (const { topic, subtopics } of questionStructure) {
+      for (const subtopic of subtopics) {
+        // Fetch all questions for the topic and subtopic
+        const { data, error } = await supabase
+          .from(tableName)
+          .select('*')
+          .eq('topic', topic)
+          .eq('subtopic', subtopic);
+
+        if (error) {
+          debugInfo.push(`Error fetching questions for ${topic} - ${subtopic}: ${error.message}`);
+          console.error(`Error: ${error.message}`);
+          continue;
+        }
+
+        if (!data || data.length === 0) {
+          debugInfo.push(`No questions found for ${topic} - ${subtopic}`);
+          continue;
+        }
+
+        // Randomly select one question from the available questions
+        const selectedQuestion = getRandomItem(data);
+        questions.push(selectedQuestion);
+        debugInfo.push(`Selected question ID ${selectedQuestion.id} for ${topic} - ${subtopic} (${data.length} available)`);
+      }
+    }
+
+    if (questions.length !== questionCount) {
+      throw new Error(
+        `Expected ${questionCount} questions, but got ${questions.length}. Check database for missing questions in ${tableName}.`
+      );
+    }
+
+    const debugEl = document.getElementById('debug-info');
+    debugEl.innerHTML = `
+      <strong>Debug Info:</strong><br>
+      Total questions selected: ${questions.length}<br>
+      Table used: ${tableName}<br>
+      ${debugInfo.join('<br>')}
+    `;
+
+    updateProgressBar();
+    startTimer();
+    showQuestion(0);
+  } catch (err) {
+    console.error('Error:', err);
+    document.getElementById('question-display').innerHTML = `
+      <div style="color: var(--error); padding: 20px; border: 1px solid var(--error); border-radius: 5px;">
+        Error loading quiz: ${err.message}<br>
+        Please check your database connection and table structure.
+      </div>`;
+    document.getElementById('loading-container').style.display = 'none';
+  }
+}
+
+// Get option column names from database
+function getOptionColumnNames(question) {
+  if (!question) return null;
+
+  // Possible column names for options
+  const possibleOptionKeys = [
+    'option1', 'option_1', 'option_a', 'optionA', 'a', 'A',
+    'option2', 'option_2', 'option_b', 'optionB', 'b', 'B',
+    'option3', 'option_3', 'option_c', 'optionC', 'c', 'C',
+    'option4', 'option_4', 'option_d', 'optionD', 'd', 'D'
+  ];
+
+  const optionColumns = {
+    option1: null,
+    option2: null,
+    option3: null,
+    option4: null
+  };
+
+  // Check which option columns exist in the question object
+  const questionKeys = Object.keys(question);
+  let foundOptions = 0;
+
+  for (let i = 1; i <= 4; i++) {
+    for (const key of possibleOptionKeys) {
+      if (questionKeys.includes(key) && question[key] && !optionColumns[`option${i}`]) {
+        if (key.toLowerCase().includes(`${i}`) || key.toLowerCase() === ['a', 'b', 'c', 'd'][i-1]) {
+          optionColumns[`option${i}`] = key;
+          foundOptions++;
+          break;
+        }
+      }
+    }
+  }
+
+  if (foundOptions < 4) {
+    console.error(`Incomplete option columns found: ${JSON.stringify(optionColumns)}`);
+    return null;
+  }
+
+  return optionColumns;
+}
+
+// Get correct answer column name
+function getCorrectAnswerColumn(question) {
+  if (!question) return null;
+  
+  const possibleCorrectKeys = [
+    'correct_option', 'correct_answer', 'correctOption', 'correctAnswer',
+    'answer', 'correct'
+  ];
+
+  return possibleCorrectKeys.find(key => question[key] !== undefined) || null;
+}
+
+// Get explanation column name
+function getExplanationColumn(question) {
+  if (!question) return null;
+  
+  const possibleExplanationKeys = ['explanation', 'feedback'];
+  return possibleExplanationKeys.find(key => question[key] !== undefined) || null;
+}
+
+// Update progress bar and question counter
+function updateProgressBar() {
+  const progress = (currentQuestionIndex / questions.length) * 100;
+  document.getElementById('progress-bar').style.width = `${progress}%`;
+  document.getElementById('question-counter').textContent = `Question ${currentQuestionIndex + 1}/${questions.length}`;
+  
+  document.getElementById('next-btn').textContent = currentQuestionIndex === questions.length - 1 ? 'Finish Quiz' : 'Next';
+}
+
+// Display a question
+function showQuestion(index) {
+  if (index < 0 || index >= questions.length) return;
+  
+  currentQuestionIndex = index;
+  updateProgressBar();
+  
+  const q = questions[index];
+  const containerElement = document.getElementById('question-display');
+  containerElement.innerHTML = '';
+  
+  window.questionStartTime = new Date();
+  
+  const optionCols = getOptionColumnNames(q);
+  if (!optionCols || !optionCols.option1) {
+    containerElement.innerHTML = `
+      <div style="color: var(--error); padding: 20px; border: 1px solid var(--error); border-radius: 5px;">
+        Cannot find option columns in database for question ID ${q.id || 'unknown'}. Please check column names (expected: option1-4, option_a-d, etc.).
+        <br>Available columns: ${Object.keys(q).join(', ')}
+      </div>`;
+    document.getElementById('loading-container').style.display = 'none';
+    return;
+  }
+  
+  const questionDiv = document.createElement('div');
+  questionDiv.className = 'question-card';
+  questionDiv.innerHTML = `
+    <div class="question-text">
+      ${q.question || 'Question text missing'}
+    </div>
+    <div class="options">
+      <button onclick="selectOption(${index}, 1, this)" class="option-btn ${userAnswers[index] === 1 ? 'selected' : ''}">
+        <span class="option-text">${q[optionCols.option1] || 'Option 1 missing'}</span>
+      </button>
+      <button onclick="selectOption(${index}, 2, this)" class="option-btn ${userAnswers[index] === 2 ? 'selected' : ''}">
+        <span class="option-text">${q[optionCols.option2] || 'Option 2 missing'}</span>
+      </button>
+      <button onclick="selectOption(${index}, 3, this)" class="option-btn ${userAnswers[index] === 3 ? 'selected' : ''}">
+        <span class="option-text">${q[optionCols.option3] || 'Option 3 missing'}</span>
+      </button>
+      <button onclick="selectOption(${index}, 4, this)" class="option-btn ${userAnswers[index] === 4 ? 'selected' : ''}">
+        <span class="option-text">${q[optionCols.option4] || 'Option 4 missing'}</span>
+      </button>
+    </div>
+  `;
+  containerElement.appendChild(questionDiv);
+  
+  document.getElementById('loading-container').style.display = 'none';
+  document.getElementById('quiz-container').style.display = 'flex';
+  document.getElementById('nav-buttons').style.display = 'flex';
+
+  const nextBtn = document.getElementById('next-btn');
+  nextBtn.disabled = !userAnswers[index];
+}
+
+// Navigate to next question
+function nextQuestion() {
+  const endTime = new Date();
+  const timeSpent = Math.floor((endTime - (window.questionStartTime || startTime)) / 1000);
+  questionTimes[currentQuestionIndex] = timeSpent;
+
+  if (currentQuestionIndex < questions.length - 1) {
+    showQuestion(currentQuestionIndex + 1);
+  } else {
+    submitQuiz();
+  }
+}
+
+// Select an option
+function selectOption(qIndex, optionNum, btnElement) {
+  if (userAnswers[qIndex] === optionNum) {
+    delete userAnswers[qIndex];
+    btnElement.classList.remove('selected');
+  } else {
+    userAnswers[qIndex] = optionNum;
+    const buttons = btnElement.parentElement.querySelectorAll('button');
+    buttons.forEach(btn => btn.classList.remove('selected'));
+    btnElement.classList.add('selected');
+  }
+
+  const nextBtn = document.getElementById('next-btn');
+  nextBtn.disabled = !userAnswers[qIndex];
+}
+
+// Show specific result question
+function showResultQuestion(index) {
+  const resultElements = document.querySelectorAll('.result');
+  resultElements.forEach(el => el.style.display = 'none');
+  resultElements[index].style.display = 'block';
+}
+
+// Load analysis section
+function loadAnalysis() {
+  let quizResults = [];
+  try {
+    const storedResults = localStorage.getItem('quizResults');
+    if (storedResults) {
+      quizResults = JSON.parse(storedResults);
+    }
+  } catch (e) {
+    console.error('Error parsing quiz results:', e);
+  }
+
+  const topics = [
+    "General Aptitude",
+    "Arithmetic Aptitude",
+    "Technical MCQs",
+    "Programming Languages",
+    "BrainRot Topics",
+    "Verbal and Reasoning",
+    "Extra Concepts"
+  ];
+
+  const topicScoresDiv = document.getElementById('topic-scores');
+  topicScoresDiv.innerHTML = '';
+
+  if (!Array.isArray(quizResults) || quizResults.length === 0) {
+    topicScoresDiv.innerHTML = '<div class="no-results">No quiz results available</div>';
+  } else {
+    topics.forEach(topic => {
+      const topicResults = quizResults.filter(result => result.topic === topic);
+      const correctCount = topicResults.filter(result => result.status === 'Correct').length;
+      const scoreCard = document.createElement('div');
+      scoreCard.className = 'topic-score-card';
+      scoreCard.innerHTML = `
+        <div class="topic-name">${topic}</div>
+        <div class="topic-score">${correctCount}/${topicResults.length}</div>
+      `;
+      topicScoresDiv.appendChild(scoreCard);
+    });
+  }
+
+  const tbody = document.getElementById('analysis-body');
+  tbody.innerHTML = '';
+
+  if (!Array.isArray(quizResults) || quizResults.length === 0) {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td colspan="5" class="no-results">No quiz results available</td>
+    `;
+    tbody.appendChild(row);
+    return;
+  }
+
+  quizResults.forEach(result => {
+    const status = result.status || 'Unanswered';
+    let statusClass, statusIcon;
+
+    if (status === 'Correct') {
+      statusClass = 'correct';
+      statusIcon = '<i class="bx bx-check-circle" style="margin-right: 8px; color: var(--correct-green);"></i>';
+    } else if (status === 'Incorrect') {
+      statusClass = 'incorrect';
+      statusIcon = '<i class="bx bx-x-circle" style="margin-right: 8px; color: var(--error);"></i>';
+    } else {
+      statusClass = 'unanswered';
+      statusIcon = '<i class="bx bx-help-circle" style="margin-right: 8px; color: var(--warning);"></i>';
+    }
+
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td data-label="Question" class="question-number">${result.questionNumber || 'N/A'}</td>
+      <td data-label="Topic">${result.topic || 'N/A'}</td>
+      <td data-label="Subtopic">${result.subtopic || 'N/A'}</td>
+      <td data-label="Status" class="status-${statusClass}">${statusIcon}${status}</td>
+      <td data-label="Time Taken">${formatTime(result.timeTaken || 0)}</td>
+    `;
+    tbody.appendChild(row);
+  });
+}
+
+// Submit quiz and show results
+function submitQuiz() {
+  clearInterval(timerInterval);
+  
+  const endTime = new Date();
+  const timeSpent = Math.floor((endTime - (window.questionStartTime || startTime)) / 1000);
+  questionTimes[currentQuestionIndex] = timeSpent;
+  
+  calculateTimeTaken();
+  
+  document.getElementById('quiz-container').style.display = 'none';
+  document.getElementById('nav-buttons').style.display = 'none';
+  document.getElementById('results-container').style.display = 'block';
+  document.getElementById('analysis-section').style.display = 'none';
+  
+  document.getElementById('difficulty-back').style.display = 'flex';
+  
+  const resultsDiv = document.getElementById('detailed-results');
+  resultsDiv.innerHTML = '';
+  
+  let correctCount = 0;
+  let wrongCount = 0;
+  let unansweredCount = 0;
+  const indicatorsDiv = document.getElementById('question-indicators');
+  indicatorsDiv.innerHTML = '';
+  
+  const quizResults = questions.map((q, index) => {
+    const userAnswer = userAnswers[index] || null;
+    const optionCols = getOptionColumnNames(q);
+    const correctCol = getCorrectAnswerColumn(q);
+    
+    if (!optionCols || !correctCol) {
+      console.error(`Invalid columns for question ${index + 1}:`, { optionCols, correctCol });
+      return {
+        questionNumber: index + 1,
+        topic: q.topic || 'Unknown',
+        subtopic: q.subtopic || 'Unknown',
+        status: 'Unanswered',
+        timeTaken: questionTimes[index] || 0
+      };
+    }
+    
+    let correct;
+    const correctVal = q[correctCol];
+    if (typeof correctVal === 'number') {
+      correct = correctVal;
+    } else if (typeof correctVal === 'string') {
+      const letterMap = { 'A': 1, 'B': 2, 'C': 3, 'D': 4, 'a': 1, 'b': 2, 'c': 3, 'd': 4 };
+      correct = letterMap[correctVal] || parseInt(correctVal, 10) || 1;
+    } else {
+      correct = 1; // Fallback to avoid undefined
+    }
+    
+    let resultStatus;
+    if (userAnswer === null) {
+      resultStatus = 'Unanswered';
+      unansweredCount++;
+    } else if (userAnswer === correct) {
+      resultStatus = 'Correct';
+      correctCount++;
+    } else {
+      resultStatus = 'Incorrect';
+      wrongCount++;
+    }
+    
+    return {
+      questionNumber: index + 1,
+      topic: q.topic || 'Unknown',
+      subtopic: q.subtopic || 'Unknown',
+      status: resultStatus,
+      timeTaken: questionTimes[index] || 0
+    };
+  });
+  
+  localStorage.setItem('quizResults', JSON.stringify(quizResults));
+  
+  questions.forEach((q, index) => {
+    const userAnswer = userAnswers[index] || null;
+    const optionCols = getOptionColumnNames(q);
+    const correctCol = getCorrectAnswerColumn(q);
+    const explanationCol = getExplanationColumn(q);
+    
+    if (!optionCols || !correctCol) {
+      resultsDiv.innerHTML += `
+        <div class="result" data-status="unanswered">
+          <div class="result-status unanswered-status">Unanswered</div>
+          <div class="result-content">
+            <div class="result-question">Q${index + 1}: ${q.question || 'Question missing'}</div>
+            <div class="answer-row">
+              <div class="answer-label">Error:</div>
+              <div class="answer-content">Invalid option or correct answer columns in database.</div>
+            </div>
+          </div>
+        </div>`;
+      return;
+    }
+    
+    let correct;
+    const correctVal = q[correctCol];
+    if (typeof correctVal === 'number') {
+      correct = correctVal;
+    } else if (typeof correctVal === 'string') {
+      const letterMap = { 'A': 1, 'B': 2, 'C': 3, 'D': 4, 'a': 1, 'b': 2, 'c': 3, 'd': 4 };
+      correct = letterMap[correctVal] || parseInt(correctVal, 10) || 1;
+    } else {
+      correct = 1; // Fallback to avoid undefined
+    }
+    
+    let resultStatus, resultClass;
+    
+    if (userAnswer === null) {
+      resultStatus = 'Unanswered';
+      resultClass = 'unanswered-status';
+    } else if (userAnswer === correct) {
+      resultStatus = 'Correct';
+      resultClass = 'correct-status';
+    } else {
+      resultStatus = 'Incorrect';
+      resultClass = 'wrong-status';
+    }
+    
+    const userOptionText = userAnswer ? q[optionCols[`option${userAnswer}`]] || 'Option missing' : 'Not answered';
+    const correctOptionText = q[optionCols[`option${correct}`]] || 'Option missing';
+    const userAnswerLetter = userAnswer ? ['A', 'B', 'C', 'D'][userAnswer - 1] : '—';
+    const correctLetter = ['A', 'B', 'C', 'D'][correct - 1];
+    
+    const explanationText = explanationCol && q[explanationCol] ? 
+      `<div class="explanation">${q[explanationCol]}</div>` : '';
+    
+    const resultDiv = document.createElement('div');
+    resultDiv.className = 'result';
+    resultDiv.style.display = index === 0 ? 'block' : 'none';
+    resultDiv.setAttribute('data-status', resultStatus.toLowerCase());
+    resultDiv.innerHTML = `
+      <div class="result-status ${resultClass}">${resultStatus}</div>
+      <div class="result-content">
+        <div class="result-question">Q${index + 1}: ${q.question || 'Question missing'}</div>
+        
+        <div class="answer-row">
+          <div class="answer-label">Your answer:</div>
+          <div class="answer-content">${userAnswer ? `${userAnswerLetter}. ${userOptionText}` : '<span style="color:var(--warning)">Not answered</span>'}</div>
+        </div>
+        
+        ${userAnswer !== correct || !userAnswer ? `
+        <div class="answer-row">
+          <div class="answer-label">Correct answer:</div>
+          <div class="answer-content">${correctLetter}. ${correctOptionText}</div>
+        </div>
+        ` : ''}
+        
+        ${explanationText}
+      </div>
+    `;
+    resultsDiv.appendChild(resultDiv);
+    
+    const dotClass = userAnswer === null ? 'dot-unanswered' : 
+                     userAnswer === correct ? 'dot-correct' : 'dot-wrong';
+    const dotElement = document.createElement('div');
+    dotElement.className = `question-dot ${dotClass}`;
+    dotElement.setAttribute('onclick', `showResultQuestion(${index})`);
+    dotElement.setAttribute('title', `Question ${index + 1}`);
+    dotElement.textContent = `${index + 1}`;
+    indicatorsDiv.appendChild(dotElement);
+  });
+  
+  const scorePercentage = Math.round((correctCount / questions.length) * 100);
+  
+  const summaryDiv = document.getElementById('results-summary');
+  summaryDiv.innerHTML = `
+    <a href="Topics.html#testarea" class="back-link">
+      <i class='bx bx-arrow-back'></i>
+      Back
+    </a>
+    <h2>General Aptitude Test Results</h2>
+    
+    <div class="score-circle" style="--percentage: ${scorePercentage}%;">
+      <div class="score-inner">
+        <div class="score-value">${correctCount}/${questions.length}</div>
+        <div class="score-label">${scorePercentage}%</div>
+      </div>
+    </div>
+    
+    <div class="time-taken">
+      <i class="time-icon">⏱️</i> Time taken: ${formatTime(timeTaken)}
+    </div>
+    
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value" style="color: var(--correct-green);">${correctCount}</div>
+        <div class="stat-label">Correct</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" style="color: var(--error);">${wrongCount}</div>
+        <div class="stat-label">Incorrect</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" style="color: var(--warning);">${unansweredCount}</div>
+        <div class="stat-label">Unanswered</div>
+      </div>
+    </div>
+  `;
+  
+  document.getElementById('progress-bar').style.width = '100%';
+  
+  loadAnalysis();
+}
+
+// Event listeners
+document.getElementById('next-btn').addEventListener('click', nextQuestion);
+
+document.getElementById('try-again-btn').addEventListener('click', () => {
+  window.location.href = `Mock Test Main.html?difficulty=${currentDifficulty}`;
+});
+
+document.getElementById('analysis-btn').addEventListener('click', () => {
+  const analysisSection = document.getElementById('analysis-section');
+  const isVisible = analysisSection.style.display === 'block';
+  analysisSection.style.display = isVisible ? 'none' : 'block';
+  document.getElementById('analysis-btn').textContent = isVisible ? 'View Detailed Analysis' : 'Hide Detailed Analysis';
+});
+</script>
+</body>
+</html>
+
+i want a same page like this but for Quick Assesment the settings here should be changed like
+timer should be 20 minutes and there should be 10 questions from table  quick_assessment_easy table if the div button is clicked from <div class="test-card">
+                    <div class="test-header">
+                        <div class="test-icon">
+                            <i class='bx bx-timer'></i>
+                        </div>
+                        <div class="test-info">
+                            <h2 class="test-title">Quick Assessment</h2>
+                        </div>
+                    </div>
+                    <p class="test-description">
+                        A shorter test with balanced questions from all topics. Ideal for a quick evaluation of your strengths and weaknesses across different areas.
+                    </p>
+                    <div class="test-details">
+                        <div class="test-stats">
+                            <div class="stat">
+                                <span class="stat-label">Easy</span>
+                                <div class="difficulty-meter">
+                                    <span class="difficulty-level low"></span>
+                                </div>
+                            </div>
+                            <span class="test-meta"><i class='bx bx-time'></i> 20 minutes</span>
+                            <span class="test-meta"><i class='bx bx-help-circle'></i> 10 questions</span>
+                        </div>
+                    </div>
+                    <button class="start-test-btn" onclick="window.location.href='QuickAssessment.html'">Start Test</button>
+                </div>
+
+quick_assessment_medium if the button is clicked from
+<div class="test-card">
+                    <div class="test-header">
+                        <div class="test-icon">
+                            <i class='bx bx-timer'></i>
+                        </div>
+                        <div class="test-info">
+                            <h2 class="test-title">Quick Assessment</h2>
+                        </div>
+                    </div>
+                    <p class="test-description">
+                        A shorter test with balanced questions from all topics. Ideal for a quick evaluation of your strengths and weaknesses across different areas.
+                    </p>
+                    <div class="test-details">
+                        <div class="test-stats">
+                            <div class="stat">
+                                <span class="stat-label">Medium</span>
+                                <div class="difficulty-meter">
+                                    <span class="difficulty-level medium"></span>
+                                </div>
+                            </div>
+                            <span class="test-meta"><i class='bx bx-time'></i> 20 minutes</span>
+                            <span class="test-meta"><i class='bx bx-help-circle'></i> 10 questions</span>
+                        </div>
+                    </div>
+                    <button class="start-test-btn" onclick="window.location.href='QuickAssessment.html'">Start Test</button>
+                </div>
+
+quick_assessment_hard if the button is clicked from
+<div class="test-card">
+                    <div class="test-header">
+                        <div class="test-icon">
+                            <i class='bx bx-timer'></i>
+                        </div>
+                        <div class="test-info">
+                            <h2 class="test-title">Quick Assessment</h2>
+                        </div>
+                    </div>
+                    <p class="test-description">
+                        A shorter test with balanced questions from all topics. Ideal for a quick evaluation of your strengths and weaknesses across different areas.
+                    </p>
+                    <div class="test-details">
+                        <div class="test-stats">
+                            <div class="stat">
+                                <span class="stat-label">Hard</span>
+                                <div class="difficulty-meter">
+                                    <span class="difficulty-level high"></span>
+                                </div>
+                            </div>
+                            <span class="test-meta"><i class='bx bx-time'></i> 20 minutes</span>
+                            <span class="test-meta"><i class='bx bx-help-circle'></i> 10 questions</span>
+                        </div>
+                    </div>
+                    <button class="start-test-btn" onclick="window.location.href='QuickAssessment.html'">Start Test</button>
+                </div>
+
+
+the questions should be selected from 5 given main topics and any subtopics 
+first 3 General Aptitude 
+next 2 Arithmetic Aptitude
+next 2 BrainRot Topics
+next 3 Verbal and Reasoning
+
+and results and detailed analytics should be declared accordingly

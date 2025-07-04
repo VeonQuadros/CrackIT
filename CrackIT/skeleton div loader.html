@@ -1,0 +1,664 @@
+<script>document.addEventListener('DOMContentLoaded', () => {
+    // Theme toggle functionality (unchanged)
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    body.classList.add(currentTheme + '-theme');
+
+    themeToggle.addEventListener('click', () => {
+        const newTheme = body.classList.contains('dark-theme') ? 'light' : 'dark';
+        body.classList.remove('dark-theme', 'light-theme');
+        body.classList.add(newTheme + '-theme');
+        localStorage.setItem('theme', newTheme);
+    });
+
+    // Simulate loading delay (replace with actual data fetch)
+    setTimeout(() => {
+        // Remove skeleton loader and load actual content
+        const mainContent = document.querySelector('.main-content');
+        </script>
+            <div class="hero-section">
+                <div class="hero-badge" id="heroBadge">CrackIT Preparation Platform</div>
+                <h1 class="hero-title" id="heroTitle">CrackIT<br>with Confidence</h1>
+                <p class="hero-description">Prepare for technical interviews, improve your logical reasoning, and enhance your problem-solving skills with our comprehensive aptitude test platform.</p>
+                <div class="btn-group">
+                    <button class="btn btn-primary">Start Practicing <i class="fas fa-arrow-right"></i></button>
+                    <button class="btn btn-secondary">Take Mock Test</button>
+                </div>
+            </div>
+            
+            <h2 class="section-heading" id="specializedPracticeAreas">Specialized Practice Areas</h2>
+            <p class="section-subheading">Focus your study on specific IT specialties to strengthen your weakest areas</p>
+            
+            <div class="specialties-grid">
+                <div class="specialty-card">
+                    <div class="specialty-icon medical-surgical">
+                        <i class='bx bx-spreadsheet'></i>
+                    </div>
+                    <h3 class="specialty-title">General Aptitude</h3>
+                    <p class="specialty-description">Assess your overall problem-solving skills with questions on reasoning, data interpretation, and basic mathematics.</p>
+                    <a href="#" class="btn-link">Practice Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="specialty-card">
+                    <div class="specialty-icon mental-health">
+                        <i class='bx bx-list-ol'></i>
+                    </div>
+                    <h3 class="specialty-title">Arithmetic Aptitude</h3>
+                    <p class="specialty-description">Practice calculations involving percentages, time-speed-distance, and other fundamental math concepts.</p>
+                    <a href="#" class="btn-link">Practice Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="specialty-card">
+                    <div class="specialty-icon emergency">
+                        <i class='bx bx-laptop'></i>
+                    </div>
+                    <h3 class="specialty-title">Technical MCQs</h3>
+                    <p class="specialty-description">Strengthen your grasp on core engineering and IT subjects with objective questions across multiple domains.</p>
+                    <a href="#" class="btn-link">Practice Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="specialty-card">
+                    <div class="specialty-icon maternity">
+                        <i class='bx bx-code-alt'></i>
+                    </div>
+                    <h3 class="specialty-title">Programming Languages</h3>
+                    <p class="specialty-description">Evaluate your coding knowledge with questions on syntax, logic, and output in languages like C, C++, Java, and Python.</p>
+                    <a href="#" class="btn-link">Practice Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="specialty-card">
+                    <div class="specialty-icon pediatrics">
+                        <i class='bx bx-brain'></i>
+                    </div>
+                    <h3 class="specialty-title">BrainRot Topics</h3>
+                    <p class="specialty-description">Contains frequently asked and BrainRot topics.</p>
+                    <br>
+                    <a href="#" class="btn-link">Practice Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="specialty-card">
+                    <div class="specialty-icon more">
+                         <i class='bx bx-text'></i> 
+                    </div>
+                    <h3 class="specialty-title">Verbal and Reasoning</h3>
+                    <p class="specialty-description">Enhance vocabulary, grammar, and comprehension skills for effective verbal communication.</p>
+                    <br>
+                    <br>
+                    <br>
+                    <a href="#" class="btn-link">Discover More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <h2 class="section-heading">Key Platform Features</h2>
+            <p class="section-subheading">Our comprehensive tools help you prepare effectively for IT placements</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">      
+                    <div class="feature-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="feature-title">Coding Questions</h3>
+                    <p class="feature-description">Practice real-world coding problems from top tech companies</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="feature-title">Problem Solving</h3>
+                    <p class="feature-description">Develop logical reasoning and analytical skills</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3 class="feature-title">Wide Range of Topics</h3>
+                    <p class="feature-description">Master key concepts with targeted exercises</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="feature-title">Tech/HR Interview Questions</h3>
+                    <p class="feature-description">Learn efficient solutions and optimization techniques</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="feature-title">Timed Mock Tests</h3>
+                    <p class="feature-description">Practice Mock Tests with time and difficulty-level</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="feature-title">Detailed Analytics</h3>
+                    <p class="feature-description">Monitor improvement with detailed performance analytics</p>
+                </div>
+            </div>
+            
+            <h2 class="section-heading" id="whatUsersSay">What Users Say</h2>
+            <p class="section-subheading">Hear from users who aced their tests using our platform</p>
+            <div class="testimonials-section" id="testimonialsSection">
+                <div class="testimonial-carousel">
+                    <div class="testimonial-container" id="testimonialContainer">
+                        <div class="testimonial-card">
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="testimonial-text">"CrackIT's practice questions helped me prepare for and crack the MET exam, and I secured a seat for my master's program."</p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">
+                                    <img src="Kiran.jpg" alt="Kiran Nayak">
+                                </div>
+                                <div class="author-info">
+                                    <h4>Kiran Nayak</h4>
+                                    <p>MCA Student</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="testimonial-text">"I had been struggling with General aptitude until I found CrackIT. The step-by-step explanations and variety of practice questions helped me to crack the interview at WIPRO"</p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">
+                                    <img src="Vimal.jpg" alt="Vimal U Acharya">
+                                </div>
+                                <div class="author-info">
+                                    <h4>Vimal U Acharya</h4>
+                                    <p>Analyst Trainee & Mtech Student</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <p class="testimonial-text">"The Technical and HR interview Q&A's on CrackIT are very helpful, they helped me to get placed in Deloitte and Cognizant"</p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">
+                                    <img src="Pari.jpg" alt="Pavithra S Poojary">
+                                </div>
+                                <div class="author-info">
+                                    <h4>Pavithra S Poojary</h4>
+                                    <p>Associate Analyst at Deloitte</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="testimonial-text">"What sets CrackIT apart is the Mocktests and the detailed analytics with the correct solution for the wrong answers which helped me to clear my aptitude round at LTI & MindTree"</p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">
+                                    <img src="Suhan.jpg" alt="Suhan D Karkera">
+                                </div>
+                                <div class="author-info">
+                                    <h4>Suhan D Karkera</h4>
+                                    <p>MSC Student</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="testimonial-text">"The verbal reasoning section on CrackIT is outstanding. It improved my comprehension skills significantly, which proved invaluable during my company interviews. The platform is intuitive and engaging."</p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">
+                                    <img src="Vrushali.jpg" alt="Vrushali Sanil">
+                                </div>
+                                <div class="author-info">
+                                    <h4>Vrushali Sanil</h4>
+                                    <p>Analyst Trainee & MSc Student</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-indicators" id="indicators"></div>
+                </div>
+            </div>
+            <div class="cta-section">
+                <h2 class="cta-title" id="ctaTitle">Ready to crack it with CrackIT?</h2>
+                <p class="cta-description">Join thousands of IT students and professionals who have successfully passed their exams with our comprehensive practice platform.</p>
+                <div class="btn-group">
+                    <button class="btn btn-primary">Technical interview Topics <i class="fas fa-arrow-right"></i></button>
+                    <button class="btn btn-secondary">Tech/HR Questions</button>
+                </div>
+                <div class="cta-badge">
+                    <i class="fas fa-award fa-4x"></i>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="Topics.html">Practice Area</a></li>
+                        <li><a href="Topics.html#testarea">Mock Test Area</a></li>
+                        <li><a href="#">Tech/HR Interview Questions</a></li>
+                    </ul>
+                </div>                
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="Company and Legal.html#company-section">About Us</a></li>
+                        <li><a href="Company and Legal.html#contact-us-section">Contact Us</a></li>
+                        <li><a href="Company and Legal.html#future-scope-section">Future Scope</a></li>                    
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul class="footer-links">
+                       <li><a href="Company and Legal.html#terms-of-service-section">Terms of Service</a></li>
+                        <li><a href="Company and Legal.html#privacy-policy-section">Privacy Policy</a></li>
+                        <li><a href="Company and Legal.html#feedback-section">Your Feedback</a></li>
+                    </ul>
+                </div>
+            </footer>
+            
+            <div class="copyright">
+                <p>© 2025 CrackIT. All rights reserved.</p>
+            </div>
+        `;
+
+<script>
+        // Reinitialize event listeners for the loaded content
+        initializeEventListeners();
+    }, 2000); // Simulated 2-second delay
+
+    function initializeEventListeners() {
+        // Login/Register navigation
+        const loginRegisterLink = document.getElementById('loginRegisterLink');
+        loginRegisterLink.addEventListener('click', () => {
+            window.location.href = 'login and register.html';
+        });
+
+        // Start Practicing navigation
+        const startPracticingBtn = document.querySelector('.btn.btn-primary');
+        startPracticingBtn.addEventListener('click', () => {
+            window.location.href = 'Topics.html';
+        });
+
+        // Sidebar toggle functionality
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const sidebar = document.querySelector('.sidebar');
+        const mainContent = document.querySelector('.main-content');
+        const sidebarItems = document.querySelectorAll('.sidebar-item');
+
+        if (sidebarToggle && sidebar && mainContent) {
+            sidebarToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+                mainContent.classList.toggle('sidebar-visible');
+            });
+
+            sidebarItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    sidebarItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    if (window.innerWidth <= 994) {
+                        sidebar.classList.remove('active');
+                        mainContent.classList.remove('sidebar-visible');
+                    }
+                });
+            });
+
+            document.addEventListener('click', (event) => {
+                if (window.innerWidth <= 994 && 
+                    !sidebar.contains(event.target) && 
+                    !sidebarToggle.contains(event.target)) {
+                    sidebar.classList.remove('active');
+                    mainContent.classList.remove('sidebar-visible');
+                }
+            });
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 994) {
+                    sidebar.classList.remove('active');
+                    mainContent.classList.remove('sidebar-visible');
+                }
+            });
+        }
+
+        // Testimonial Carousel functionality
+        const testimonialContainer = document.getElementById('testimonialContainer');
+        const indicatorsContainer = document.getElementById('indicators');
+        const testimonials = document.querySelectorAll('.testimonial-card');
+        let currentIndex = 0;
+        let intervalId;
+
+        if (testimonialContainer && indicatorsContainer && testimonials.length > 0) {
+            testimonials.forEach((_, index) => {
+                const indicator = document.createElement('div');
+                indicator.classList.add('indicator');
+                if (index === 0) indicator.classList.add('active');
+                indicator.addEventListener('click', () => goToSlide(index));
+                indicatorsContainer.appendChild(indicator);
+            });
+
+            function goToSlide(index) {
+                currentIndex = index;
+                testimonialContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+                document.querySelectorAll('.indicator').forEach((indicator, i) => {
+                    indicator.classList.toggle('active', i === currentIndex);
+                });
+            }
+
+            function autoRotate() {
+                currentIndex = (currentIndex + 1) % testimonials.length;
+                goToSlide(currentIndex);
+            }
+
+            function startRotation() {
+                stopRotation();
+                intervalId = setInterval(autoRotate, 4000);
+            }
+
+            function stopRotation() {
+                clearInterval(intervalId);
+            }
+
+            startRotation();
+
+            testimonialContainer.addEventListener('mouseenter', stopRotation);
+            testimonialContainer.addEventListener('mouseleave', startRotation);
+        }
+
+        // Navigation to sections
+        const homeIcon = document.querySelector('.sidebar-item.active');
+        const heroBadge = document.getElementById('heroBadge');
+        homeIcon.addEventListener('click', (event) => {
+            event.preventDefault();
+            heroBadge.scrollIntoView({ behavior: 'smooth' });
+        });</script>
+        <style>
+
+.specialty-card, .feature-card {
+    padding: 16px;
+}
+.testimonial-card {
+    padding: 16px;
+}
+.section-heading {
+    font-size: 20px;
+}
+.section-subheading {
+    font-size: 13px;
+}
+
+
+/* Touch-friendly active states */
+.sidebar-item:active, .btn:active, .specialty-card:active, .feature-card:active {
+    transform: scale(0.98);
+    opacity: 0.9;
+}
+
+.specialty-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    font-size: 32px;
+}
+
+@media (max-width: 768px) {
+    .specialty-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+    }
+}
+
+/* Hover effects for non-touch devices */
+@media (hover: hover) {
+    .specialty-card:hover, .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+}
+
+/* Skeleton Loader Styles */
+.skeleton-loader {
+    width: 100%;
+}
+
+.skeleton {
+    background: #D3D3D3; /* Placeholder color from wireframe */
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+.skeleton::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.2) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Hero Section Skeleton */
+.skeleton-badge {
+    width: 200px;
+    height: 30px;
+    margin: 0 auto 24px;
+    border-radius: 999px;
+}
+
+.skeleton-title {
+    width: 60%;
+    height: 48px;
+    margin: 0 auto 24px;
+}
+
+.skeleton-description {
+    width: 80%;
+    height: 20px;
+    margin: 0 auto 40px;
+}
+
+.skeleton-btn {
+    width: 150px;
+    height: 44px;
+    border-radius: 8px;
+}
+
+/* Specialized Practice Areas and Features Skeleton */
+.skeleton-heading {
+    width: 40%;
+    height: 32px;
+    margin: 0 auto 12px;
+}
+
+.skeleton-subheading {
+    width: 60%;
+    height: 16px;
+    margin: 0 auto 40px;
+}
+
+.skeleton-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 auto 24px;
+}
+
+.skeleton-card-title {
+    width: 70%;
+    height: 24px;
+    margin: 0 auto 12px;
+}
+
+.skeleton-card-description {
+    width: 90%;
+    height: 16px;
+    margin: 0 auto 24px;
+}
+
+.skeleton-link {
+    width: 120px;
+    height: 16px;
+    margin: 0 auto;
+}
+
+/* Testimonials Skeleton */
+.skeleton-rating {
+    width: 100px;
+    height: 20px;
+    margin: 0 auto 16px;
+}
+
+.skeleton-testimonial-text {
+    width: 90%;
+    height: 60px;
+    margin: 0 auto 24px;
+}
+
+.skeleton-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 12px;
+}
+
+.skeleton-author-name {
+    width: 120px;
+    height: 16px;
+    margin-bottom: 8px;
+}
+
+.skeleton-author-role {
+    width: 80px;
+    height: 14px;
+}
+
+/* CTA Section Skeleton */
+.skeleton-cta-title {
+    width: 50%;
+    height: 32px;
+    margin: 0 auto 16px;
+}
+
+.skeleton-cta-description {
+    width: 70%;
+    height: 20px;
+    margin: 0 auto 32px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .skeleton-title {
+        height: 36px;
+        width: 70%;
+    }
+
+    .skeleton-description {
+        height: 16px;
+        width: 90%;
+    }
+
+    .skeleton-btn {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .skeleton-icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .skeleton-heading {
+        height: 28px;
+        width: 50%;
+    }
+
+    .skeleton-subheading {
+        height: 15px;
+        width: 70%;
+    }
+
+    .skeleton-card-title {
+        height: 20px;
+    }
+
+    .skeleton-card-description {
+        height: 14px;
+    }
+
+    .skeleton-testimonial-text {
+        height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .skeleton-title {
+        height: 28px;
+        width: 80%;
+    }
+
+    .skeleton-description {
+        height: 14px;
+    }
+
+    .skeleton-btn {
+        height: 40px;
+    }
+
+    .skeleton-heading {
+        height: 24px;
+    }
+
+    .skeleton-subheading {
+        height: 14px;
+    }
+}
+</style>

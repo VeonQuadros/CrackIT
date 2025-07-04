@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Programming Knowledge Questions</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            background-color: #0f0f0f;
+            color: #f0f0f0;
+            min-height: 100vh;
+            display: flex;
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme {
+            background-color: #f5f7fb;
+            color: #333;
+        }
+
+        .top-right-buttons {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .theme-toggle-btn, .back-btn {
+            background-color: #0a0a0a;
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 20px;
+            text-decoration: none;
+        }
+
+        body.light-theme .theme-toggle-btn, body.light-theme .back-btn {
+            background-color: #c8c8c8;
+            color: #4a90e2;
+            border: 1px solid rgba(74, 144, 226, 0.3);
+        }
+
+        .theme-toggle-btn:hover, .back-btn:hover {
+            background-color: #1a1a1a;
+            transform: scale(1.1);
+        }
+
+        body.light-theme .theme-toggle-btn:hover, body.light-theme .back-btn:hover {
+            background-color: #d3dce6;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            width: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #4CAF50, #45D149);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        body.light-theme .header h1 {
+            background: linear-gradient(45deg, #4a90e2, #357abd);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-icon {
+            font-size: 4rem;
+            color: #22c55e;
+            margin: 1rem 0;
+            display: block;
+            animation: scaleIn 0.5s ease;
+        }
+
+        body.light-theme .header-icon {
+            color: #4a90e2;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #aaa;
+            margin-top: 1rem;
+        }
+
+        body.light-theme .header p {
+            color: #6b7280;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid transparent;
+            background: linear-gradient(90deg, #22c55e, #45D149);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #22c55e, #45D149);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .section-title:hover::after {
+            transform: scaleX(1);
+        }
+
+        body.light-theme .section-title {
+            background: linear-gradient(90deg, #4a90e2, #357abd);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        body.light-theme .section-title::after {
+            background: linear-gradient(90deg, #4a90e2, #357abd);
+            height: 3px;
+        }
+
+        .question-block {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            position: relative;
+            animation: fadeInUp 0.6s ease forwards;
+            animation-delay: calc(var(--block-index) * 0.1s);
+        }
+
+        body.light-theme .question-block {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .question-block h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #22c55e;
+        }
+
+        body.light-theme .question-block h3 {
+            color: #4a90e2;
+        }
+
+        .question-block .question-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem 0;
+            font-size: 1.8rem;
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            transition: transform 0.3s ease;
+        }
+
+        body.light-theme .question-block .question-icon {
+            background: rgba(74, 144, 226, 0.2);
+            color: #4a90e2;
+        }
+
+        .question-block:hover .question-icon {
+            transform: scale(1.1);
+        }
+
+        .question-block p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #aaa;
+            margin-bottom: 1rem;
+        }
+
+        body.light-theme .question-block p {
+            color: #6b7280;
+        }
+
+        .question-block ul {
+            font-size: 0.85rem;
+            color: #ccc;
+            line-height: 1.6;
+            padding-left: 1.5rem;
+        }
+
+        body.light-theme .question-block ul {
+            color: #333;
+        }
+
+        .question-block ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sample-response {
+            margin: 1rem 0;
+            padding: 1rem;
+            border-left: 3px solid #22c55e;
+            background: rgba(55, 197, 94, 0.1);
+            border-radius: 0 8px 8px 0;
+        }
+
+        body.light-theme .sample-response {
+            border-left: 3px solid #4a90e2;
+            background: rgba(74, 144, 226, 0.1);
+        }
+
+        .sample-response p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .conversation {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            position: relative;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        body.light-theme .conversation {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .conversation h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #22c55e;
+        }
+
+        body.light-theme .conversation h3 {
+            color: #4a90e2;
+        }
+
+        .dialogue {
+            margin: 1rem 0;
+            padding: 1rem;
+            border-left: 3px solid #22c55e;
+            background: rgba(55, 197, 94, 0.1);
+            border-radius: 0 8px 8px 0;
+        }
+
+        body.light-theme .dialogue {
+            border-left: 3px solid #4a90e2;
+            background: rgba(74, 144, 226, 0.1);
+        }
+
+        .dialogue.interviewer {
+            border-left: 3px solid #f97316;
+            background: rgba(249, 115, 22, 0.1);
+        }
+
+        body.light-theme .dialogue.interviewer {
+            border-left: 3px solid #357abd;
+            background: rgba(53, 122, 189, 0.2);
+        }
+
+        .dialogue p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .dialogue strong {
+            color: #ffffff;
+        }
+
+        body.light-theme .dialogue strong {
+            color: #1f2937;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #333, transparent);
+            margin: 3rem 0;
+        }
+
+        body.light-theme .divider {
+            background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.8); }
+            to { transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .question-block, .conversation {
+                padding: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .question-block h3, .conversation h3 {
+                font-size: 1.3rem;
+            }
+
+            .question-block p, .dialogue p, .sample-response p {
+                font-size: 0.85rem;
+            }
+
+            .question-block ul {
+                font-size: 0.8rem;
+            }
+
+            .top-right-buttons {
+                top: 10px;
+                right: 10px;
+            }
+
+            .theme-toggle-btn, .back-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-right-buttons">
+        <button class="theme-toggle-btn" id="themeToggle" title="Toggle Theme">
+            <i class='bx bx-moon'></i>
+        </button>
+        <a href="Tech and HR Questions.html" class="back-btn" title="Back to Tech and HR Questions">
+            <i class='bx bx-arrow-back'></i>
+        </a>
+    </div>
+
+    <div class="main-content">
+        <div class="container">
+            <header class="header">
+                <i class='bx bx-code-alt header-icon'></i>
+                <h1>Programming Knowledge Questions</h1>
+                <p>Prepare for technical interviews with key programming concepts for IT students</p>
+            </header>
+
+            <section class="section" id="programming-knowledge">
+                <h2 class="section-title">Key Programming Questions</h2>
+                <div class="question-block" style="--block-index: 1;">
+                    <h3>Explain the Difference Between an Array and a Linked List</h3>
+                    <div class="question-icon"><i class='bx bx-list-ul'></i></div>
+                    <p>Tests your understanding of fundamental data structures.</p>
+                    <ul>
+                        <li>Define both data structures clearly.</li>
+                        <li>Compare access time, insertion/deletion, memory usage.</li>
+                        <li>Provide use cases for each.</li>
+                        <li>Keep it concise and structured.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>An array stores elements contiguously, enabling O(1) access but O(n) for insertion/deletion due to shifting. A linked list uses nodes with pointers, offering O(1) insertion/deletion at known positions but O(n) for access. Arrays suit static data like sorting, while linked lists are ideal for dynamic data like queues. In a project, I used arrays for efficient sorting of fixed-size data.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 2;">
+                    <h3>What is Object-Oriented Programming (OOP)? Explain Its Principles</h3>
+                    <div class="question-icon"><i class='bx bx-objects-horizontal-left'></i></div>
+                    <p>Assesses your grasp of OOP and its core concepts.</p>
+                    <ul>
+                        <li>Define OOP and its purpose.</li>
+                        <li>Explain encapsulation, inheritance, polymorphism, abstraction.</li>
+                        <li>Give a brief example for each.</li>
+                        <li>Relate to practical coding experience.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>OOP organizes code into reusable objects combining data and behavior. Its principles are: <em>Encapsulation</em> bundles data and methods, like private fields in a class; <em>Inheritance</em> allows a class to inherit properties, e.g., Car from Vehicle; <em>Polymorphism</em> enables method overriding, like different print behaviors; <em>Abstraction</em> hides complexity via interfaces. In a Java project, I used encapsulation to secure user data in a User class.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 3;">
+                    <h3>How Would You Reverse a String in Your Preferred Language?</h3>
+                    <div class="question-icon"><i class='bx bx-text'></i></div>
+                    <p>Evaluates your coding ability and problem-solving approach.</p>
+                    <ul>
+                        <li>Choose a language you’re comfortable with.</li>
+                        <li>Explain the logic before presenting code.</li>
+                        <li>Discuss time and space complexity.</li>
+                        <li>Mention alternative approaches.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>In Python, I’d reverse a string using slicing: <code>def reverse_string(s): return s[::-1]</code>. For input "hello", it returns "olleh". This is O(n) time and space. Alternatively, I could use a loop: <code>result = ''; for char in s: result = char + result</code>, also O(n). I used slicing in a text processing project for its simplicity and readability.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 4;">
+                    <h3>What is the Difference Between Stack and Queue?</h3>
+                    <div class="question-icon"><i class='bx bx-layer'></i></div>
+                    <p>Tests knowledge of data structures and their applications.</p>
+                    <ul>
+                        <li>Define both structures and their operations.</li>
+                        <li>Contrast LIFO vs. FIFO.</li>
+                        <li>Provide real-world use cases.</li>
+                        <li>Keep the explanation example-driven.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>A stack is LIFO (Last In, First Out), like a pile of plates, with push/pop operations, used in undo features. A queue is FIFO (First In, First Out), like a ticket line, with enqueue/dequeue, used in task scheduling. In a project, I used a stack to implement an undo function, allowing O(1) reversals.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 5;">
+                    <h3>Explain Time and Space Complexity</h3>
+                    <div class="question-icon"><i class='bx bx-time'></i></div>
+                    <p>Assesses your understanding of algorithm efficiency.</p>
+                    <ul>
+                        <li>Define time and space complexity.</li>
+                        <li>Explain Big-O notation with examples.</li>
+                        <li>Discuss how to analyze an algorithm.</li>
+                        <li>Relate to practical coding scenarios.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>Time complexity measures an algorithm’s runtime growth with input size, and space complexity measures memory usage. Big-O notation describes worst-case, e.g., O(n) for linear search, O(n²) for bubble sort. Analysis counts operations and memory. In a sorting project, I switched from O(n²) bubble sort to O(n log n) merge sort for better performance.</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 6;">
+                    <h3>What is a Binary Search Tree (BST)?</h3>
+                    <div class="question-icon"><i class='bx bx-sitemap'></i></div>
+                    <p>Tests knowledge of tree-based data structures.</p>
+                    <ul>
+                        <li>Define a BST and its properties.</li>
+                        <li>Explain operations like insertion, search, deletion.</li>
+                        <li>Discuss advantages and limitations.</li>
+                        <li>Mention a practical application.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p>A Binary Search Tree is a tree where left child nodes are smaller and right child nodes are larger than their parent. Search, insertion, and deletion are O(log n) in balanced cases, O(n) if skewed. It’s useful for sorted data, like dictionaries. In a project, I used a BST for fast lookups of student records.</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="section">
+                <h2 class="section-title">Mock Interview Conversations</h2>
+                <div class="conversation">
+                    <h3>Mock Interview 1</h3>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> What is recursion, and when would you use it?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> Recursion is when a function calls itself to solve smaller instances of a problem. It’s useful for tasks with a base case and repetitive subproblems, like calculating factorials or traversing trees. For example, in a project, I used recursion to traverse a file directory tree, processing each subdirectory. It’s elegant but needs careful base cases to avoid stack overflow.</p>
+                    </div>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> What’s the difference between a hash table and a hash map?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> A hash table maps keys to values using a hash function, handling collisions via chaining or open addressing, with O(1) average-case lookup. In many languages, a hash map is a specific implementation of a hash table, often synonymous, but in Java, HashMap is a non-synchronized class, unlike Hashtable, which is thread-safe. I used a hash map in a project to store user IDs for O(1) retrieval.</p>
+                    </div>
+                </div>
+                <div class="conversation">
+                    <h3>Mock Interview 2</h3>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> What is a deadlock, and how can you prevent it?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> A deadlock occurs when multiple processes hold resources and wait for each other’s resources, causing a standstill. For example, Process A holds Resource 1 and waits for Resource 2, while Process B holds Resource 2 and waits for Resource 1. Prevention includes resource ordering, where processes request resources in a fixed order, or using timeouts to release resources. In a database project, I implemented resource ordering to avoid deadlocks in transactions.</p>
+                    </div>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> How does garbage collection work in Java?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> Java’s garbage collection automatically reclaims memory from objects no longer referenced. The JVM’s garbage collector identifies unreachable objects using mark-and-sweep: it marks live objects and sweeps unmarked ones. It runs in generations (young, old) to optimize performance. In a web app project, I tuned GC settings to reduce latency during high traffic.</p>
+                    </div>
+                </div>
+                <div class="conversation">
+                    <h3>Mock Interview 3</h3>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> What is dynamic programming, and when is it useful?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> Dynamic programming solves problems by breaking them into overlapping subproblems and storing results to avoid recomputation, using either memoization or tabulation. It’s useful for optimization problems, like finding the shortest path or knapsack problem. In a project, I used dynamic programming to optimize a route-finding algorithm, reducing time complexity from O(2^n) to O(n²).</p>
+                    </div>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> What’s the difference between SQL and NoSQL databases?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> SQL databases are relational, using structured tables and SQL for queries, ideal for complex relationships, like in banking systems. NoSQL databases are non-relational, handling unstructured data with flexible schemas, suited for scalability, like in social media apps. In a project, I used MySQL for structured user data and MongoDB for handling dynamic JSON logs.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const themeToggleBtn = document.getElementById('themeToggle');
+            const themeIcon = themeToggleBtn.querySelector('i');
+
+            if (themeToggleBtn) {
+                themeToggleBtn.addEventListener('click', function () {
+                    document.body.classList.toggle('light-theme');
+                    const isLightTheme = document.body.classList.contains('light-theme');
+                    themeIcon.className = isLightTheme ? 'bx bx-sun' : 'bx bx-moon';
+                    localStorage.setItem('theme', isLightTheme ? 'light' : 'dark');
+                });
+            }
+
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-theme');
+                themeIcon.className = 'bx bx-sun';
+            }
+        });
+    </script>
+</body>
+</html>

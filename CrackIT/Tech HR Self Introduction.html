@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Self-Introduction</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            background-color: #0f0f0f;
+            color: #f0f0f0;
+            min-height: 100vh;
+            display: flex;
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme {
+            background-color: #f5f7fb;
+            color: #333;
+        }
+
+        .top-right-buttons {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .theme-toggle-btn, .back-btn {
+            background-color: #0a0a0a;
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 20px;
+            text-decoration: none;
+        }
+
+        body.light-theme .theme-toggle-btn, body.light-theme .back-btn {
+            background-color: #c8c8c8;
+            color: #4a90e2;
+            border: 1px solid rgba(74, 144, 226, 0.3);
+        }
+
+        .theme-toggle-btn:hover, .back-btn:hover {
+            background-color: #1a1a1a;
+            transform: scale(1.1);
+        }
+
+        body.light-theme .theme-toggle-btn:hover, body.light-theme .back-btn:hover {
+            background-color: #d3dce6;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            width: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #4CAF50, #45D149);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        body.light-theme .header h1 {
+            background: linear-gradient(45deg, #4a90e2, #357abd);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-icon {
+            font-size: 4rem;
+            color: #22c55e;
+            margin: 1rem 0;
+            display: block;
+            animation: scaleIn 0.5s ease;
+        }
+
+        body.light-theme .header-icon {
+            color: #4a90e2;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #aaa;
+            margin-top: 1rem;
+        }
+
+        body.light-theme .header p {
+            color: #6b7280;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid transparent;
+            background: linear-gradient(90deg, #22c55e, #45D149);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #22c55e, #45D149);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .section-title:hover::after {
+            transform: scaleX(1);
+        }
+
+        body.light-theme .section-title {
+            background: linear-gradient(90deg, #4a90e2, #357abd);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        body.light-theme .section-title::after {
+            background: linear-gradient(90deg, #4a90e2, #357abd);
+            height: 3px;
+        }
+
+        .question-block {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            position: relative;
+            animation: fadeInUp 0.6s ease forwards;
+            animation-delay: calc(var(--block-index) * 0.1s);
+        }
+
+        body.light-theme .question-block {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .question-block h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #22c55e;
+        }
+
+        body.light-theme .question-block h3 {
+            color: #4a90e2;
+        }
+
+        .question-block .question-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem 0;
+            font-size: 1.8rem;
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            transition: transform 0.3s ease;
+        }
+
+        body.light-theme .question-block .question-icon {
+            background: rgba(74, 153, 226, 0.1);
+            color: #4a90e2;
+        }
+
+        .question-block:hover .question-icon {
+            transform: scale(1.1);
+        }
+
+        .question-block p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #aaa;
+            margin-bottom: 1rem;
+        }
+
+        body.light-theme .question-block p {
+            color: #6b7280;
+        }
+
+        .question-block ul {
+            font-size: 0.85rem;
+            color: #ccc;
+            line-height: 1.6;
+            padding-left: 1.2rem;
+        }
+
+        body.light-theme .question-block ul {
+            color: #333;
+        }
+
+        .question-block ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sample-response {
+            margin: 1rem 0;
+            padding: 1rem;
+            border-left: 3px solid #22c55e;
+            background: rgba(55, 197, 94, 0.1);
+            border-radius: 0 8px 8px 0;
+        }
+
+        body.light-theme .sample-response {
+            border-left: 3px solid #4a90e2;
+            background: rgba(74, 153, 226, 0.1);
+        }
+
+        .sample-response p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .conversation {
+            margin: 1.5rem 0;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: relative;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        body.light-theme .conversation {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 2px 8px(0, 0, 0, 0.05);
+        }
+
+        .conversation h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #22c55e;
+        }
+
+        body.light-theme .conversation h3 {
+            color: #4a90e2;
+        }
+
+        .dialogue {
+            margin: 1rem 0;
+            padding: 12px;
+            border-left: 3px solid #22c55e;
+            background: rgba(53, 197, 94, 0.1);
+            border-radius: 0 8px 8px 8px 0;
+        }
+
+        body.light-theme .dialogue {
+            border-left: 3px solid #4a90e2;
+            background: rgba(74, 153, 226, 0.1);
+        }
+
+        .dialogue.interviewer {
+            border-left: 3px solid #f97316;
+            background: rgba(249, 115, 14, 0.2);
+        }
+
+        body.light-theme .dialogue.interviewer {
+            border-left: 3px solid #357abd;
+            background: rgba(53, 75, 189, 0.2);
+        }
+
+        .dialogue p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .dialogue strong {
+            color: #ffffff;
+        }
+
+        body.light-theme .dialogue strong {
+            color: #333;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #333, transparent);
+            margin: 3rem 0;
+        }
+
+        body.light-theme .divider {
+            background: linear-gradient(to right, transparent, #e5e7eb, transparent);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.8); }
+            to { transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .question-block, .conversation {
+                padding: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .question-block h3, .conversation h3 {
+                font-size: 1.3rem;
+            }
+
+            .question-block p, .dialogue p, .sample-response p {
+                font-size: 0.85rem;
+            }
+
+            .question-block ul {
+                font-size: 0.8rem;
+            }
+
+            .top-right-buttons {
+                top: 10px;
+                right: 10px;
+            }
+
+            .theme-toggle-btn, .back-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-right-buttons">
+        <button class="theme-toggle-btn" id="themeToggle" title="Toggle Theme">
+            <i class='bx bx-moon'></i>
+        </button>
+        <a href="Tech and HR Questions.html" class="back-btn" title="Back to Tech and HR Questions">
+            <i class='bx bx-arrow-back'></i>
+        </a>
+    </div>
+
+    <div class="main-content">
+        <div class="container">
+            <header class="header">
+                <i class='bx bx-user-circle header-icon'></i>
+                <h1>Self-Introduction</h1>
+                <p>Master the art of introducing yourself professionally in interviews</p>
+            </header>
+
+            <section class="section" id="self-intro">
+                <h2 class="section-title">Key Self-Introduction Questions</h2>
+                <div class="question-block" style="--block-index: 1;">
+                    <h3>Tell Me About Yourself</h3>
+                    <div class="question-icon"><i class='bx bx-user'></i></div>
+                    <p>A classic opener to gauge your background, skills, and confidence.</p>
+                    <ul>
+                        <li>Start with your name, current role, and a brief career overview.</li>
+                        <li>Highlight key achievements relevant to the job.</li>
+                        <li>End with your goals and enthusiasm for the role.</li>
+                        <li>Keep it concise: 1-2 minutes max.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p><strong>Fresher Response:</strong> Good morning! I’m [Your Name], a recent [Your Degree, e.g., B.Tech in Computer Science] graduate from [Your University]. During [Experience, e.g., my internship at Tech Solutions], I worked on [Key Achievement, e.g., a web application that streamlined student data management using HTML and Python]. I’m skilled in [Your Skills, e.g., Java and database management], and I’m excited to bring my passion for [Relevant Interest, e.g., innovative software solutions] to [Company Name] to contribute to [Company Goal, e.g., cutting-edge technology projects].</p>
+                    </div>
+                    <div class="sample-response">
+                        <p><strong>Experienced Response:</strong> Good morning! I’m [Your Name], a software engineer with [Experience, e.g., three years of experience] in full-stack development. I’ve worked on projects using [Skills, e.g., Java, Python, and React], including [Key Achievement, e.g., a recent e-commerce platform that increased user engagement by 20%]. I’m passionate about building efficient, user-friendly solutions and am excited to bring my skills to [Company Name] to contribute to [Company Goal, e.g., cutting-edge software products].</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 2;">
+                    <h3>What Are Your Strengths?</h3>
+                    <div class="question-icon"><i class='bx bx-star'></i></div>
+                    <p>Showcase qualities that align with the job requirements.</p>
+                    <ul>
+                        <li>Choose 2-3 strengths relevant to the position.</li>
+                        <li>Provide specific examples to back them up.</li>
+                        <li>Focus on skills like adaptability, communication, or problem-solving.</li>
+                        <li>Avoid generic or overused terms without context.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p><strong>Fresher Response:</strong> I’d say my key strengths are [Strength 1, e.g., problem-solving] and [Strength 2, e.g., eagerness to learn]. For example, during [Experience, e.g., a college project], I [Example, e.g., debugged a complex algorithm, ensuring our team met the deadline]. I also actively sought feedback from professors to improve my [Skill, e.g., coding skills], which I believe will help me excel in [Role, e.g., this software development role] at [Company Name].</p>
+                    </div>
+                    <div class="sample-response">
+                        <p><strong>Experienced Response:</strong> I’d say my key strengths are [Strength 1, e.g., problem-solving] and [Strength 2, e.g., teamwork]. For example, during [Experience, e.g., my last role at Tech Corp], I [Example, e.g., resolved a critical payment gateway issue under a tight deadline, saving the project launch]. I also collaborated effectively with [Team Context, e.g., cross-functional teams], ensuring clear communication to deliver high-quality results for [Company Name].</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 3;">
+                    <h3>What Are Your Weaknesses?</h3>
+                    <div class="question-icon"><i class='bx bx-shield-alt'></i></div>
+                    <p>Demonstrate self-awareness and a growth mindset.</p>
+                    <ul>
+                        <li>Pick a real but non-critical weakness.</li>
+                        <li>Explain steps you’re taking to improve.</li>
+                        <li>Turn it positive: e.g., “I’m overly detail-oriented, but I’m learning to balance it.”</li>
+                        <li>Avoid clichés like “I’m a perfectionist” without evidence.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p><strong>Fresher Response:</strong> One area I’m working on is [Weakness, e.g., public speaking]. During [Context, e.g., my early college presentations], I felt nervous, but I’ve been improving by [Action, e.g., joining a toastmasters club and practicing regularly]. Recently, I [Progress, e.g., delivered a project presentation to 20 peers with confidence]. I’m committed to refining this skill to contribute effectively at [Company Name].</p>
+                    </div>
+                    <div class="sample-response">
+                        <p><strong>Experienced Response:</strong> One area I’m improving is [Weakness, e.g., over-analyzing data before decisions]. While it ensures thoroughness, I’ve learned to trust my instincts and set clear timelines. For instance, I recently [Progress, e.g., streamlined a project analysis process, cutting decision time by 25% while maintaining accuracy]. I’m committed to balancing this for [Company Name].</p>
+                    </div>
+                </div>
+                <div class="question-block" style="--block-index: 4;">
+                    <h3>Why Do You Want This Job?</h3>
+                    <div class="question-icon"><i class='bx bx-briefcase'></i></div>
+                    <p>Connect your goals to the company’s mission and role.</p>
+                    <ul>
+                        <li>Research the company’s values and goals.</li>
+                        <li>Link your skills and experience to the role.</li>
+                        <li>Show enthusiasm for growth and contribution.</li>
+                        <li>Avoid focusing only on salary or benefits.</li>
+                    </ul>
+                    <div class="sample-response">
+                        <p><strong>Fresher Response:</strong> I’m excited about this opportunity at [Company Name] because of [Company Value, e.g., your focus on innovative technology]. I admire [Specific Aspect, e.g., your recent AI projects], and with my [Skills/Experience, e.g., academic background in programming and internship experience], I believe I can contribute to [Specific Goal, e.g., building efficient applications]. I’m eager to grow in [Area, e.g., software development] and support [Company Mission, e.g., cutting-edge IT solutions].</p>
+                    </div>
+                    <div class="sample-response">
+                        <p><strong>Experienced Response:</strong> I’m excited about this opportunity at [Company Name] because of [Company Value, e.g., your commitment to innovative solutions]. With my [Skills/Experience, e.g., three years of experience in software development], I can contribute to [Specific Goal, e.g., building user-friendly applications that enhance customer experience]. I’m eager to leverage my skills in [Area, e.g., cloud computing] to drive [Company Mission, e.g., cutting-edge IT advancements].</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="section">
+                <h2 class="section-title">Mock Interview Conversations</h2>
+                <div class="conversation">
+                    <h3>Scenario 1: Software Engineer Role</h3>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> Good morning! To get started, can you tell me about yourself?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> Good morning! I’m [Your Name], a software engineer with three years of experience in full-stack development. I’ve worked on projects using Java, Python, and React, including a recent e-commerce platform that increased user engagement by 20%. I’m passionate about building efficient, user-friendly solutions and am excited to bring my skills to your innovative team at [Company Name] to contribute to cutting-edge software products.</p>
+                    </div>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> Great! What are your key strengths?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> I’d say my key strengths are problem-solving and collaboration. For example, in my last role, I debugged a critical payment gateway issue under a tight deadline, saving the project launch. I also enjoy working with cross-functional teams, ensuring clear communication to deliver high-quality results.</p>
+                    </div>
+                </div>
+                <div class="conversation">
+                    <h3>Scenario 2: Marketing Position</h3>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> Hello! Why don’t you start by telling me about yourself?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> Hello! I’m [Your Name], a marketing professional with five years of experience in digital campaigns. At my current role with [Current Company], I led a social media strategy that boosted follower growth by 35% in six months. I’m skilled in SEO, content creation, and analytics, and I’m eager to join [Company Name] to drive impactful campaigns that align with your mission of innovative branding.</p>
+                    </div>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> Interesting! What’s a weakness you’re working on?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> One area I’m improving is my tendency to over-analyze data before making decisions. While it ensures thoroughness, I’ve learned to trust my instincts more and set clear timelines. For instance, I recently streamlined a campaign analysis process, cutting decision time by 25% while maintaining accuracy.</p>
+                    </div>
+                </div>
+                <div class="conversation">
+                    <h3>Scenario 3: Fresher for IT Company Role</h3>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> Hello! Can you tell me about yourself?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> Hello! I’m [Your Name], a recent [Your Degree, e.g., B.Tech in Computer Science] graduate from [Your University]. During my studies, I completed [Experience, e.g., an internship at Tech Innovations], where I developed [Project, e.g., a web application using HTML, CSS, and JavaScript that streamlined student data management]. I’m proficient in [Skills, e.g., Python and SQL], and I’m eager to apply my skills and learn at [Company Name] to contribute to [Company Goal, e.g., innovative software solutions].</p>
+                    </div>
+                    <div class="dialogue interviewer">
+                        <p><strong>Interviewer:</strong> Nice! Why do you want to work at our company?</p>
+                    </div>
+                    <div class="dialogue">
+                        <p><strong>Candidate:</strong> I’m excited about [Company Name] because of [Company Value, e.g., your focus on cutting-edge technology and employee growth]. I admire [Specific Aspect, e.g., your recent AI-driven projects], and with my [Skills/Experience, e.g., academic background in programming and hands-on project experience], I believe I can contribute to your team. I’m eager to grow my skills in [Area, e.g., software development] and help drive [Company Mission, e.g., innovative IT solutions].</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const themeToggleBtn = document.getElementById('themeToggle');
+            const themeIcon = themeToggleBtn.querySelector('i');
+
+            if (themeToggleBtn) {
+                themeToggleBtn.addEventListener('click', function () {
+                    document.body.classList.toggle('light-theme');
+                    const isLightTheme = document.body.classList.contains('light-theme');
+                    themeIcon.className = isLightTheme ? 'bx bx-sun' : 'bx bx-moon';
+                    localStorage.setItem('theme', isLightTheme ? 'light' : 'dark');
+                });
+            }
+
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-theme');
+                themeIcon.className = 'bx bx-sun';
+            }
+        });
+    </script>
+</body>
+</html>

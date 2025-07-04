@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operating Systems Practice</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        /* For iOS Safari */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* For Android Chrome (and most browsers) */
+        * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0f0f0f;
+            color: #f0f0f0;
+            min-height: 100vh;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body.light-theme {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .header-icons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .header-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            background-color: #22c55e;
+            color: white;
+            border: none;
+        }
+
+        body.light-theme .header-icon {
+            background-color: #2563eb;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-icon:hover {
+            transform: scale(1.1);
+            background-color: #16a34a;
+        }
+
+        body.light-theme .header-icon:hover {
+            background-color: #1d4ed8;
+        }
+
+        .main-content {
+            padding: 80px 50px;
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .page-title {
+            font-size: 36px;
+            margin-bottom: 60px;
+            font-weight: 700;
+            color: #f0f0f0;
+            text-align: center;
+            position: relative;
+        }
+
+        .page-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #22c55e;
+            margin: 20px auto 0;
+            border-radius: 2px;
+        }
+
+        body.light-theme .page-title {
+            color: #333;
+        }
+
+        body.light-theme .page-title::after {
+            background-color: #2563eb;
+        }
+
+        .topic-section {
+            margin-bottom: 80px;
+            background-color: #1a1a1a;
+            border-radius: 16px;
+            padding: 40px;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        body.light-theme .topic-section {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .topic-section:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+            border-color: #22c55e;
+        }
+
+        body.light-theme .topic-section:hover {
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+            border-color: #3b82f6;
+        }
+
+        .topic-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .topic-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 25px;
+        }
+
+        body.light-theme .topic-icon {
+            background-color: rgba(239, 68, 68, 0.1);
+        }
+
+        .topic-icon i {
+            font-size: 28px;
+        }
+
+        .topic-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: white;
+        }
+
+        body.light-theme .topic-title {
+            color: #333;
+        }
+
+        .topic-description {
+            font-size: 17px;
+            color: #aaa;
+            line-height: 1.9;
+            margin-bottom: 30px;
+        }
+
+        body.light-theme .topic-description {
+            color: #666;
+        }
+
+        .question-list {
+            margin-top: 30px;
+            padding: 0;
+            max-width: 100%;
+        }
+
+        .question-list ol {
+            list-style-position: outside;
+            padding-left: 0;
+            margin: 0 auto;
+            max-width: 100%;
+            counter-reset: item;
+        }
+
+        .question {
+            position: relative;
+            font-size: 17px;
+            color: #f0f0f0;
+            margin-bottom: 30px;
+            line-height: 1.8;
+            padding: 20px;
+            background-color: #222;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        body.light-theme .question {
+            color: #333;
+            background-color: #f9fafb;
+        }
+
+        .question-text {
+            margin-bottom: 15px;
+            font-weight: 500;
+            padding-left: 35px;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+            padding-left: 35px;
+        }
+
+        .option {
+            background-color: #333;
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        body.light-theme .option {
+            background-color: #e5e7eb;
+        }
+
+        .option:hover {
+            background-color: #444;
+        }
+
+        body.light-theme .option:hover {
+            background-color: #d1d5db;
+        }
+
+        .option.selected {
+            background-color: #22c55e;
+            color: white;
+            border: 2px solid #16a34a;
+        }
+
+        body.light-theme .option.selected {
+            background-color: #2563eb;
+            color: white;
+            border: 2px solid #1d4ed8;
+        }
+
+        .answer-table {
+            margin-top: 40px;
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .answer-table::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 20px;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.2));
+            pointer-events: none;
+        }
+
+        body.light-theme .answer-table {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+        }
+
+        body.light-theme .answer-table::after {
+            background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.1));
+        }
+
+        .answer-table table {
+            width: 100%;
+            min-width: 600px;
+            border-collapse: collapse;
+        }
+
+        .answer-table th, .answer-table td {
+            border: 1px solid #333;
+            padding: 15px;
+            text-align: center;
+            color: #f0f0f0;
+            font-size: 15px;
+            min-width: 50px;
+        }
+
+        body.light-theme .answer-table th,
+        body.light-theme .answer-table td {
+            border: 1px solid #ddd;
+            color: #333;
+        }
+
+        .answer-table td.correct {
+            background-color: #16a34a;
+            color: white;
+        }
+
+        body.light-theme .answer-table td.correct {
+            background-color: #16a34a;
+            color: white;
+        }
+
+        .answer-table td.incorrect {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        body.light-theme .answer-table td.incorrect {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        .footer {
+            background-color: #0f0f0f;
+            padding: 100px 0 40px;
+            margin-top: 100px;
+            border-top: 1px solid #222;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background-color: #22c55e;
+            border-radius: 2px;
+        }
+
+        body.light-theme .footer {
+            background-color: #f5f5f5;
+            border-top: 1px solid #ddd;
+        }
+
+        body.light-theme .footer::before {
+            background-color: #2563eb;
+        }
+
+        .copyright {
+            text-align: center;
+            padding: 40px 0 0;
+            margin-top: 60px;
+            border-top: 1px solid #222;
+            color: #888;
+            font-size: 15px;
+        }
+
+        body.light-theme .copyright {
+            border-top: 1px solid #ddd;
+            color: #666;
+        }
+
+        @media screen and (max-width: 1024px) {
+            .options {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .header-icons {
+                top: 10px;
+                right: 10px;
+                gap: 10px;
+            }
+
+            .header-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+
+            .main-content {
+                padding: 60px 10px;
+                margin: 0 auto;
+                max-width: 100%;
+            }
+
+            .page-title {
+                font-size: 28px;
+                margin-bottom: 40px;
+            }
+
+            .topic-section {
+                padding: 20px 12px;
+                margin: 0 auto 40px;
+                max-width: 100%;
+            }
+
+            .topic-header {
+                margin-bottom: 20px;
+            }
+
+            .topic-icon {
+                width: 50px;
+                height: 50px;
+                margin-right: 15px;
+            }
+
+            .topic-icon i {
+                font-size: 24px;
+            }
+
+            .topic-title {
+                font-size: 24px;
+            }
+
+            .topic-description {
+                font-size: 15px;
+                line-height: 1.7;
+            }
+
+            .question-list {
+                padding: 0;
+                margin: 0 auto;
+            }
+
+            .question-list ol {
+                list-style-position: inside;
+                padding-left: 0;
+                max-width: 100%;
+            }
+
+            .question {
+                font-size: 15px;
+                padding: 15px 20px;
+                margin-bottom: 20px;
+                display: flex;
+                flex-direction: column;
+                max-width: 100%;
+            }
+
+            .question::before {
+                content: counter(item) ".";
+                counter-increment: item;
+                position: absolute;
+                left: 10px;
+                top: 15px;
+                color: #22c55e;
+                font-weight: 500;
+            }
+
+            body.light-theme .question::before {
+                color: #2563eb;
+            }
+
+            .question-text {
+                position: relative;
+                padding-left: 30px;
+                margin-bottom: 12px;
+                margin-left: 10px;
+            }
+
+            .options {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 12px;
+                padding-left: 30px;
+                max-width: 100%;
+            }
+
+            .option {
+                padding: 10px;
+                font-size: 14px;
+                border-radius: 4px;
+            }
+
+            .answer-table {
+                background-color: transparent;
+            }
+
+            .answer-table table {
+                background-color: #1a1a1a;
+                border-radius: 8px;
+                min-width: 600px;
+            }
+
+            body.light-theme .answer-table table {
+                background-color: #ffffff;
+            }
+
+            .answer-table th, 
+            .answer-table td {
+                padding: 10px 8px;
+                font-size: 13px;
+                min-width: 40px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .header-icons {
+                top: 8px;
+                right: 8px;
+                gap: 8px;
+            }
+
+            .header-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+
+            .main-content {
+                padding: 50px 8px;
+            }
+
+            .page-title {
+                font-size: 24px;
+                margin-bottom: 30px;
+            }
+
+            .topic-section {
+                padding: 15px 10px;
+                margin-bottom: 30px;
+            }
+
+            .topic-icon {
+                width: 40px;
+                height: 40px;
+                margin-right: 12px;
+            }
+
+            .topic-icon i {
+                font-size: 20px;
+            }
+
+            .topic-title {
+                font-size: 20px;
+            }
+
+            .topic-description {
+                font-size: 14px;
+            }
+
+            .question {
+                font-size: 14px;
+                padding: 12px 15px;
+                margin-bottom: 15px;
+            }
+
+            .question::before {
+                left: 8px;
+                top: 12px;
+            }
+
+            .question-text {
+                padding-left: 25px;
+                margin-left: 8px;
+            }
+
+            .options {
+                gap: 8px;
+                padding-left: 25px;
+            }
+
+            .option {
+                padding: 8px 10px;
+                font-size: 13px;
+            }
+
+            .answer-table th, 
+            .answer-table td {
+                padding: 8px 6px;
+                font-size: 12px;
+                min-width: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-icons">
+        <button class="header-icon theme-toggle" id="theme-toggle" title="Toggle Theme">
+            <i class='bx bx-moon'></i>
+        </button>
+        <button class="header-icon back-button" title="Back">
+            <i class='bx bx-arrow-back'></i>
+        </button>
+    </div>
+
+    <div class="main-content">
+        <h1 class="page-title">Practice Questions</h1>
+
+        <!-- Operating Systems Questions -->
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon">
+                    <i class='bx bx-terminal'></i>
+                </div>
+                <h2 class="topic-title">Operating Systems</h2>
+            </div>
+            <p class="topic-description">
+                Test your knowledge with these 30 practice questions covering key Operating Systems concepts, including process management, memory management, file systems, and scheduling algorithms.
+            </p>
+            <div class="question-list">
+                <ol>
+                    <li class="question" data-question-id="1">
+                        <div class="question-text">What is the primary function of an operating system?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Manage hardware and software resources</div>
+                            <div class="option" data-option="(b)">(b) Execute application code</div>
+                            <div class="option" data-option="(c)">(c) Design user interfaces</div>
+                            <div class="option" data-option="(d)">(d) Compile source code</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="2">
+                        <div class="question-text">Which scheduling algorithm selects the process with the shortest next CPU burst?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) First-Come, First-Served</div>
+                            <div class="option" data-option="(b)">(b) Shortest Job Next</div>
+                            <div class="option" data-option="(c)">(c) Round Robin</div>
+                            <div class="option" data-option="(d)">(d) Priority Scheduling</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="3">
+                        <div class="question-text">What is a deadlock in an operating system?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) A process running indefinitely</div>
+                            <div class="option" data-option="(b)">(b) A process waiting for I/O completion</div>
+                            <div class="option" data-option="(c)">(c) A set of processes where each waits for a resource held by another</div>
+                            <div class="option" data-option="(d)">(d) A process exceeding memory limits</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="4">
+                        <div class="question-text">Which memory management technique divides memory into fixed-size partitions?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Paging</div>
+                            <div class="option" data-option="(b)">(b) Segmentation</div>
+                            <div class="option" data-option="(c)">(c) Swapping</div>
+                            <div class="option" data-option="(d)">(d) Fixed Partitioning</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="5">
+                        <div class="question-text">What does a process control block (PCB) contain?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) User data</div>
+                            <div class="option" data-option="(b)">(b) Application code</div>
+                            <div class="option" data-option="(c)">(c) Process state and registers</div>
+                            <div class="option" data-option="(d)">(d) File system metadata</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="6">
+                        <div class="question-text">Which of the following is a real-time operating system characteristic?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) High throughput</div>
+                            <div class="option" data-option="(b)">(b) Predictable response times</div>
+                            <div class="option" data-option="(c)">(c) Flexible scheduling</div>
+                            <div class="option" data-option="(d)">(d) Large memory usage</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="7">
+                        <div class="question-text">What is the purpose of virtual memory?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Increase CPU speed</div>
+                            <div class="option" data-option="(b)">(b) Allow processes to use more memory than physically available</div>
+                            <div class="option" data-option="(c)">(c) Reduce disk usage</div>
+                            <div class="option" data-option="(d)">(d) Optimize I/O operations</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="8">
+                        <div class="question-text">Which file system is commonly used in Linux?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) NTFS</div>
+                            <div class="option" data-option="(b)">(b) ext4</div>
+                            <div class="option" data-option="(c)">(c) FAT32</div>
+                            <div class="option" data-option="(d)">(d) HFS+</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="9">
+                        <div class="question-text">What is a thread in an operating system?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) A separate program</div>
+                            <div class="option" data-option="(b)">(b) A lightweight process sharing the same address space</div>
+                            <div class="option" data-option="(c)">(c) A memory management unit</div>
+                            <div class="option" data-option="(d)">(d) A file system component</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="10">
+                        <div class="question-text">Which scheduling algorithm provides equal time slices to each process?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Shortest Job Next</div>
+                            <div class="option" data-option="(b)">(b) Priority Scheduling</div>
+                            <div class="option" data-option="(c)">(c) Round Robin</div>
+                            <div class="option" data-option="(d)">(d) First-Come, First-Served</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="11">
+                        <div class="question-text">What is the main advantage of a multi-user operating system?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Faster processing speed</div>
+                            <div class="option" data-option="(b)">(b) Multiple users can access the system simultaneously</div>
+                            <div class="option" data-option="(c)">(c) Reduced memory usage</div>
+                            <div class="option" data-option="(d)">(d) Simplified file management</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="12">
+                        <div class="question-text">What is the role of the kernel in an operating system?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Manage user interfaces</div>
+                            <div class="option" data-option="(b)">(b) Handle core system operations like process and memory management</div>
+                            <div class="option" data-option="(c)">(c) Execute application software</div>
+                            <div class="option" data-option="(d)">(d) Provide network connectivity</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="13">
+                        <div class="question-text">Which of the following is a condition for deadlock?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Mutual Exclusion</div>
+                            <div class="option" data-option="(b)">(b) High CPU Utilization</div>
+                            <div class="option" data-option="(c)">(c) Low Memory Usage</div>
+                            <div class="option" data-option="(d)">(d) Fast I/O Operations</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="14">
+                        <div class="question-text">What is paging in memory management?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Dividing memory into variable-sized segments</div>
+                            <div class="option" data-option="(b)">(b) Dividing memory into fixed-size pages</div>
+                            <div class="option" data-option="(c)">(c) Allocating memory dynamically</div>
+                            <div class="option" data-option="(d)">(d) Swapping entire processes</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="15">
+                        <div class="question-text">What is the purpose of an interrupt in an operating system?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Terminate a process</div>
+                            <div class="option" data-option="(b)">(b) Signal the CPU to handle an event</div>
+                            <div class="option" data-option="(c)">(c) Allocate memory</div>
+                            <div class="option" data-option="(d)">(d) Schedule tasks</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="16">
+                        <div class="question-text">Which of the following is a benefit of multiprogramming?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Increased CPU utilization</div>
+                            <div class="option" data-option="(b)">(b) Reduced memory requirements</div>
+                            <div class="option" data-option="(c)">(c) Simplified process management</div>
+                            <div class="option" data-option="(d)">(d) Lower I/O performance</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="17">
+                        <div class="question-text">What is a semaphore in an operating system?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) A memory allocation technique</div>
+                            <div class="option" data-option="(b)">(b) A synchronization tool for processes</div>
+                            <div class="option" data-option="(c)">(c) A file system structure</div>
+                            <div class="option" data-option="(d)">(d) A scheduling algorithm</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="18">
+                        <div class="question-text">Which file system is used by Windows 10 by default?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) ext4</div>
+                            <div class="option" data-option="(b)">(b) FAT32</div>
+                            <div class="option" data-option="(c)">(c) NTFS</div>
+                            <div class="option" data-option="(d)">(d) HFS+</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="19">
+                        <div class="question-text">What is the purpose of the swap space in an operating system?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Store user files</div>
+                            <div class="option" data-option="(b)">(b) Extend virtual memory using disk space</div>
+                            <div class="option" data-option="(c)">(c) Cache frequently used files</div>
+                            <div class="option" data-option="(d)">(d) Manage process scheduling</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="20">
+                        <div class="question-text">Which of the following is a characteristic of a batch operating system?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Real-time processing</div>
+                            <div class="option" data-option="(b)">(b) Jobs are processed without user interaction</div>
+                            <div class="option" data-option="(c)">(c) Interactive user interfaces</div>
+                            <div class="option" data-option="(d)">(d) High priority for I/O operations</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="21">
+                        <div class="question-text">What is the purpose of the file allocation table (FAT)?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Manage memory allocation</div>
+                            <div class="option" data-option="(b)">(b) Track file locations on disk</div>
+                            <div class="option" data-option="(c)">(c) Schedule processes</div>
+                            <div class="option" data-option="(d)">(d) Handle interrupts</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="22">
+                        <div class="question-text">Which scheduling algorithm may lead to starvation?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Round Robin</div>
+                            <div class="option" data-option="(b)">(b) Priority Scheduling</div>
+                            <div class="option" data-option="(c)">(c) Shortest Job Next</div>
+                            <div class="option" data-option="(d)">(d) First-Come, First-Served</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="23">
+                        <div class="question-text">What is thrashing in an operating system?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Excessive process creation</div>
+                            <div class="option" data-option="(b)">(b) Excessive paging due to low memory</div>
+                            <div class="option" data-option="(c)">(c) High CPU utilization</div>
+                            <div class="option" data-option="(d)">(d) Frequent interrupts</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="24">
+                        <div class="question-text">Which of the following is a type of operating system?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Compiler-based</div>
+                            <div class="option" data-option="(b)">(b) Distributed</div>
+                            <div class="option" data-option="(c)">(c) Interpreter-based</div>
+                            <div class="option" data-option="(d)">(d) Application-based</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="25">
+                        <div class="question-text">What is the purpose of a device driver?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Manage file systems</div>
+                            <div class="option" data-option="(b)">(b) Interface between hardware and OS</div>
+                            <div class="option" data-option="(c)">(c) Schedule processes</div>
+                            <div class="option" data-option="(d)">(d) Allocate memory</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="26">
+                        <div class="question-text">Which of the following is a benefit of using threads?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Reduced memory usage</div>
+                            <div class="option" data-option="(b)">(b) Increased process isolation</div>
+                            <div class="option" data-option="(c)">(c) Simplified scheduling</div>
+                            <div class="option" data-option="(d)">(d) Independent memory allocation</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="27">
+                        <div class="question-text">What is the purpose of the boot loader?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Manage memory allocation</div>
+                            <div class="option" data-option="(b)">(b) Load the operating system into memory</div>
+                            <div class="option" data-option="(c)">(c) Execute application programs</div>
+                            <div class="option" data-option="(d)">(d) Handle file operations</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="28">
+                        <div class="question-text">Which of the following is a page replacement algorithm?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) First-Come, First-Served</div>
+                            <div class="option" data-option="(b)">(b) Least Recently Used</div>
+                            <div class="option" data-option="(c)">(c) Round Robin</div>
+                            <div class="option" data-option="(d)">(d) Shortest Job Next</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="29">
+                        <div class="question-text">What is the role of the shell in an operating system?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Manage hardware resources</div>
+                            <div class="option" data-option="(b)">(b) Provide a user interface to interact with the OS</div>
+                            <div class="option" data-option="(c)">(c) Allocate memory to processes</div>
+                            <div class="option" data-option="(d)">(d) Handle network protocols</div>
+                        </div>
+                    </li>
+                    <li class="question" data-question-id="30">
+                        <div class="question-text">Which of the following prevents deadlock?</div>
+                        <div class="options">
+                            <div class="option" data-option="(a)">(a) Resource Preemption</div>
+                            <div class="option" data-option="(b)">(b) Increased Memory Allocation</div>
+                            <div class="option" data-option="(c)">(c) Higher CPU Priority</div>
+                            <div class="option" data-option="(d)">(d) Faster I/O Operations</div>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Answer Key -->
+        <div class="topic-section">
+            <div class="topic-header">
+                <div class="topic-icon">
+                    <i class='bx bx-key'></i>
+                </div>
+                <h2 class="topic-title">Answer Key</h2>
+            </div>
+            <p class="topic-description">
+                Correct answers for the Operating Systems practice questions.
+            </p>
+            <div class="answer-table">
+                <table>
+                    <tr>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                        <th>Question</th><th>Answer</th>
+                    </tr>
+                    <tr>
+                        <td>1</td><td data-question-id="1">(a)</td>
+                        <td>2</td><td data-question-id="2">(b)</td>
+                        <td>3</td><td data-question-id="3">(c)</td>
+                        <td>4</td><td data-question-id="4">(d)</td>
+                        <td>5</td><td data-question-id="5">(c)</td>
+                    </tr>
+                    <tr>
+                        <td>6</td><td data-question-id="6">(b)</td>
+                        <td>7</td><td data-question-id="7">(b)</td>
+                        <td>8</td><td data-question-id="8">(b)</td>
+                        <td>9</td><td data-question-id="9">(b)</td>
+                        <td>10</td><td data-question-id="10">(c)</td>
+                    </tr>
+                    <tr>
+                        <td>11</td><td data-question-id="11">(b)</td>
+                        <td>12</td><td data-question-id="12">(b)</td>
+                        <td>13</td><td data-question-id="13">(a)</td>
+                        <td>14</td><td data-question-id="14">(b)</td>
+                        <td>15</td><td data-question-id="15">(b)</td>
+                    </tr>
+                    <tr>
+                        <td>16</td><td data-question-id="16">(a)</td>
+                        <td>17</td><td data-question-id="17">(b)</td>
+                        <td>18</td><td data-question-id="18">(c)</td>
+                        <td>19</td><td data-question-id="19">(b)</td>
+                        <td>20</td><td data-question-id="20">(b)</td>
+                    </tr>
+                    <tr>
+                        <td>21</td><td data-question-id="21">(b)</td>
+                        <td>22</td><td data-question-id="22">(b)</td>
+                        <td>23</td><td data-question-id="23">(b)</td>
+                        <td>24</td><td data-question-id="24">(b)</td>
+                        <td>25</td><td data-question-id="25">(b)</td>
+                    </tr>
+                    <tr>
+                        <td>26</td><td data-question-id="26">(a)</td>
+                        <td>27</td><td data-question-id="27">(b)</td>
+                        <td>28</td><td data-question-id="28">(b)</td>
+                        <td>29</td><td data-question-id="29">(b)</td>
+                        <td>30</td><td data-question-id="30">(a)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="copyright">
+                <p>© 2025 OS Prep. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.querySelector('.theme-toggle');
+            const backButton = document.querySelector('.back-button');
+            const options = document.querySelectorAll('.option');
+            const answerKey = {
+                1: '(a)', 2: '(b)', 3: '(c)', 4: '(d)', 5: '(c)',
+                6: '(b)', 7: '(b)', 8: '(b)', 9: '(b)', 10: '(c)',
+                11: '(b)', 12: '(b)', 13: '(a)', 14: '(b)', 15: '(b)',
+                16: '(a)', 17: '(b)', 18: '(c)', 19: '(b)', 20: '(b)',
+                21: '(b)', 22: '(b)', 23: '(b)', 24: '(b)', 25: '(b)',
+                26: '(a)', 27: '(b)', 28: '(b)', 29: '(b)', 30: '(a)'
+            };
+
+            if (themeToggle) {
+                const themeIcon = themeToggle.querySelector('i');
+                themeToggle.addEventListener('click', function() {
+                    document.body.classList.toggle('light-theme');
+                    if (document.body.classList.contains('light-theme')) {
+                        themeIcon.classList.remove('bx-moon');
+                        themeIcon.classList.add('bx-sun');
+                        localStorage.setItem('theme', 'light');
+                    } else {
+                        themeIcon.classList.remove('bx-sun');
+                        themeIcon.classList.add('bx-moon');
+                        localStorage.setItem('theme', 'dark');
+                    }
+                });
+
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'light') {
+                    document.body.classList.add('light-theme');
+                    themeIcon.classList.remove('bx-moon');
+                    themeIcon.classList.add('bx-sun');
+                }
+            }
+
+            if (backButton) {
+                backButton.addEventListener('click', function() {
+                    window.history.back();
+                });
+            }
+
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    const question = this.closest('.question');
+                    const questionId = question.getAttribute('data-question-id');
+                    const selectedOption = this.getAttribute('data-option');
+                    const correctAnswer = answerKey[questionId];
+
+                    question.querySelectorAll('.option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+
+                    this.classList.add('selected');
+
+                    const answerCell = document.querySelector(`td[data-question-id="${questionId}"]`);
+                    if (answerCell) {
+                        answerCell.classList.remove('correct', 'incorrect');
+                        if (selectedOption === correctAnswer) {
+                            answerCell.classList.add('correct');
+                        } else {
+                            answerCell.classList.add('incorrect');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

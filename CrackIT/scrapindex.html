@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CrackIT - Homepage</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* For iOS Safari */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Restrict user-select to sidebar and toggle */
+        .sidebar, .sidebar-toggle {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* General styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            display: flex;
+            width: 100%;
+            overflow-x: hidden;
+            color: #1e293b;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Light Theme with Animated Background */
+        body.light-theme {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 10s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body.light-theme .sidebar {
+            background-color: #ffffff;
+            border-right: 1px solid #e2e8f0;
+        }
+
+        body.light-theme .sidebar-item {
+            color: #64748b;
+        }
+
+        body.light-theme .sidebar-item:hover {
+            background-color: #f1f5f9;
+            color: #2563eb;
+            transform: translateX(5px);
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme .sidebar-item:hover i,
+        body.light-theme .sidebar-item:hover span {
+            color: #2563eb;
+        }
+
+        body.light-theme .sidebar-header {
+            color: #2563eb;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        body.light-theme .sidebar-header i {
+            color: #2563eb;
+        }
+
+        body.light-theme .hero-badge {
+            background-color: #dbeafe;
+            color: #2563eb;
+        }
+
+        body.light-theme .hero-description {
+            color: #64748b;
+        }
+
+        body.light-theme .btn-primary {
+            background-color: #2563eb;
+            color: #ffffff;
+            border: none;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+        }
+
+        body.light-theme .btn-primary:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        body.light-theme .btn-secondary {
+            background-color: transparent;
+            border: 1px solid #cbd5e1;
+            color: #1e293b;
+        }
+
+        body.light-theme .btn-secondary:hover {
+            background-color: #f1f5f9;
+            border-color: #2563eb;
+            color: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        body.light-theme .section-subheading {
+            color: #64748b;
+        }
+
+        body.light-theme .specialty-card,
+        body.light-theme .feature-card,
+        body.light-theme .testimonial-card {
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body.light-theme .specialty-card:hover,
+        body.light-theme .feature-card:hover,
+        body.light-theme .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-theme .specialty-description,
+        body.light-theme .feature-description {
+            color: #64748b;
+        }
+
+        body.light-theme .btn-link {
+            color: #2563eb;
+        }
+
+        body.light-theme .btn-link:hover {
+            color: #1d4ed8;
+        }
+
+        body.light-theme .feature-icon {
+            background-color: #dbeafe;
+            color: #2563eb;
+            transition: transform 0.3s ease;
+        }
+
+        body.light-theme .feature-icon:hover {
+            background-color: #bfdbfe;
+            transform: scale(1.1);
+        }
+
+        body.light-theme .testimonial-rating {
+            color: #f59e0b;
+        }
+
+        body.light-theme .author-info p {
+            color: #64748b;
+        }
+
+        body.light-theme .indicator {
+            background-color: #e2e8f0;
+        }
+
+        body.light-theme .indicator.active {
+            background-color: #2563eb;
+        }
+
+        body.light-theme .indicator:hover {
+            background-color: #cbd5e1;
+            transform: scale(1.2);
+        }
+
+        body.light-theme .cta-section {
+            background-color: #f1f5f9;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        body.light-theme .cta-description {
+            color: #64748b;
+        }
+
+        body.light-theme .cta-badge {
+            color: #2563eb;
+        }
+
+        body.light-theme .footer {
+            background-color: #ffffff;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        body.light-theme .footer-links a {
+            color: #64748b;
+        }
+
+        body.light-theme .footer-links a:hover {
+            color: #2563eb;
+        }
+
+        body.light-theme .sidebar-toggle {
+            background-color: #ffffff;
+            color: #2563eb;
+            border: 1px solid #e2e8f0;
+        }
+
+        body.light-theme .sidebar-toggle:hover {
+            background-color: #f1f5f9;
+            transform: scale(1.1);
+        }
+
+        /* Dark Theme */
+        body.dark-theme {
+            background: linear-gradient(135deg, #121212 0%, #1C2526 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 10s ease infinite;
+            color: #E0E0E0;
+        }
+
+        body.dark-theme .sidebar {
+            background-color: #1E1E1E;
+            border-right: 1px solid #2A2A2A;
+        }
+
+        body.dark-theme .sidebar-item {
+            color: #B0BEC5;
+        }
+
+        body.dark-theme .sidebar-item:hover {
+            background-color: #2A2A2A;
+            color: #BB86FC;
+            transform: translateX(5px);
+        }
+
+        body.dark-theme .sidebar-item:hover i,
+        body.dark-theme .sidebar-item:hover span {
+            color: #BB86FC;
+        }
+
+        body.dark-theme .sidebar-header {
+            color: #BB86FC;
+            border-bottom: 1px solid #2A2A2A;
+        }
+
+        body.dark-theme .sidebar-header i {
+            color: #BB86FC;
+        }
+
+        body.dark-theme .hero-badge {
+            background-color: #2A2A2A;
+            color: #BB86FC;
+        }
+
+        body.dark-theme .hero-description {
+            color: #B0BEC5;
+        }
+
+        body.dark-theme .btn-primary {
+            background-color: #BB86FC;
+            color: #121212;
+            border: none;
+            box-shadow: 0 4px 10px rgba(187, 134, 252, 0.3);
+        }
+
+        body.dark-theme .btn-primary:hover {
+            background-color: #AB6DFC;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(187, 134, 252, 0.4);
+        }
+
+        body.dark-theme .btn-secondary {
+            background-color: transparent;
+            border: 1px solid #2A2A2A;
+            color: #E0E0E0;
+        }
+
+        body.dark-theme .btn-secondary:hover {
+            background-color: #2A2A2A;
+            border-color: #BB86FC;
+            color: #BB86FC;
+            transform: translateY(-2px);
+        }
+
+        body.dark-theme .section-subheading {
+            color: #B0BEC5;
+        }
+
+        body.dark-theme .specialty-card,
+        body.dark-theme .feature-card,
+        body.dark-theme .testimonial-card {
+            background-color: #1E1E1E;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        body.dark-theme .specialty-card:hover,
+        body.dark-theme .feature-card:hover,
+        body.dark-theme .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-theme .specialty-description,
+        body.dark-theme .feature-description {
+            color: #B0BEC5;
+        }
+
+        body.dark-theme .btn-link {
+            color: #BB86FC;
+        }
+
+        body.dark-theme .btn-link:hover {
+            color: #AB6DFC;
+        }
+
+        body.dark-theme .feature-icon {
+            background-color: #2A2A2A;
+            color: #BB86FC;
+        }
+
+        body.dark-theme .feature-icon:hover {
+            background-color: #3A3A3A;
+            transform: scale(1.1);
+        }
+
+        body.dark-theme .testimonial-rating {
+            color: #f59e0b;
+        }
+
+        body.dark-theme .author-info p {
+            color: #B0BEC5;
+        }
+
+        body.dark-theme .indicator {
+            background-color: #2A2A2A;
+        }
+
+        body.dark-theme .indicator.active {
+            background-color: #BB86FC;
+        }
+
+        body.dark-theme .indicator:hover {
+            background-color: #3A3A3A;
+            transform: scale(1.2);
+        }
+
+        body.dark-theme .cta-section {
+            background-color: #1E1E1E;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        body.dark-theme .cta-description {
+            color: #B0BEC5;
+        }
+
+        body.dark-theme .cta-badge {
+            color: #BB86FC;
+        }
+
+        body.dark-theme .footer {
+            background-color: #1E1E1E;
+            border-top: 1px solid #2A2A2A;
+        }
+
+        body.dark-theme .footer-links a {
+            color: #B0BEC5;
+        }
+
+        body.dark-theme .footer-links a:hover {
+            color: #BB86FC;
+        }
+
+        body.dark-theme .sidebar-toggle {
+            background-color: #1E1E1E;
+            color: #BB86FC;
+            border: 1px solid #2A2A2A;
+        }
+
+        body.dark-theme .sidebar-toggle:hover {
+            background-color: #2A2A2A;
+            transform: scale(1.1);
+        }
+
+        /* Specialty icon colors */
+        .medical-surgical {
+            background-color: #fee2e2;
+            color: #dc2626;
+        }
+
+        .mental-health {
+            background-color: #e0e7ff;
+            color: #4f46e5;
+        }
+
+        .emergency {
+            background-color: #ffedd5;
+            color: #ea580c;
+        }
+
+        .maternity {
+            background-color: #d1fae5;
+            color: #059669;
+        }
+
+        .pediatrics {
+            background-color: #fefcbf;
+            color: #ca8a04;
+        }
+
+        .specialty-icon.more {
+            background-color: #f3e8ff;
+            color: #7c3aed;
+        }
+
+        body.dark-theme .medical-surgical {
+            background-color: #5A1A1A;
+            color: #FF9999;
+        }
+
+        body.dark-theme .mental-health {
+            background-color: #252A6A;
+            color: #8A9EFF;
+        }
+
+        body.dark-theme .emergency {
+            background-color: #5A2A1A;
+            color: #FFAA77;
+        }
+
+        body.dark-theme .maternity {
+            background-color: #1A5A3A;
+            color: #77FFAA;
+        }
+
+        body.dark-theme .pediatrics {
+            background-color: #5A4A1A;
+            color: #FFDD77;
+        }
+
+        body.dark-theme .specialty-icon.more {
+            background-color: #3A2A5A;
+            color: #BB86FC;
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            width: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: fixed;
+            height: 100vh;
+            transition: width 0.3s ease;
+            padding: 20px 0;
+            left: 0;
+            top: 0;
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+        /* Hover effect for sidebar on larger screens */
+        @media (min-width: 769px) {
+            .sidebar:hover {
+                width: 200px;
+            }
+
+            .sidebar:hover .sidebar-item span,
+            .sidebar:hover .sidebar-header .sidebar-title,
+            .sidebar:hover .sidebar-header i {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            .sidebar:hover ~ .main-content {
+                margin-left: 200px;
+                width: calc(100% - 200px);
+            }
+        }
+
+        /* Sidebar Header */
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 20px 0;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar-header i {
+            font-size: 40px;
+            margin-bottom: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar-header .sidebar-title {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar.active .sidebar-header .sidebar-title,
+        .sidebar.active .sidebar-header i {
+            opacity: 1;
+        }
+
+        /* Sidebar items */
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0 12px 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-item i {
+            font-size: 20px;
+            min-width: 24px;
+            margin-right: 12px;
+        }
+
+        .sidebar-item span {
+            display: inline;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            white-space: nowrap;
+        }
+
+        /* Active state for sidebar */
+        .sidebar.active .sidebar-item span {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .sidebar.active {
+            width: 200px;
+        }
+
+        .sidebar-item.active {
+            background-color: #f1f5f9;
+            color: #2563eb;
+        }
+
+        body.dark-theme .sidebar-item.active {
+            background-color: #2A2A2A;
+            color: #BB86FC;
+        }
+
+        /* Sidebar sections */
+        .sidebar-top, .sidebar-bottom {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-spacer {
+            flex-grow: 1;
+        }
+
+        /* Sidebar toggle button (Arrow) */
+        .sidebar-toggle {
+            display: flex;
+            position: fixed;
+            top: 45px;
+            left: 9px;
+            border-radius: 50%;
+            padding: 6px;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            font-size: 16px;
+            font-weight: 700;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 1100;
+        }
+
+        /* Main content */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .main-content {
+            margin-left: 50px;
+            width: calc(100% - 50px);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+            transition: margin-left 0.3s ease, width 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Prevent hover effects on mobile */
+        @media (max-width: 768px) {
+            .sidebar:hover {
+                width: 50px;
+            }
+
+            .sidebar:hover .sidebar-item span,
+            .sidebar:hover .sidebar-header .sidebar-title,
+            .sidebar:hover .sidebar-header i {
+                opacity: 0;
+            }
+
+            .sidebar:hover ~ .main-content {
+                margin-left: 50px;
+                width: calc(100% - 50px);
+            }
+        }
+
+        /* Hero and other sections */
+        .hero-section,
+        .specialties-section,
+        .features-section,
+        .testimonials-section,
+        .cta-section,
+        .footer {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 1;
+        }
+
+        .specialties-grid,
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 80px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .hero-badge {
+            padding: 8px 16px;
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-badge:hover {
+            transform: scale(1.05);
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            line-height: 1.2;
+            text-align: center;
+        }
+
+        .hero-description {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            text-align: center;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 16px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            min-height: 44px;
+        }
+
+        .btn i {
+            margin-left: 8px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .section-heading {
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .section-subheading {
+            font-size: 16px;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .specialty-card, .feature-card {
+            border-radius: 12px;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .specialty-icon, .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .specialty-title, .feature-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .specialty-description, .feature-description {
+            margin-bottom: 24px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .btn-link {
+            display: inline-flex;
+            align-items: center;
+            font-weight: 500;
+            text-decoration: none;
+            font-size: 16px;
+            min-height: 44px;
+        }
+
+        .btn-link i {
+            margin-left: 8px;
+            transition: transform 0.2s;
+        }
+
+        .btn-link:hover i {
+            transform: translateX(4px);
+        }
+
+        .testimonials-section {
+            padding: 40px 20px;
+            margin-bottom: 80px;
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+            z-index: 1;
+        }
+
+        .testimonial-carousel {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+            box-sizing: border-box;
+            z-index: 1;
+        }
+
+        .testimonial-container {
+            display: flex;
+            transition: transform 0.8s ease-in-out;
+            width: 100%;
+            min-width: 100%;
+        }
+
+        .testimonial-card {
+            flex: 0 0 100%;
+            min-width: 100%;
+            width: 100%;
+            border-radius: 12px;
+            padding: 32px;
+            box-sizing: border-box;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .testimonial-author {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #2563eb;
+            overflow: hidden;
+            margin-bottom: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        body.dark-theme .author-avatar {
+            background-color: #BB86FC;
+        }
+
+        .author-avatar:hover {
+            transform: scale(1.1);
+        }
+
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 4px;
+            text-align: center;
+        }
+
+        .author-info p {
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .testimonial-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .testimonial-rating {
+            margin-bottom: 16px;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .testimonial-text {
+            font-size: 18px;
+            font-style: italic;
+            text-align: center;
+        }
+
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cta-section {
+            border-radius: 16px;
+            padding: 64px 32px;
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .cta-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .cta-description {
+            max-width: 600px;
+            margin: 0 auto 32px;
+            text-align: center;
+        }
+
+        .cta-badge {
+            position: absolute;
+            right: 64px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100px;
+            height: 120px;
+            opacity: 0.8;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-badge:hover {
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .footer {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 32px;
+            padding: 40px 20px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column {
+            text-align: center;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.2s;
+        }
+
+        /* Responsive Styles */
+        @media (min-width: 1024px) {
+            .main-content {
+                padding: 2rem 4rem;
+                max-width: 1200px;
+            }
+            .hero-title {
+                font-size: 3rem;
+            }
+            .hero-description {
+                font-size: 1.1rem;
+                max-width: 80%;
+            }
+            .specialties-grid, .features-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.5rem;
+            }
+            .specialty-card, .feature-card {
+                min-height: 220px;
+                padding: 1.5rem;
+            }
+            .testimonial-card {
+                max-width: 700px;
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 50px;
+                transform: translateX(0);
+            }
+
+            .sidebar.active {
+                width: 200px;
+            }
+
+            .main-content {
+                margin-left: 50px;
+                width: calc(100% - 50px);
+            }
+
+            .sidebar-item span,
+            .sidebar-header .sidebar-title,
+            .sidebar-header i {
+                opacity: 0;
+            }
+
+            .sidebar.active .sidebar-item span,
+            .sidebar.active .sidebar-header .sidebar-title,
+            .sidebar.active .sidebar-header i {
+                opacity: 1;
+            }
+
+            .specialties-grid, .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .hero-title {
+                font-size: 42px;
+            }
+            .main-content {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 20px;
+                margin-left: 50px;
+                width: calc(100% - 50px);
+            }
+
+            .hero-section {
+                padding: 30px 10px;
+            }
+            .hero-title {
+                font-size: 36px;
+            }
+            .hero-description {
+                font-size: 16px;
+                padding: 0 10px;
+            }
+            .btn-group {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+                margin: 0 auto;
+                gap: 12px;
+            }
+            .specialties-grid, .features-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .specialty-card, .feature-card {
+                padding: 24px;
+            }
+            .specialty-icon, .feature-icon {
+                margin: 16px auto;
+            }
+            .specialty-title, .feature-title {
+                order: -2;
+                margin-bottom: 16px;
+            }
+            .specialty-icon, .feature-icon {
+                order: -1;
+            }
+            .specialty-description, .feature-description {
+                order: 0;
+            }
+            .btn-link {
+                order: 1;
+                margin-top: 16px;
+            }
+            .testimonials-section {
+                padding: 40px 10px;
+            }
+            .testimonial-carousel {
+                max-width: 100%;
+                padding: 0;
+            }
+            .testimonial-card {
+                padding: 24px;
+                max-width: 100%;
+            }
+            .testimonial-text {
+                font-size: 15px;
+            }
+            .author-avatar {
+                margin-bottom: 8px;
+            }
+            .author-info h4, .author-info p {
+                text-align: center;
+            }
+            .section-heading {
+                font-size: 28px;
+            }
+            .section-subheading {
+                font-size: 15px;
+                padding: 0 10px;
+            }
+            .cta-section {
+                padding: 40px 20px;
+            }
+            .cta-badge {
+                display: none;
+            }
+            .footer {
+                grid-template-columns: 1fr;
+                padding: 30px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 10px;
+                margin-left: 50px;
+                width: calc(100% - 50px);
+            }
+            .hero-title {
+                font-size: 28px;
+                line-height: 1.3;
+            }
+            .hero-badge {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+            .hero-description {
+                font-size: 14px;
+                line-height: 1.5;
+            }
+            .btn {
+                padding: 10px;
+                font-size: 14px;
+                width: 100%;
+            }
+            .specialty-icon, .feature-icon {
+                width: 50px;
+                height: 50px;
+            }
+            .specialty-title, .feature-title {
+                font-size: 18px;
+            }
+            .specialty-description, .feature-description {
+                font-size: 14px;
+            }
+            .testimonial-text {
+                font-size: 14px;
+                line-height: 1.5;
+            }
+            .section-heading {
+                font-size: 24px;
+            }
+            .section-subheading {
+                font-size: 14px;
+            }
+            .cta-title {
+                font-size: 24px;
+            }
+            .cta-description {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .hero-title {
+                font-size: 24px;
+            }
+            .hero-description {
+                font-size: 13px;
+            }
+            .btn {
+                font-size: 13px;
+                padding: 8px;
+            }
+            .specialty-card, .feature-card {
+                padding: 16px;
+            }
+            .testimonial-card {
+                padding: 16px;
+            }
+            .section-heading {
+                font-size: 20px;
+            }
+            .section-subheading {
+                font-size: 13px;
+            }
+        }
+
+        /* Touch-friendly active states */
+        .sidebar-item:active, .btn:active, .specialty-card:active, .feature-card:active {
+            transform: scale(0.98);
+            opacity: 0.9;
+        }
+
+        .specialty-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            font-size: 32px;
+            transition: transform 0.3s ease;
+        }
+
+        .specialty-icon:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .specialty-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body class="light-theme">
+    <!-- Sidebar Toggle Button (Arrow) -->
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+        <span class="toggle-arrow">❯</span>
+    </button>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header" id="crackITHeader">
+            <i class='bx bxs-graduation'></i>
+            <span class="sidebar-title">CrackIT</span>
+        </div>
+        <div class="sidebar-top">
+            <div class="sidebar-item active">
+                <i class='bx bx-home-alt'></i>
+                <span>Home</span>
+            </div>
+            <div class="sidebar-item" id="loginRegisterLink">
+                <i class='bx bx-user-circle'></i>
+                <span>Login/Register</span>
+            </div>
+            <div class="sidebar-item">
+                <i class='bx bx-message-square-dots'></i>
+                <span>Testimonials</span>
+            </div>
+            <div class="sidebar-item">
+                <i class='bx bx-book-content'></i>
+                <span>Topics</span>
+            </div>
+            <div class="sidebar-item">
+                <i class='bx bx-clipboard'></i>
+                <span>Mocktest</span>
+            </div>
+            <div class="sidebar-item">
+                <i class='bx bx-briefcase'></i>
+                <span>Technical & HR</span>
+            </div>
+        </div>
+        <div class="sidebar-spacer"></div>
+        <div class="sidebar-bottom">
+            <div class="sidebar-item" id="themeToggle">
+                <i class='bx bx-palette'></i>
+                <span>Theme</span>
+            </div>
+            <div class="sidebar-item">
+                <a href="login and register.html" style="text-decoration: none; color: inherit;">
+                    <i class='bx bx-log-out'></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="main-content">
+            <div class="hero-section">
+                <div class="hero-badge" id="heroBadge">CrackIT Preparation Platform</div>
+                <h1 class="hero-title" id="heroTitle">CrackIT<br>with Confidence</h1>
+                <p class="hero-description">Prepare for technical interviews, improve your logical reasoning, and enhance your problem-solving skills with our comprehensive aptitude test platform.</p>
+                <div class="btn-group">
+                    <button class="btn btn-primary">Start Practicing <i class="fas fa-arrow-right"></i></button>
+                    <button class="btn btn-secondary">Take Mock Test</button>
+                </div>
+            </div>
+
+            <h2 class="section-heading" id="specializedPracticeAreas">Specialized Practice Areas</h2>
+            <p class="section-subheading">Focus your study on specific IT specialties to strengthen your weakest areas</p>
+
+            <div class="specialties-grid">
+                <div class="specialty-card">
+                    <h3 class="specialty-title">General Aptitude</h3>
+                    <div class="specialty-icon medical-surgical">
+                        <i class='bx bx-spreadsheet'></i>
+                    </div>
+                    <p class="specialty-description">Assess your overall problem-solving skills with questions on reasoning, data interpretation, and basic mathematics.</p>
+                    <a href="Topics.html" class="btn-link">Practice Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="specialty-card">
+                    <h3 class="specialty-title">Arithmetic Aptitude</h3>
+                    <div class="specialty-icon mental-health">
+                        <i class='bx bx-list-ol'></i>
+                    </div>
+                    <p class="specialty-description">Practice calculations involving percentages, time-speed-distance, and other fundamental math concepts.</p>
+                    <a href="Topics.html" class="btn-link">Practice Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="specialty-card">
+                    <h3 class="specialty-title">Technical MCQs</h3>
+                    <div class="specialty-icon emergency">
+                        <i class='bx bx-laptop'></i>
+                    </div>
+                    <p class="specialty-description">Strengthen your grasp on core engineering and IT subjects with objective questions across multiple domains.</p>
+                    <a href="Topics.html" class="btn-link">Practice Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="specialty-card">
+                    <h3 class="specialty-title">Programming Topics</h3>
+                    <div class="specialty-icon maternity">
+                        <i class='bx bx-code-alt'></i>
+                    </div>
+                    <p class="specialty-description">Evaluate your coding knowledge with questions on syntax, logic, and output in languages like C, C++, Java, and Python.</p>
+                    <a href="Topics.html" class="btn-link">Practice Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="specialty-card">
+                    <h3 class="specialty-title">BrainRot Topics</h3>
+                    <div class="specialty-icon pediatrics">
+                        <i class='bx bx-brain'></i>
+                    </div>
+                    <p class="specialty-description">Contains frequently asked and BrainRot topics. These are important and most commonly tested areas.</p>
+                    <a href="Topics.html" class="btn-link">Practice Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="specialty-card">
+                    <h3 class="specialty-title">Verbal and Reasoning</h3>
+                    <div class="specialty-icon more">
+                        <i class='bx bx-text'></i>
+                    </div>
+                    <p class="specialty-description">Enhance vocabulary, grammar, and comprehension skills for effective verbal communication.</p>
+                    <a href="Topics.html" class="btn-link">Discover More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <h2 class="section-heading">Key Platform Features</h2>
+            <p class="section-subheading">Our comprehensive tools help you prepare effectively for IT Throws</p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3 class="feature-title">Coding Questions</h3>
+                    <div class="feature-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <p class="feature-description">Practice real-world coding problems from top tech companies</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title">Problem Solving</h3>
+                    <div class="feature-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <p class="feature-description">Develop logical reasoning and analytical skills</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title">Wide Range of Topics</h3>
+                    <div class="feature-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <p class="feature-description">Master key concepts with targeted exercises</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title">Tech/HR Questions</h3>
+                    <div class="feature-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <p class="feature-description">Learn efficient solutions and optimization techniques</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title">Timed Mock Tests</h3>
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <p class="feature-description">Practice Mock Tests with time and difficulty-level</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title">Detailed Analytics</h3>
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <p class="feature-description">Monitor improvement with detailed performance analytics</p>
+                </div>
+            </div>
+
+            <h2 class="section-heading" id="whatUsersSay">What Users Say</h2>
+            <p class="section-subheading">Hear from users who aced their tests using our platform</p>
+            <div class="testimonials-section" id="testimonialsSection">
+                <div class="testimonial-carousel">
+                    <div class="testimonial-container" id="testimonialContainer">
+                        <div class="testimonial-card">
+                            <div class="testimonial-author">
+                                <div class="author-avatar">
+                                    <img src="Kiran.jpg" alt="Kiran Nayak">
+                                </div>
+                                <div class="author-info">
+                                    <h4>Kiran Nayak</h4>
+                                    <p>MCA Student</p>
+                                </div>
+                            </div>
+                            <div class="testimonial-content">
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p class="testimonial-text">"CrackIT's practice questions helped me prepare for and crack the MET exam, and I secured a seat for my master's program."</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="testimonial-author">
+                                <div class="author-avatar">
+                                    <img src="Vimal.jpg" alt="Vimal U Acharya">
+                                </div>
+                                <div class="author-info">
+                                    <h4>Vimal U Acharya</h4>
+                                    <p>Analyst Trainee & Mtech Student</p>
+                                </div>
+                            </div>
+                            <div class="testimonial-content">
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p class="testimonial-text">"I had been struggling with General aptitude until I found CrackIT. The step-by-step explanations and variety of practice questions helped me to crack the interview at WIPRO"</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="testimonial-author">
+                                <div class="author-avatar">
+                                    <img src="Pari.jpg" alt="Pavithra S Poojary">
+                                </div>
+                                <div class="author-info">
+                                    <h4>Pavithra S Poojary</h4>
+                                    <p>Associate Analyst at Deloitte</p>
+                                </div>
+                            </div>
+                            <div class="testimonial-content">
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <p class="testimonial-text">"The Technical and HR interview Q&A's on CrackIT are very helpful, they helped me to get placed in Deloitte and Cognizant"</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="testimonial-author">
+                                <div class="author-avatar">
+                                    <img src="Suhan.jpg" alt="Suhan D Karkera">
+                                </div>
+                                <div class="author-info">
+                                    <h4>Suhan D Karkera</h4>
+                                    <p>MSC Student</p>
+                                </div>
+                            </div>
+                            <div class="testimonial-content">
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p class="testimonial-text">"What sets CrackIT apart is the Mocktests and the detailed analytics with the correct solution for the wrong answers which helped me to clear my aptitude round at LTI & MindTree"</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="testimonial-author">
+                                <div class="author-avatar">
+                                    <img src="Vrushali.jpg" alt="Vrushali Sanil">
+                                </div>
+                                <div class="author-info">
+                                    <h4>Vrushali Sanil</h4>
+                                    <p>Analyst Trainee & MSc Student</p>
+                                </div>
+                            </div>
+                            <div class="testimonial-content">
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p class="testimonial-text">"The verbal reasoning section on CrackIT is outstanding. It improved my comprehension skills significantly, which proved invaluable during my company interviews. The platform is intuitive and engaging."</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-indicators" id="indicators"></div>
+                </div>
+            </div>
+            <div class="cta-section">
+                <h2 class="cta-title" id="ctaTitle">Ready to crack it with CrackIT?</h2>
+                <p class="cta-description">Join thousands of IT students and professionals who have successfully passed their exams with our comprehensive practice platform.</p>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="window.location.href='Tech and HR Questions.html'">
+                        Technical interview Topics <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.location.href='Tech and HR Questions.html'">
+                        Tech/HR Questions
+                    </button>
+                </div>
+                <div class="cta-badge">
+                    <i class="fas fa-award fa-4x"></i>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="Topics.html">Practice Area</a></li>
+                        <li><a href="Topics.html#testarea">Mock Test Area</a></li>
+                        <li><a href="#">Tech/HR Interview Questions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="Company and Legal.html#company-section">About Us</a></li>
+                        <li><a href="Company and Legal.html#contact-us-section">Contact Us</a></li>
+                        <li><a href="Company and Legal.html#future-scope-section">Future Scope</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="Company and Legal.html#terms-of-service-section">Terms of Service</a></li>
+                        <li><a href="Company and Legal.html#privacy-policy-section">Privacy Policy</a></li>
+                        <li><a href="Company and Legal.html#feedback-section">Your Feedback</a></li>
+                    </ul>
+                </div>
+            </footer>
+
+            <div class="copyright">
+                <p>© 2025 CrackIT. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Elements
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const toggleArrow = sidebarToggle.querySelector('.toggle-arrow');
+            const sidebar = document.querySelector('.sidebar');
+            const sidebarHeader = document.querySelector('.sidebar-header');
+            const mainContent = document.querySelector('.main-content');
+            const themeToggle = document.getElementById('themeToggle');
+            const sidebarItems = document.querySelectorAll('.sidebar-item');
+
+            // Load saved theme
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.body.classList.add(savedTheme + '-theme');
+
+            // Sidebar toggle functionality
+            if (sidebarToggle && sidebar && sidebarHeader) {
+                sidebarToggle.addEventListener('click', function () {
+                    sidebar.classList.toggle('active');
+                    toggleArrow.textContent = sidebar.classList.contains('active') ? '❮' : '❯';
+                });
+
+                // Close sidebar when clicking outside
+                document.addEventListener('click', function (event) {
+                    const isClickInsideSidebar = sidebar.contains(event.target);
+                    const isClickOnToggle = sidebarToggle.contains(event.target);
+                    const isClickOnSidebarItem = Array.from(sidebarItems).some(item => item.contains(event.target));
+                    if (!isClickInsideSidebar && !isClickOnToggle && !isClickOnSidebarItem) {
+                        sidebar.classList.remove('active');
+                        toggleArrow.textContent = '❯';
+                    }
+                });
+            }
+
+            // Theme toggle functionality
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function () {
+                    const body = document.body;
+                    const newTheme = body.classList.contains('light-theme') ? 'dark' : 'light';
+                    body.classList.remove('light-theme', 'dark-theme');
+                    body.classList.add(newTheme + '-theme');
+                    localStorage.setItem('theme', newTheme);
+                });
+            }
+
+            // Sidebar item click handling
+            sidebarItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    sidebarItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Login/Register navigation
+            const loginRegisterLink = document.getElementById('loginRegisterLink');
+            loginRegisterLink.addEventListener('click', () => {
+                window.location.href = 'login and register.html';
+            });
+
+            // Start Practicing navigation
+            const startPracticingBtn = document.querySelector('.btn.btn-primary');
+            startPracticingBtn.addEventListener('click', () => {
+                window.location.href = 'Topics.html';
+            });
+
+            // Testimonial Carousel functionality
+            const testimonialContainer = document.getElementById('testimonialContainer');
+            const indicatorsContainer = document.getElementById('indicators');
+            const testimonials = document.querySelectorAll('.testimonial-card');
+            let currentIndex = 0;
+            let intervalId;
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            if (testimonialContainer && indicatorsContainer && testimonials.length > 0) {
+                testimonials.forEach((_, index) => {
+                    const indicator = document.createElement('div');
+                    indicator.classList.add('indicator');
+                    if (index === 0) indicator.classList.add('active');
+                    indicator.addEventListener('click', () => goToSlide(index));
+                    indicatorsContainer.appendChild(indicator);
+                });
+
+                function goToSlide(index) {
+                    currentIndex = index;
+                    testimonialContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+                    document.querySelectorAll('.indicator').forEach((indicator, i) => {
+                        indicator.classList.toggle('active', i === currentIndex);
+                    });
+                }
+
+                function autoRotate() {
+                    currentIndex = (currentIndex + 1) % testimonials.length;
+                    goToSlide(currentIndex);
+                }
+
+                function startRotation() {
+                    stopRotation();
+                    intervalId = setInterval(autoRotate, 4000);
+                }
+
+                function stopRotation() {
+                    if (intervalId) {
+                        clearInterval(intervalId);
+                        intervalId = null;
+                    }
+                }
+
+                startRotation();
+
+                testimonialContainer.addEventListener('mouseenter', stopRotation);
+                testimonialContainer.addEventListener('mouseleave', startRotation);
+
+                // Touch swipe support
+                testimonialContainer.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                });
+
+                testimonialContainer.addEventListener('touchend', (e) => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    if (touchStartX - touchEndX > 50) {
+                        // Swipe left
+                        currentIndex = Math.min(currentIndex + 1, testimonials.length - 1);
+                        goToSlide(currentIndex);
+                    } else if (touchEndX - touchStartX > 50) {
+                        // Swipe right
+                        currentIndex = Math.max(currentIndex - 1, 0);
+                        goToSlide(currentIndex);
+                    }
+                });
+            }
+
+            // Navigation to sections
+            const homeIcon = document.querySelector('.sidebar-item.active');
+            const heroBadge = document.getElementById('heroBadge');
+            homeIcon.addEventListener('click', (event) => {
+                event.preventDefault();
+                heroBadge.scrollIntoView({ behavior: 'smooth' });
+            });
+
+            const testimonialsLink = document.querySelector('.sidebar-item:nth-child(3)');
+            const whatUsersSay = document.getElementById('whatUsersSay');
+            testimonialsLink.addEventListener('click', (event) => {
+                event.preventDefault();
+                whatUsersSay.scrollIntoView({ behavior: 'smooth' });
+            });
+
+            const topicsLink = document.querySelector('.sidebar-item:nth-child(4)');
+            const specializedPracticeAreas = document.getElementById('specializedPracticeAreas');
+            if (topicsLink && specializedPracticeAreas) {
+                topicsLink.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    specializedPracticeAreas.scrollIntoView({ behavior: 'smooth' });
+                });
+            }
+
+            const technicalHrLink = document.querySelector('.sidebar-item:nth-child(6)');
+            const ctaTitle = document.getElementById('ctaTitle');
+            technicalHrLink.addEventListener('click', (event) => {
+                event.preventDefault();
+                ctaTitle.scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // Specialty cards navigation
+            const specialtyCards = document.querySelectorAll('.specialty-card');
+            const practiceButtons = document.querySelectorAll('.btn-link');
+            specialtyCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    window.location.href = 'Topics.html';
+                });
+            });
+            practiceButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    window.location.href = 'Topics.html';
+                });
+            });
+
+            // Mock test navigation
+            const mockTestBtn = document.querySelector('.btn.btn-secondary');
+            if (mockTestBtn) {
+                mockTestBtn.addEventListener('click', () => {
+                    window.location.href = 'Topics.html#testarea';
+                });
+            }
+
+            const mocktestSidebarItem = document.querySelector('.sidebar-item i.bx-clipboard').parentElement;
+            mocktestSidebarItem.addEventListener('click', () => {
+                window.location.href = 'Topics.html#testarea';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CrackIT - Admin Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --accent-color: #2ecc71;
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --hover-bg: #2a2a2a;
+            --input-bg: #2a2a2a;
+            --border-color: #333;
+            --error-color: #ff6b3b;
+            --success-color: #2ecc71;
+            --button-bg: #2a2a2a;
+            --shadow: rgba(0, 0, 0, 0.2);
+            --glow-color-start: #2ecc71;
+            --glow-color-end: #00c853;
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f9f9f9;
+            --card-bg: #ffffff;
+            --accent-color: #0288D1;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --hover-bg: #e0e0e0;
+            --input-bg: #f5f5f5;
+            --border-color: #e0e0e0;
+            --error-color: #d32f2f;
+            --success-color: #4CAF50;
+            --button-bg: #e0e0e0;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --glow-color-start: #0288D1;
+            --glow-color-end: #0277BD;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            overflow-y: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            flex-direction: row;
+            box-shadow: 0 4px 20px var(--shadow);
+            border-radius: 12px;
+            overflow: hidden;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .form-container {
+            background-color: var(--card-bg);
+            width: 55%;
+            padding: 30px 20px;
+            position: relative;
+            z-index: 1;
+            border-radius: 12px 0 0 12px;
+            max-height: calc(100vh - 20px);
+            overflow-y: auto;
+        }
+
+        .glow-top-left,
+        .glow-bottom-right {
+            position: absolute;
+            width: 25px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--glow-color-start), transparent);
+            z-index: 2;
+            pointer-events: none;
+            animation: glowPulse 2s ease-in-out infinite;
+        }
+
+        .glow-top-left {
+            top: 0;
+            left: 0;
+            animation: moveBorderClockwise 6s linear infinite, glowPulse 2s ease-in-out infinite;
+        }
+
+        .glow-bottom-right {
+            bottom: 0;
+            right: 0;
+            animation: moveBorderCounterClockwise 6s linear infinite, glowPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0% { box-shadow: 0 0 4px var(--glow-color-start), 0 0 8px var(--glow-color-start); }
+            50% { box-shadow: 0 0 8px var(--glow-color-end), 0 0 16px var(--glow-color-end); }
+            100% { box-shadow: 0 0 4px var(--glow-color-start), 0 0 8px var(--glow-color-start); }
+        }
+
+        @keyframes moveBorderClockwise {
+            0% { top: 0; left: 0; width: 25px; height: 3px; }
+            24% { top: 0; left: calc(100% - 25px); width: 25px; height: 3px; }
+            25% { top: 0; left: calc(100% - 3px); width: 3px; height: 25px; }
+            49% { top: calc(100% - 25px); left: calc(100% - 3px); width: 3px; height: 25px; }
+            50% { top: calc(100% - 3px); left: calc(100% - 3px); width: 25px; height: 3px; }
+            74% { top: calc(100% - 3px); left: 0; width: 25px; height: 3px; }
+            75% { top: calc(100% - 3px); left: 0; width: 3px; height: 25px; }
+            99% { top: 0; left: 0; width: 3px; height: 25px; }
+            100% { top: 0; left: 0; width: 25px; height: 3px; }
+        }
+
+        @keyframes moveBorderCounterClockwise {
+            0% { bottom: 0; right: 0; width: 25px; height: 3px; }
+            24% { bottom: 0; right: calc(100% - 25px); width: 25px; height: 3px; }
+            25% { bottom: 0; right: calc(100% - 3px); width: 3px; height: 25px; }
+            49% { bottom: calc(100% - 25px); right: calc(100% - 3px); width: 3px; height: 25px; }
+            50% { bottom: calc(100% - 3px); right: calc(100% - 3px); width: 25px; height: 3px; }
+            74% { bottom: calc(100% - 3px); right: 0; width: 25px; height: 3px; }
+            75% { bottom: calc(100% - 3px); right: 0; width: 3px; height: 25px; }
+            99% { bottom: 0; right: 0; width: 3px; height: 25px; }
+            100% { bottom: 0; right: 0; width: 25px; height: 3px; }
+        }
+
+        .glow-top-left.moving-to-button,
+        .glow-bottom-right.moving-to-button {
+            animation: none;
+            transition: all 0.4s ease;
+            opacity: 0;
+        }
+
+        .banner {
+            background-color: var(--card-bg);
+            width: 45%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(18, 18, 18, 0.7), rgba(0, 255, 0, 0.5));
+            z-index: 0;
+        }
+
+        [data-theme="light"] .banner::before {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(2, 136, 209, 0.3));
+        }
+
+        .banner-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            width: 100%;
+            height: 100%;
+        }
+
+        .banner h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .banner i {
+            font-size: 60px;
+            color: var(--accent-color);
+        }
+
+        .auth-form h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--accent-color);
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .theme-toggle-container {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .theme-toggle {
+            background: var(--button-bg);
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 2px 4px var(--shadow);
+        }
+
+        .theme-toggle i {
+            font-size: 16px;
+            color: var(--text-primary);
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        .input-group input {
+            width: 100%;
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 12px 12px 12px 36px;
+            color: var(--text-primary);
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 4px var(--glow-color-start);
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 10px;
+            top: calc(50% + 9px);
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .input-group .error-message {
+            position: absolute;
+            bottom: -18px;
+            left: 0;
+            font-size: 11px;
+            color: var(--error-color);
+        }
+
+        .btn {
+            width: 100%;
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            border: none;
+            border-radius: 6px;
+            padding: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-bottom: 15px;
+        }
+
+        .btn:hover {
+            background-color: #27ae60;
+            transform: translateY(-2px);
+        }
+
+        [data-theme="light"] .btn:hover {
+            background-color: #0277BD;
+        }
+
+        .btn:disabled {
+            background-color: var(--text-secondary);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn.loading .spinner {
+            animation: spin 1s linear infinite, glowMerge 0.5s ease-in-out forwards;
+        }
+
+        @keyframes glowMerge {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                max-width: 100%;
+                max-height: calc(100vh - 20px);
+                border-radius: 8px;
+            }
+
+            .form-container {
+                width: 100%;
+                padding: 20px 15px;
+                border-radius: 8px;
+                max-height: calc(100vh - 20px);
+            }
+
+            .banner {
+                display: none;
+            }
+
+            .auth-form h1 {
+                font-size: 24px;
+            }
+
+            .subtitle {
+                font-size: 13px;
+            }
+
+            .input-group input {
+                padding: 10px 10px 10px 32px;
+                font-size: 13px;
+            }
+
+            .input-group i {
+                font-size: 13px;
+                left: 8px;
+            }
+
+            .btn {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            .theme-toggle {
+                width: 26px;
+                height: 26px;
+            }
+
+            .theme-toggle i {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 5px;
+            }
+
+            .container {
+                border-radius: 6px;
+            }
+
+            .form-container {
+                padding: 15px 10px;
+            }
+
+            .auth-form h1 {
+                font-size: 20px;
+            }
+
+            .subtitle {
+                font-size: 12px;
+                margin-bottom: 15px;
+            }
+
+            .input-group {
+                margin-bottom: 12px;
+            }
+
+            .input-group label {
+                font-size: 12px;
+                margin-bottom: 5px;
+            }
+
+            .input-group input {
+                padding: 8px 8px 8px 30px;
+                font-size: 12px;
+            }
+
+            .input-group i {
+                font-size: 12px;
+                left: 8px;
+            }
+
+            .btn {
+                padding: 8px;
+                font-size: 13px;
+            }
+
+            .glow-top-left,
+            .glow-bottom-right {
+                width: 20px;
+                height: 2px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <div class="glow-top-left"></div>
+            <div class="glow-bottom-right"></div>
+            <div class="theme-toggle-container">
+                <button class="theme-toggle" id="theme-toggle" title="Toggle Theme">
+                    <i class='bx bx-moon'></i>
+                </button>
+            </div>
+            <form id="loginForm" class="auth-form">
+                <h1>Admin Login</h1>
+                <p class="subtitle">Access the CrackIT admin panel</p>
+                <div class="input-group">
+                    <label for="admin-email">Email</label>
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="admin-email" required placeholder="Enter your email" aria-required="true">
+                    <div class="error-message" id="adminEmailError"></div>
+                </div>
+                <div class="input-group">
+                    <label for="admin-password">Password</label>
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="admin-password" required placeholder="Enter your password" aria-required="true">
+                    <div class="error-message" id="adminPasswordError"></div>
+                </div>
+                <button type="submit" class="btn" id="loginBtn" data-text="Login">Login</button>
+            </form>
+        </div>
+        <div class="banner">
+            <div class="banner-content">
+                <i class='bx bxs-graduation'></i>
+                <h2>CrackIT Admin</h2>
+                <p>Manage your educational content with ease</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyA1HsQrf8wFv7wX1XrSPXAgaLiObbcdKsY",
+            authDomain: "crackit-7dfeb.firebaseapp.com",
+            projectId: "crackit-7dfeb",
+            storageBucket: "crackit-7dfeb.firebasestorage.app",
+            messagingSenderId: "939792436450",
+            appId: "1:939792436450:web:5e3345e874f95a1a1ba2bb"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        const elements = {
+            loginForm: document.getElementById('loginForm'),
+            adminEmail: document.getElementById('admin-email'),
+            adminPassword: document.getElementById('admin-password'),
+            loginBtn: document.getElementById('loginBtn'),
+            adminEmailError: document.getElementById('adminEmailError'),
+            adminPasswordError: document.getElementById('adminPasswordError'),
+            themeToggle: document.getElementById('theme-toggle'),
+            glowTopLeft: document.querySelector('.glow-top-left'),
+            glowBottomRight: document.querySelector('.glow-bottom-right')
+        };
+
+        const utils = {
+            showError: (element, message) => {
+                element.textContent = message;
+            },
+            clearErrors: () => {
+                document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+            },
+            setLoading: (button, isLoading, text = 'Processing...') => {
+                button.disabled = isLoading;
+                button.innerHTML = isLoading ? `<i class="fas fa-spinner spinner"></i> ${text}` : button.dataset.text;
+                if (isLoading) {
+                    button.classList.add('loading');
+                    const buttonRect = button.getBoundingClientRect();
+                    const formRect = elements.loginForm.getBoundingClientRect();
+                    const targetX = buttonRect.left - formRect.left + buttonRect.width / 2 - 12;
+                    const targetY = buttonRect.top - formRect.top + buttonRect.height / 2 - 1.5;
+                    elements.glowTopLeft.classList.add('moving-to-button');
+                    elements.glowBottomRight.classList.add('moving-to-button');
+                    elements.glowTopLeft.style.left = `${targetX}px`;
+                    elements.glowTopLeft.style.top = `${targetY}px`;
+                    elements.glowTopLeft.style.width = '25px';
+                    elements.glowTopLeft.style.height = '3px';
+                    elements.glowBottomRight.style.right = `unset`;
+                    elements.glowBottomRight.style.bottom = `unset`;
+                    elements.glowBottomRight.style.left = `${targetX}px`;
+                    elements.glowBottomRight.style.top = `${targetY}px`;
+                    elements.glowBottomRight.style.width = '25px';
+                    elements.glowBottomRight.style.height = '3px';
+                } else {
+                    elements.glowTopLeft.classList.remove('moving-to-button');
+                    elements.glowBottomRight.classList.remove('moving-to-button');
+                    elements.glowTopLeft.style.cssText = '';
+                    elements.glowBottomRight.style.cssText = '';
+                }
+            },
+            validateEmail: (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email),
+            validatePassword: (password) => password.length >= 6,
+            getAuthErrorMessage: (code) => {
+                const messages = {
+                    'auth/email-already-in-use': 'Email already in use',
+                    'auth/invalid-email': 'Invalid email address',
+                    'auth/weak-password': 'Password too weak',
+                    'auth/user-not-found': 'No account found',
+                    'auth/wrong-password': 'Incorrect password',
+                    'auth/too-many-requests': 'Too many attempts. Try again later.'
+                };
+                return messages[code] || 'An error occurred';
+            }
+        };
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            elements.themeToggle.querySelector('i').classList.toggle('bx-moon', theme === 'dark');
+            elements.themeToggle.querySelector('i').classList.toggle('bx-sun', theme === 'light');
+            localStorage.setItem('theme', theme);
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+            setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+        }
+
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        setTheme(savedTheme);
+
+        elements.themeToggle.addEventListener('click', toggleTheme);
+
+        async function handleLogin(e) {
+            e.preventDefault();
+            utils.clearErrors();
+            const email = elements.adminEmail.value.trim();
+            const password = elements.adminPassword.value;
+
+            if (!utils.validateEmail(email)) {
+                utils.showError(elements.adminEmailError, 'Invalid email address');
+                return;
+            }
+            if (!utils.validatePassword(password)) {
+                utils.showError(elements.adminPasswordError, 'Password must be at least 6 characters');
+                return;
+            }
+
+            utils.setLoading(elements.loginBtn, true, 'Logging in...');
+            try {
+                const userCredential = await auth.signInWithEmailAndPassword(email, password);
+                if (!userCredential.user.emailVerified) {
+                    await userCredential.user.sendEmailVerification();
+                    utils.showError(elements.adminEmailError, 'Please verify your email');
+                    utils.setLoading(elements.loginBtn, false);
+                    return;
+                }
+                window.location.href = 'admin-panel.html';
+            } catch (error) {
+                utils.setLoading(elements.loginBtn, false);
+                const errorMessage = utils.getAuthErrorMessage(error.code);
+                if (error.code === 'auth/wrong-password') {
+                    utils.showError(elements.adminPasswordError, errorMessage);
+                } else {
+                    utils.showError(elements.adminEmailError, errorMessage);
+                }
+            }
+        }
+
+        function limitContentHeight() {
+            const formContainer = document.querySelector('.form-container');
+            formContainer.style.maxHeight = `${window.innerHeight - 20}px`;
+            formContainer.style.overflowY = 'auto';
+        }
+
+        elements.loginForm.addEventListener('submit', handleLogin);
+        window.addEventListener('resize', limitContentHeight);
+        document.addEventListener('DOMContentLoaded', limitContentHeight);
+    </script>
+</body>
+</html>

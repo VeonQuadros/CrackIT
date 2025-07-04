@@ -1,0 +1,1920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CrackIT Practice & Mocktest</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        /* Global styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            background-color: #0f0f0f;
+            color: #f0f0f0;
+            min-height: 100vh;
+            display: flex;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Light Theme */
+        body.light-theme {
+            background-color: #F5F7FA;
+            color: #333;
+        }
+
+        body.light-theme .sidebar {
+            background-color: #E6ECF0;
+            border-right: 1px solid #D3DCE6;
+        }
+
+        body.light-theme .sidebar-header {
+            border-bottom: 1px solid #D3DCE6;
+        }
+
+        body.light-theme .sidebar-item {
+            color: #666;
+        }
+
+        body.light-theme .sidebar-item:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+            color: #333;
+        }
+
+        body.light-theme .sidebar-item:hover i,
+        body.light-theme .sidebar-item:hover span {
+            color: #4A90E2;
+        }
+
+        body.light-theme .sidebar-item.active {
+            color: #333;
+        }
+
+        body.light-theme .sidebar-header,
+        body.light-theme .sidebar-header i {
+            color: #0EA5E9;
+        }
+
+        body.light-theme .main-content {
+            background-color: #F5F7FA;
+        }
+
+        body.light-theme .page-title,
+        body.light-theme .section-title {
+            color: #333;
+        }
+
+        body.light-theme .section-description {
+            color: #666;
+        }
+
+        body.light-theme .topic-card,
+        body.light-theme .test-card,
+        body.light-theme .test-info-banner {
+            background: linear-gradient(145deg, #ffffff, #f5f5f5);
+            border: 2px solid #D3DCE6;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-theme .topic-card:hover,
+        body.light-theme .test-card:hover {
+            border-color: #0EA5E9;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        body.light-theme .topic-title,
+        body.light-theme .test-title,
+        body.light-theme .subtopics-title,
+        body.light-theme .info-content h3 {
+            color: #333;
+        }
+
+        body.light-theme .topic-description,
+        body.light-theme .test-description,
+        body.light-theme .info-content p {
+            color: #666;
+        }
+
+        body.light-theme .practice-btn,
+        body.light-theme .subtopic-item span,
+        body.light-theme .test-meta,
+        body.light-theme .stat-label {
+            color: #666;
+        }
+
+        body.light-theme .practice-btn:hover,
+        body.light-theme .subtopic-item i,
+        body.light-theme .back-btn:hover,
+        body.light-theme .info-icon {
+            color: #4A90E2;
+        }
+
+        body.light-theme .subtopics-panel {
+            background-color: rgba(255, 255, 255, 0.98);
+        }
+
+        body.light-theme .subtopic-item {
+            border-bottom: 1px solid #D3DCE6;
+        }
+
+        body.light-theme .test-details {
+            background-color: #F5F7FA;
+            border: 1px solid #D3DCE6;
+        }
+
+        body.light-theme .test-card:hover .test-details {
+            border-color: #0EA5E9;
+        }
+
+        body.light-theme .stat-value {
+            color: #333;
+        }
+
+        body.light-theme .difficulty-meter {
+            background-color: #D3DCE6;
+        }
+
+        body.light-theme .difficulty-level.low {
+            background-color: #22c55e;
+        }
+
+        body.light-theme .difficulty-level.medium {
+            background-color: #FFCA28;
+        }
+
+        body.light-theme .difficulty-level.high {
+            background-color: #EF5350;
+        }
+
+        body.light-theme .start-test-btn {
+            background: linear-gradient(90deg, #0EA5E9, #0288D1);
+            color: #FFFFFF;
+        }
+
+        body.light-theme .start-test-btn:hover {
+            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.4);
+        }
+
+        body.light-theme .footer {
+            background-color: #F5F7FA;
+            border-top: 1px solid #D3DCE6;
+        }
+
+        body.light-theme .footer-section h3 {
+            color: #333;
+        }
+
+        body.light-theme .footer-section ul li a {
+            color: #666;
+        }
+
+        body.light-theme .footer-section ul li a:hover {
+            color: #0EA5E9;
+        }
+
+        body.light-theme .copyright {
+            border-top: 1px solid #D3DCE6;
+            color: #666;
+        }
+
+        /* Sidebar container */
+        .sidebar {
+            width: 50px;
+            background-color: #0a0a0a;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: fixed;
+            height: 100vh;
+            transition: width 0.3s ease;
+            padding: 20px 0;
+            border-right: 1px solid #222;
+            left: 0;
+            top: 0;
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+        /* Hover effect for sidebar on larger screens */
+        @media (min-width: 769px) {
+            .sidebar:hover {
+                width: 200px;
+            }
+
+            .sidebar:hover .sidebar-item span,
+            .sidebar:hover .sidebar-header .sidebar-title {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            .sidebar:hover .sidebar-header {
+                opacity: 1;
+            }
+
+            /* Shift main content on hover */
+            .sidebar:hover + .main-content {
+                margin-left: 200px;
+            }
+        }
+
+        /* Sidebar Header */
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 20px 0;
+            font-size: 20px;
+            font-weight: bold;
+            color: #22c55e;
+            border-bottom: 1px solid #222;
+            margin-bottom: 20px;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .sidebar-header i {
+            font-size: 40px;
+            color: #22c55e;
+            margin-bottom: 10px;
+        }
+
+        .sidebar-header .sidebar-title {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar.active .sidebar-header,
+        .sidebar:hover .sidebar-header {
+            opacity: 1;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0 12px 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #888;
+        }
+
+        .sidebar-item i {
+            font-size: 20px;
+            min-width: 24px;
+            margin-right: 12px;
+        }
+
+        .sidebar-item span {
+            display: inline;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .sidebar.active .sidebar-item span,
+        .sidebar.active .sidebar-header .sidebar-title {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .sidebar.active {
+            width: 200px;
+        }
+
+        .sidebar-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .sidebar-item:hover i,
+        .sidebar-item:hover span {
+            color: #22c55e;
+        }
+
+        .sidebar-item.active {
+            background-color: transparent;
+            border-left: none;
+            color: #ffffff;
+        }
+
+        .sidebar-top, .sidebar-bottom {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-spacer {
+            flex-grow: 1;
+        }
+
+        .sidebar-toggle {
+            display: none;
+            position: fixed;
+            top: 45px;
+            left: 9px;
+            background-color: rgb(10, 10, 10);
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 50%;
+            padding: 6px;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            font-size: 16px;
+            font-weight: bold;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+            opacity: 0.9;
+            z-index: 1100;
+            display: flex;
+        }
+
+        body.light-theme .sidebar-toggle {
+            background-color: rgb(200, 200, 200);
+            color: #4A90E2;
+            border: 1px solid rgba(74, 144, 226, 0.3);
+        }
+
+        .sidebar-toggle:hover {
+            transform: scale(1.1);
+            opacity: 1;
+            background-color: #1a1a1a;
+        }
+
+        body.light-theme .sidebar-toggle:hover {
+            background-color: #D3DCE6;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar-toggle {
+                display: flex;
+            }
+
+            .sidebar.active + .main-content {
+                margin-left: 0;
+            }
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            width: 100%;
+            margin-left: 50px; /* Ensure content starts after the collapsed sidebar */
+            transition: margin-left 0.3s ease;
+        }
+
+        .page-title {
+            font-size: 28px;
+            margin-bottom: 40px;
+            color: #f0f0f0;
+            font-weight: 600;
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .topic-card {
+            background: linear-gradient(145deg, #1a1a1a, #222);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            height: 280px;
+            display: flex;
+            flex-direction: column;
+            border: 2px solid #333;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .topic-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+            border-color: #22c55e;
+        }
+
+        .topic-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+        }
+
+        .topic-icon.red { background-color: rgba(239, 68, 68, 0.3); color: #ef4444; }
+        .topic-icon.purple { background-color: rgba(124, 58, 237, 0.3); color: #7c3aed; }
+        .topic-icon.orange { background-color: rgba(249, 115, 22, 0.3); color: #f97316; }
+        .topic-icon.blue { background-color: rgba(14, 165, 233, 0.3); color: #0ea5e9; }
+        .topic-icon.green { background-color: rgba(34, 197, 94, 0.3); color: #22c55e; }
+        .topic-icon.tomato { background-color: rgba(255, 99, 71, 0.3); color: tomato; }
+
+        body.light-theme .topic-icon.red { background-color: rgba(239, 68, 68, 0.2); color: #ef4444; }
+        body.light-theme .topic-icon.purple { background-color: rgba(124, 58, 237, 0.2); color: #7c3aed; }
+        body.light-theme .topic-icon.orange { background-color: rgba(249, 115, 22, 0.2); color: #f97316; }
+        body.light-theme .topic-icon.blue { background-color: rgba(14, 165, 233, 0.2); color: #0ea5e9; }
+        body.light-theme .topic-icon.green { background-color: rgba(34, 197, 94, 0.2); color: #22c55e; }
+        body.light-theme .topic-icon.tomato { background-color: rgba(255, 99, 71, 0.2); color: tomato; }
+
+        .topic-icon i {
+            font-size: 24px;
+        }
+
+        .topic-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: white;
+            text-align: center;
+        }
+
+        .topic-description {
+            font-size: 14px;
+            color: #aaa;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .practice-btn {
+            display: inline-flex;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 500;
+            color: #888;
+            transition: all 0.3s ease;
+            margin-top: auto;
+            text-decoration: none;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .practice-btn i {
+            margin-left: 6px;
+        }
+
+        .subtopics-panel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(26, 26, 26, 0.98);
+            display: flex;
+            flex-direction: column;
+            padding: 24px;
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            transition: all 0.3s ease;
+            border-radius: 12px;
+        }
+
+        .topic-card:hover .subtopics-panel {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .subtopics-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: white;
+        }
+
+        .subtopics-list {
+            list-style: none;
+            margin-top: 8px;
+            flex-grow: 1;
+        }
+
+        .subtopic-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #333;
+            transition: all 0.2s ease;
+        }
+
+        .subtopic-item:last-child {
+            border-bottom: none;
+        }
+
+        .subtopic-item:hover {
+            transform: translateX(5px);
+        }
+
+        .subtopic-item i {
+            font-size: 16px;
+            margin-right: 10px;
+            color: #22c55e;
+        }
+
+        .subtopic-item span {
+            font-size: 14px;
+            color: #ddd;
+        }
+
+        .subtopic-item a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #888;
+            margin-top: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            color: #22c55e;
+        }
+
+        .back-btn i {
+            margin-right: 6px;
+        }
+
+        .test-area {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid #333;
+        }
+
+        .section-title {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #f0f0f0;
+            font-weight: 600;
+        }
+
+        .section-description {
+            color: #aaa;
+            font-size: 16px;
+            margin-bottom: 40px;
+            max-width: 800px;
+        }
+
+        .tests-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .test-card {
+            background: linear-gradient(145deg, #1a1a1a, #222);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            position: relative;
+            border: 2px solid #333;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .test-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+            border-color: #22c55e;
+        }
+
+        .test-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .test-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .test-card:nth-child(-n+3) .test-icon {
+            background-color: rgba(34, 197, 94, 0.3);
+            color: #16a34a;
+        }
+
+        .test-card:nth-child(n+4):nth-child(-n+6) .test-icon {
+            background-color: rgba(14, 165, 233, 0.3);
+            color: #0ea5e9;
+        }
+
+        .test-card:nth-child(n+7):nth-child(-n+9) .test-icon {
+            background-color: rgba(124, 58, 237, 0.3);
+            color: #7c3aed;
+        }
+
+        .test-card:nth-child(n+10) .test-icon {
+            background-color: rgba(249, 115, 22, 0.3);
+            color: #f97316;
+        }
+
+        body.light-theme .test-card:nth-child(-n+3) .test-icon {
+            background-color: rgba(34, 197, 94, 0.2);
+            color: #16a34a;
+        }
+
+        body.light-theme .test-card:nth-child(n+4):nth-child(-n+6) .test-icon {
+            background-color: rgba(14, 165, 233, 0.2);
+            color: #0ea5e9;
+        }
+
+        body.light-theme .test-card:nth-child(n+7):nth-child(-n+9) .test-icon {
+            background-color: rgba(124, 58, 237, 0.2);
+            color: #7c3aed;
+        }
+
+        body.light-theme .test-card:nth-child(n+10) .test-icon {
+            background-color: rgba(249, 115, 22, 0.2);
+            color: #f97316;
+        }
+
+        .test-icon i {
+            font-size: 24px;
+        }
+
+        .test-info {
+            flex: 1;
+        }
+
+        .test-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: white;
+            letter-spacing: 0.5px;
+        }
+
+        .test-description {
+            font-size: 14px;
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .test-details {
+            background-color: #111;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+
+        .test-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .stat-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #f0f0f0;
+        }
+
+        .test-meta {
+            font-size: 14px;
+            color: #888;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .test-meta i {
+            font-size: 16px;
+            margin-right: 6px;
+        }
+
+        .difficulty-meter {
+            height: 6px;
+            background-color: #333;
+            border-radius: 3px;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .difficulty-level {
+            height: 100%;
+            display: block;
+        }
+
+        .difficulty-level.low {
+            width: 33%;
+            background-color: #22c55e;
+        }
+
+        .difficulty-level.medium {
+            width: 66%;
+            background-color: #eab308;
+        }
+
+        .difficulty-level.high {
+            width: 85%;
+            background-color: #f97316;
+        }
+
+        .start-test-btn {
+            background: linear-gradient(90deg, #22c55e, #16a34a);
+            color: #0a0a0a;
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: auto;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .start-test-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .start-test-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .start-test-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+        }
+
+        .test-info-banner {
+            background: linear-gradient(145deg, #1a1a1a, #222);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            align-items: flex-start;
+            border: 2px solid #333;
+            margin-top: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .info-icon {
+            font-size: 30px;
+            color: #22c55e;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .info-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .info-content p {
+            font-size: 14px;
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .info-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .footer {
+            background-color: #0f0f0f;
+            padding: 60px 0 20px;
+            margin-top: 60px;
+            border-top: 1px solid #222;
+            width: 100%;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            padding: 0 20px;
+        }
+
+        .footer-section h3 {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 16px;
+        }
+
+        .footer-section ul li a {
+            color: #888;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: #22c55e;
+        }
+
+        .copyright {
+            text-align: center;
+            padding: 20px 0 0;
+            margin-top: 40px;
+            border-top: 1px solid #222;
+            color: #888;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 50px;
+                transform: translateX(0);
+            }
+
+            .sidebar.active {
+                width: 200px;
+            }
+
+            .main-content {
+                padding: 20px;
+                margin-left: 50px; /* Ensure content starts after sidebar even on mobile */
+            }
+
+            .sidebar-item span {
+                opacity: 0;
+            }
+
+            .sidebar.active .sidebar-item span {
+                opacity: 1;
+            }
+
+            .sidebar-header .sidebar-title {
+                opacity: 0;
+            }
+
+            .sidebar.active .sidebar-header .sidebar-title {
+                opacity: 1;
+            }
+
+            .topics-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .topic-card {
+                width: 100%;
+                padding: 16px;
+                height: auto;
+                min-height: 260px;
+            }
+
+            .topic-title {
+                font-size: 20px;
+            }
+
+            .topic-description {
+                font-size: 13px;
+            }
+
+            .subtopics-panel {
+                padding: 16px;
+            }
+
+            .subtopics-title {
+                font-size: 16px;
+            }
+
+            .subtopic-item span {
+                font-size: 13px;
+            }
+
+            .tests-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .test-card {
+                width: 100%;
+                padding: 16px;
+            }
+
+            .test-title {
+                font-size: 20px;
+            }
+
+            .test-description {
+                font-size: 13px;
+            }
+
+            .test-details {
+                padding: 12px;
+            }
+
+            .test-stats {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .stat-label {
+                font-size: 11px;
+            }
+
+            .test-meta {
+                font-size: 13px;
+            }
+
+            .start-test-btn {
+                padding: 10px;
+                font-size: 13px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding: 0 15px;
+            }
+
+            .footer-section {
+                text-align: center;
+            }
+
+            .test-info-banner {
+                flex-direction: column;
+                padding: 16px;
+            }
+
+            .info-icon {
+                margin-bottom: 15px;
+                margin-right: 0;
+            }
+
+            .info-content h3 {
+                font-size: 16px;
+            }
+
+            .info-content p {
+                font-size: 13px;
+            }
+
+            .page-title, .section-title {
+                font-size: 24px;
+            }
+
+            .section-description {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 1008px) and (min-width: 769px) {
+            .tests-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 672px) {
+            .tests-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 15px;
+                margin-left: 50px; /* Ensure content starts after sidebar */
+            }
+
+            .topic-card, .test-card, .test-info-banner {
+                padding: 12px;
+            }
+
+            .topic-title, .test-title {
+                font-size: 18px;
+            }
+
+            .topic-description, .test-description, .info-content p {
+                font-size: 12px;
+            }
+
+            .subtopics-panel {
+                padding: 12px;
+            }
+
+            .subtopics-title {
+                font-size: 14px;
+            }
+
+            .subtopic-item span {
+                font-size: 12px;
+            }
+
+            .test-details {
+                padding: 10px;
+            }
+
+            .stat-label {
+                font-size: 10px;
+            }
+
+            .test-meta {
+                font-size: 12px;
+            }
+
+            .start-test-btn {
+                padding: 8px;
+                font-size: 12px;
+            }
+
+            .footer-grid {
+                padding: 0 10px;
+            }
+
+            .footer-section h3 {
+                font-size: 16px;
+            }
+
+            .footer-section ul li a {
+                font-size: 13px;
+            }
+
+            .copyright {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="sidebar-toggle" id="sidebarToggle">
+        <span class="toggle-arrow">❯</span>
+    </button>
+
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <i class='bx bxs-graduation'></i>
+            <span class="sidebar-title">CrackIT</span>
+        </div>
+        <div class="sidebar-top">
+            <div class="sidebar-item active">
+                <a href="index.html" style="text-decoration: none; color: inherit;">
+                    <i class='bx bx-home-alt'></i>
+                    <span>Home</span>
+                </a>
+            </div>
+            <div class="sidebar-item">
+                <a href="#practice-area" style="text-decoration: none; color: inherit;">
+                    <i class='bx bx-book-open'></i>
+                    <span>Practice Area</span>
+                </a>
+            </div>
+            <div class="sidebar-item">
+                <a href="#testarea" style="text-decoration: none; color: inherit;">
+                    <i class='bx bx-clipboard'></i>
+                    <span>Mock Test Area</span>
+                </a>
+            </div>
+        </div>
+        <div class="sidebar-spacer"></div>
+        <div class="sidebar-bottom">
+            <div class="sidebar-item">
+                <i class='bx bx-palette'></i>
+                <span>Theme</span>
+            </div>
+            <div class="sidebar-item">
+                <a href="login and register.html" style="text-decoration: none; color: inherit;">
+                    <i class='bx bx-log-out'></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <h1 class="page-title" id="practice-area">Practice Area</h1>
+        
+        <div class="topics-grid">
+            <div class="topic-card">
+                <h2 class="topic-title">General Aptitude</h2>
+                <div class="topic-icon red">
+                    <i class='bx bx-spreadsheet'></i>
+                </div>
+                <p class="topic-description">
+                    Assess your overall problem-solving skills with questions on reasoning, data interpretation, and basic mathematics.
+                </p>
+                <a href="sub GeneralAptitude.html" class="practice-btn">
+                    Practice Now <i class='bx bx-right-arrow-alt'></i>
+                </a>
+                
+                <div class="subtopics-panel">
+                    <h3 class="subtopics-title">General Aptitude</h3>
+                    <ul class="subtopics-list">
+                        <li class="subtopic-item">
+                            <i class='bx bx-brain'></i>
+                            <span><a href="sub GeneralAptitude.html" class="practice-btn">Logical Reasoning</a></span>
+                        </li>
+                        <li class="subtopic-item">
+                            <i class='bx bx-line-chart'></i>
+                            <span><a href="sub GeneralAptitude.html" class="practice-btn">Ratio & Proportion</a></span>
+                        </li>
+                        <li class="subtopic-item">
+                            <i class='bx bx-money'></i>
+                            <span><a href="sub GeneralAptitude.html" class="practice-btn">Averages, Profit & Loss</a></span>
+                        </li>
+                        <li class="subtopic-item">
+                            <i class='bx bx-math'></i>
+                            <span><a href="sub GeneralAptitude.html" class="practice-btn">HCF & LCM, Simplification</a></span>
+                        </li>
+                        <li class="subtopic-item">
+                            <i class='bx bx-chart'></i>
+                            <span><a href="sub GeneralAptitude.html" class="practice-btn">Probability, Permutations & Combinations</a></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="topic-card">
+                <h2 class="topic-title">Arithmetic Aptitude</h2>
+                <div class="topic-icon purple">
+                    <i class='bx bx-list-ol'></i>
+                </div>
+                <p class="topic-description">
+                    Practice calculations involving percentages, profit and loss, time-speed-distance, and other concepts.
+                </p>
+                <a href="sub ArithmeticAptitude.html" class="practice-btn">
+                    Practice Now <i class='bx bx-right-arrow-alt'></i>
+                </a>
+                
+                <div class="subtopics-panel">
+                    <h3 class="subtopics-title">Arithmetic Aptitude</h3>
+                    <ul class="subtopics-list">
+                        <li class="subtopic-item">
+                            <i class='bx bx-calculator'></i>
+                            <span><a href="sub ArithmeticAptitude.html" class="practice-btn">Percentages</a></span>
+                        </li>
+                        <li class="subtopic-item">
+                            <i class='bx bx-time-five'></i>
+                            <span><a href="sub ArithmeticAptitude.html" class="practice-btn">Time & Work</a></span>
+                        </li>
+                        <li class="subtopic-item">
+                            <i class='bx bx-tachometer'></i>
+                            <span><a href="sub ArithmeticAptitude.html" class="practice-btn">Time, Speed & Distance</a></span>
+                        </li>
+                        <li class="subtopic-item">
+                            <i class='bx bx-ruler'></i>
+                            <span><a href="sub ArithmeticAptitude.html" class="practice-btn">Measurements & Geometry</a></span>
+                        </li>
+                        <li class="subtopic-item">
+                            <i class='bx bx-trending-up'></i>
+                            <span><a href="sub ArithmeticAptitude.html" class="practice-btn">Simple & Compound Interest</a></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="topic-card">
+                <h2 class="topic-title">Technical MCQs</h2>
+                <div class="topic-icon orange">
+                    <i class='bx bx-laptop'></i>
+                </div>
+                <p class="topic-description">
+                    Strengthen your grasp on core engineering and IT subjects with objective questions across multiple domains.
+                </p>
+                <a href="sub Technical MCQs.html" class="practice-btn">
+                    Practice Now <i class='bx bx-right-arrow-alt'></i>
+                </a>
+                
+                <div class="subtopics-panel">
+                    <h3 class="subtopics-title">Technical MCQs</h3>
+                    <ul class="subtopics-list">
+                        <li class="subtopic-item">
+                            <i class='bx bx-terminal'></i>
+                            <span><a href="sub Technical MCQs.html" class="practice-btn">Operating Systems</a></span>
+                        </li>
+                        <li class="subtopic-item">
+                            <i class='bx bx-network-chart'></i>
+                            <span><a href="sub Technical MCQs.html" class="practice-btn">Computer Networks</a></span>
+                        </li>
+                        <li class="subtopic-item">
+                            <i class='bx bx-chip'></i>
+                            <span><a href="sub Technical MCQs.html" class="practice-btn">Computer Architecture</a></span>
+                        </li>
+                        <li class="subtopic-item">
+                            <i class='bx bx-server'></i>
+                            <span><a href="sub Technical MCQs.html" class="practice-btn">Database Management</a></span>
+                        </li>
+                        <li class="subtopic-item">
+                            <i class='bx bx-data'></i>
+                            <span><a href="sub Technical MCQs.html" class="practice-btn">Data Structures & Algorithms</a></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="topic-card">
+                <h2 class="topic-title">Programming Topics</h2>
+                <div class="topic-icon blue">
+                    <i class='bx bx-code-alt'></i>
+                </div>
+                <p class="topic-description">
+                    Evaluate your coding knowledge in languages like C, C++, Java, and Python.
+                </p>
+                <a href="sub Programming Languages.html" class="practice-btn">
+                    Practice Now <i class='bx bx-right-arrow-alt'></i>
+                </a>
+                
+                <div class="subtopics-panel">
+                    <h3 class="subtopics-title">Programming Topics</h3>
+                    <ul class="subtopics-list">
+                        <li class="subtopic-item">
+                            <i class='bx bxl-java'></i>
+                            <span><a href="sub Programming Languages.html" class="practice-btn">Java</a></span>
+                        </li>
+                        <li class="subtopic-item">
+                            <i class='bx bxl-python'></i>
+                            <span><a href="sub Programming Languages.html" class="practice-btn">Python</a></span>
+                        </li>
+                        <li class="subtopic-item">
+                            <i class='bx bxl-c-plus-plus'></i>
+                            <span><a href="sub Programming Languages.html" class="practice-btn">C & C++</a></span>
+                        </li>
+                        <li class="subtopic-item">
+                            <i class='bx bxl-javascript'></i>
+                            <span><a href="sub Programming Languages.html" class="practice-btn">JavaScript</a></span>
+                        </li>
+                        <li class="subtopic-item">
+                            <i class='bx bx-code-curly'></i>
+                            <span><a href="sub Programming Languages.html" class="practice-btn">Modern Languages</a></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="topic-card">
+                <h2 class="topic-title">BrainRot Topics</h2>
+                <div class="topic-icon green">
+                    <i class='bx bx-brain'></i>
+                </div>
+                <p class="topic-description">
+                    Contains frequently asked and BrainRot topics. These are important and most commonly tested areas.
+                </p>
+                <a href="sub TheoryConcepts.html" class="practice-btn">
+                    Practice Now <i class='bx bx-right-arrow-alt'></i>
+                </a>
+    
+                <div class="subtopics-panel">
+                    <h3 class="subtopics-title">BrainRot Topics</h3>
+                    <ul class="subtopics-list">
+                        <li class="subtopic-item">
+                            <i class='bx bx-group'></i>
+                            <span><a href="sub BrainRot Topics.html" class="practice-btn">Blood Relations</a></span>
+                        </li>
+                        <li class="subtopic-item">
+                            <i class='bx bx-compass'></i>
+                            <span><a href="sub BrainRot Topics.html" class="practice-btn">Direction Problems</a></span>
+                        </li>
+                        <li class="subtopic-item">
+                            <i class='bx bx-lock'></i>
+                            <span><a href="sub BrainRot Topics.html" class="practice-btn">Coding and Decoding</a></span>
+                        </li>
+                        <li class="subtopic-item">
+                            <i class='bx bx-chair'></i>
+                            <span><a href="sub BrainRot Topics.html" class="practice-btn">Seating Arrangements</a></span>
+                        </li>
+                        <li class="subtopic-item">
+                            <i class='bx bx-train'></i>
+                            <span><a href="sub BrainRot Topics.html" class="practice-btn">Train, Boat, Pipe and Tank Problems</a></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="topic-card">
+                <h2 class="topic-title">Verbal and Reasoning</h2>
+                <div class="topic-icon purple">
+                    <i class='bx bx-text'></i>
+                </div>
+                <p class="topic-description">
+                    Enhance vocabulary, grammar, and comprehension skills for effective verbal communication.
+                </p>
+                <a href="sub Verbal and Reasoning.html" class="practice-btn">
+                    Practice Now <i class='bx bx-right-arrow-alt'></i>
+                </a>
+                
+                <div class="subtopics-panel">
+                    <h3 class="subtopics-title">Verbal and Reasoning</h3>
+                    <ul class="subtopics-list">
+                        <li class="subtopic-item">
+                            <i class='bx bx-book-reader'></i>
+                            <span><a href="sub Verbal and Reasoning.html" class="practice-btn">Verbal Ability</a></span>
+                        </li>
+                        <li class="subtopic-item">
+                            <i class='bx bx-pen'></i>
+                            <span><a href="sub Verbal and Reasoning.html" class="practice-btn">English Grammar</a></span>
+                        </li>
+                        <li class="subtopic-item">
+                            <i class='bx bx-conversation'></i>
+                            <span><a href="sub Verbal and Reasoning.html" class="practice-btn">Verbal Reasoning</a></span>
+                        </li>
+                        <li class="subtopic-item">
+                            <i class='bx bx-shape-triangle'></i>
+                            <span><a href="sub Verbal and Reasoning.html" class="practice-btn">Non Verbal Reasoning</a></span>
+                        </li>
+                        <li class="subtopic-item">
+                            <i class='bx bxl-messenger'></i>
+                            <span><a href="sub Verbal and Reasoning.html" class="practice-btn">Antonyms & Synonyms, Fill in the blanks</a></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="topic-card">
+                <h2 class="topic-title">Extra Concepts</h2>
+                <div class="topic-icon tomato">
+                    <i class='bx bx-dots-horizontal-rounded'></i>
+                </div>
+                <p class="topic-description">
+                    Explore additional topics and advanced practice areas to further enhance your skills and knowledge.
+                </p>
+                <a href="sub MoreTopics.html" class="practice-btn">
+                    Discover More <i class='bx bx-right-arrow-alt'></i>
+                </a>
+               <div class="subtopics-panel">
+    <h3 class="subtopics-title">More Topics</h3>
+    <ul class="subtopics-list">
+        <li class="subtopic-item">
+            <i class='bx bx-cloud'></i>
+            <span><a href="sub MoreTopics.html" class="practice-btn">Cloud Computing</a></span>
+        </li>
+        <li class="subtopic-item">
+            <i class='bx bx-chip'></i>
+            <span><a href="sub MoreTopics.html" class="practice-btn">Artificial Intelligence</a></span>
+        </li>
+        <li class="subtopic-item">
+            <i class='bx bx-code-curly'></i>
+            <span><a href="sub MoreTopics.html" class="practice-btn">Software Engineering</a></span>
+        </li>
+        <li class="subtopic-item">
+            <i class='bx bx-conversation'></i>
+            <span><a href="sub MoreTopics.html" class="practice-btn">Situational Questions</a></span>
+        </li>
+        <li class="subtopic-item">
+            <i class='bx bx-globe'></i>
+            <span><a href="sub MoreTopics.html" class="practice-btn">Web Content Management</a></span>
+        </li>
+    </ul>
+</div>
+            </div>
+        </div>
+        
+        <div class="test-area">
+            <h1 class="section-title" id="testarea">Mock Tests Area</h1>
+            <p class="section-description">Challenge yourself with comprehensive tests covering Practice Area topics to assess your overall preparation.</p>
+            
+            <div class="tests-grid">
+                <div class="test-card">
+                    <div class="test-header">
+                        <div class="test-icon">
+                            <i class='bx bx-checkbox-checked'></i>
+                        </div>
+                        <div class="test-info">
+                            <h2 class="test-title">Mock Test</h2>
+                        </div>
+                    </div>
+                    <p class="test-description">
+                        This contains the combined questions from all the above topics from Practice Area section. The questions are randomly selected from each topic to ensure a balanced assessment.
+                    </p>
+                    <div class="test-details">
+                        <div class="test-stats">
+                            <div class="stat">
+                                <span class="stat-label">Easy</span>
+                                <div class="difficulty-meter">
+                                    <span class="difficulty-level low"></span>
+                                </div>
+                            </div>
+                            <span class="test-meta"><i class='bx bx-time'></i> 45 minutes</span>
+                            <span class="test-meta"><i class='bx bx-help-circle'></i> 35 questions</span>
+                        </div>
+                    </div>
+                    <button class="start-test-btn" onclick="window.location.href='Mock Test Main.html?difficulty=easy'">Start Test</button>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-header">
+                        <div class="test-icon">
+                            <i class='bx bx-checkbox-checked'></i>
+                        </div>
+                        <div class="test-info">
+                            <h2 class="test-title">Mock Test</h2>
+                        </div>
+                    </div>
+                    <p class="test-description">
+                        This contains the combined questions from all the above topics from Practice Area section. The questions are randomly selected from each topic to ensure a balanced assessment.
+                    </p>
+                    <div class="test-details">
+                        <div class="test-stats">
+                            <div class="stat">
+                                <span class="stat-label">Medium</span>
+                                <div class="difficulty-meter">
+                                    <span class="difficulty-level medium"></span>
+                                </div>
+                            </div>
+                            <span class="test-meta"><i class='bx bx-time'></i> 45 minutes</span>
+                            <span class="test-meta"><i class='bx bx-help-circle'></i> 35 questions</span>
+                        </div>
+                    </div>
+                    <button class="start-test-btn" onclick="window.location.href='Mock Test Main.html?difficulty=medium'">Start Test</button>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-header">
+                        <div class="test-icon">
+                            <i class='bx bx-checkbox-checked'></i>
+                        </div>
+                        <div class="test-info">
+                            <h2 class="test-title">Mock Test</h2>
+                        </div>
+                    </div>
+                    <p class="test-description">
+                        This contains the combined questions from all the above topics from Practice Area section. The questions are randomly selected from each topic to ensure a balanced assessment.
+                    </p>
+                    <div class="test-details">
+                        <div class="test-stats">
+                            <div class="stat">
+                                <span class="stat-label">Hard</span>
+                                <div class="difficulty-meter">
+                                    <span class="difficulty-level high"></span>
+                                </div>
+                            </div>
+                            <span class="test-meta"><i class='bx bx-time'></i> 45 minutes</span>
+                            <span class="test-meta"><i class='bx bx-help-circle'></i> 35 questions</span>
+                        </div>
+                    </div>
+                    <button class="start-test-btn" onclick="window.location.href='Mock Test Main.html?difficulty=hard'">Start Test</button>
+                </div>
+
+                <div class="test-card">
+    <div class="test-header">
+        <div class="test-icon">
+            <i class='bx bx-timer'></i>
+        </div>
+        <div class="test-info">
+            <h2 class="test-title">Quick Assessment</h2>
+        </div>
+    </div>
+    <p class="test-description">
+        A shorter test with balanced questions from all topics. Ideal for a quick evaluation of your strengths and weaknesses across different areas.
+    </p>
+    <div class="test-details">
+        <div class="test-stats">
+            <div class="stat">
+                <span class="stat-label">Easy</span>
+                <div class="difficulty-meter">
+                    <span class="difficulty-level low"></span>
+                </div>
+            </div>
+            <span class="test-meta"><i class='bx bx-time'></i> 20 minutes</span>
+            <span class="test-meta"><i class='bx bx-help-circle'></i> 10 questions</span>
+        </div>
+    </div>
+    <button class="start-test-btn" onclick="window.location.href='Quick Assessment main.html?difficulty=easy'">Start Test</button>
+</div>
+
+<div class="test-card">
+    <div class="test-header">
+        <div class="test-icon">
+            <i class='bx bx-timer'></i>
+        </div>
+        <div class="test-info">
+            <h2 class="test-title">Quick Assessment</h2>
+        </div>
+    </div>
+    <p class="test-description">
+        A shorter test with balanced questions from all topics. Ideal for a quick evaluation of your strengths and weaknesses across different areas.
+    </p>
+    <div class="test-details">
+        <div class="test-stats">
+            <div class="stat">
+                <span class="stat-label">Medium</span>
+                <div class="difficulty-meter">
+                    <span class="difficulty-level medium"></span>
+                </div>
+            </div>
+            <span class="test-meta"><i class='bx bx-time'></i> 20 minutes</span>
+            <span class="test-meta"><i class='bx bx-help-circle'></i> 10 questions</span>
+        </div>
+    </div>
+    <button class="start-test-btn" onclick="window.location.href='Quick Assessment main.html?difficulty=medium'">Start Test</button>
+</div>
+
+<div class="test-card">
+    <div class="test-header">
+        <div class="test-icon">
+            <i class='bx bx-timer'></i>
+        </div>
+        <div class="test-info">
+            <h2 class="test-title">Quick Assessment</h2>
+        </div>
+    </div>
+    <p class="test-description">
+        A shorter test with balanced questions from all topics. Ideal for a quick evaluation of your strengths and weaknesses across different areas.
+    </p>
+    <div class="test-details">
+        <div class="test-stats">
+            <div class="stat">
+                <span class="stat-label">Hard</span>
+                <div class="difficulty-meter">
+                    <span class="difficulty-level high"></span>
+                </div>
+            </div>
+            <span class="test-meta"><i class='bx bx-time'></i> 20 minutes</span>
+            <span class="test-meta"><i class='bx bx-help-circle'></i> 10 questions</span>
+        </div>
+    </div>
+    <button class="start-test-btn" onclick="window.location.href='Quick Assessment main.html?difficulty=hard'">Start Test</button>
+</div>
+
+                <div class="test-card">
+                    <div class="test-header">
+                        <div class="test-icon">
+                            <i class='bx bx-code-block'></i>
+                        </div>
+                        <div class="test-info">
+                            <h2 class="test-title">Technical Focus</h2>
+                        </div>
+                    </div>
+                    <p class="test-description">
+                        Heavy emphasis on Technical MCQs, Programming Languages, and Theory Concepts with fewer aptitude questions. Perfect for IT job interviews.
+                    </p>
+                    <div class="test-details">
+                        <div class="test-stats">
+                            <div class="stat">
+                                <span class="stat-label">Easy</span>
+                                <div class="difficulty-meter">
+                                    <span class="difficulty-level low"></span>
+                                </div>
+                            </div>
+                            <span class="test-meta"><i class='bx bx-time'></i> 30 minutes</span>
+                            <span class="test-meta"><i class='bx bx-help-circle'></i> 30 questions</span>
+                        </div>
+                    </div>
+                     <button class="start-test-btn" onclick="window.location.href='Technical Focus Main .html?difficulty=easy'">Start Test</button>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-header">
+                        <div class="test-icon">
+                            <i class='bx bx-code-block'></i>
+                        </div>
+                        <div class="test-info">
+                            <h2 class="test-title">Technical Focus</h2>
+                        </div>
+                    </div>
+                    <p class="test-description">
+                        Heavy emphasis on Technical MCQs, Programming Languages, and Theory Concepts with fewer aptitude questions. Perfect for IT job interviews.
+                    </p>
+                    <div class="test-details">
+                        <div class="test-stats">
+                            <div class="stat">
+                                <span class="stat-label">Medium</span>
+                                <div class="difficulty-meter">
+                                    <span class="difficulty-level medium"></span>
+                                </div>
+                            </div>
+                            <span class="test-meta"><i class='bx bx-time'></i> 30 minutes</span>
+                            <span class="test-meta"><i class='bx bx-help-circle'></i> 30 questions</span>
+                        </div>
+                    </div>
+                   <button class="start-test-btn" onclick="window.location.href='Technical Focus Main .html?difficulty=medium'">Start Test</button>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-header">
+                        <div class="test-icon">
+                            <i class='bx bx-code-block'></i>
+                        </div>
+                        <div class="test-info">
+                            <h2 class="test-title">Technical Focus</h2>
+                        </div>
+                    </div>
+                    <p class="test-description">
+                        Heavy emphasis on Technical MCQs, Programming Languages, and Theory Concepts with fewer aptitude questions. Perfect for IT job interviews.
+                    </p>
+                    <div class="test-details">
+                        <div class="test-stats">
+                            <div class="stat">
+                                <span class="stat-label">Hard</span>
+                                <div class="difficulty-meter">
+                                    <span class="difficulty-level high"></span>
+                                </div>
+                            </div>
+                            <span class="test-meta"><i class='bx bx-time'></i> 30 minutes</span>
+                            <span class="test-meta"><i class='bx bx-help-circle'></i> 30 questions</span>
+                        </div>
+                    </div>
+                    <button class="start-test-btn" onclick="window.location.href='Technical Focus Main .html?difficulty=hard'">Start Test</button>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-header">
+                        <div class="test-icon">
+                            <i class='bx bx-brain'></i>
+                        </div>
+                        <div class="test-info">
+                            <h2 class="test-title">Aptitude Focus</h2>
+                        </div>
+                    </div>
+                    <p class="test-description">
+                        Concentrated on General and Arithmetic Aptitude with fewer technical questions. Ideal for initial screening rounds of most companies.
+                    </p>
+                    <div class="test-details">
+                        <div class="test-stats">
+                            <div class="stat">
+                                <span class="stat-label">Easy</span>
+                                <div class="difficulty-meter">
+                                    <span class="difficulty-level low"></span>
+                                </div>
+                            </div>
+                            <span class="test-meta"><i class='bx bx-time'></i> 30 minutes</span>
+                            <span class="test-meta"><i class='bx bx-help-circle'></i> 25 questions</span>
+                        </div>
+                    </div>
+                    <button class="start-test-btn" onclick="window.location.href='AptitudeFocus.html'">Start Test</button>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-header">
+                        <div class="test-icon">
+                            <i class='bx bx-brain'></i>
+                        </div>
+                        <div class="test-info">
+                            <h2 class="test-title">Aptitude Focus</h2>
+                        </div>
+                    </div>
+                    <p class="test-description">
+                        Concentrated on General and Arithmetic Aptitude with fewer technical questions. Ideal for initial screening rounds of most companies.
+                    </p>
+                    <div class="test-details">
+                        <div class="test-stats">
+                            <div class="stat">
+                                <span class="stat-label">Medium</span>
+                                <div class="difficulty-meter">
+                                    <span class="difficulty-level medium"></span>
+                                </div>
+                            </div>
+                            <span class="test-meta"><i class='bx bx-time'></i> 30 minutes</span>
+                            <span class="test-meta"><i class='bx bx-help-circle'></i> 25 questions</span>
+                        </div>
+                    </div>
+                    <button class="start-test-btn" onclick="window.location.href='AptitudeFocus.html'">Start Test</button>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-header">
+                        <div class="test-icon">
+                            <i class='bx bx-brain'></i>
+                        </div>
+                        <div class="test-info">
+                            <h2 class="test-title">Aptitude Focus</h2>
+                        </div>
+                    </div>
+                    <p class="test-description">
+                        Concentrated on General and Arithmetic Aptitude with fewer technical questions. Ideal for initial screening rounds of most companies.
+                    </p>
+                    <div class="test-details">
+                        <div class="test-stats">
+                            <div class="stat">
+                                <span class="stat-label">Hard</span>
+                                <div class="difficulty-meter">
+                                    <span class="difficulty-level high"></span>
+                                </div>
+                            </div>
+                            <span class="test-meta"><i class='bx bx-time'></i> 30 minutes</span>
+                            <span class="test-meta"><i class='bx bx-help-circle'></i> 25 questions</span>
+                        </div>
+                    </div>
+                    <button class="start-test-btn" onclick="window.location.href='AptitudeFocus.html'">Start Test</button>
+                </div>
+            </div>
+
+            <div class="test-info-banner">
+                <div class="info-icon">
+                    <i class='bx bx-info-circle'></i>
+                </div>
+                <div class="info-content">
+                    <h3>About Our Tests</h3>
+                    <p>All tests include questions from multiple topics to provide a comprehensive assessment of your skills.</p>
+                    <p>Here there are 3 difficulties to choose from Easy, Medium and Hard. The number of questions and time will be equal for all 3 difficulties, but the questions will be advanced on higher difficulties.</p>
+                    <p>Each test consists of multiple-choice questions drawn from various topics. Tests are automatically graded with detailed feedback and analytics. Practice tests can be taken unlimited times, while mock tests simulate actual exam conditions.</p>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#practice-area">Practice Area</a></li>
+                        <li><a href="#testarea">Mock Test Area</a></li>
+                        <li><a href="#">Tech/HR Interview Questions</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="Company and Legal.html#company-section">About Us</a></li>
+                        <li><a href="Company and Legal.html#contact-us-section">Contact Us</a></li>
+                        <li><a href="Company and Legal.html#future-scope-section">Future Scope</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="Company and Legal.html#terms-of-service-section">Terms of Service</a></li>
+                        <li><a href="Company and Legal.html#privacy-policy-section">Privacy Policy</a></li>
+                        <li><a href="Company and Legal.html#feedback-section">Your Feedback</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>© 2025 CrackIT. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const toggleArrow = sidebarToggle.querySelector('.toggle-arrow');
+            const sidebar = document.querySelector('.sidebar');
+            const sidebarHeader = document.querySelector('.sidebar-header');
+            const backButtons = document.querySelectorAll('.back-btn');
+            const subtopicsPanels = document.querySelectorAll('.subtopics-panel');
+            const themeToggle = document.querySelector('.sidebar-item i.bx-palette').parentElement;
+            const topicCards = document.querySelectorAll('.topic-card');
+            const practiceButtons = document.querySelectorAll('.practice-btn');
+            const sidebarItems = document.querySelectorAll('.sidebar-item');
+            const startTestButtons = document.querySelectorAll('.start-test-btn');
+
+            if (sidebarToggle && sidebar && sidebarHeader) {
+                sidebarToggle.addEventListener('click', function() {
+                    sidebar.classList.toggle('active');
+                    toggleArrow.textContent = sidebar.classList.contains('active') ? '❮' : '❯';
+                });
+
+                document.addEventListener('click', function(event) {
+                    if (
+                        window.innerWidth <= 768 &&
+                        !sidebar.contains(event.target) &&
+                        !sidebarToggle.contains(event.target)
+                    ) {
+                        sidebar.classList.remove('active');
+                        toggleArrow.textContent = '❯';
+                    }
+                });
+            }
+
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    document.body.classList.toggle('light-theme');
+                    if (document.body.classList.contains('light-theme')) {
+                        localStorage.setItem('theme', 'light');
+                    } else {
+                        localStorage.setItem('theme', 'dark');
+                    }
+                });
+            }
+
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-theme');
+            }
+
+            backButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const panel = this.closest('.subtopics-panel');
+                    if (panel) {
+                        panel.style.opacity = '0';
+                        panel.style.transform = 'translateY(20px)';
+                        panel.style.pointerEvents = 'none';
+                        setTimeout(() => {
+                            panel.removeAttribute('style');
+                        }, 300);
+                    }
+                });
+            });
+
+            subtopicsPanels.forEach(panel => {
+                panel.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            });
+
+            topicCards.forEach(card => {
+                card.addEventListener('mouseleave', function() {
+                    const panel = this.querySelector('.subtopics-panel');
+                    if (panel) {
+                        panel.style.opacity = '0';
+                        panel.style.transform = 'translateY(20px)';
+                        panel.style.pointerEvents = 'none';
+                        setTimeout(() => {
+                            panel.removeAttribute('style');
+                        }, 300);
+                    }
+                });
+            });
+
+            practiceButtons.forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    this.style.color = '#22c55e';
+                });
+                btn.addEventListener('mouseleave', function() {
+                    this.style.color = '#888';
+                });
+            });
+
+            sidebarItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    sidebarItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            startTestButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    if (!this.getAttribute('onclick')) {
+                        alert('This test is not yet implemented.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
